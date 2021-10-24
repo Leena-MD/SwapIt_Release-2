@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "377703067671",
+    "project_id": "swapit-474e1",
+    "storage_bucket": "swapit-474e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377703067671:android:3a60c5335613c751ab2c52",
+        "android_client_info": {
+          "package_name": "com.example.first_swap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377703067671-kl2e2h7bgc54465q5u7fi5m81rs0j5mv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDckEk2j5H2Rjhto38FQbIZK5alA0UZrSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377703067671-kl2e2h7bgc54465q5u7fi5m81rs0j5mv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "377703067671-ano0mdmqrd5e4coraq1di3jpoa881j3i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firstSwap"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
