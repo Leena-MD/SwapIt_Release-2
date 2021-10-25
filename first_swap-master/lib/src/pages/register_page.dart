@@ -183,6 +183,7 @@ class _regestpState extends State<regestp> {
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
           }
+          
     if (!regex.hasMatch(value)) {
         return ("يجب ان تحتوي كلمة المرور على :حرف كبير وصغير وارقام ورمز");
        }
