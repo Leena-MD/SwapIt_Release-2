@@ -230,22 +230,22 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(color: Colors.black54),
                     ),
                     SizedBox(height: 50),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "الإستمرار كضيف",
-                            style: TextStyle(
-                              color: Colors.cyan[600],
-                              fontWeight: FontWeight.bold,
-                            ),
-                            recognizer: Guestnav,
-                          ),
-                        ],
-                      ),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black54),
-                    ),
+                    //Text.rich(
+                     // TextSpan(
+                       // children: [
+                         // TextSpan(
+                         //   text: "الإستمرار كضيف",
+                           // style: TextStyle(
+                           //   color: Colors.cyan[600],
+                           //   fontWeight: FontWeight.bold,
+                           // ),
+                          //  recognizer: Guestnav,
+                         // ),
+                       // ],
+                     // ),
+                     // textAlign: TextAlign.center,
+                    //  style: TextStyle(color: Colors.black54),
+                  //  ),
                   ],
                 ),
               ),
