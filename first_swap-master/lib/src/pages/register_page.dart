@@ -178,14 +178,14 @@ class _regestpState extends State<regestp> {
         obscureText: true,
         validator: (value) {
           
-      // RegExp regex = new RegExp(
-           //   "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+      RegExp regex = new RegExp(
+           r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
           }
-     // if (!regex.hasMatch(value)) {
-         //  return ("يجب ان تحتوي كلمة المرور على :حرف كبير وصغير وارقام ورمز");
-      //  }
+      if (!regex.hasMatch(value)) {
+           return ("يجب ان تحتوي كلمة المرور على :حرف كبير وصغير وارقام ورمز");
+       }
         },
         onSaved: (value) {
           firstNameEditingController.text = value!;
