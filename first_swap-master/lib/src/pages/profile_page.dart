@@ -103,7 +103,7 @@ bottomNavigationBar: CustomBottomNavigationBar(
             iconList: [
               Icons.home,
               Icons.add_to_photos,
-              Icons.search,
+            
               Icons.reorder_rounded,
               Icons.person,
             ],

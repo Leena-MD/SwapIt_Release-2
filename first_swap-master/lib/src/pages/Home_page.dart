@@ -1,4 +1,5 @@
 import 'package:first_swap/fluttericon.dart';
+import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/fluttericon.dart';
 import 'package:first_swap/src/widgets/app_outlinebutton.dart';
@@ -8,28 +9,44 @@ import 'Intrests_page.dart';
 
 
 
+class HomePage extends StatefulWidget {
 
 
 
-class Home extends StatelessWidget {
+
+  
+  @override
+  _HomePage createState() => _HomePage();
+}
+
+
+
+
+
+
+
+
+class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xfff7f7f7),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.grey[500],
-          unselectedItemColor: Colors.grey[400],
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home), title: Text("Home")),
-           
-            BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_basket), title: Text("Basket")),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline), title: Text("Profile")),
-          ],
-        ),
+        bottomNavigationBar: CustomBottomNavigationBar(
+            iconList: [
+              Icons.home,
+              Icons.add_to_photos,
+            
+              Icons.reorder_rounded,
+              Icons.person,
+            ],
+            onChange: (val) {
+              setState(() {
+                var _selectedItem = val;
+              });
+            },
+            defaultSelectedIndex: 1,
+          ),
         body: Column(
           children: <Widget>[
             Flexible(
