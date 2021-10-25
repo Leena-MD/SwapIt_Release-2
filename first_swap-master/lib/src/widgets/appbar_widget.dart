@@ -11,14 +11,18 @@ AppBar buildAppBar(BuildContext context) {
    // elevation: 0,
     
 
- leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+  leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.cyan[800]),
           onPressed: () {
             Navigator.pop(context);
-            
           },
         ),
- backgroundColor: Color(0xff51878d),
+
+
+
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+
 
 
 

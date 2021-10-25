@@ -32,7 +32,7 @@ class _InterstsPageState extends State<InterstsPage> {
   get dashBg => Column(
         children: <Widget>[
           Expanded(
-            child: Container(color: Color(0xff51878d)),
+            child: Container(color:Colors.cyan[800]),
             flex: 2,
           ),
           Expanded(
@@ -114,7 +114,7 @@ child:   FlatButton(
                 borderRadius: BorderRadius.circular(30),
               ),
               onPressed: () => {},
-              color: Color(0xff51878d),
+              color: Colors.cyan[800],
               padding: EdgeInsets.all(10.0),
               child: Wrap(
                

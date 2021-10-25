@@ -153,7 +153,7 @@ to change password يمكن نحتاجه
   final   SaveButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Color(0xff737373),
+      color: Colors.cyan[800],
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -183,7 +183,7 @@ submitAction(context);}
   final   changePass = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Color(0xff737373),
+      color:Colors.cyan[800],
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,

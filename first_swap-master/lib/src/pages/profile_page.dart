@@ -116,7 +116,18 @@ bottomNavigationBar: CustomBottomNavigationBar(
           ),
 
 
-          appBar: buildAppBar(context),
+                appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        /*
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Color(0xff51878d)),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        */
+      ),
           body:Center(
         child: FutureBuilder(
           future: _fetch(),

@@ -1,3 +1,5 @@
+import 'package:first_swap/src/pages/Home_page.dart';
+import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +12,6 @@ import 'Forgot_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'Intrests_page.dart';
-import 'profile_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -70,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => ProfilePage(),// غيرتها  كانت الانترست
+            builder: (_) => Home(),
           ),
         );
         pass1cont.clear();
@@ -151,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
     final loginButtonPlace = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Color(0xff737373),
+      color: Colors.cyan[800],
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -200,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                           TextSpan(
                             text: "نسيت كلمة المرور؟",
                             style: TextStyle(
-                              color: Color(0xff51878d),
+                              color: Colors.cyan[600],
                               fontWeight: FontWeight.bold,
                             ),
                             recognizer: forgotnav,
@@ -218,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
                           TextSpan(
                             text: "سجل الآن",
                             style: TextStyle(
-                              color: Color(0xff51878d),
+                              color: Colors.cyan[600],
                               fontWeight: FontWeight.bold,
                             ),
                             recognizer: registernav,
@@ -235,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                           TextSpan(
                             text: "الإستمرار كضيف",
                             style: TextStyle(
-                              color: Color(0xff51878d),
+                              color: Colors.cyan[600],
                               fontWeight: FontWeight.bold,
                             ),
                             recognizer: Guestnav,
@@ -264,7 +265,7 @@ class _LoginPageState extends State<LoginPage> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "تم تسجيل الدخول بنجاح"),
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => ProfilePage())),//InterstsPage
+                      MaterialPageRoute(builder: (context) => ProfilePage())),
                 });
         pass1cont.clear();
 

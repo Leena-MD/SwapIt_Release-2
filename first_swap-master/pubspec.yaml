@@ -68,6 +68,15 @@ flutter:
   assets:
    - assets/Screen Shot 1443-03-02 at 6.09.18 PM.png
    - assets/Screen Shot 1443-03-15 at 8.53.25 PM.png
+   - assets/bookshelf.png
+   - assets/brick.png
+   - assets/clothes-rack.png
+   - assets/computer.png
+   - assets/dumbbell.png
+   - assets/handbag.png
+   - assets/kitchen.png
+   - assets/make-up.png
+   - assets/pet-house.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
