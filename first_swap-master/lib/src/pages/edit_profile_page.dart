@@ -1,32 +1,42 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:first_swap/models/user_model.dart';
-import 'package:first_swap/src/widgets/app_textfield.dart';
-import 'package:first_swap/themes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:first_swap/src/widgets/appbar_widget.dart';
-import 'package:first_swap/src/widgets/profile_widget.dart';
-import 'package:first_swap/src/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:path/path.dart';
-import 'login_page.dart';
-import 'register_page.dart';
-import 'edit_profile_page.dart';
 import 'profile_page.dart';
 
-class EditProfilePage extends StatelessWidget {
+
+class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
+  _EditProfilePageState createState() => _EditProfilePageState();
+}
+
+
+
+
+
+class _EditProfilePageState  extends State<EditProfilePage>  {
+
+
 
       final _auth = FirebaseAuth.instance;
 
 
   final firstNameEditingController = new TextEditingController();
   final secondNameEditingController = new TextEditingController();
-  final passwordEditingController = new TextEditingController();
-  final confirmPasswordEditingController = new TextEditingController();
+  String userID ="";
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+
 
     final firstNameField = TextFormField(
         textAlign: TextAlign.right,
@@ -82,8 +92,8 @@ class EditProfilePage extends StatelessWidget {
         ));
 
 
-
-
+/*
+to change password يمكن نحتاجه
     final passwordField = TextFormField(
         textAlign: TextAlign.right,
         autofocus: false,
@@ -135,8 +145,59 @@ class EditProfilePage extends StatelessWidget {
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "أعد إدخال كملة المرور",
         ));
+*/
 
+
+    //Save button
+
+  final   SaveButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Color(0xff737373),
+      child: MaterialButton(
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          minWidth: MediaQuery.of(context).size.width,
+          
+          onPressed: () {
+                if(firstNameEditingController.text.isNotEmpty&&secondNameEditingController.text.isNotEmpty){
+
+submitAction(context);}
+                if(firstNameEditingController.text.isEmpty&&secondNameEditingController.text.isEmpty){
+                 Navigator.pop(context);
+                };
+          },
+          child: Text(
+            "حفظ التعديلات",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+    );
   //
+
+
+
+
+
+  //changr password button
+  final   changePass = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Color(0xff737373),
+      child: MaterialButton(
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          minWidth: MediaQuery.of(context).size.width,
+          
+          onPressed: () {
+             
+          },
+          child: Text(
+            "تغيير كلمة المرور",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+    );
   //
   //
   return Scaffold(
@@ -165,14 +226,12 @@ class EditProfilePage extends StatelessWidget {
                     firstNameField,
                     SizedBox(height: 20),
                     secondNameField,
+ 
                     SizedBox(height: 20),
-           //         emailField,
-                    SizedBox(height: 20),
-                    passwordField,
-                    SizedBox(height: 20),
-                    confirmPasswordField,
-                    SizedBox(height: 20),
-            //        signUpButton,//save button
+                     
+                     SaveButton,//save button
+                    SizedBox(height: 15),
+                      changePass,//change paasword button
                     SizedBox(height: 15),
                   ],
                 ),
@@ -183,33 +242,55 @@ class EditProfilePage extends StatelessWidget {
       ),
     ); 
   }
- postDetailsToFirestore() async {
+
+  
+ updateUserData(String FirstName, String LastName, String uid) async {
 
           final _auth = FirebaseAuth.instance;
 
     // calling our firestore
     // calling our user model
-    // sedning these values
+    // updateing Data 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
     UserModel userModel = UserModel();
 
-    // writing all the values
-    userModel.email = user!.email;// no
-    userModel.uid = user.uid;//no
-    //userModel.FirstName = firstNameEditingController.text;
-    //userModel.LastName = secondNameEditingController.text;
-   
-    await firebaseFirestore
-        .collection("users")
-        .doc(user.uid)
-        .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "تمت عملية إنشاء الحساب بنجاح");
+    // writing  the values
 
-    Navigator.pushAndRemoveUntil((this.context),
-        MaterialPageRoute(builder: (context) => ProfilePage()),// غيرتها للبروفايل
+    userModel.FirstName = firstNameEditingController.text;
+    userModel.LastName = secondNameEditingController.text;
+
+     final firebaseUser = await FirebaseAuth.instance.currentUser;
+     if(FirstName!=null&&LastName!=null){
+        if (firebaseUser != null)// 
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .update({
+       'FirstName': FirstName,'LastName': LastName 
+    });   }
+
+    userID =firebaseUser!.uid;  
+
+    Fluttertoast.showToast(msg: "تم التعديل بنجاح");
+  
+   Navigator.pushAndRemoveUntil(
+      (this.context),
+       MaterialPageRoute(builder: (context) => ProfilePage()),
         (route) => false);
   }
 
-}*/
+    updateData(String FirstName, String LastName,String userID) async {
+
+ await updateUserData(FirstName, LastName, userID);
+
+
+  }
+  submitAction(BuildContext context) {
+    updateData(firstNameEditingController.text, secondNameEditingController.text,
+         userID);
+    firstNameEditingController.clear();
+    secondNameEditingController.clear();}
+  
+}

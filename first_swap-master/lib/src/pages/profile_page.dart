@@ -121,8 +121,8 @@ bottomNavigationBar: CustomBottomNavigationBar(
         child: FutureBuilder(
           future: _fetch(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.done)
-              return Text("جاري تحميل المعلومات");
+          //  if (snapshot.connectionState != ConnectionState.done)
+              //return Text("");
             return buildName();
           },
         ),
@@ -170,7 +170,10 @@ Widget buildName() => Column(
   
         children: 
         
-        <Widget>[ SizedBox(
+        <Widget>[ 
+                        const SizedBox(height: 18),
+SizedBox(
+          
                         height: 150,
                         child: Image.asset(
                           "assets/Screen Shot 1443-03-02 at 6.09.18 PM.png",
@@ -179,34 +182,46 @@ Widget buildName() => Column(
           
          Text(
            '@'+ userName,
-            style: TextStyle(color: Color(0xff737373)),
+            style: TextStyle(color: Color(0xff737373),fontSize: 18),
           ),
           const SizedBox(height: 8),
           Text(
-            Email,style: TextStyle(color: Color(0xff737373)),
+            Email,style: TextStyle(color: Color(0xff737373),fontSize: 18),
           ),
+                    const SizedBox(height: 8),
+
            Text(
             FName+' '+LName,
-            style: TextStyle(color: Color(0xff737373)),
+            style: TextStyle(color: Color(0xff737373),fontSize: 18),
           ),
           /* Text(
             LName,
             style: TextStyle(color: Color(0xff737373)),
           ), */
+                    const SizedBox(height: 8),
+
            Text(
             phoneN,
-            style: TextStyle(color: Color(0xff737373)),
+            style: TextStyle(color: Color(0xff737373),fontSize: 18),
           ),
 
-          const SizedBox(height: 24),
+        //  const SizedBox(height: 24),
         
-              const SizedBox(height: 24),
-              Center(child: buildUpgradeButton()), 
+              const SizedBox(height: 20),
+              Center(child: MyInterest() ), 
+                            const SizedBox(height: 20),
+
+              Center(child: buildUpgradeButton() ),
+                            const SizedBox(height: 20),
+
+              Center(child: signOut() ),
 
 
+
         
-          FlatButton.icon(
+        /*  FlatButton.icon(
               onPressed: () {
+                
                 FirebaseAuth.instance.signOut();
                 Navigator.push(this.context,
                     MaterialPageRoute(builder: (context) => LoginPage()));
@@ -219,7 +234,7 @@ Widget buildName() => Column(
                 'تسجيل خروج',
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color:Color(0xff51878d)),
-              ))
+              )) */
         ],
           
           
@@ -245,11 +260,46 @@ Widget buildName() => Column(
     onClicked: () {
       
       Navigator.of(this.context).push(
+        MaterialPageRoute(builder: (context) =>EditProfilePage()),// EditProfilePage()
+      );
+    },
+    
+      );
+
+
+ Widget signOut() => ButtonWidget(
+    
+        text: 'تسجيل خروج',
+        
+        
+    onClicked: () {
+
+
+       FirebaseAuth.instance.signOut();
+                Navigator.push(this.context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
+      
+    
+      
+    },
+    
+      );
+Widget MyInterest() => ButtonWidget(
+    
+        text: 'المفضلات',
+        
+        
+    onClicked: ()  {
+      
+      Navigator.of(this.context).push(
         MaterialPageRoute(builder: (context) =>InterstsPage()),// EditProfilePage()
       );
     },
     
       );
+
+
+
     
   }
 
