@@ -98,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
 
 
-    return  Container(
+    return  SafeArea(
       //  home: Scaffold(
 
 
@@ -118,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 var _selectedItem = val;
               });
             },
-            defaultSelectedIndex: 1,
+            defaultSelectedIndex:3,
           ),
 
 

@@ -1,12 +1,13 @@
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
-import 'HomePage.dart';
+import 'Home_page.dart';
 import 'Offers.dart';
 class MyItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
         bottomNavigationBar: CustomBottomNavigationBar(
           iconList: [
             Icons.home,
@@ -20,13 +21,14 @@ class MyItems extends StatelessWidget {
             });
           },
           defaultSelectedIndex: 1,
+       
         ),
 
         appBar: AppBar(
           backgroundColor: Colors.cyan[800],
           title: Center(child: Text('منتجاتي', style: TextStyle(fontSize: 30))),
         )
-    );
+      );
 
   }
 

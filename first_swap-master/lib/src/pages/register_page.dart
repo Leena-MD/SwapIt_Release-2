@@ -1,10 +1,12 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_swap/fluttericon.dart';
+import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/fluttericon.dart';
 import 'package:first_swap/src/widgets/app_outlinebutton.dart';
 import 'package:first_swap/src/widgets/app_textfield.dart';
 import 'package:first_swap/themes.dart';
+
 import 'Intrests_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_swap/models/user_model.dart';
@@ -317,20 +319,20 @@ class _regestpState extends State<regestp> {
   Future<bool> userExists(String username) async =>
       (await _instance.collection("users").where("UserName", isEqualTo: username).get()).docs.isNotEmpty;
 
-      Future<bool> phoneExists(String phoneN) async =>
-      (await _instance.collection("users").where("phoneN", isEqualTo: phoneN).get()).docs.isNotEmpty;
+    Future<bool> phoneExists(String phoneN) async =>
+     (await _instance.collection("users").where("phoneN", isEqualTo: phoneN).get()).docs.isNotEmpty;
 
   if(await userExists(username)){
-    errorMessage = "اسم المستخدم مسجل مسبقاً";
+ errorMessage = "اسم المستخدم مسجل مسبقاً";
 Fluttertoast.showToast(msg: errorMessage!);
         
-    }
+   }
     else
-    if(await phoneExists(phoneN)){
-    errorMessage = "رقم الهاتف مسجل مسبقاً";
+   if(await phoneExists(phoneN)){
+   errorMessage = "رقم الهاتف مسجل مسبقاً";
 Fluttertoast.showToast(msg: errorMessage!);
-    }
-    else
+   }
+   else
       if (_formKey.currentState!.validate()) {
       try {
         await _auth
@@ -384,7 +386,7 @@ Fluttertoast.showToast(msg: errorMessage!);
 
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => ProfilePage()),// غيرتها للبروفايل
+        MaterialPageRoute(builder: (context) => HomePage()),// غيرتها للبروفايل
         (route) => false);
   }
 }

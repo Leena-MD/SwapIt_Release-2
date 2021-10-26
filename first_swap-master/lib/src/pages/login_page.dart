@@ -265,7 +265,7 @@ class _LoginPageState extends State<LoginPage> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "تم تسجيل الدخول بنجاح"),
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => ProfilePage())),
+                      MaterialPageRoute(builder: (context) => HomePage())),
                 });
         pass1cont.clear();
 

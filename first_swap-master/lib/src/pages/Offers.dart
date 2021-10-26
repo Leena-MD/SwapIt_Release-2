@@ -1,7 +1,7 @@
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
-import 'HomePage.dart';
+import 'Home_page.dart';
 import 'MyItems.dart';
 class Offers extends StatelessWidget {
   @override
@@ -19,7 +19,7 @@ class Offers extends StatelessWidget {
               var _selectedItem = val;
             });
           },
-          defaultSelectedIndex: 1,
+          defaultSelectedIndex: 2,
         ),
 
         appBar: AppBar(
