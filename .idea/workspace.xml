@@ -26,9 +26,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e6bf522-e4ba-4112-9733-49fd7c9c167a" name="Default Changelist" comment="add nav bar">
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/main.dart" afterDir="false" />
-    </list>
+    <list default="true" id="2e6bf522-e4ba-4112-9733-49fd7c9c167a" name="Default Changelist" comment="add nav bar" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635229833039</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add nav bar">
+      <created>1635230125041</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1635230125041</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,17 +136,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
               <option name="TEXT_FILTER_SETTINGS">
                 <TextFilterSettings>
                   <option name="REGEX" value="true" />
@@ -187,22 +181,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1635226311347" />
-    <state width="1236" height="163" key="GridCell.Tab.0.bottom" timestamp="1635229160992">
+    <state width="1236" height="163" key="GridCell.Tab.0.bottom" timestamp="1635230132145">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1236" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1635229160992" />
-    <state width="1236" height="163" key="GridCell.Tab.0.center" timestamp="1635229160991">
+    <state width="1236" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1635230132145" />
+    <state width="1236" height="163" key="GridCell.Tab.0.center" timestamp="1635230132144">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1236" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1635229160991" />
-    <state width="1236" height="163" key="GridCell.Tab.0.left" timestamp="1635229160990">
+    <state width="1236" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1635230132144" />
+    <state width="1236" height="163" key="GridCell.Tab.0.left" timestamp="1635230132143">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1236" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1635229160990" />
-    <state width="1236" height="163" key="GridCell.Tab.0.right" timestamp="1635229160992">
+    <state width="1236" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1635230132143" />
+    <state width="1236" height="163" key="GridCell.Tab.0.right" timestamp="1635230132145">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1236" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1635229160992" />
+    <state width="1236" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1635230132145" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1635226318914">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
