@@ -1,3 +1,4 @@
+import 'package:first_swap/src/pages/Offers.dart';
 import 'package:flutter/material.dart';
 
 import 'package:first_swap/models/user_model.dart';
@@ -12,6 +13,7 @@ import 'package:first_swap/src/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 import 'Home_page.dart';
+import 'MyItems.dart';
 import 'login_page.dart';
 import 'edit_profile_page.dart';
 import 'Intrests_page.dart';
@@ -384,8 +386,19 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           if(_selectedIndex==0)
             Navigator.push(
                 this.context, MaterialPageRoute(builder: (context) => HomePage()));
+                if(_selectedIndex==1)
+            Navigator.push(
+                this.context, MaterialPageRoute(builder: (context) => MyItems()));
+                if(_selectedIndex==2)
+            Navigator.push(
+                this.context, MaterialPageRoute(builder: (context) => Offers()));
+                if(_selectedIndex==3)
+            Navigator.push(
+                this.context, MaterialPageRoute(builder: (context) => ProfilePage()));
+
         });
       },
+      
       child: Container(
 
         height: 60,

@@ -23,7 +23,7 @@ class Offers extends StatelessWidget {
         ),
 
         appBar: AppBar(
-          backgroundColor: Color(0xff51878d),
+          backgroundColor: Colors.cyan[800],
           title: Center(child: Text('الطلبات', style: TextStyle(fontSize: 30))),
 
         ));
