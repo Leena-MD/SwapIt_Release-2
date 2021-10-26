@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
+
 import 'package:first_swap/models/user_model.dart';
 import 'package:first_swap/src/widgets/app_textfield.dart';
 import 'package:first_swap/themes.dart';
@@ -11,9 +11,13 @@ import 'package:first_swap/src/widgets/profile_widget.dart';
 import 'package:first_swap/src/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
+import 'Home_page.dart';
 import 'login_page.dart';
 import 'edit_profile_page.dart';
 import 'Intrests_page.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 
 
 
@@ -23,7 +27,7 @@ class ProfilePage extends StatefulWidget {
 
 
 
-  
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -31,20 +35,20 @@ class ProfilePage extends StatefulWidget {
 
 
 class _ProfilePageState extends State<ProfilePage> {
-  
+
   @override
 
   //  final collRef = FirebaseFirestore.instance.collection('users');
 
-String Email='';
-String FName='';
-String LName='';
-String phoneN='';
-String userName='';
+  String Email='';
+  String FName='';
+  String LName='';
+  String phoneN='';
+  String userName='';
 
 
-final FirebaseAuth auth = FirebaseAuth.instance;
-void inputData() {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  void inputData() {
     final User? user = auth.currentUser;
     final uid = user!.uid;
     // here you write the codes to input the data into firestore
@@ -53,18 +57,18 @@ void inputData() {
 
 
 
-     // CollectionReference users = FirebaseFirestore.instance.collection('users');
+  // CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   final userRef= FirebaseFirestore.instance.collection('users');
 
- Future<void> _fetch() async {
+  Future<void> _fetch() async {
     final firebaseUser = await FirebaseAuth.instance.currentUser;//(); شلتها لان تطلع لي ايرور
     if (firebaseUser != null)// the user sign in
       await FirebaseFirestore.instance
           .collection('users')
           .doc(firebaseUser.uid)
           .get()
-          //.then((value) => null)
+      //.then((value) => null)
           .then((ds) {
         Email = ds.data()!['email'];
         print(Email);
@@ -78,7 +82,7 @@ void inputData() {
         print(userName);
 
       })
-      .catchError((e) {
+          .catchError((e) {
         print(e);
       });
   }
@@ -87,23 +91,23 @@ void inputData() {
 
 
 
-  
+
   Widget build(BuildContext context) {
 
 
-  
+
     return  Container(
-    //  home: Scaffold(
+      //  home: Scaffold(
 
 
       child: Builder(
         builder: (context) => Scaffold(
 
-bottomNavigationBar: CustomBottomNavigationBar(
+          bottomNavigationBar: CustomBottomNavigationBar(
             iconList: [
               Icons.home,
               Icons.add_to_photos,
-            
+
               Icons.reorder_rounded,
               Icons.person,
             ],
@@ -116,10 +120,10 @@ bottomNavigationBar: CustomBottomNavigationBar(
           ),
 
 
-                appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        /*
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            /*
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Color(0xff51878d)),
           onPressed: () {
@@ -127,22 +131,27 @@ bottomNavigationBar: CustomBottomNavigationBar(
           },
         ),
         */
-      ),
+          ),
           body:Center(
-        child: FutureBuilder(
-          future: _fetch(),
-          builder: (context, snapshot) {
-          //  if (snapshot.connectionState != ConnectionState.done)
-              //return Text("");
-            return buildName();
-          },
-        ),
-      ),
-    
-          
-          
-          
-         /*  ListView(
+
+
+
+
+            child: FutureBuilder(
+
+              future: _fetch(),
+              builder: (context, snapshot) {
+                //  if (snapshot.connectionState != ConnectionState.done)
+                //return Text("");
+                return buildName();
+              },
+            ),
+          ),
+
+
+
+
+          /*  ListView(
             physics: BouncingScrollPhysics(),
             children: [/*
               ProfileWidget(
@@ -153,86 +162,89 @@ bottomNavigationBar: CustomBottomNavigationBar(
                   );
                 },
               ),done
-              const SizedBox(height: 24), 
+              const SizedBox(height: 24),
               buildName(UserModel),
               const SizedBox(height: 24),
               Center(child: buildUpgradeButton()), */
             ],
 
-            
+
           ),
           */
 
-          
+
         ),
 
 
-        
+
       ),
-     
-      );
+
+    );
 
 
 
 //Uid,userName,FName,LName,email,phoneN
   }
-Widget buildName() => Column(
-  
-  
-        children: 
-        
-        <Widget>[ 
-                        const SizedBox(height: 18),
-SizedBox(
-          
-                        height: 150,
-                        child: Image.asset(
-                          "assets/Screen Shot 1443-03-02 at 6.09.18 PM.png",
-                          fit: BoxFit.contain,
-                        )),
-          
-         Text(
-           '@'+ userName,
-            style: TextStyle(color: Color(0xff737373),fontSize: 18),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            Email,style: TextStyle(color: Color(0xff737373),fontSize: 18),
-          ),
-                    const SizedBox(height: 8),
+  Widget buildName() => Column(
 
-           Text(
-            FName+' '+LName,
-            style: TextStyle(color: Color(0xff737373),fontSize: 18),
-          ),
-          /* Text(
+
+    children:
+
+    <Widget>[
+      const SizedBox(height: 18),
+      SizedBox(
+        //gh-1421@hotmail.com
+        //Ghzh1234@
+          height: 150,
+          child: Image.asset(
+            "assets/Screen Shot 1443-03-02 at 6.09.18 PM.png",
+            //fit: BoxFit.contain,
+            height: 1000,
+            width:1000,
+          )),
+
+      Text(
+        '@'+ userName,
+        style: TextStyle(color: Color(0xff737373),fontSize: 18),
+      ),
+      const SizedBox(height: 8),
+      Text(
+        Email,style: TextStyle(color: Color(0xff737373),fontSize: 18),
+      ),
+      const SizedBox(height: 8),
+
+      Text(
+        FName+' '+LName,
+        style: TextStyle(color: Color(0xff737373),fontSize: 18),
+      ),
+      /* Text(
             LName,
             style: TextStyle(color: Color(0xff737373)),
           ), */
-                    const SizedBox(height: 8),
+      const SizedBox(height: 8),
 
-           Text(
-            phoneN,
-            style: TextStyle(color: Color(0xff737373),fontSize: 18),
-          ),
+      Text(
+        phoneN,
+        style: TextStyle(color: Color(0xff737373),fontSize: 18),
+      ),
 
-        //  const SizedBox(height: 24),
-        
-              const SizedBox(height: 20),
-              Center(child: MyInterest() ), 
-                            const SizedBox(height: 20),
+      //  const SizedBox(height: 24),
 
-              Center(child: buildUpgradeButton() ),
-                            const SizedBox(height: 20),
+      const SizedBox(height: 20),
+      Center(child: MyInterest() ),
+      const SizedBox(height: 20),
 
-              Center(child: signOut() ),
+      Center(child: buildUpgradeButton() ),
+      const SizedBox(height: 20),
+
+      Center(child: signOut() ),
 
 
 
-        
-        /*  FlatButton.icon(
+
+      /*  FlatButton.icon(
               onPressed: () {
-                
+
                 FirebaseAuth.instance.signOut();
                 Navigator.push(this.context,
                     MaterialPageRoute(builder: (context) => LoginPage()));
@@ -246,10 +258,7 @@ SizedBox(
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color:Color(0xff51878d)),
               )) */
-        ],
-          
-          
-        
+    ],
 
 
 
@@ -258,62 +267,64 @@ SizedBox(
 
 
 
-        
-      );
 
 
 
- Widget buildUpgradeButton() => ButtonWidget(
-    
-        text: 'تعديل الملف الشخصي',
-        
-        
+
+  );
+
+
+
+  Widget buildUpgradeButton() => ButtonWidget(
+
+    text: 'تعديل الملف الشخصي',
+
+
     onClicked: () {
-      
+
       Navigator.of(this.context).push(
         MaterialPageRoute(builder: (context) =>EditProfilePage()),// EditProfilePage()
       );
     },
-    
-      );
+
+  );
 
 
- Widget signOut() => ButtonWidget(
-    
-        text: 'تسجيل خروج',
-        
-        
+  Widget signOut() => ButtonWidget(
+
+    text: 'تسجيل خروج',
+
+
     onClicked: () {
 
 
-       FirebaseAuth.instance.signOut();
-                Navigator.push(this.context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
-      
-    
-      
+      FirebaseAuth.instance.signOut();
+      Navigator.push(this.context,
+          MaterialPageRoute(builder: (context) => LoginPage()));
+
+
+
     },
-    
-      );
-Widget MyInterest() => ButtonWidget(
-    
-        text: 'المفضلات',
-        
-        
+
+  );
+  Widget MyInterest() => ButtonWidget(
+
+    text: 'المفضلات',
+
+
     onClicked: ()  {
-      
+
       Navigator.of(this.context).push(
         MaterialPageRoute(builder: (context) =>InterstsPage()),// EditProfilePage()
       );
     },
-    
-      );
+
+  );
 
 
 
-    
-  }
 
+}
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final int defaultSelectedIndex;
@@ -336,23 +347,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   void initState() {
-  
+    // TODO: implement initState
     super.initState();
 
     _selectedIndex = widget.defaultSelectedIndex;
     _iconList = widget.iconList;
   }
 
-
-
-
-
-
-
-
-
-
-  
   @override
   Widget build(BuildContext context) {
     List<Widget> _navBarItemList = [];
@@ -368,21 +369,25 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       children: _navBarItemList,
     );
   }
- 
+
   Widget buildNavBarItem(IconData icon, int index) {
-    
+
 
 
     return GestureDetector(
-      
+
       onTap: () {
         widget.onChange(index);
+
         setState(() {
           _selectedIndex = index;
+          if(_selectedIndex==0)
+            Navigator.push(
+                this.context, MaterialPageRoute(builder: (context) => HomePage()));
         });
       },
       child: Container(
-    
+
         height: 60,
         width: MediaQuery.of(this.context).size.width / _iconList.length,
         decoration: index == _selectedIndex
@@ -394,22 +399,35 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               Colors.blueGrey.withOpacity(0.3),
               Colors.blueGrey.withOpacity(0.015),
             ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
-          // color: index == _selectedItemIndex ? Colors.green : Colors.white,
+
+          //color: index == _selectedItemIndex ? Colors.green : Colors.white,
+
         )
             : BoxDecoration(),
         child:
 
-          Column (
-            children: <Widget>[
-              Icon(icon,
-              
-                color: index ==_selectedIndex ? Colors.black : Colors.grey,),
-              
-            ],
-          ),
+        Column (
+          children: <Widget>[
+            Icon(icon,
+
+              color: index ==_selectedIndex ? Colors.black : Colors.grey,),
+
+
+            if(index==0)
+              Text('الرئيسية'),
+            if(index==1)
+              Text('منتجاتي'),
+
+            if(index==2)
+              Text('الطلبات'),
+            if(index==3)
+              Text('حسابي'),
+          ],
+        ),
 
 
       ),
+
     );
   }
 }
