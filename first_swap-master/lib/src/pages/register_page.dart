@@ -13,6 +13,7 @@ import 'package:first_swap/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'profile_page.dart';
+
 class regestp extends StatefulWidget {
   const regestp({Key? key}) : super(key: key);
 
@@ -36,7 +37,6 @@ class _regestpState extends State<regestp> {
 
   @override
   Widget build(BuildContext context) {
-
     //User Name
     final userNameField = TextFormField(
         textAlign: TextAlign.right,
@@ -44,7 +44,6 @@ class _regestpState extends State<regestp> {
         controller: userNameEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
-         
           RegExp regex = new RegExp(r'^.{3,}$');
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
@@ -54,7 +53,6 @@ class _regestpState extends State<regestp> {
           }
           return null;
         },
-        
         onSaved: (value) {
           userNameEditingController.text = value!;
         },
@@ -72,8 +70,7 @@ class _regestpState extends State<regestp> {
         controller: phoneNumberEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
-          RegExp regex = new RegExp(
-              r'(^(05)(5|0|3|6|4|9|1|8|7)([0-9]{7}))');
+          RegExp regex = new RegExp(r'(^(05)(5|0|3|6|4|9|1|8|7)([0-9]{7}))');
 
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
@@ -94,7 +91,8 @@ class _regestpState extends State<regestp> {
         ));
 
     //first name field
-    final firstNameField = TextFormField(//var بجرب فاينل اول 
+    final firstNameField = TextFormField(
+        //var بجرب فاينل اول
         textAlign: TextAlign.right,
         autofocus: false,
         controller: firstNameEditingController,
@@ -179,16 +177,15 @@ class _regestpState extends State<regestp> {
         controller: passwordEditingController,
         obscureText: true,
         validator: (value) {
-          
-       RegExp regex = new RegExp(
-             r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+          RegExp regex = new RegExp(
+              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
           }
-          
-    if (!regex.hasMatch(value)) {
-        return ("يجب ان تحتوي كلمة المرور على :حرف كبير وصغير وارقام ورمز");
-       }
+
+          if (!regex.hasMatch(value)) {
+            return ("يجب ان تحتوي كلمة المرور على :حرف كبير وصغير وارقام ورمز");
+          }
         },
         onSaved: (value) {
           firstNameEditingController.text = value!;
@@ -310,30 +307,32 @@ class _regestpState extends State<regestp> {
   }
 
   void regist(String email, String password) async {
-    
     var _instance = FirebaseFirestore.instance;
 
-  String username = userNameEditingController.text;
-  String phoneN = phoneNumberEditingController.text;
+    String username = userNameEditingController.text;
+    String phoneN = phoneNumberEditingController.text;
 
-  Future<bool> userExists(String username) async =>
-      (await _instance.collection("users").where("UserName", isEqualTo: username).get()).docs.isNotEmpty;
+    Future<bool> userExists(String username) async => (await _instance
+            .collection("users")
+            .where("UserName", isEqualTo: username)
+            .get())
+        .docs
+        .isNotEmpty;
 
-    Future<bool> phoneExists(String phoneN) async =>
-     (await _instance.collection("users").where("phoneN", isEqualTo: phoneN).get()).docs.isNotEmpty;
+    Future<bool> phoneExists(String phoneN) async => (await _instance
+            .collection("users")
+            .where("phoneN", isEqualTo: phoneN)
+            .get())
+        .docs
+        .isNotEmpty;
 
-  if(await userExists(username)){
- errorMessage = "اسم المستخدم مسجل مسبقاً";
-Fluttertoast.showToast(msg: errorMessage!);
-        
-   }
-    else
-   if(await phoneExists(phoneN)){
-   errorMessage = "رقم الهاتف مسجل مسبقاً";
-Fluttertoast.showToast(msg: errorMessage!);
-   }
-   else
-      if (_formKey.currentState!.validate()) {
+    if (await userExists(username)) {
+      errorMessage = "اسم المستخدم مسجل مسبقاً";
+      Fluttertoast.showToast(msg: errorMessage!);
+    } else if (await phoneExists(phoneN)) {
+      errorMessage = "رقم الهاتف مسجل مسبقاً";
+      Fluttertoast.showToast(msg: errorMessage!);
+    } else if (_formKey.currentState!.validate()) {
       try {
         await _auth
             .createUserWithEmailAndPassword(email: email, password: password)
@@ -360,13 +359,12 @@ Fluttertoast.showToast(msg: errorMessage!);
   }
 
   postDetailsToFirestore() async {
-
-    
     // calling our firestore
     // calling our user model
     // sedning these values
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
+    int Rate = 5;
 
     UserModel userModel = UserModel();
 
@@ -377,7 +375,9 @@ Fluttertoast.showToast(msg: errorMessage!);
     userModel.LastName = secondNameEditingController.text;
     userModel.UserName = userNameEditingController.text;
     userModel.phoneN = phoneNumberEditingController.text;
-   
+    userModel.Rate = Rate;
+    userModel.Blacklist = false;
+
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)
@@ -386,7 +386,7 @@ Fluttertoast.showToast(msg: errorMessage!);
 
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => HomePage()),// غيرتها للبروفايل
+        MaterialPageRoute(builder: (context) => HomePage()), // غيرتها للبروفايل
         (route) => false);
   }
 }
