@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:first_swap/src/widgets/appbar_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'profile_page.dart';
+import 'Edit_password_page.dart';
 
 
 class EditProfilePage extends StatefulWidget {
@@ -92,61 +93,6 @@ class _EditProfilePageState  extends State<EditProfilePage>  {
         ));
 
 
-/*
-to change password يمكن نحتاجه
-    final passwordField = TextFormField(
-        textAlign: TextAlign.right,
-        autofocus: false,
-        controller: passwordEditingController,
-        obscureText: true,
-        validator: (value) {
-          RegExp regex = 
-         new RegExp(
-              "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-          if (value!.isEmpty) {
-            return ("*الحقل مطلوب");
-          }
-      if (!regex.hasMatch(value)) {
-           return ("يجب ان تحتوي كلمة المرور على :حرف كبير وصغير وارقام ورمز");
-        }
-        },
-        onSaved: (value) {
-          firstNameEditingController.text = value!;
-        },
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.lock),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "كلمة المرور",
-        ));
-
-
-//confirm password field
-    final confirmPasswordField = TextFormField(
-        textAlign: TextAlign.right,
-        autofocus: false,
-        controller: confirmPasswordEditingController,
-        obscureText: true,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return ("*الحقل مطلوب");
-          } else if (confirmPasswordEditingController.text !=
-              passwordEditingController.text) {
-            return "كلمة المرور لا تتطابق";
-          }
-          return null;
-        },
-        onSaved: (value) {
-          confirmPasswordEditingController.text = value!;
-        },
-        textInputAction: TextInputAction.done,
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.lock),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "أعد إدخال كملة المرور",
-        ));
-*/
-
 
     //Save button
 
@@ -162,9 +108,9 @@ to change password يمكن نحتاجه
                 if(firstNameEditingController.text.isNotEmpty&&secondNameEditingController.text.isNotEmpty){
 
 submitAction(context);}
-                if(firstNameEditingController.text.isEmpty&&secondNameEditingController.text.isEmpty){
-                 Navigator.pop(context);
-                };
+            //    if(firstNameEditingController.text.isEmpty&&secondNameEditingController.text.isEmpty){
+              //   Navigator.pop(context);
+               // };
           },
           child: Text(
             "حفظ التعديلات",
@@ -189,7 +135,8 @@ submitAction(context);}
           minWidth: MediaQuery.of(context).size.width,
           
           onPressed: () {
-             
+                 Navigator.push(
+                this.context, MaterialPageRoute(builder: (context) => EditPasswordPage()));
           },
           child: Text(
             "تغيير كلمة المرور",
@@ -269,16 +216,21 @@ submitAction(context);}
           .doc(firebaseUser.uid)
           .update({
        'FirstName': FirstName,'LastName': LastName 
-    });   }
+       
+    }
+    
+    ); 
+        Fluttertoast.showToast(msg: "تم التعديل بنجاح");
+  }
 
     userID =firebaseUser!.uid;  
 
-    Fluttertoast.showToast(msg: "تم التعديل بنجاح");
-  
+  //  Fluttertoast.showToast(msg: "تم التعديل بنجاح");
+  /*
    Navigator.pushAndRemoveUntil(
       (this.context),
        MaterialPageRoute(builder: (context) => ProfilePage()),
-        (route) => false);
+        (route) => false);  */
   }
 
     updateData(String FirstName, String LastName,String userID) async {
