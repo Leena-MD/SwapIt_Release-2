@@ -23,6 +23,7 @@ class _InterstsPageState extends State<InterstsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[dashBg, content],
       ),

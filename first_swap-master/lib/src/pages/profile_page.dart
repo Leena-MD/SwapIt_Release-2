@@ -104,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
       child: Builder(
         builder: (context) => Scaffold(
-
+backgroundColor: Colors.white,
           bottomNavigationBar: CustomBottomNavigationBar(
             iconList: [
               Icons.home,
@@ -136,6 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           body:Center(
 
+ 
 
 
 
@@ -169,8 +170,6 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(height: 24),
               Center(child: buildUpgradeButton()), */
             ],
-
-
           ),
           */
 
@@ -189,64 +188,100 @@ class _ProfilePageState extends State<ProfilePage> {
   }
   Widget buildName() => Column(
 
-
+  
     children:
 
     <Widget>[
       const SizedBox(height: 18),
-      SizedBox(
-        //gh-1421@hotmail.com
-        //Ghzh1234@
-          height: 150,
-          child: Image.asset(
-            "assets/Screen Shot 1443-03-02 at 6.09.18 PM.png",
-            //fit: BoxFit.contain,
-            height: 1000,
-            width:1000,
-          )),
-
-      Text(
+      
+     
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Container(
+            height: 150,
+            width: 150,
+            decoration: BoxDecoration(
+                
+                
+               
+                image: DecorationImage(
+  
+                    fit: BoxFit.fitWidth,
+                       
+                    image: AssetImage("assets/Screen Shot 1443-03-02 at 6.09.18 PM.png"))
+                
+                ),
+          ),
+        ),
+   
+Container(
+   child: Center(
+        child: Text(
+     
         '@'+ userName,
-        style: TextStyle(color: Color(0xff737373),fontSize: 18),
-      ),
-      const SizedBox(height: 8),
-      Text(
-        Email,style: TextStyle(color: Color(0xff737373),fontSize: 18),
-      ),
-      const SizedBox(height: 8),
+      style: TextStyle(
+              color: Colors.black, fontSize: 24, fontWeight: FontWeight.w800),
+      ),)),
+      Container(
+      child:
+       ListTile(
+      title: Text(  "المعلومات الشخصية",
+     textAlign: TextAlign.right,
+        style: TextStyle(fontSize: 16),
+     
+      ),)
+     
+    ),
+      
+      Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 4,
+        child: Column(
+          children: [
+       
+      ListTile(
+              leading: Icon(Icons.email),
+              title: Text(Email),
+                
+            ),
+      Divider(
+              height: 0.6,
+              color: Colors.black87,
+            ),
 
-      Text(
-        FName+' '+LName,
-        style: TextStyle(color: Color(0xff737373),fontSize: 18),
-      ),
+      ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text(FName+' '+ LName),
+            ),
+       Divider(
+              height: 0.6,
+              color: Colors.black87,
+            ),
       /* Text(
             LName,
             style: TextStyle(color: Color(0xff737373)),
           ), */
       const SizedBox(height: 8),
 
-      Text(
-        phoneN,
-        style: TextStyle(color: Color(0xff737373),fontSize: 18),
-      ),
+       ListTile(
+              leading: Icon(Icons.phone),
+              title: Text(phoneN),
+            ),
+       Divider(
+              height: 0.6,
+              color: Colors.black87,
+            ),
 
       //  const SizedBox(height: 24),
 
-      const SizedBox(height: 20),
-      Center(child: MyInterest() ),
-      const SizedBox(height: 20),
-
-      Center(child: buildUpgradeButton() ),
-      const SizedBox(height: 20),
-
-      Center(child: signOut() ),
+     
 
 
 
 
       /*  FlatButton.icon(
               onPressed: () {
-
                 FirebaseAuth.instance.signOut();
                 Navigator.push(this.context,
                     MaterialPageRoute(builder: (context) => LoginPage()));
@@ -260,25 +295,38 @@ class _ProfilePageState extends State<ProfilePage> {
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color:Color(0xff51878d)),
               )) */
-    ],
+   
+
+
+          ],
 
 
 
 
 
+        ),
+      ),
+      
+      ), const SizedBox(height: 20),
+      Center(child: MyInterest() ),
+      const SizedBox(height: 20),
+
+      Center(child: buildUpgradeButton() ),
+      const SizedBox(height: 50),
+
+      Center(child: signOut() ),]
+      
+      
+      );
+
+ 
 
 
-
-
-
-
-
-  );
 
 
 
   Widget buildUpgradeButton() => ButtonWidget(
-
+ 
     text: 'تعديل الملف الشخصي',
 
 
@@ -292,26 +340,37 @@ class _ProfilePageState extends State<ProfilePage> {
   );
 
 
-  Widget signOut() => ButtonWidget(
-
-    text: 'تسجيل خروج',
-
-
-    onClicked: () {
-
-
-      FirebaseAuth.instance.signOut();
+  Widget signOut(){
+    return InkWell(
+    onTap: () {FirebaseAuth.instance.signOut();
       Navigator.push(this.context,
           MaterialPageRoute(builder: (context) => LoginPage()));
+},
+   
+      child: Container(
+          color: Colors.cyan[800],
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 10),
+                Text(
+                  "تسجيل الخروج",
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                )
+              ],
+            ),
+          )),
 
-
-
-    },
-
-  );
+  );}
   Widget MyInterest() => ButtonWidget(
 
-    text: 'المفضلات',
+    text: '       المفضلات       ',
 
 
     onClicked: ()  {

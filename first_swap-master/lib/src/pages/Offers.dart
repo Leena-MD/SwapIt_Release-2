@@ -7,6 +7,7 @@ class Offers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
         bottomNavigationBar: CustomBottomNavigationBar(
           iconList: [
             Icons.home,

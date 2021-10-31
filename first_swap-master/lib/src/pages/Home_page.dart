@@ -31,7 +31,7 @@ class _HomePage extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xfff7f7f7),
+       backgroundColor: Colors.white,
         bottomNavigationBar: CustomBottomNavigationBar(
             iconList: [
               Icons.home,

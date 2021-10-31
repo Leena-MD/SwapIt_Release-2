@@ -104,7 +104,7 @@ class ForgotPage extends StatelessWidget {
                     SizedBox(height: 30),
                     FlatButton(
                         //forgot button
-                        color: Color(0xff51878d),
+                        color: Colors.cyan[800],
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         minWidth: MediaQuery.of(context).size.width,
                         child: Text(
