@@ -6,7 +6,8 @@ import 'MyItems.dart';
 class Offers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+     child: Scaffold(
         bottomNavigationBar: CustomBottomNavigationBar(
           iconList: [
             Icons.home,
@@ -26,7 +27,7 @@ class Offers extends StatelessWidget {
           backgroundColor: Colors.cyan[800],
           title: Center(child: Text('الطلبات', style: TextStyle(fontSize: 30))),
 
-        ));
+       ) ));
   }
 
   void setState(Null Function() param0) {}
