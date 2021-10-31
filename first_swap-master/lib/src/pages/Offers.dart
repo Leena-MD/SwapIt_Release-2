@@ -8,6 +8,7 @@ class Offers extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
      child: Scaffold(
+       backgroundColor: Colors.white,
         bottomNavigationBar: CustomBottomNavigationBar(
           iconList: [
             Icons.home,

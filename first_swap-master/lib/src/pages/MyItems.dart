@@ -6,7 +6,8 @@ import 'Offers.dart';
 class MyItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+     child: Scaffold(
      backgroundColor: Colors.white,
         bottomNavigationBar: CustomBottomNavigationBar(
           iconList: [
@@ -28,7 +29,7 @@ class MyItems extends StatelessWidget {
           backgroundColor: Colors.cyan[800],
           title: Center(child: Text('منتجاتي', style: TextStyle(fontSize: 30))),
         )
-      );
+     ) );
 
   }
 
