@@ -41,7 +41,7 @@ class _ItemState extends State<Item> {
           ],
           border: _isSelected
                     ? Border.all(
-                        width: 2.0,
+                        width: 1.0,
                         color: Colors.cyan,
                       )
                     : null,
