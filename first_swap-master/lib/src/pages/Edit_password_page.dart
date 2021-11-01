@@ -23,6 +23,12 @@ class EditPasswordPage extends StatefulWidget {
 
 class _EditPasswordPageState  extends State<EditPasswordPage>  {
 
+
+    final _formkey = GlobalKey<FormState>();
+
+// error Message
+  String? errorMessage;
+  
   final TextEditingController pass1cont = new TextEditingController(); // القديم
 
   final passwordEditingController = new TextEditingController();//الجديد  
@@ -128,7 +134,15 @@ var errorMsg="";
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
+
             _changePassword(pass1cont.text, passwordEditingController.text);
+            if(_changePassword==null){
+                   print("i am here2222222222");
+
+                    Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
+
+
+            }
           },
           child: Text(
             "تغيير كلمة المرور",
@@ -158,7 +172,7 @@ var errorMsg="";
             child: Padding(
               padding: const EdgeInsets.all(36.0),
               child: Form(
-            //    key: _formKey,
+              key: _formkey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -187,6 +201,12 @@ var errorMsg="";
     );
   }
 void _changePassword(String currentPassword, String newPassword) async {
+
+
+  
+if (_formkey.currentState!.validate()) {
+
+
   print("i am here1");
 final user = await FirebaseAuth.instance.currentUser;
 final cred = EmailAuthProvider.credential(
@@ -197,21 +217,37 @@ user.reauthenticateWithCredential(cred).then((value) {
    print("i am here3");
   user.updatePassword(newPassword).then((_) {
       Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
-           //       Navigator.of(context).pushReplacement(
-             //         MaterialPageRoute(builder: (context) => HomePage())),
+                Navigator.of(this.context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => EditProfilePage()));
      print("i am here4");
     //Success, do something
-  }).catchError((print(error)) {
-    Fluttertoast.showToast(msg: "الرجاء التحقق من صحة المدخلات!");
+  });
+  
+ /* .catchError((print(error)) {
+            pass1cont.clear();
+
+    Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
+
      print("i am here5");
     //Error, show something
-  });
-}).catchError((print(err)) {
+  }); */
+});/*.catchError((print(err)) {
+              pass1cont.clear();
+
     Fluttertoast.showToast(msg: "الرجاء التحقق من صحة المدخلات!");
   print("i am here6");
+} 
+
+); */
+//return null;
+pass1cont.clear();
+    Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
+
+//return null;
+
 }
 
-);}
 
-  
+
+}
 }
