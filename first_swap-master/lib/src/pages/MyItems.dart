@@ -28,7 +28,7 @@ class MyItems extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.cyan[800],
           title: Center(child: Text('منتجاتي', style: TextStyle(fontSize: 30))),
-        )
+        automaticallyImplyLeading: false,)
      ) );
 
   }
