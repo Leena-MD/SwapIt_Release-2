@@ -122,18 +122,6 @@ backgroundColor: Colors.white,
           ),
 
 
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            /*
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xff51878d)),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        */
-          ),
           body:Center(
 
  
@@ -192,7 +180,7 @@ backgroundColor: Colors.white,
     children:
 
     <Widget>[
-      const SizedBox(height: 18),
+      
       
      
         Padding(
@@ -312,7 +300,7 @@ Container(
       const SizedBox(height: 20),
 
       Center(child: buildUpgradeButton() ),
-      const SizedBox(height: 50),
+      const SizedBox(height: 23),
 
       Center(child: signOut() ),]
       
