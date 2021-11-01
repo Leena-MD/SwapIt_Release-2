@@ -47,7 +47,7 @@ class _HomePage extends State<HomePage> {
               var _selectedItem = val;
             });
           },
-          defaultSelectedIndex: 0,
+          defaultSelectedIndex: 1,
         ),
         body: Column(
           children: <Widget>[

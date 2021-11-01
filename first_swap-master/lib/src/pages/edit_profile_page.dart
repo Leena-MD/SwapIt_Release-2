@@ -148,7 +148,6 @@ submitAction(context);}
   //
   //
   return Scaffold(
-    backgroundColor: Colors.white,
     appBar: buildAppBar(context),
     
       body: Center(
