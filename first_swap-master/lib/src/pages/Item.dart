@@ -66,10 +66,10 @@ class _ItemState extends State<Item> {
               ),
               child: Icon(
                 widget.product.iconData,
-                size: 30.0,
+                size: 28.0,
               ),
             ),
-            SizedBox(height: 12.0),
+            SizedBox(height: 11.0),
             Text(
               widget.product.title,
               style: TextStyle(
