@@ -103,6 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
 
       child: Builder(
+        
         builder: (context) => Scaffold(
 backgroundColor: Colors.white,
           bottomNavigationBar: CustomBottomNavigationBar(
@@ -125,48 +126,48 @@ backgroundColor: Colors.white,
           body:Center(
 
  
-
-
-
+ child: SingleChildScrollView(
             child: FutureBuilder(
 
               future: _fetch(),
               builder: (context, snapshot) {
+                
                 //  if (snapshot.connectionState != ConnectionState.done)
                 //return Text("");
                 return buildName();
+                
               },
+              
             ),
+           
           ),
 
 
+   /*  ListView(
+     physics: BouncingScrollPhysics(),
+     children: [/*
+       ProfileWidget(
+         imagePath: user.imagePath,//
+         onClicked: () {
+           Navigator.of(context).push(
+             MaterialPageRoute(builder: (context) => EditProfilePage()),
+           );
+         },
+       ),done
+       const SizedBox(height: 24),
+       buildName(UserModel),
+       const SizedBox(height: 24),
+       Center(child: buildUpgradeButton()), */
+     ],
+   ),
+   */
 
 
-          /*  ListView(
-            physics: BouncingScrollPhysics(),
-            children: [/*
-              ProfileWidget(
-                imagePath: user.imagePath,//
-                onClicked: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => EditProfilePage()),
-                  );
-                },
-              ),done
-              const SizedBox(height: 24),
-              buildName(UserModel),
-              const SizedBox(height: 24),
-              Center(child: buildUpgradeButton()), */
-            ],
-          ),
-          */
-
-
-        ),
+ ),
 
 
 
-      ),
+        )  ),
 
     );
 
@@ -288,14 +289,16 @@ Container(
 
           ],
 
-
+ 
 
 
 
         ),
+        
       ),
       
-      ), const SizedBox(height: 20),
+      ), 
+      const SizedBox(height: 20),
       Center(child: MyInterest() ),
       const SizedBox(height: 20),
 
