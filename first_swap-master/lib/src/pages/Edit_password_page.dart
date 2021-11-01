@@ -23,7 +23,7 @@ class EditPasswordPage extends StatefulWidget {
 
 class _EditPasswordPageState  extends State<EditPasswordPage>  {
 
-
+bool flag1=true;
     final _formkey = GlobalKey<FormState>();
 
 // error Message
@@ -206,7 +206,7 @@ void _changePassword(String currentPassword, String newPassword) async {
   
 if (_formkey.currentState!.validate()) {
 
-
+try {
   print("i am here1");
 final user = await FirebaseAuth.instance.currentUser;
 final cred = EmailAuthProvider.credential(
@@ -217,33 +217,68 @@ user.reauthenticateWithCredential(cred).then((value) {
    print("i am here3");
   user.updatePassword(newPassword).then((_) {
       Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
+      flag1=false;
                 Navigator.of(this.context).pushReplacement(
                     MaterialPageRoute(builder: (context) => EditProfilePage()));
      print("i am here4");
     //Success, do something
   });
   
- /* .catchError((print(error)) {
-            pass1cont.clear();
+}
+); 
 
+
+
+if(flag1){
     Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
+    pass1cont.clear();
 
-     print("i am here5");
-    //Error, show something
-  }); */
-});/*.catchError((print(err)) {
-              pass1cont.clear();
+}
+}
 
-    Fluttertoast.showToast(msg: "الرجاء التحقق من صحة المدخلات!");
-  print("i am here6");
-} 
 
-); */
+
+on FirebaseAuthException catch (error) {
+
+
+        //validation of the email with the database records
+        // switch (error.code) {
+       
+        //   case "wrong-password":
+        //     errorMessage = " كلمة المرور غير صحيحة!";
+        //     break;
+         
+        //   case "too-many-requests":
+        //     errorMessage = "حدث خطأ  في النظام";
+        //     break;
+        //   case "operation-not-allowed":
+        //     errorMessage = "عملية غير مقبولة!";
+        //     break;
+        //   default:
+        //     errorMessage = "حدث خطأ في النظام";
+        // } 
+        // Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+      }
+
+
+
+
+
+
+
+
+
+
+
+
 //return null;
-pass1cont.clear();
-    Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
+//pass1cont.clear();
+  //  Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
 
 //return null;
+
+
 
 }
 
