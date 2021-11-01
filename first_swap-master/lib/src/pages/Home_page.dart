@@ -7,46 +7,31 @@ import 'package:first_swap/src/widgets/app_textfield.dart';
 import 'package:first_swap/themes.dart';
 import 'Intrests_page.dart';
 
-
-
 class HomePage extends StatefulWidget {
-
-
-
-
-  
   @override
   _HomePage createState() => _HomePage();
 }
-
-
-
-
-
-
-
 
 class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-       backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         bottomNavigationBar: CustomBottomNavigationBar(
-            iconList: [
-              Icons.home,
-              Icons.add_to_photos,
-            
-              Icons.reorder_rounded,
-              Icons.person,
-            ],
-            onChange: (val) {
-              setState(() {
-                var _selectedItem = val;
-              });
-            },
-            defaultSelectedIndex: 0,
-          ),
+          iconList: [
+            Icons.home,
+            Icons.add_to_photos,
+            Icons.reorder_rounded,
+            Icons.person,
+          ],
+          onChange: (val) {
+            setState(() {
+              var _selectedItem = val;
+            });
+          },
+          defaultSelectedIndex: 0,
+        ),
         body: Column(
           children: <Widget>[
             Flexible(
@@ -61,17 +46,15 @@ class _HomePage extends State<HomePage> {
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
-                          
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.elliptical(30, 30),
                             bottomRight: Radius.elliptical(30, 30),
                           ),
-                         color: Colors.cyan[800],
+                          color: Colors.cyan[800],
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
-                            
                             Spacer(),
                             RichText(
                               text: TextSpan(
@@ -83,11 +66,8 @@ class _HomePage extends State<HomePage> {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25,
                                       color: Colors.white,
-                                    
                                     ),
-                                    
                                   ),
-                                  
                                 ],
                               ),
                             ),
@@ -97,7 +77,6 @@ class _HomePage extends State<HomePage> {
                             Text(
                               "قديم عندك جديد عند غيرك",
                               style: TextStyle(
-                                
                                 color: Colors.white,
                                 fontSize: 20,
                                 letterSpacing: 1.3,
@@ -115,19 +94,14 @@ class _HomePage extends State<HomePage> {
                       child: Container(
                         height: 57,
                         alignment: Alignment.center,
-                      
                         child: Center(
-                          
                           child: TextField(
-                           textAlign: TextAlign.right,
+                            textAlign: TextAlign.right,
                             decoration: InputDecoration(
-                              
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                borderSide: BorderSide.none
-                              ),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide.none),
                               hintText: "البحث",
-                              
                               prefixIcon: Icon(
                                 Icons.search,
                                 color: Colors.blue,
@@ -149,12 +123,13 @@ class _HomePage extends State<HomePage> {
                 padding: EdgeInsets.all(15),
                 child: SingleChildScrollView(
                   child: Column(
-                     crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                       SizedBox(height: 30),
-                       
-                        Text("الفئات  ",  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19) ),
-                        SizedBox(height: 30),
+                      SizedBox(height: 30),
+                      Text("الفئات  ",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 19)),
+                      SizedBox(height: 30),
                       CategoryContainer(),
                       SizedBox(
                         height: 9,
@@ -179,26 +154,16 @@ class _HomePage extends State<HomePage> {
 class CategoryContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
     return Container(
-
-
       child: Container(
- 
-        
-        
-       
-          child: SizedBox(
-           
-            height: 150.0,
-            child: ListView(
-              
-              scrollDirection: Axis.horizontal,
-               reverse:true,
-              children: <Widget>[
-
-                   Container(
-                     width: 120.0,
+        child: SizedBox(
+          height: 150.0,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            reverse: true,
+            children: <Widget>[
+              Container(
+                width: 120.0,
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -206,12 +171,13 @@ class CategoryContainer extends StatelessWidget {
                       width: 50,
                     ),
                     SizedBox(height: 15),
-                    Text("المستلزمات المكتبية و الكتب", textAlign: TextAlign.center)
+                    Text("المستلزمات المكتبية و الكتب",
+                        textAlign: TextAlign.center)
                   ],
                 ),
               ),
-               Container(
-                     width: 120.0,
+              Container(
+                width: 120.0,
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -219,13 +185,13 @@ class CategoryContainer extends StatelessWidget {
                       width: 50,
                     ),
                     SizedBox(height: 15),
-                    Text("الأجهزة الالكترونية و ملحقاتها", textAlign: TextAlign.center)
+                    Text("الأجهزة الالكترونية و ملحقاتها",
+                        textAlign: TextAlign.center)
                   ],
                 ),
               ),
-               
               Container(
-                     width: 120.0,
+                width: 120.0,
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -237,9 +203,8 @@ class CategoryContainer extends StatelessWidget {
                   ],
                 ),
               ),
-               
-               Container(
-                     width: 120.0,
+              Container(
+                width: 120.0,
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -251,9 +216,8 @@ class CategoryContainer extends StatelessWidget {
                   ],
                 ),
               ),
-               
-               Container(
-                     width: 120.0,
+              Container(
+                width: 120.0,
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -261,13 +225,13 @@ class CategoryContainer extends StatelessWidget {
                       width: 50,
                     ),
                     SizedBox(height: 15),
-                    Text("منتجات الأطفال و الألعاب", textAlign: TextAlign.center)
+                    Text("منتجات الأطفال و الألعاب",
+                        textAlign: TextAlign.center)
                   ],
                 ),
               ),
-               
-               Container(
-                     width: 120.0,
+              Container(
+                width: 120.0,
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -279,9 +243,8 @@ class CategoryContainer extends StatelessWidget {
                   ],
                 ),
               ),
-               
-               Container(
-                     width: 120.0,
+              Container(
+                width: 120.0,
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -289,13 +252,13 @@ class CategoryContainer extends StatelessWidget {
                       width: 50,
                     ),
                     SizedBox(height: 15),
-                    Text("الاكسسوارات  و الحقائب و  الأحذية", textAlign: TextAlign.center)
+                    Text("الاكسسوارات  و الحقائب و  الأحذية",
+                        textAlign: TextAlign.center)
                   ],
                 ),
               ),
-               
-               Container(
-                     width: 120.0,
+              Container(
+                width: 120.0,
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -307,9 +270,8 @@ class CategoryContainer extends StatelessWidget {
                   ],
                 ),
               ),
-               
-               Container(
-                     width: 120.0,
+              Container(
+                width: 120.0,
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -321,17 +283,13 @@ class CategoryContainer extends StatelessWidget {
                   ],
                 ),
               ),
-               
-
-              ],
-            ),
+            ],
           ),
         ),
-     
+      ),
     );
   }
 }
-
 
 class DealsContainer extends StatelessWidget {
   @override
@@ -346,22 +304,17 @@ class DealsContainer extends StatelessWidget {
             Row(
               children: <Widget>[
                 FlatButton(
-                child: Text(
-                  "..المزيد",
-                 
-                  style: TextStyle(color: Colors.blueAccent, fontSize: 15),
-                ),
-                onPressed: () {},
+                  child: Text(
+                    "..المزيد",
+                    style: TextStyle(color: Colors.blueAccent, fontSize: 15),
+                  ),
+                  onPressed: () {},
                 ),
                 Spacer(),
-               
-                   Text(
-                    "قد يعجبك ايضاً",
-                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
-                   
-                    
-                  ),
-                
+                Text(
+                  "قد يعجبك ايضاً",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+                ),
               ],
             ),
             SizedBox(
@@ -372,7 +325,7 @@ class DealsContainer extends StatelessWidget {
               child: ListView.builder(
                 itemCount: 3,
                 scrollDirection: Axis.horizontal,
-                reverse:true,
+                reverse: true,
                 itemBuilder: (context, id) {
                   return SingleItem();
                 },
@@ -401,31 +354,30 @@ class SingleItem extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Positioned(
-            bottom: 0,
+            top: 20,
+            right: 3,
+            bottom: 3,
             left: 0,
             child: Container(
               child: Image.asset(
                 "assets/bookshelf.png",
                 width: 121,
+                alignment: Alignment.center,
               ),
             ),
           ),
           Container(
+            alignment: Alignment.center,
             padding: EdgeInsets.all(15.0),
-            
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-            
-              Text(
+                Text(
                   "كتب مستعملة",
                   style: TextStyle(fontWeight: FontWeight.bold),
                   textAlign: TextAlign.right,
-                  
                 ),
-                
                 Spacer(),
-               
               ],
             ),
           ),

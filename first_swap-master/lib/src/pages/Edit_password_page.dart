@@ -225,15 +225,29 @@ user.reauthenticateWithCredential(cred).then((value) {
   
  /* .catchError((print(error)) {
             pass1cont.clear();
+<<<<<<< HEAD
     Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
+=======
+
+    Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
+
+>>>>>>> 4ea06b8c837bd6f9591ffbf0c06799fa4b879caa
      print("i am here5");
     //Error, show something
   }); */
 });/*.catchError((print(err)) {
               pass1cont.clear();
+<<<<<<< HEAD
     Fluttertoast.showToast(msg: "الرجاء التحقق من صحة المدخلات!");
   print("i am here6");
 } 
+=======
+
+    Fluttertoast.showToast(msg: "الرجاء التحقق من صحة المدخلات!");
+  print("i am here6");
+} 
+
+>>>>>>> 4ea06b8c837bd6f9591ffbf0c06799fa4b879caa
 ); */
 //return null;
 pass1cont.clear();
@@ -245,5 +259,9 @@ pass1cont.clear();
 
 
 
+<<<<<<< HEAD
+=======
+}
+>>>>>>> 4ea06b8c837bd6f9591ffbf0c06799fa4b879caa
 }
 }
