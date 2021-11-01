@@ -24,6 +24,7 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState  extends State<EditProfilePage>  {
 
 
+  final _formkey = GlobalKey<FormState>();
 
       final _auth = FirebaseAuth.instance;
 
@@ -105,9 +106,10 @@ class _EditProfilePageState  extends State<EditProfilePage>  {
           minWidth: MediaQuery.of(context).size.width,
           
           onPressed: () {
-                if(firstNameEditingController.text.isNotEmpty&&secondNameEditingController.text.isNotEmpty){
+           //     if(firstNameEditingController.text.isNotEmpty&&secondNameEditingController.text.isNotEmpty){
 
-submitAction(context);}
+submitAction(context);
+//}
             //    if(firstNameEditingController.text.isEmpty&&secondNameEditingController.text.isEmpty){
               //   Navigator.pop(context);
                // };
@@ -157,6 +159,7 @@ submitAction(context);}
             child: Padding(
               padding: const EdgeInsets.all(36.0),
               child: Form(
+               key: _formkey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -210,6 +213,8 @@ submitAction(context);}
 
      final firebaseUser = await FirebaseAuth.instance.currentUser;
      if(FirstName!=null&&LastName!=null){
+              if (_formkey.currentState!.validate()) {
+
         if (firebaseUser != null)// 
       await FirebaseFirestore.instance
           .collection('users')
@@ -220,7 +225,10 @@ submitAction(context);}
     }
     
     ); 
-        Fluttertoast.showToast(msg: "تم التعديل بنجاح");
+       Fluttertoast.showToast(msg: "تم التعديل بنجاح!");
+           Navigator.of(this.context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
+        }
   }
 
     userID =firebaseUser!.uid;  
@@ -242,7 +250,8 @@ submitAction(context);}
   submitAction(BuildContext context) {
     updateData(firstNameEditingController.text, secondNameEditingController.text,
          userID);
-    firstNameEditingController.clear();
-    secondNameEditingController.clear();}
+   // firstNameEditingController.clear();
+  //  secondNameEditingController.clear();
+  }
   
 }
