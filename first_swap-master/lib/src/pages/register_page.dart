@@ -34,7 +34,7 @@ class _regestpState extends State<regestp> {
   final emailEditingController = new TextEditingController();
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
-
+  final confirmEmailEditingController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     //User Name
@@ -44,7 +44,7 @@ class _regestpState extends State<regestp> {
         controller: userNameEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
-          RegExp regex = new RegExp(r'^.{3,}$');
+          RegExp regex = new RegExp(r'^[a-zA-Z]{3,}$');
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
           }
@@ -167,9 +167,30 @@ class _regestpState extends State<regestp> {
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.mail),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "البريد الإلكتروني",
+          hintText: " البريد الإلكتروني",
         ));
-
+    final confirmEmailField = TextFormField(
+        textAlign: TextAlign.right,
+        autofocus: false,
+        controller: confirmEmailEditingController,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("*الحقل مطلوب");
+          } else if (confirmEmailEditingController.text !=
+              emailEditingController.text) {
+            return "البريد الإلكتروني لا يتطابق";
+          }
+          return null;
+        },
+        onSaved: (value) {
+          confirmEmailEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.mail),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "أعد إدخال البريد الإلكتروني",
+        ));
     //password field
     final passwordField = TextFormField(
         textAlign: TextAlign.right,
@@ -289,6 +310,8 @@ class _regestpState extends State<regestp> {
                     secondNameField,
                     SizedBox(height: 20),
                     emailField,
+                    SizedBox(height: 20),
+                    confirmEmailField,
                     SizedBox(height: 20),
                     passwordField,
                     SizedBox(height: 20),
