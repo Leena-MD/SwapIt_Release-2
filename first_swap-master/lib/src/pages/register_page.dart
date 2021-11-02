@@ -70,7 +70,7 @@ class _regestpState extends State<regestp> {
         controller: phoneNumberEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
-          RegExp regex = new RegExp(r'(^(05)(5|0|3|6|4|9|1|8|7)([0-9]{7}))');
+          RegExp regex = new RegExp(r'(^(05)(5|0|3|6|4|9|8|7)([0-9]{7}))');
 
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
