@@ -87,7 +87,7 @@ class _EditProfilePageState  extends State<EditProfilePage>  {
             return ("الاسم الأخير حد أدنى حرف ٣ أحرف");
           }
           if (!regex3.hasMatch(value)) {
-            return ("يجب ان يتكون  الاسم الأخير من احرف فقط");
+            return ("يجب ان يتكون الاسم الأخير من احرف فقط");
           }
           return null;
         },
