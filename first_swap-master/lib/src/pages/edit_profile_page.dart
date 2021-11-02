@@ -47,11 +47,15 @@ class _EditProfilePageState  extends State<EditProfilePage>  {
         keyboardType: TextInputType.name,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{1,}$');
+          RegExp regex3 = new RegExp(r'^[a-zA-Z]+$');
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
           }
           if (!regex.hasMatch(value)) {
             return ("الاسم الأول حد أدنى حرف واحد");
+          }
+          if (!regex3.hasMatch(value)) {
+            return ("يجب ان يتكون الاسم الأول من احرف فقط");
           }
           return null;
         },
@@ -75,11 +79,15 @@ class _EditProfilePageState  extends State<EditProfilePage>  {
         keyboardType: TextInputType.name,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{3,}$');
+          RegExp regex3 = new RegExp(r'^[a-zA-Z]+$');
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
           }
           if (!regex.hasMatch(value)) {
             return ("الاسم الأخير حد أدنى حرف ٣ أحرف");
+          }
+          if (!regex3.hasMatch(value)) {
+            return ("يجب ان يتكون الاسم الأخير من احرف فقط");
           }
           return null;
         },
