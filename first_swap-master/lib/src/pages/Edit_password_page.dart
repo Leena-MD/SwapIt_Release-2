@@ -10,6 +10,9 @@ import 'profile_page.dart';
 import 'edit_profile_page.dart';
 import 'package:first_swap/fluttericon.dart';
 import 'edit_profile_page.dart';
+//import 'package:firebase_storage_platform_interface/firebase_core_platform_interface.dart';
+//package:firebase_core_platform_interface/firebase_core_platform_interface.dart
+//import
 
 
 
@@ -22,12 +25,18 @@ class EditPasswordPage extends StatefulWidget {
 
 
 class _EditPasswordPageState  extends State<EditPasswordPage>  {
+int flag2=-1;
 
-bool flag1=true;
+
+bool checkCurrentPasswordValid = true;
+
+ bool flag1=true;
+
+ late bool flag3;
     final _formkey = GlobalKey<FormState>();
 
 // error Message
-  String? errorMessage;
+  String errorMessage='';
   
   final TextEditingController pass1cont = new TextEditingController(); // القديم
 
@@ -64,6 +73,9 @@ var errorMsg="";
           ),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "   كلمة المرور الحالية",
+           errorText: checkCurrentPasswordValid
+                            ? null
+                            : "Please double check your current password",
           labelStyle: TextStyle(
             color: Colors.grey,
             fontSize: 15,
@@ -136,13 +148,8 @@ var errorMsg="";
           onPressed: () {
 
             _changePassword(pass1cont.text, passwordEditingController.text);
-            if(_changePassword==null){
-                   print("i am here2222222222");
+    
 
-                    Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
-
-
-            }
           },
           child: Text(
             "تغيير كلمة المرور",
@@ -202,7 +209,6 @@ var errorMsg="";
   }
 void _changePassword(String currentPassword, String newPassword) async {
 
-
   
 if (_formkey.currentState!.validate()) {
 
@@ -216,67 +222,47 @@ final cred = EmailAuthProvider.credential(
 user.reauthenticateWithCredential(cred).then((value) {
    print("i am here3");
   user.updatePassword(newPassword).then((_) {
+    flag2=0;
       Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
-      flag1=false;
+      pass1cont.clear();
                 Navigator.of(this.context).pushReplacement(
                     MaterialPageRoute(builder: (context) => EditProfilePage()));
      print("i am here4");
     //Success, do something
-  });
-  
-}
-); 
-
-
-
-if(flag1){
-    Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
-    pass1cont.clear();
+  });}); 
 
 }
-}
 
+on FirebaseAuthException catch (error){
+     Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
 
-
-on FirebaseAuthException catch (error) {
-
-
-        //validation of the email with the database records
-        // switch (error.code) {
-       
-        //   case "wrong-password":
-        //     errorMessage = " كلمة المرور غير صحيحة!";
-        //     break;
+switch (error.code) {
+     //   validation of the email with the database records 
+          case "wrong-password":
+            errorMessage = " كلمة المرور غير صحيحة!";
+            break;
          
-        //   case "too-many-requests":
-        //     errorMessage = "حدث خطأ  في النظام";
-        //     break;
-        //   case "operation-not-allowed":
-        //     errorMessage = "عملية غير مقبولة!";
-        //     break;
-        //   default:
-        //     errorMessage = "حدث خطأ في النظام";
-        // } 
-        // Fluttertoast.showToast(msg: errorMessage!);
+          case "too-many-requests":
+            errorMessage = "حدث خطأ  في النظام";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "عملية غير مقبولة!";
+            break;
+          default:
+            errorMessage = "حدث خطأ في النظام";
+}
+        
+        Fluttertoast.showToast(msg: errorMessage);
         print(error.code);
-      }
+    
+     
+    }
+  
+  }
 
 
-
-
-
-
-
-
-
-
-
-
-//return null;
-//pass1cont.clear();
   //  Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
 
-//return null;
 
 
 
@@ -284,5 +270,10 @@ on FirebaseAuthException catch (error) {
 
 
 
+
 }
-}
+
+
+
+
+
