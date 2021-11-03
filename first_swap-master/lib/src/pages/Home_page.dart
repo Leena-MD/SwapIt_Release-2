@@ -125,18 +125,18 @@ class _HomePage extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      SizedBox(height: 30),
+                      SizedBox(height: 10),
                       Text("الفئات  ",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 19)),
-                      SizedBox(height: 30),
+                      SizedBox(height: 20),
                       CategoryContainer(),
                       SizedBox(
-                        height: 9,
+                        height: 1,
                       ),
                       Divider(),
                       SizedBox(
-                        height: 9,
+                        height: 1,
                       ),
                       DealsContainer(),
                     ],
