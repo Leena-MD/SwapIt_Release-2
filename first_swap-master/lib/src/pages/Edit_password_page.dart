@@ -259,6 +259,11 @@ switch (error.code) {
     }
   
   }
+<<<<<<< HEAD
+
+
+  //  Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
+=======
 
 
   //  Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
@@ -269,6 +274,17 @@ switch (error.code) {
 }
 
 
+>>>>>>> bbf62db29cbef6b8ba8c4ac8eecf3c5072568175
 
 
 }
+
+
+
+
+
+<<<<<<< HEAD
+
+}
+=======
+>>>>>>> bbf62db29cbef6b8ba8c4ac8eecf3c5072568175

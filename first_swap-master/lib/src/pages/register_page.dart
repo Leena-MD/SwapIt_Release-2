@@ -34,7 +34,7 @@ class _regestpState extends State<regestp> {
   final emailEditingController = new TextEditingController();
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
-
+  final confirmEmailEditingController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     //User Name
@@ -44,7 +44,7 @@ class _regestpState extends State<regestp> {
         controller: userNameEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
-          RegExp regex = new RegExp(r'^.{3,}$');
+          RegExp regex = new RegExp(r'^[a-zA-Z]{3,}$');
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
           }
@@ -70,7 +70,7 @@ class _regestpState extends State<regestp> {
         controller: phoneNumberEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
-          RegExp regex = new RegExp(r'(^(05)(5|0|3|6|4|9|1|8|7)([0-9]{7}))');
+          RegExp regex = new RegExp(r'(^(05)(5|0|3|6|4|9|8|7)([0-9]{7}))');
 
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
@@ -99,11 +99,15 @@ class _regestpState extends State<regestp> {
         keyboardType: TextInputType.name,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{1,}$');
+          RegExp regex3 = new RegExp(r'^[a-zA-Z]+$');
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
           }
           if (!regex.hasMatch(value)) {
             return ("الاسم الأول حد أدنى حرف واحد");
+          }
+          if (!regex3.hasMatch(value)) {
+            return ("يجب ان يتكون الاسم الأول من احرف فقط");
           }
           return null;
         },
@@ -125,11 +129,15 @@ class _regestpState extends State<regestp> {
         keyboardType: TextInputType.name,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{3,}$');
+          RegExp regex3 = new RegExp(r'^[a-zA-Z]+$');
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
           }
           if (!regex.hasMatch(value)) {
             return ("الاسم الأخير حد أدنى حرف ٣ أحرف");
+          }
+          if (!regex3.hasMatch(value)) {
+            return ("يجب ان يتكون الاسم الأخير من احرف فقط");
           }
           return null;
         },
@@ -167,9 +175,30 @@ class _regestpState extends State<regestp> {
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.mail),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "البريد الإلكتروني",
+          hintText: " البريد الإلكتروني",
         ));
-
+    final confirmEmailField = TextFormField(
+        textAlign: TextAlign.right,
+        autofocus: false,
+        controller: confirmEmailEditingController,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("*الحقل مطلوب");
+          } else if (confirmEmailEditingController.text !=
+              emailEditingController.text) {
+            return "البريد الإلكتروني لا يتطابق";
+          }
+          return null;
+        },
+        onSaved: (value) {
+          confirmEmailEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.mail),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "أعد إدخال البريد الإلكتروني",
+        ));
     //password field
     final passwordField = TextFormField(
         textAlign: TextAlign.right,
@@ -289,6 +318,8 @@ class _regestpState extends State<regestp> {
                     secondNameField,
                     SizedBox(height: 20),
                     emailField,
+                    SizedBox(height: 20),
+                    confirmEmailField,
                     SizedBox(height: 20),
                     passwordField,
                     SizedBox(height: 20),
