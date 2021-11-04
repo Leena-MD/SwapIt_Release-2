@@ -10,9 +10,6 @@ import 'profile_page.dart';
 import 'edit_profile_page.dart';
 import 'package:first_swap/fluttericon.dart';
 import 'edit_profile_page.dart';
-//import 'package:firebase_storage_platform_interface/firebase_core_platform_interface.dart';
-//package:firebase_core_platform_interface/firebase_core_platform_interface.dart
-//import
 
 
 
@@ -218,12 +215,30 @@ final user = await FirebaseAuth.instance.currentUser;
 final cred = EmailAuthProvider.credential(
     email: user!.email!, password: currentPassword);
  print("i am here2");
-//user.reauthenticateWithCredential(credential)
 user.reauthenticateWithCredential(cred).then((value) {
+  flag2=1;
+
+
+  switch(flag2){
+
+case 1:
+
+      Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
+      break;
+case -1:
+
+       Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
+       break;
+        default:
+       Fluttertoast.showToast(msg: "حدث خطأ في النظام");
+
+
+}
+  flag1=true;
    print("i am here3");
   user.updatePassword(newPassword).then((_) {
-    flag2=0;
-      Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
+    
+  //    Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
       pass1cont.clear();
                 Navigator.of(this.context).pushReplacement(
                     MaterialPageRoute(builder: (context) => EditProfilePage()));
@@ -234,7 +249,6 @@ user.reauthenticateWithCredential(cred).then((value) {
 }
 
 on FirebaseAuthException catch (error){
-     Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
 
 switch (error.code) {
      //   validation of the email with the database records 
@@ -257,11 +271,8 @@ switch (error.code) {
     
      
     }
-  
+
   }
-
-
-  //  Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
 
 
 
