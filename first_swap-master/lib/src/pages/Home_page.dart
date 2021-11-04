@@ -157,7 +157,7 @@ class CategoryContainer extends StatelessWidget {
     return Container(
       child: Container(
         child: SizedBox(
-          height: 150.0,
+          height: 120.0,
           child: ListView(
             scrollDirection: Axis.horizontal,
             reverse: true,
@@ -217,7 +217,7 @@ class CategoryContainer extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 120.0,
+                width: 150.0,
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -321,7 +321,7 @@ class DealsContainer extends StatelessWidget {
               height: 9,
             ),
             Container(
-              height: 171,
+              height: 150,
               child: ListView.builder(
                 itemCount: 3,
                 scrollDirection: Axis.horizontal,
@@ -342,7 +342,7 @@ class SingleItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 251,
+      width: 205,
       margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
       decoration: BoxDecoration(
         color: Colors.white,
