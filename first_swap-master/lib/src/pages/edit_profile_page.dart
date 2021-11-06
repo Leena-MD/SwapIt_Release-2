@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:first_swap/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -114,13 +113,9 @@ class _EditProfilePageState  extends State<EditProfilePage>  {
           minWidth: MediaQuery.of(context).size.width,
           
           onPressed: () {
-           //     if(firstNameEditingController.text.isNotEmpty&&secondNameEditingController.text.isNotEmpty){
 
 submitAction(context);
-//}
-            //    if(firstNameEditingController.text.isEmpty&&secondNameEditingController.text.isEmpty){
-              //   Navigator.pop(context);
-               // };
+
           },
           child: Text(
             "حفظ التعديلات",
@@ -129,13 +124,7 @@ submitAction(context);
                 fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
           )),
     );
-  //
 
-
-
-
-
-  //changr password button
   final   changePass = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
@@ -155,8 +144,9 @@ submitAction(context);
                 fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
           )),
     );
-  //
-  //
+  
+  
+
   return Scaffold(
     appBar: buildAppBar(context),
     
@@ -223,7 +213,7 @@ submitAction(context);
      if(FirstName!=null&&LastName!=null){
               if (_formkey.currentState!.validate()) {
 
-        if (firebaseUser != null)// 
+        if (firebaseUser != null)
       await FirebaseFirestore.instance
           .collection('users')
           .doc(firebaseUser.uid)
@@ -241,12 +231,6 @@ submitAction(context);
 
     userID =firebaseUser!.uid;  
 
-  //  Fluttertoast.showToast(msg: "تم التعديل بنجاح");
-  /*
-   Navigator.pushAndRemoveUntil(
-      (this.context),
-       MaterialPageRoute(builder: (context) => ProfilePage()),
-        (route) => false);  */
   }
 
     updateData(String FirstName, String LastName,String userID) async {
@@ -258,8 +242,7 @@ submitAction(context);
   submitAction(BuildContext context) {
     updateData(firstNameEditingController.text, secondNameEditingController.text,
          userID);
-   // firstNameEditingController.clear();
-  //  secondNameEditingController.clear();
+   
   }
   
 }
