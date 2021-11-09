@@ -1,6 +1,6 @@
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
-
+import 'Post_page.dart';
 import 'Home_page.dart';
 import 'Offers.dart';
 
@@ -14,6 +14,7 @@ class MyItems extends StatelessWidget {
               iconList: [
                 Icons.home,
                 Icons.add_to_photos,
+                Icons.add_a_photo,
                 Icons.reorder_rounded,
                 Icons.person,
               ],
@@ -83,6 +84,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
         setState(() {
           _selectedIndex = index;
+
           if (_selectedIndex == 0)
             Navigator.push(this.context,
                 MaterialPageRoute(builder: (context) => HomePage()));
@@ -91,8 +93,12 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 MaterialPageRoute(builder: (context) => MyItems()));
           if (_selectedIndex == 2)
             Navigator.push(this.context,
-                MaterialPageRoute(builder: (context) => Offers()));
+                MaterialPageRoute(builder: (context) => PostPage()));
+
           if (_selectedIndex == 3)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => Offers()));
+          if (_selectedIndex == 4)
             Navigator.push(this.context,
                 MaterialPageRoute(builder: (context) => ProfilePage()));
         });
@@ -122,8 +128,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             ),
             if (index == 0) Text('الرئيسية'),
             if (index == 1) Text('منتجاتي'),
-            if (index == 2) Text('الطلبات'),
-            if (index == 3) Text('حسابي'),
+            if (index == 2) Text('اضافة'),
+            if (index == 3) Text('الطلبات'),
+            if (index == 4) Text('حسابي'),
           ],
         ),
       ),
