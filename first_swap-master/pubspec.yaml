@@ -41,6 +41,7 @@ dependencies:
   #add authentication 
   firebase_auth: ^1.1.0
   fluttertoast: ^8.0.8
+  flutter_picker: ^2.0.2
 
 dev_dependencies:
   flutter_test:
