@@ -1,18 +1,10 @@
 import 'package:first_swap/src/pages/Offers.dart';
 import 'package:first_swap/src/pages/Post_page.dart';
 import 'package:flutter/material.dart';
-
-import 'package:first_swap/models/user_model.dart';
-import 'package:first_swap/src/widgets/app_textfield.dart';
-import 'package:first_swap/themes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:first_swap/src/widgets/appbar_widget.dart';
-import 'package:first_swap/src/widgets/profile_widget.dart';
 import 'package:first_swap/src/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:path/path.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
 import 'login_page.dart';
@@ -143,25 +135,6 @@ backgroundColor: Colors.white,
           ),
 
 
-   /*  ListView(
-     physics: BouncingScrollPhysics(),
-     children: [/*
-       ProfileWidget(
-         imagePath: user.imagePath,//
-         onClicked: () {
-           Navigator.of(context).push(
-             MaterialPageRoute(builder: (context) => EditProfilePage()),
-           );
-         },
-       ),done
-       const SizedBox(height: 24),
-       buildName(UserModel),
-       const SizedBox(height: 24),
-       Center(child: buildUpgradeButton()), */
-     ],
-   ),
-   */
-
 
  ),
 
@@ -173,7 +146,7 @@ backgroundColor: Colors.white,
 
 
 
-//Uid,userName,FName,LName,email,phoneN
+//display userName,FName,LName,email,phoneN
   }
   Widget buildName() => Column(
 
@@ -247,10 +220,7 @@ Container(
               height: 0.6,
               color: Colors.black87,
             ),
-      /* Text(
-            LName,
-            style: TextStyle(color: Color(0xff737373)),
-          ), */
+   
       const SizedBox(height: 8),
 
        ListTile(
@@ -269,21 +239,7 @@ Container(
 
 
 
-      /*  FlatButton.icon(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.push(this.context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
-              },
-              icon: Icon(
-                Icons.person_outline,
-                color: Color(0xff51878d),
-              ),
-              label: Text(
-                'تسجيل خروج',
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color:Color(0xff51878d)),
-              )) */
+   
    
 
 
@@ -421,7 +377,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       children: _navBarItemList,
     );
   }
-
+  //navigation bar
   Widget buildNavBarItem(IconData icon, int index) {
 
 
