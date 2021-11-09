@@ -1,4 +1,5 @@
 import 'package:first_swap/src/pages/Offers.dart';
+import 'package:first_swap/src/pages/Post_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:first_swap/models/user_model.dart';
@@ -19,8 +20,7 @@ import 'edit_profile_page.dart';
 import 'Intrests_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-
+import 'Post_page.dart';
 
 
 
@@ -110,7 +110,7 @@ backgroundColor: Colors.white,
             iconList: [
               Icons.home,
               Icons.add_to_photos,
-
+ Icons.add_a_photo,
               Icons.reorder_rounded,
               Icons.person,
             ],
@@ -119,7 +119,7 @@ backgroundColor: Colors.white,
                 var _selectedItem = val;
               });
             },
-            defaultSelectedIndex:3,
+            defaultSelectedIndex:4,
           ),
 
 
@@ -439,13 +439,17 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 if(_selectedIndex==1)
             Navigator.push(
                 this.context, MaterialPageRoute(builder: (context) => MyItems()));
-                if(_selectedIndex==2)
+                  if(_selectedIndex==2)
             Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => Offers()));
+                this.context, MaterialPageRoute(builder: (context) => PostPage()));
+
                 if(_selectedIndex==3)
             Navigator.push(
+                this.context, MaterialPageRoute(builder: (context) => Offers()));
+                if(_selectedIndex==4)
+            Navigator.push(
                 this.context, MaterialPageRoute(builder: (context) => ProfilePage()));
-
+               
         });
       },
       
@@ -480,11 +484,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               Text('الرئيسية'),
             if(index==1)
               Text('منتجاتي'),
-
-            if(index==2)
-              Text('الطلبات'),
+             if(index==2)
+              Text('اضافة'),
             if(index==3)
+              Text('الطلبات'),
+            if(index==4)
               Text('حسابي'),
+              
           ],
         ),
 

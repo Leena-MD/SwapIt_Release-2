@@ -215,25 +215,27 @@ final user = await FirebaseAuth.instance.currentUser;
 final cred = EmailAuthProvider.credential(
     email: user!.email!, password: currentPassword);
  print("i am here2");
+ 
 user.reauthenticateWithCredential(cred).then((value) {
   flag2=1;
 
+switch(flag2){
+  case -1:
 
-  switch(flag2){
+       Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
+       break;
 
 case 1:
 
       Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
       break;
-case -1:
 
-       Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
-       break;
         default:
        Fluttertoast.showToast(msg: "حدث خطأ في النظام");
 
 
 }
+  
   flag1=true;
    print("i am here3");
   user.updatePassword(newPassword).then((_) {
@@ -244,7 +246,9 @@ case -1:
                     MaterialPageRoute(builder: (context) => EditProfilePage()));
      print("i am here4");
     //Success, do something
-  });}); 
+  });}
+  ); 
+
 
 }
 
@@ -271,6 +275,7 @@ switch (error.code) {
     
      
     }
+  
 
   }
 
@@ -283,8 +288,3 @@ switch (error.code) {
 
 
 }
-
-
-
-
-

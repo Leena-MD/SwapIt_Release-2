@@ -152,6 +152,9 @@ class ForgotPage extends StatelessWidget {
                                 case "operation-not-allowed":
                                   errorMessage = "عملية غير مقبولة!";
                                   break;
+                                  default:
+                                   errorMessage = "البريد الإلكتروني غير مسجل";
+                                  break;
                               }
                               Fluttertoast.showToast(msg: errorMessage!);
                               print(error.code);
