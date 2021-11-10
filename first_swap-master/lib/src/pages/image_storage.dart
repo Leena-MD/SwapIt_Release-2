@@ -8,14 +8,15 @@ class Storage{
 final firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
 
 Future<void> uploadImage(
-String imagePath
-
+String imagePath,
+String imageName
 )async{
 
 File  file = File(imagePath);
 
 try{
-await storage.ref('test/$imagePath').putFile(file);
+  
+await storage.ref('test/$imageName').putFile(file);
 
 }
 on firebase_core.FirebaseException catch (e){
@@ -24,7 +25,4 @@ on firebase_core.FirebaseException catch (e){
 
 
 }
-
-
-
 }

@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/fluttericon.dart';
+import 'package:first_swap/models/goodsMod.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart' as Path; 
 import 'package:flutter/material.dart';
 import 'package:first_swap/fluttericon.dart';
@@ -13,6 +17,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'image_storage.dart';
+
+String userID = "";
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
   @override
@@ -21,12 +27,13 @@ class PostPage extends StatefulWidget {
 
 class _PostPage extends State<PostPage> {
     final _formKey = GlobalKey<FormState>();
-
+ final Storage storage = Storage();
 
 String _currentSelectedValue = "one";
  int _value = 42;
 
  String imagePath = "";
+ String imageName = "";
 
   final picker = ImagePicker();
 
@@ -39,7 +46,7 @@ final GoodsNController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final Storage storage = Storage();
+   
     var studentNumberController;
     var validateStudentNumber;
     var studentEmailController;
@@ -78,7 +85,7 @@ final GoodsNController = new TextEditingController();
           child: Column(
             
             children: [
-              SizedBox(
+              const SizedBox(
                       height: 30,
                     ),
                     Text(
@@ -135,7 +142,7 @@ final GoodsNController = new TextEditingController();
                                 labelText: 'اسم المنتج',
                                  
                               ),
-                              validator: (value) {
+                         /*     validator: (value) {
                                         RegExp regex =
                                             new RegExp(r'^[a-zA-Z]{3,}$');
                                         if (value!.isEmpty) {
@@ -145,7 +152,7 @@ final GoodsNController = new TextEditingController();
                                           return ("اسم المنتج حد أدنى ٣ أحرف");
                                         }
                                         return null;
-                                      },
+                                     },  */
                                       onSaved: (val) {
                                         GoodsNController.text = val!;
                                       },
@@ -259,7 +266,7 @@ final GoodsNController = new TextEditingController();
                               textAlign: TextAlign.right,
                               controller: GoodsDController,
                               keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
+                          /*    validator: (value) {
                                         RegExp regex =
                                             new RegExp(r'^[a-zA-Z]{10,}$');
                                         if (value!.isEmpty) {
@@ -269,7 +276,7 @@ final GoodsNController = new TextEditingController();
                                           return ("الرجاء إدخال وصف كافي");
                                         }
                                         return null;
-                                      },
+                                      }, */
                               style: TextStyle(
                                   fontSize: 16.0,
                                   color: Colors.black),
@@ -318,12 +325,13 @@ final GoodsNController = new TextEditingController();
                                   ),
                                   onTap: ()async {
                                     final pickedFile = await picker.getImage(source: ImageSource.gallery);
+                                
  if (pickedFile != null) { 
   setState(() {
     imagePath = pickedFile.path;
-   storage
-   .uploadImage(imagePath)
-   .then((value) => print("done"));
+ imageName=GoodsNController.text;
+        
+  
   }); 
  }
  
@@ -406,16 +414,21 @@ imagePath != ""
                                       size: 30.0,
                                     ),
                                     onPressed: () {
+                                       submitAction(context);
+                                       
                                       // Validate returns true if the form is valid, or false otherwise.
-                                      if (_formKey.currentState!.validate()) {
+                                    /* if (_formKey.currentState!.validate()) {
+                                         storage
+   .uploadImage(imagePath, imageName)
+   .then((value) => print("done")); */
                                         // If the form is valid, display a snackbar. In the real world,
                                         // you'd often call a server or save the information in a database.
-                                        ScaffoldMessenger.of(context)
+                                      /*  ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           const SnackBar(
                                               content: Text('Processing Data')),
-                                        );
-                                      }
+                                        ); */
+                                     // }
                                     },
                                   ),
                                 ),
@@ -444,6 +457,64 @@ imagePath != ""
               ),
             )),
       ),
+      
     );
+  }
+  addgood(String name, String des, int cat, String img, String userID) async {
+    
+    final _auth = FirebaseAuth.instance;
+
+    // calling our firestore
+    // calling our user model
+    // updateing Data
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+    int num = 1;
+    goodsModel goodsMo = goodsModel();
+
+    // writing  the values
+
+    goodsMo.name = GoodsNController.text;
+    goodsMo.desc = GoodsDController.text;
+    goodsMo.cat = _value;
+    goodsMo.img = GoodMController.text;
+    goodsMo.gnum = num++;
+    goodsMo.stat = "avalible";
+
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+
+    if (_formKey.currentState!.validate()) {
+      storage
+   .uploadImage(imagePath, imageName)
+   .then((value) => print("done"));
+      if (firebaseUser != null)
+      
+        await FirebaseFirestore.instance.collection('goods').add({
+          'gName': name,
+          'Description': des,
+          'Category': cat,
+          'image': img,
+        });
+      Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
+      Navigator.of(this.context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+    }
+
+    userID = firebaseUser!.uid;
+  }
+
+  addadata(
+    String name,
+    String des,
+    int cat,
+    String img,
+    String id,
+  ) async {
+    await addgood(name, des, cat, img, userID);
+  }
+
+  submitAction(BuildContext context) {
+    addadata(GoodsNController.text, GoodsDController.text, _value,
+        GoodMController.text, userID);
   }
 }
