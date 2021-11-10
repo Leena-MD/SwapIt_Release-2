@@ -10,8 +10,8 @@ import 'package:flutter/services.dart';
 import 'Intrests_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
-
+import 'package:file_picker/file_picker.dart';
+import 'dart:io';
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
   @override
@@ -24,6 +24,16 @@ class _PostPage extends State<PostPage> {
 
 String _currentSelectedValue = "one";
  int _value = 42;
+
+ String imagePath = "";
+  final picker = ImagePicker();
+
+final GoodsNController = new TextEditingController();
+  final GoodsDController = new TextEditingController();
+  final GoodsCController = new TextEditingController();
+  final GoodMController = new TextEditingController();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +66,7 @@ String _currentSelectedValue = "one";
           backgroundColor: Colors.cyan[800],
           title: Center(child: Text('منتج جديد', style: TextStyle(fontSize: 30))),
         automaticallyImplyLeading: false,),
+
       body: SafeArea(
       top: false,
       bottom: false,
@@ -64,9 +75,24 @@ String _currentSelectedValue = "one";
           child: Column(
             
             children: [
+              SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      "الرجاء إدخال معلومات المنتج",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        letterSpacing: 1.3,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+
               Padding(
                 padding: EdgeInsets.only(
-                    top: 10.0, bottom: 5.0, left: 15.0, right: 15.0),
+                    top: 15.0, bottom: 15.0, left: 17.0, right: 17.0),
                 child: Card(
                   elevation: 6,
                   child: Form(
@@ -82,14 +108,14 @@ String _currentSelectedValue = "one";
                           Padding(
                             
                             padding: EdgeInsets.only(
-                          top: 10.0, bottom: 6.0, left: 1.0, right: 1.0),
+                          top: 15.0, bottom: 15.0, left: 17.0, right: 17.0),
                             child: Directionality(
                   textDirection: TextDirection.rtl,
                             child: TextFormField(
                               
                               autofocus: false,
                               textAlign: TextAlign.right,
-                              controller: studentNumberController,
+                              controller: GoodsNController,
                               keyboardType: TextInputType.emailAddress,
                               style: TextStyle(
                                   fontSize: 16.0,
@@ -103,16 +129,26 @@ String _currentSelectedValue = "one";
                                 labelText: 'اسم المنتج',
                                  
                               ),
-                              validator: validateStudentNumber,
-                             // onSaved: (String val) {
-                               // _stNumber = val;
-                             // },
-                             
-                           ), ),
-                          ),
+                              validator: (value) {
+                                        RegExp regex =
+                                            new RegExp(r'^[a-zA-Z]{3,}$');
+                                        if (value!.isEmpty) {
+                                          return ("*الحقل مطلوب");
+                                        }
+                                        if (!regex.hasMatch(value)) {
+                                          return ("اسم المنتج حد أدنى ٣ أحرف");
+                                        }
+                                        return null;
+                                      },
+                                      onSaved: (val) {
+                                        GoodsNController.text = val!;
+                                      },
+                                    ),
+                                  ),
+                                ),
   //===> Drop Down Menu starts from here <===
                          Padding(
-                            padding: EdgeInsets.only(top: 1.0, bottom: 6.0, left: 1.0, right: 1.0),
+                            padding: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 17.0, right: 17.0),
                             child: Directionality(
                   textDirection: TextDirection.rtl,
                             child: FormField(
@@ -127,7 +163,10 @@ String _currentSelectedValue = "one";
                                   ),
                                  
                                   child: Padding(
-                                    padding: EdgeInsets.only(left: 130.0, right: 1 , ),
+                                    padding: EdgeInsets.only(top: 0,
+                                                  bottom: 0,
+                                                  left: 17.0,
+                                                  right: 17.0),
                                     child: Container(
                                       width: MediaQuery.of(context).size.width,
                                       child: DropdownButtonHideUnderline( 
@@ -175,6 +214,11 @@ String _currentSelectedValue = "one";
                 child: new Text('مستلزمات الحيوان '),
                 value: 42,
               ),
+              new DropdownMenuItem(
+                                                            child: new Text(
+                                                                'اخرى'),
+                                                            value: 9,
+                                                          ),
             ],
             onChanged: (int? value) {
               setState(() {
@@ -193,15 +237,26 @@ String _currentSelectedValue = "one";
                            Padding(
                             
                             padding: EdgeInsets.only(
-                          top: 10.0, bottom: 6.0, left: 1.0, right: 1.0),
+                          top: 15.0, bottom: 15.0, left: 17.0, right: 17.0),
                             child: Directionality(
                   textDirection: TextDirection.rtl,
                             child: TextFormField(
                               maxLines: 4,
                               autofocus: false,
                               textAlign: TextAlign.right,
-                              controller: queryController,
+                              controller: GoodsDController,
                               keyboardType: TextInputType.emailAddress,
+                              validator: (value) {
+                                        RegExp regex =
+                                            new RegExp(r'^[a-zA-Z]{10,}$');
+                                        if (value!.isEmpty) {
+                                          return ("*الحقل مطلوب");
+                                        }
+                                        if (!regex.hasMatch(value)) {
+                                          return ("الرجاء إدخال وصف كافي");
+                                        }
+                                        return null;
+                                      },
                               style: TextStyle(
                                   fontSize: 16.0,
                                   color: Colors.black),
@@ -213,6 +268,9 @@ String _currentSelectedValue = "one";
                                hintText: 'وصف المنتج',
                               labelText: 'وصف المنتج',
                             ),
+                             onSaved: (val) {
+                                        GoodsDController.text = val!;
+                                      },
                            // keyboardType: TextInputType.text,
                          //   style: TextStyle(
                             //    fontSize: 16.0,
@@ -222,8 +280,51 @@ String _currentSelectedValue = "one";
                           ),
 
                            ),
+                           Text(
+                                  "اضف صورة",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 20,
+                                    letterSpacing: 1.3,
+                                  ),
+                                ),
+//new ListTile(
+                           //       leading: new Icon(Icons.photo_camera),
+                             //     title: new Text(
+                              //      'التقط صورة',
+                               //     textAlign: TextAlign.right,
+                              //    ),
+                               //   onTap: () {},
+                              //  ),
+                                new ListTile(
+                                  leading: new Icon(Icons.image),
+                                  title: new Text(
+                                    'مكتبة الصور',
+                                    textAlign: TextAlign.right,
+                                  ),
+                                  onTap: ()async {
+                                    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+ if (pickedFile != null) { 
+  setState(() {
+    imagePath = pickedFile.path;
+  }); 
+ }
+ 
+ 
+ },
+                                ),
+imagePath != ""
+                ? Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Image.file(File(imagePath)),
+                  )
+                : Container(),
+
+
+
                            
-                         
+                           
                           //===> Goods descerption<===
                           
                          // TextFormField(
@@ -264,48 +365,69 @@ String _currentSelectedValue = "one";
                                   ),
                                 ],
                                 gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF008ECC), //Colors is Olympic blue
-                                      Color(0xFF008ECC),
-                                    ],
+                                     colors: [
+                                          Color(
+                                              0xFFFFFFFF), 
+                                          Color(0xFFFFFFFF),
+                                        ],
                                     begin: FractionalOffset(0.2, 0.2),
                                     end: FractionalOffset(1.0, 1.0),
                                     stops: [0.0, 1.0],
                                     tileMode: TileMode.clamp),
                               ),
-                              child: MaterialButton(
-                                onPressed: () {},
-                               child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                     vertical: 10.0, horizontal: 65.0),
-                                  child: Text(
-                                   "Submit",
-                                    style: TextStyle(
-                                     color: Colors.white,
-                                     fontSize: 25.0,
+                               height: 60.0,
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: RaisedButton.icon(
+                                    color: Colors.cyan[800],
+                                    label: Text(
+                                      "",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 18),
+                                    ),
+                                    icon: Icon(
+                                      Icons.post_add_outlined,
+                                      size: 30.0,
+                                    ),
+                                    onPressed: () {
+                                      // Validate returns true if the form is valid, or false otherwise.
+                                      if (_formKey.currentState!.validate()) {
+                                        // If the form is valid, display a snackbar. In the real world,
+                                        // you'd often call a server or save the information in a database.
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text('Processing Data')),
+                                        );
+                                      }
+                                    },
                                   ),
-                                 ),
-                               ),
-                              )
-                              ),
-                        ],
-                        
-                      )),
+                                ),
+                                /*  child: MaterialButton(
+                                
+                                      color: Colors.cyan[800],
+                                      onPressed: () {},
+                          
+                                      child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 10.0, horizontal: 65.0),
+                                          child: Text(
+                                            "آرسل ",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18),
+                                          )),
+                                    )),*/
+                              ],
+                            )),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      )),
-
-
-
-
+            )),
       ),
     );
-    
   }
 }
-
-
-
