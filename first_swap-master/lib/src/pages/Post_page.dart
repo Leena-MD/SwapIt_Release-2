@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
+import 'image_storage.dart';
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
   @override
@@ -26,6 +27,7 @@ String _currentSelectedValue = "one";
  int _value = 42;
 
  String imagePath = "";
+
   final picker = ImagePicker();
 
 final GoodsNController = new TextEditingController();
@@ -37,6 +39,7 @@ final GoodsNController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final Storage storage = Storage();
     var studentNumberController;
     var validateStudentNumber;
     var studentEmailController;
@@ -93,8 +96,11 @@ final GoodsNController = new TextEditingController();
               Padding(
                 padding: EdgeInsets.only(
                     top: 15.0, bottom: 15.0, left: 17.0, right: 17.0),
+                   
                 child: Card(
-                  elevation: 6,
+                  
+                  elevation: 9,
+                  
                   child: Form(
                       key: _formKey,
                       
@@ -171,6 +177,7 @@ final GoodsNController = new TextEditingController();
                                       width: MediaQuery.of(context).size.width,
                                       child: DropdownButtonHideUnderline( 
                                         child: ButtonTheme(
+                                        
                                           alignedDropdown: true, 
                                           child: DropdownButton(
                                              isDense: true,
@@ -178,6 +185,12 @@ final GoodsNController = new TextEditingController();
                                             isExpanded: true,
                                            value: _value,
             items: <DropdownMenuItem<int>>[
+              new DropdownMenuItem(
+                
+                child: new Text('اختر فئة المنتج'),
+                enabled: false,
+                value: 42,
+              ),
               new DropdownMenuItem(
                 child: new Text('الأجهزة الإلكترونية و ملحقاتها'),
                 value: 0,
@@ -212,7 +225,7 @@ final GoodsNController = new TextEditingController();
               ),
               new DropdownMenuItem(
                 child: new Text('مستلزمات الحيوان '),
-                value: 42,
+                value: 8,
               ),
               new DropdownMenuItem(
                                                             child: new Text(
@@ -308,6 +321,9 @@ final GoodsNController = new TextEditingController();
  if (pickedFile != null) { 
   setState(() {
     imagePath = pickedFile.path;
+   storage
+   .uploadImage(imagePath)
+   .then((value) => print("done"));
   }); 
  }
  
@@ -422,7 +438,7 @@ imagePath != ""
                               ],
                             )),
                       ),
-                    ),
+                ),
                   ],
                 ),
               ),
