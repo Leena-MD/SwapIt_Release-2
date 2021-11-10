@@ -484,9 +484,15 @@ imagePath != ""
     final firebaseUser = await FirebaseAuth.instance.currentUser;
 
     if (_formKey.currentState!.validate()) {
+
+      if (imagePath != ""){
       storage
    .uploadImage(imagePath, imageName)
-   .then((value) => print("done"));
+   .then((value) => print("done"));}
+   else {
+
+      Fluttertoast.showToast(msg: "يجب اضافة صورة ");
+   }
       if (firebaseUser != null)
       
         await FirebaseFirestore.instance.collection('goods').add({
