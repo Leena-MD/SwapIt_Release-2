@@ -14,5 +14,11 @@ class Storage {
     } on firebase_core.FirebaseException catch (e) {
       print(e);
     }
+
+    try {
+      await storage.ref('test/$imageName').putFile(file);
+    } on firebase_core.FirebaseException catch (e) {
+      print(e);
+    }
   }
 }

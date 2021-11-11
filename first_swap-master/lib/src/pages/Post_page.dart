@@ -494,8 +494,13 @@ class _PostPage extends State<PostPage> {
     final firebaseUser = await FirebaseAuth.instance.currentUser;
 
     if (_formKey.currentState!.validate()) {
-      storage.uploadImage(imagePath, imageName).then((value) => print("done"));
-
+      if (imagePath != "") {
+        storage
+            .uploadImage(imagePath, imageName)
+            .then((value) => print("done"));
+      } else {
+        Fluttertoast.showToast(msg: "يجب اضافة صورة ");
+      }
       if (firebaseUser != null)
         await FirebaseFirestore.instance
             .collection('users')
