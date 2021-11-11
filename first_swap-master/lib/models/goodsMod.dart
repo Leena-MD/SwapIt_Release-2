@@ -6,6 +6,7 @@ class goodsModel {
   String? img;
   String? stat;
   int? gnum;
+   String? own;
 
   goodsModel({
     this.uid,
@@ -15,6 +16,7 @@ class goodsModel {
     this.img,
     this.gnum,
     this.stat,
+    this.own
   });
 
   // receiving data from server
@@ -27,6 +29,7 @@ class goodsModel {
       img: map['image'],
       gnum: map['numGood'],
       stat: map['Status'],
+      own: map['owner']
     );
   }
 
@@ -40,6 +43,7 @@ class goodsModel {
       'image': img,
       'numGood': gnum,
       'Status': stat,
+      'owner':own
     };
   }
 }
