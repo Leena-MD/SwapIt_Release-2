@@ -21,6 +21,7 @@ import 'image_storage.dart';
 String userID = "";
 int num = 1;
 
+
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
   @override
@@ -341,6 +342,8 @@ class _PostPage extends State<PostPage> {
                                         imageName = GoodsNController.text;
                                       });
                                     }
+
+                        
                                   },
                                 ),
                                 imagePath != ""
@@ -464,10 +467,11 @@ class _PostPage extends State<PostPage> {
       ),
     );
   }
+  String url  = "";
 
   String uiduser = '';
   String st = "available";
-  addgood(String name, String des, int cat, String img, String userID, int num,
+  addgood(String name, String des, int cat, String url, String userID, int num,
       String st) async {
     final _auth = FirebaseAuth.instance;
 
@@ -486,7 +490,7 @@ class _PostPage extends State<PostPage> {
     goodsMo.name = GoodsNController.text;
     goodsMo.desc = GoodsDController.text;
     goodsMo.cat = _value;
-    goodsMo.img = GoodMController.text;
+    goodsMo.img = url;
     goodsMo.gnum = num;
     goodsMo.stat = st;
     goodsMo.own = uiduser;
@@ -495,12 +499,18 @@ class _PostPage extends State<PostPage> {
 
     if (_formKey.currentState!.validate()) {
       if (imagePath != "") {
+
+
+        
         storage
             .uploadImage(imagePath, imageName)
-            .then((value) => print("done"));
+            .then((value) => url = value);
+        url=  await Storage().uploadImage(imagePath, imageName);
+              print("1");
       } else {
         Fluttertoast.showToast(msg: "يجب اضافة صورة ");
       }
+          
       if (firebaseUser != null)
         await FirebaseFirestore.instance
             .collection('users')
@@ -513,11 +523,14 @@ class _PostPage extends State<PostPage> {
         }).catchError((e) {
           print(e);
         });
+         print("2");
+        
+          print("3");
       await FirebaseFirestore.instance.collection('goods').add({
         'gName': name,
         'Description': des,
         'Category': cat,
-        'image': img,
+        'image': url,
         'numGood': num,
         'Status': st,
         'owner': uiduser,
@@ -530,13 +543,14 @@ class _PostPage extends State<PostPage> {
     }
 
     userID = firebaseUser!.uid;
+    
   }
 
   addadata(
     String name,
     String des,
     int cat,
-    String img,
+    String url,
     String id,
     int num,
     String st,
@@ -545,15 +559,15 @@ class _PostPage extends State<PostPage> {
       name,
       des,
       cat,
-      img,
+      url,
       id,
       num,
       st,
     );
   }
-
+      
   submitAction(BuildContext context) {
-    addadata(GoodsNController.text, GoodsDController.text, _value,
-        GoodMController.text, userID, num, st);
+    addadata(GoodsNController.text, GoodsDController.text, _value, url, userID,
+        num, st);
   }
 }
