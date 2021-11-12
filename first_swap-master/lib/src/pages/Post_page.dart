@@ -21,7 +21,6 @@ import 'image_storage.dart';
 String userID = "";
 int num = 1;
 
-
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
   @override
@@ -133,17 +132,16 @@ class _PostPage extends State<PostPage> {
                                         hintText: 'اسم المنتج',
                                         labelText: 'اسم المنتج',
                                       ),
-                                      /*     validator: (value) {
-                                        RegExp regex =
-                                            new RegExp(r'^[a-zA-Z]{3,}$');
+                                      validator: (value) {
+                                        RegExp regex = new RegExp(r'\w{3,15}$');
                                         if (value!.isEmpty) {
                                           return ("*الحقل مطلوب");
                                         }
                                         if (!regex.hasMatch(value)) {
-                                          return ("اسم المنتج حد أدنى ٣ أحرف");
+                                          return ("اسم المنتج حد أدنى ٣ ");
                                         }
                                         return null;
-                                     },  */
+                                      },
                                       onSaved: (val) {
                                         GoodsNController.text = val!;
                                       },
@@ -184,76 +182,83 @@ class _PostPage extends State<PostPage> {
                                                     DropdownButtonHideUnderline(
                                                   child: ButtonTheme(
                                                     alignedDropdown: true,
-                                                    child: DropdownButton(
-                                                        isDense: true,
-                                                        isExpanded: true,
-                                                        value: _value,
-                                                        items: <
-                                                            DropdownMenuItem<
-                                                                int>>[
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                'اختر فئة المنتج'),
-                                                            enabled: false,
-                                                            value: 42,
-                                                          ),
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                'الأجهزة الإلكترونية و ملحقاتها'),
-                                                            value: 0,
-                                                          ),
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                'منتجات الأطفال و الألعاب'),
-                                                            value: 1,
-                                                          ),
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                'المنزل و المطبخ'),
-                                                            value: 2,
-                                                          ),
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                'المستلزمات المكتبية و الكتب'),
-                                                            value: 3,
-                                                          ),
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                'الاكسسوارات و الحقائب و الأحذية'),
-                                                            value: 4,
-                                                          ),
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                'الجمال والعطور'),
-                                                            value: 5,
-                                                          ),
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                'الرياضة و اللياقة'),
-                                                            value: 6,
-                                                          ),
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                ' الملابس'),
-                                                            value: 7,
-                                                          ),
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                'مستلزمات الحيوان '),
-                                                            value: 8,
-                                                          ),
-                                                          new DropdownMenuItem(
-                                                            child: new Text(
-                                                                'اخرى'),
-                                                            value: 9,
-                                                          ),
-                                                        ],
-                                                        onChanged:
-                                                            (int? value) {
-                                                          setState(() {
-                                                            _value = value!;
-                                                          });
-                                                        }),
+                                                    child:
+                                                        DropdownButtonFormField(
+                                                            icon: Icon(Icons
+                                                                .category_outlined),
+                                                            isDense: true,
+                                                            isExpanded: true,
+                                                            value: _value,
+                                                            items: <
+                                                                DropdownMenuItem<
+                                                                    int>>[
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    'اختر فئة المنتج'),
+                                                                enabled: false,
+                                                                value: 42,
+                                                              ),
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    'الأجهزة الإلكترونية و ملحقاتها'),
+                                                                value: 0,
+                                                              ),
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    'منتجات الأطفال و الألعاب'),
+                                                                value: 1,
+                                                              ),
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    'المنزل و المطبخ'),
+                                                                value: 2,
+                                                              ),
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    'المستلزمات المكتبية و الكتب'),
+                                                                value: 3,
+                                                              ),
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    'الاكسسوارات و الحقائب و الأحذية'),
+                                                                value: 4,
+                                                              ),
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    'الجمال والعطور'),
+                                                                value: 5,
+                                                              ),
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    'الرياضة و اللياقة'),
+                                                                value: 6,
+                                                              ),
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    ' الملابس'),
+                                                                value: 7,
+                                                              ),
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    'مستلزمات الحيوان '),
+                                                                value: 8,
+                                                              ),
+                                                              new DropdownMenuItem(
+                                                                child: new Text(
+                                                                    'اخرى'),
+                                                                value: 9,
+                                                              ),
+                                                            ],
+                                                            validator: (value) =>
+                                                                value == 42
+                                                                    ? 'الحقل مطلوب *'
+                                                                    : null,
+                                                            onChanged:
+                                                                (int? value) {
+                                                              setState(() {
+                                                                _value = value!;
+                                                              });
+                                                            }),
                                                   ),
                                                 ),
                                               ),
@@ -298,6 +303,17 @@ class _PostPage extends State<PostPage> {
                                         hintText: 'وصف المنتج',
                                         labelText: 'وصف المنتج',
                                       ),
+                                      validator: (value) {
+                                        RegExp regex =
+                                            new RegExp(r'^.{10,200}$');
+                                        if (value!.isEmpty) {
+                                          return ("*الحقل مطلوب");
+                                        }
+                                        if (!regex.hasMatch(value)) {
+                                          return ("اسم المنتج حد أدنى و اعلى ٢٠٠ ");
+                                        }
+                                        return null;
+                                      },
                                       onSaved: (val) {
                                         GoodsDController.text = val!;
                                       },
@@ -342,8 +358,6 @@ class _PostPage extends State<PostPage> {
                                         imageName = GoodsNController.text;
                                       });
                                     }
-
-                        
                                   },
                                 ),
                                 imagePath != ""
@@ -467,7 +481,8 @@ class _PostPage extends State<PostPage> {
       ),
     );
   }
-  String url  = "";
+
+  String url = "";
 
   String uiduser = '';
   String st = "available";
@@ -499,18 +514,13 @@ class _PostPage extends State<PostPage> {
 
     if (_formKey.currentState!.validate()) {
       if (imagePath != "") {
-
-
-        
-        storage
-            .uploadImage(imagePath, imageName)
-            .then((value) => url = value);
-        url=  await Storage().uploadImage(imagePath, imageName);
-              print("1");
+        storage.uploadImage(imagePath, imageName).then((value) => url = value);
+        url = await Storage().uploadImage(imagePath, imageName);
+        print("1");
       } else {
         Fluttertoast.showToast(msg: "يجب اضافة صورة ");
       }
-          
+
       if (firebaseUser != null)
         await FirebaseFirestore.instance
             .collection('users')
@@ -523,27 +533,28 @@ class _PostPage extends State<PostPage> {
         }).catchError((e) {
           print(e);
         });
-         print("2");
-        
-          print("3");
-      await FirebaseFirestore.instance.collection('goods').add({
-        'gName': name,
-        'Description': des,
-        'Category': cat,
-        'image': url,
-        'numGood': num,
-        'Status': st,
-        'owner': uiduser,
-      });
-      Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
+      print("2");
 
-      Navigator.of(this.context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
-      return true;
+      print("3");
+      if (imagePath != "") {
+        await FirebaseFirestore.instance.collection('goods').add({
+          'gName': name,
+          'Description': des,
+          'Category': cat,
+          'image': url,
+          'numGood': num,
+          'Status': st,
+          'owner': uiduser,
+        });
+        Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
+
+        Navigator.of(this.context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomePage()));
+        return true;
+      }
     }
 
     userID = firebaseUser!.uid;
-    
   }
 
   addadata(
@@ -565,7 +576,7 @@ class _PostPage extends State<PostPage> {
       st,
     );
   }
-      
+
   submitAction(BuildContext context) {
     addadata(GoodsNController.text, GoodsDController.text, _value, url, userID,
         num, st);

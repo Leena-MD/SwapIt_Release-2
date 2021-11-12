@@ -9,6 +9,7 @@ import 'Intrests_page.dart';
 import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePage createState() => _HomePage();
@@ -165,8 +166,11 @@ class CategoryContainer extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             reverse: true,
             children: <Widget>[
-              Container(
-                width: 120.0,
+               Container(
+                 width: 120,
+            child:  GestureDetector(
+                onTap: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MyItems())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -175,12 +179,16 @@ class CategoryContainer extends StatelessWidget {
                     ),
                     SizedBox(height: 15),
                     Text("المستلزمات المكتبية و الكتب",
-                        textAlign: TextAlign.center)
+                        textAlign: TextAlign.center),
                   ],
-                ),
+            ),),
               ),
               Container(
-                width: 120.0,
+                width: 120,
+                   
+            child:  GestureDetector(
+                onTap: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MyItems())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -191,10 +199,15 @@ class CategoryContainer extends StatelessWidget {
                     Text("الأجهزة الالكترونية و ملحقاتها",
                         textAlign: TextAlign.center)
                   ],
-                ),
+            ),),
               ),
-              Container(
-                width: 120.0,
+
+             Container(
+                width: 120,
+                   
+            child:  GestureDetector(
+                onTap: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MyItems())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -204,10 +217,14 @@ class CategoryContainer extends StatelessWidget {
                     SizedBox(height: 15),
                     Text("المنزل و المطبخ", textAlign: TextAlign.center)
                   ],
-                ),
+                ),    ),
               ),
-              Container(
-                width: 120.0,
+            Container(
+                width: 120,
+                   
+            child:  GestureDetector(
+                onTap: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MyItems())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -217,10 +234,14 @@ class CategoryContainer extends StatelessWidget {
                     SizedBox(height: 15),
                     Text("الملابس", textAlign: TextAlign.center)
                   ],
-                ),
+                ),    ),
               ),
-              Container(
-                width: 150.0,
+             Container(
+                width: 120,
+                   
+            child:  GestureDetector(
+                onTap: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MyItems())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -231,10 +252,15 @@ class CategoryContainer extends StatelessWidget {
                     Text("منتجات الأطفال و الألعاب",
                         textAlign: TextAlign.center)
                   ],
-                ),
+               ),   ),
               ),
-              Container(
-                width: 120.0,
+
+            Container(
+                width: 120,
+                   
+            child:  GestureDetector(
+                onTap: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MyItems())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -244,10 +270,14 @@ class CategoryContainer extends StatelessWidget {
                     SizedBox(height: 15),
                     Text("الرياضة و اللياقة", textAlign: TextAlign.center)
                   ],
-                ),
+               ),   ),
               ),
-              Container(
-                width: 120.0,
+           Container(
+                width: 120,
+                   
+            child:  GestureDetector(
+                onTap: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MyItems())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -258,10 +288,15 @@ class CategoryContainer extends StatelessWidget {
                     Text("الاكسسوارات  و الحقائب و  الأحذية",
                         textAlign: TextAlign.center)
                   ],
-                ),
+               ),   ),
               ),
-              Container(
-                width: 120.0,
+
+             Container(
+                width: 120,
+                   
+            child:  GestureDetector(
+                onTap: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MyItems())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -271,10 +306,15 @@ class CategoryContainer extends StatelessWidget {
                     SizedBox(height: 15),
                     Text("الجمال و العطور", textAlign: TextAlign.center)
                   ],
-                ),
+              ),  ),
               ),
-              Container(
-                width: 120.0,
+
+            Container(
+                width: 120,
+                   
+            child:  GestureDetector(
+                onTap: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MyItems())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -285,7 +325,7 @@ class CategoryContainer extends StatelessWidget {
                     Text("مستلزمات الحيوان", textAlign: TextAlign.center)
                   ],
                 ),
-              ),
+             ), ),
             ],
           ),
         ),
@@ -389,6 +429,7 @@ class SingleItem extends StatelessWidget {
     );
   }
 }
+
 class CustomBottomNavigationBar extends StatefulWidget {
   final int defaultSelectedIndex;
   final Function(int) onChange;
@@ -396,8 +437,8 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
   CustomBottomNavigationBar(
       {this.defaultSelectedIndex = 0,
-        required this.iconList,
-        required this.onChange});
+      required this.iconList,
+      required this.onChange});
 
   @override
   _CustomBottomNavigationBarState createState() =>
@@ -421,11 +462,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget build(BuildContext context) {
     List<Widget> _navBarItemList = [];
 
-
-
     for (var i = 0; i < _iconList.length; i++) {
       _navBarItemList.add(buildNavBarItem(_iconList[i], i));
-
     }
 
     return Row(
@@ -434,77 +472,61 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   }
 
   Widget buildNavBarItem(IconData icon, int index) {
-
-
-
     return GestureDetector(
-
       onTap: () {
         widget.onChange(index);
 
         setState(() {
           _selectedIndex = index;
-         if(_selectedIndex==0)
-            Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => HomePage()));
-                if(_selectedIndex==1)
-            Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => MyItems()));
-                  if(_selectedIndex==2)
-            Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => PostPage()));
+          if (_selectedIndex == 0)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => HomePage()));
+          if (_selectedIndex == 1)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => MyItems()));
+          if (_selectedIndex == 2)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => PostPage()));
 
-                if(_selectedIndex==3)
-            Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => Offers()));
-                if(_selectedIndex==4)
-            Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => ProfilePage()));
+          if (_selectedIndex == 3)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => Offers()));
+          if (_selectedIndex == 4)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => ProfilePage()));
         });
       },
       child: Container(
-
         height: 60,
         width: MediaQuery.of(this.context).size.width / _iconList.length,
         decoration: index == _selectedIndex
             ? BoxDecoration(
-            border: Border(
-              bottom: BorderSide(width: 4, color: Colors.blueGrey),
-            ),
-            gradient: LinearGradient(colors: [
-              Colors.blueGrey.withOpacity(0.3),
-              Colors.blueGrey.withOpacity(0.015),
-            ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
+                border: Border(
+                  bottom: BorderSide(width: 4, color: Colors.blueGrey),
+                ),
+                gradient: LinearGradient(colors: [
+                  Colors.blueGrey.withOpacity(0.3),
+                  Colors.blueGrey.withOpacity(0.015),
+                ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
 
-          //color: index == _selectedItemIndex ? Colors.green : Colors.white,
+                //color: index == _selectedItemIndex ? Colors.green : Colors.white,
 
-        )
+                )
             : BoxDecoration(),
-        child:
-
-        Column (
+        child: Column(
           children: <Widget>[
-            Icon(icon,
-
-              color: index ==_selectedIndex ? Colors.black : Colors.grey,),
-
-
-           if(index==0)
-              Text('الرئيسية'),
-            if(index==1)
-              Text('منتجاتي'),
-             if(index==2)
-              Text('اضافة'),
-            if(index==3)
-              Text('الطلبات'),
-            if(index==4)
-              Text('حسابي'),
+            Icon(
+              icon,
+              color: index == _selectedIndex ? Colors.black : Colors.grey,
+            ),
+            if (index == 0) Text('الرئيسية'),
+            if (index == 1) Text('منتجاتي'),
+            if (index == 2) Text('اضافة'),
+            if (index == 3) Text('الطلبات'),
+            if (index == 4) Text('حسابي'),
           ],
         ),
-
-
       ),
-
     );
   }
 }
