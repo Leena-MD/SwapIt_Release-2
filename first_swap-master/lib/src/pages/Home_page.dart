@@ -1,4 +1,5 @@
 import 'package:first_swap/fluttericon.dart';
+import 'package:first_swap/src/pages/books_category.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/fluttericon.dart';
@@ -170,7 +171,7 @@ class CategoryContainer extends StatelessWidget {
                 width: 120,
                 child: GestureDetector(
                   onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => MyItems())),
+                      MaterialPageRoute(builder: (context) => BooksCat())),
                   child: Column(
                     children: <Widget>[
                       Image.asset(

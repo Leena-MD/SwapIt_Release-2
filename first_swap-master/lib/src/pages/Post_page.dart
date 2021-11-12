@@ -133,7 +133,7 @@ class _PostPage extends State<PostPage> {
                                         labelText: 'اسم المنتج',
                                       ),
                                       validator: (value) {
-                                        RegExp regex = new RegExp(r'\w{1,15}$');
+                                        RegExp regex = new RegExp(r'\w{3,15}$');
                                         if (value!.isEmpty) {
                                           return ("*الحقل مطلوب");
                                         }
@@ -310,7 +310,7 @@ class _PostPage extends State<PostPage> {
                                           return ("*الحقل مطلوب");
                                         }
                                         if (!regex.hasMatch(value)) {
-                                          return ("وصف المنتج حد أدنى ١٠ و اعلى ٢٠٠ ");
+                                          return ("اسم المنتج حد أدنى و اعلى ٢٠٠ ");
                                         }
                                         return null;
                                       },
@@ -545,7 +545,6 @@ class _PostPage extends State<PostPage> {
           'Status': st,
           'owner': uiduser,
         });
-        // num = num + 1;
         Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
 
         Navigator.of(this.context).pushReplacement(
