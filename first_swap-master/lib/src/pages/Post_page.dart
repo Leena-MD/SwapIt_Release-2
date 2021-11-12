@@ -432,10 +432,11 @@ class _PostPage extends State<PostPage> {
                                       size: 30.0,
                                     ),
                                     onPressed: () {
-                                      submitAction(context);
-                                      setState(() {
-                                        num = num++;
-                                      });
+                                      if (submitAction(context) == true) {
+                                        num = num + 1;
+                                      } else {
+                                        num = num;
+                                      }
 
                                       // Validate returns true if the form is valid, or false otherwise.
                                       /* if (_formKey.currentState!.validate()) {
