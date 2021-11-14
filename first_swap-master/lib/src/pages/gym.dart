@@ -15,12 +15,12 @@ import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
 
-class KidsCat extends StatefulWidget {
+class gym extends StatefulWidget {
   @override
-  _KidsCat createState() => _KidsCat();
+  _gym createState() => _gym();
 }
 
-class _KidsCat extends State<KidsCat> {
+class _gym extends State<gym> {
   List<Product> booksList = [];
 
   ///2nd
@@ -274,7 +274,7 @@ class _KidsCat extends State<KidsCat> {
                     childAspectRatio: 0.8,
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 20,
-                    children: kidsList
+                    children: gymList
                         .map(
                           (e) => BottomContainer(
                             //  onTap: () {

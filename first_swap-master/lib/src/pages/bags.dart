@@ -15,12 +15,12 @@ import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
 
-class KidsCat extends StatefulWidget {
+class bags extends StatefulWidget {
   @override
-  _KidsCat createState() => _KidsCat();
+  _bags createState() => _bags();
 }
 
-class _KidsCat extends State<KidsCat> {
+class _bags extends State<bags> {
   List<Product> booksList = [];
 
   ///2nd
@@ -274,26 +274,24 @@ class _KidsCat extends State<KidsCat> {
                     childAspectRatio: 0.8,
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 20,
-                    children: kidsList
-                        .map(
-                          (e) => BottomContainer(
-                            //  onTap: () {
-                            // Navigator.of(context).pushReplacement(
-                            //MaterialPageRoute(
-                            //  builder: (context) => DetailPage(
-                            //     image: e.image,
-                            //    name: e.title,
+                    children: BagList.map(
+                      (e) => BottomContainer(
+                        //  onTap: () {
+                        // Navigator.of(context).pushReplacement(
+                        //MaterialPageRoute(
+                        //  builder: (context) => DetailPage(
+                        //     image: e.image,
+                        //    name: e.title,
 
-                            //    ),
-                            //   ),
-                            //  );
-                            //  },
-                            image: e.image,
+                        //    ),
+                        //   ),
+                        //  );
+                        //  },
+                        image: e.image,
 
-                            name: e.title,
-                          ),
-                        )
-                        .toList()),
+                        name: e.title,
+                      ),
+                    ).toList()),
               )
             ],
           )),

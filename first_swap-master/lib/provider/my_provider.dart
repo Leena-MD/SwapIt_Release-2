@@ -8,8 +8,6 @@ import 'package:flutter/cupertino.dart';
 //import 'package:foodapp/modles/food_modle.dart';
 
 class MyProvider extends ChangeNotifier {
-
-
 ///////////////////  category 1 ////////////////
   List<Product> booksList = [];
   late Product booksModle;
@@ -24,16 +22,12 @@ class MyProvider extends ChangeNotifier {
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-       
-            id: element.data()['owner'],
-
-
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
       books.add(booksModle);
       booksList = books;
-     
     });
     notifyListeners();
   }
@@ -56,10 +50,9 @@ class MyProvider extends ChangeNotifier {
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-          
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
       newComputerList.add(computerModle);
       computerList = newComputerList;
@@ -77,7 +70,7 @@ class MyProvider extends ChangeNotifier {
   Future<void> getKidsCategory() async {
     List<Product> newKidsList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-       .collection('goods')
+        .collection('goods')
         .where("Category", isEqualTo: 1)
         .get();
     querySnapshot.docs.forEach((element) {
@@ -85,10 +78,9 @@ class MyProvider extends ChangeNotifier {
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-           
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
       newKidsList.add(kidsModle);
       kidsList = newKidsList;
@@ -106,18 +98,17 @@ class MyProvider extends ChangeNotifier {
   Future<void> getHouseCategory() async {
     List<Product> newHouseList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-       .collection('goods')
-        .where("Category", isEqualTo: 3)
+        .collection('goods')
+        .where("Category", isEqualTo: 2) //2
         .get();
     querySnapshot.docs.forEach((element) {
       HouseModle = Product(
-         image: element.data()['image'],
+        image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-          
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
       newHouseList.add(HouseModle);
       HouseList = newHouseList;
@@ -135,18 +126,17 @@ class MyProvider extends ChangeNotifier {
   Future<void> getBagCategory() async {
     List<Product> newBagList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-       .collection('goods')
+        .collection('goods')
         .where("Category", isEqualTo: 4)
         .get();
     querySnapshot.docs.forEach((element) {
       BagModle = Product(
-         image: element.data()['image'],
+        image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-          
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
       newBagList.add(BagModle);
       BagList = newBagList;
@@ -155,7 +145,7 @@ class MyProvider extends ChangeNotifier {
   }
 
   get throwBagList {
-    return HouseList;
+    return BagList;
   }
 
   /////////////////category 6 /////////////
@@ -164,20 +154,19 @@ class MyProvider extends ChangeNotifier {
   Future<void> getPerfumeCategory() async {
     List<Product> newPerfumeList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-       .collection('goods')
+        .collection('goods')
         .where("Category", isEqualTo: 5)
         .get();
     querySnapshot.docs.forEach((element) {
       perfumeModle = Product(
-         image: element.data()['image'],
+        image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-          
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
-      newPerfumeList.add(BagModle);
+      newPerfumeList.add(perfumeModle);
       perfumeList = newPerfumeList;
     });
     notifyListeners();
@@ -193,20 +182,19 @@ class MyProvider extends ChangeNotifier {
   Future<void> getGymCategory() async {
     List<Product> newGymList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-       .collection('goods')
+        .collection('goods')
         .where("Category", isEqualTo: 6)
         .get();
     querySnapshot.docs.forEach((element) {
       gymModle = Product(
-         image: element.data()['image'],
+        image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-          
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
-      newGymList.add(BagModle);
+      newGymList.add(gymModle);
       gymList = newGymList;
     });
     notifyListeners();
@@ -216,27 +204,25 @@ class MyProvider extends ChangeNotifier {
     return gymList;
   }
 
-  
   /////////////////category 8 /////////////
   List<Product> clothesList = [];
   late Product clothesModle;
   Future<void> getClothesCategory() async {
     List<Product> newClothesList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-       .collection('goods')
+        .collection('goods')
         .where("Category", isEqualTo: 7)
         .get();
     querySnapshot.docs.forEach((element) {
       clothesModle = Product(
-         image: element.data()['image'],
+        image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-          
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
-      newClothesList.add(BagModle);
+      newClothesList.add(clothesModle);
       clothesList = newClothesList;
     });
     notifyListeners();
@@ -246,27 +232,25 @@ class MyProvider extends ChangeNotifier {
     return clothesList;
   }
 
-
 /////////////////category 9 /////////////
   List<Product> petList = [];
   late Product petModle;
   Future<void> getPetCategory() async {
     List<Product> newPetList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-       .collection('goods')
+        .collection('goods')
         .where("Category", isEqualTo: 8)
         .get();
     querySnapshot.docs.forEach((element) {
       petModle = Product(
-         image: element.data()['image'],
+        image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-          
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
-      newPetList.add(BagModle);
+      newPetList.add(petModle);
       petList = newPetList;
     });
     notifyListeners();
@@ -275,9 +259,6 @@ class MyProvider extends ChangeNotifier {
   get throwPetList {
     return petList;
   }
-
-  
-
 
   /////////////////////  Single Food Item     //////////////////////////
   List<Product> foodModleList = [];
@@ -290,11 +271,11 @@ class MyProvider extends ChangeNotifier {
       (element) {
         foodModle = Product(
           image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-         status: element.data()['Status'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
           owner: element.data()['owner'],
-            id: element.data()['owner'],
+          id: element.data()['owner'],
         );
         newSingleFoodList.add(foodModle);
       },
@@ -319,13 +300,12 @@ class MyProvider extends ChangeNotifier {
         .get();
     querySnapshot.docs.forEach((element) {
       burgerCategoriesModle = Product(
-         image: element.data()['image'],
+        image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-          
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
       newBurgerCategoriesList.add(burgerCategoriesModle);
       burgerCategoriesList = newBurgerCategoriesList;
@@ -350,10 +330,9 @@ class MyProvider extends ChangeNotifier {
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-           
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
       newrecipeCategoriesList.add(recipeCategoriesModle);
       recipeCategoriesList = newrecipeCategoriesList;
@@ -378,10 +357,9 @@ class MyProvider extends ChangeNotifier {
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
-         status: element.data()['Status'],
-          owner: element.data()['owner'],
-          
-            id: element.data()['owner'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
       );
       newPizzaCategoriesList.add(pizzaCategoriesModle);
       pizzaCategoriesList = newPizzaCategoriesList;
@@ -391,8 +369,4 @@ class MyProvider extends ChangeNotifier {
   get throwPizzaCategoriesList {
     return pizzaCategoriesList;
   }
-
-  
-
-
 }

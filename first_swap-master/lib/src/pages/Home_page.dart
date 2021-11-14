@@ -1,6 +1,11 @@
 import 'package:first_swap/fluttericon.dart';
+import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/books_category.dart';
+import 'package:first_swap/src/pages/clothes.dart';
 import 'package:first_swap/src/pages/computer_category.dart';
+import 'package:first_swap/src/pages/gym.dart';
+import 'package:first_swap/src/pages/perfume.dart';
+import 'package:first_swap/src/pages/pet.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/fluttericon.dart';
@@ -11,7 +16,12 @@ import 'Intrests_page.dart';
 import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
+import 'house.dart';
 import 'kids_category.dart';
+import 'clothes.dart';
+import 'gym.dart';
+import 'bags.dart';
+import 'pet.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,7 +29,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -170,166 +179,163 @@ class CategoryContainer extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             reverse: true,
             children: <Widget>[
-               Container(
-                 width: 120,
-            child:  GestureDetector(
-                onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => BooksCat())),
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/bookshelf.png",
-                      width: 50,
-                    ),
-                    SizedBox(height: 15),
-                    Text("المستلزمات المكتبية و الكتب",
-                        textAlign: TextAlign.center),
-                  ],
-            ),),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => BooksCat())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/bookshelf.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("المستلزمات المكتبية و الكتب",
+                          textAlign: TextAlign.center),
+                    ],
+                  ),
+                ),
               ),
               Container(
                 width: 120,
-                   
-            child:  GestureDetector(
-                onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => ComputerCat())),
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/computer.png",
-                      width: 50,
-                    ),
-                    SizedBox(height: 15),
-                    Text("الأجهزة الالكترونية و ملحقاتها",
-                        textAlign: TextAlign.center)
-                  ],
-            ),),
-              ),
-
-             Container(
-                width: 120,
-                   
-            child:  GestureDetector(
-                onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => MyItems())),
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/kitchen.png",
-                      width: 50,
-                    ),
-                    SizedBox(height: 15),
-                    Text("المنزل و المطبخ", textAlign: TextAlign.center)
-                  ],
-                ),    ),
-              ),
-            Container(
-                width: 120,
-                   
-            child:  GestureDetector(
-                onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => MyItems())),
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/clothes-rack.png",
-                      width: 50,
-                    ),
-                    SizedBox(height: 15),
-                    Text("الملابس", textAlign: TextAlign.center)
-                  ],
-                ),    ),
-              ),
-             Container(
-                width: 120,
-                   
-            child:  GestureDetector(
-                onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => KidsCat())),
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/brick.png",
-                      width: 50,
-                    ),
-                    SizedBox(height: 15),
-                    Text("منتجات الأطفال و الألعاب",
-                        textAlign: TextAlign.center)
-                  ],
-               ),   ),
-              ),
-
-            Container(
-                width: 120,
-                   
-            child:  GestureDetector(
-                onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => MyItems())),
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/dumbbell.png",
-                      width: 50,
-                    ),
-                    SizedBox(height: 15),
-                    Text("الرياضة و اللياقة", textAlign: TextAlign.center)
-                  ],
-               ),   ),
-              ),
-           Container(
-                width: 120,
-                   
-            child:  GestureDetector(
-                onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => MyItems())),
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/handbag.png",
-                      width: 50,
-                    ),
-                    SizedBox(height: 15),
-                    Text("الاكسسوارات  و الحقائب و  الأحذية",
-                        textAlign: TextAlign.center)
-                  ],
-               ),   ),
-              ),
-
-             Container(
-                width: 120,
-                   
-            child:  GestureDetector(
-                onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => MyItems())),
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/make-up.png",
-                      width: 50,
-                    ),
-                    SizedBox(height: 15),
-                    Text("الجمال و العطور", textAlign: TextAlign.center)
-                  ],
-              ),  ),
-              ),
-
-            Container(
-                width: 120,
-                   
-            child:  GestureDetector(
-                onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => MyItems())),
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/pet-house.png",
-                      width: 50,
-                    ),
-                    SizedBox(height: 15),
-                    Text("مستلزمات الحيوان", textAlign: TextAlign.center)
-                  ],
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => ComputerCat())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/computer.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("الأجهزة الالكترونية و ملحقاتها",
+                          textAlign: TextAlign.center)
+                    ],
+                  ),
                 ),
-             ), ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => houseK())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/kitchen.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("المنزل و المطبخ", textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => clothes())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/clothes-rack.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("الملابس", textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => KidsCat())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/brick.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("منتجات الأطفال و الألعاب",
+                          textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => gym())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/dumbbell.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("الرياضة و اللياقة", textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => bags())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/handbag.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("الاكسسوارات  و الحقائب و  الأحذية",
+                          textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => perfume())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/make-up.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("الجمال و العطور", textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => pet())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/pet-house.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("مستلزمات الحيوان", textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
