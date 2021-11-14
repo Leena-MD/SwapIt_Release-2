@@ -4,14 +4,14 @@ class BottomContainer extends StatelessWidget {
   final String image;
   final String name;
 
-  //final Function onTap;
+  final VoidCallback onTap;
 
-  BottomContainer({required this. image , required this.name});
+  BottomContainer({required this. image , required this.name, required this.onTap});
   @override
   Widget build(BuildContext context) {
 
     return GestureDetector(
-
+ onTap:onTap ,
 child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -19,7 +19,7 @@ child: Column(
           Expanded(
            
            
-    //  onTap:onTap ,
+
           child: Container(
             
         height: 270,
@@ -53,7 +53,7 @@ child: Column(
               padding: const EdgeInsets.only(left: 12),
               child: Row(
                 children: [
-                  Icon(
+                  /* Icon(
                     Icons.star,
                     size: 20,
                     color: Colors.white,
@@ -77,7 +77,7 @@ child: Column(
                     Icons.star,
                     size: 20,
                     color: Colors.white,
-                  )
+                  )*/
                 ],
               ),
             )

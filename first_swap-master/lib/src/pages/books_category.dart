@@ -2,20 +2,29 @@
 import 'package:first_swap/provider/my_provider.dart';
 
 import 'package:first_swap/src/pages/Home_page.dart';
+import 'package:first_swap/src/pages/perfume.dart';
+import 'package:first_swap/src/pages/pet.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
 
 import 'package:first_swap/src/widgets/bottom_Container.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 
 import 'package:first_swap/models/goods.dart';
 import 'package:provider/provider.dart';
 import 'package:first_swap/provider/my_provider.dart';
+import 'bags.dart';
+import 'clothes.dart';
+import 'computer_category.dart';
 import 'details_page.dart';
 
 import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
+import 'gym.dart';
+import 'house.dart';
+import 'kids_category.dart';
 
 class BooksCat extends StatefulWidget {
   @override
@@ -266,11 +275,174 @@ class _BooksCat extends State<BooksCat> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      
         children: [
           
-         // SingleChildScrollView(
-           // scrollDirection: Axis.horizontal,
-           // child: Row(
+       /* SingleChildScrollView(
+         scrollDirection: Axis.horizontal,
+
+         reverse: true,
+           child: Row(
+             
+            children: <Widget>[
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => BooksCat())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/bookshelf.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("المستلزمات المكتبية و الكتب",
+                          textAlign: TextAlign.center),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => ComputerCat())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/computer.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("الأجهزة الالكترونية و ملحقاتها",
+                          textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => houseK())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/kitchen.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("المنزل و المطبخ", textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => clothes())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/clothes-rack.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("الملابس", textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => KidsCat())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/brick.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("منتجات الأطفال و الألعاب",
+                          textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => gym())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/dumbbell.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("الرياضة و اللياقة", textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => bags())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/handbag.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("الاكسسوارات  و الحقائب و  الأحذية",
+                          textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => perfume())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/make-up.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("الجمال و العطور", textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 120,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => pet())),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/pet-house.png",
+                        width: 50,
+                      ),
+                      SizedBox(height: 15),
+                      Text("مستلزمات الحيوان", textAlign: TextAlign.center)
+                    ],
+                  ),
+                ),
+              ),
+             ],)) , */
             //  children: [
               //  burger(),
               //  recipe(),
@@ -290,20 +462,21 @@ class _BooksCat extends State<BooksCat> {
                 childAspectRatio: 0.8,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
+               
                 children: booksList
                     .map(
                       (e) => BottomContainer(
-                    //  onTap: () {
-                         // Navigator.of(context).pushReplacement(
-                            //MaterialPageRoute(
-                            //  builder: (context) => DetailPage(
-                           //     image: e.image,
-                            //    name: e.title,
-                               
-                          //    ),
-                         //   ),
-                        //  );
-                      //  },
+                 onTap: () {
+                     Navigator.of(context).pushReplacement(
+                           MaterialPageRoute(
+                           builder: (context) => DetailPage(
+                          image: e.image,
+                            name: e.title,
+                                description: e.description,
+                           ),
+                         ),
+                      );
+                      },
                         image: e.image,
                        
                         name: e.title,

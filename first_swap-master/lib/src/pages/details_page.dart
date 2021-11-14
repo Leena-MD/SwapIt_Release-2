@@ -6,9 +6,9 @@ import 'books_category.dart';
 
 class DetailPage extends StatefulWidget {
   final String image;
-
+  final String description;
   final String name;
-  DetailPage({required this.image, required this.name});
+  DetailPage({required this.image, required this.name , required this.description} );
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -68,7 +68,7 @@ class _DetailPageState extends State<DetailPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                    /*  Row(
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -117,7 +117,7 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ),
                         ],
-                      ),
+                      ),*/
                       Text(
                       "test",
                         style: TextStyle(color: Colors.white, fontSize: 30),
@@ -125,14 +125,14 @@ class _DetailPageState extends State<DetailPage> {
                     ],
                   ),
                   Text(
-                    "Descipation",
+                   "Description",
                     style: TextStyle(
                         fontSize: 25,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "The customer app is the one that the customer is going to use. That is the briefest description for this app. The customer app helps the customer to access the online food ordering platforms, search for the right restaurant or the dish they want to order, place their orders and pay easily.",
+                    widget.description,
                     style: TextStyle(color: Colors.grey),
                   ),
                   Container(
@@ -141,17 +141,7 @@ class _DetailPageState extends State<DetailPage> {
                     child: RaisedButton(
                       color: Color(0xff2b2b2b),
                       onPressed: () {
-                       // provider.addToCart(
-                         // image: widget.image,
-                         // name: widget.name,
-                         // price: widget.price,
-                         // quantity: quantity,
-                       // );
-                        //Navigator.of(context).pushReplacement(
-                        //  MaterialPageRoute(
-                        //    builder: (context) => CartPage(),
-                         // ),
-                       //);
+                     
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),

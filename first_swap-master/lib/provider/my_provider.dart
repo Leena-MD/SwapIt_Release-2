@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goods.dart';
+
 import 'package:flutter/cupertino.dart';
 
 //import 'package:foodapp/modles/cart_modle.dart';
@@ -8,6 +10,9 @@ import 'package:flutter/cupertino.dart';
 //import 'package:foodapp/modles/food_modle.dart';
 
 class MyProvider extends ChangeNotifier {
+final firebaseUser = FirebaseAuth.instance.currentUser;
+  String uiduser = '';
+
 ///////////////////  category 1 ////////////////
   List<Product> booksList = [];
   late Product booksModle;
@@ -15,8 +20,28 @@ class MyProvider extends ChangeNotifier {
     List<Product> books = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: 3)
+        .where(
+          "Category",
+          isEqualTo: 3,
+        )
         .get();
+
+    final firebaseUser =
+        await FirebaseAuth.instance.currentUser; 
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+    
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
     querySnapshot.docs.forEach((element) {
       booksModle = Product(
         image: element.data()['image'],
@@ -26,8 +51,10 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
       );
-      books.add(booksModle);
-      booksList = books;
+      if (element.data()['owner'] != uiduser) {
+        books.add(booksModle);
+        booksList = books;
+      }
     });
     notifyListeners();
   }
@@ -45,6 +72,23 @@ class MyProvider extends ChangeNotifier {
         .collection('goods')
         .where("Category", isEqualTo: 0)
         .get();
+
+
+        final firebaseUser =
+        await FirebaseAuth.instance.currentUser; 
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+ 
+      }).catchError((e) {
+        print(e);
+      });
+    }
     querySnapshot.docs.forEach((element) {
       computerModle = Product(
         image: element.data()['image'],
@@ -54,8 +98,9 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
       );
+      if (element.data()['owner'] != uiduser) {
       newComputerList.add(computerModle);
-      computerList = newComputerList;
+      computerList = newComputerList; }
     });
     notifyListeners();
   }
@@ -73,6 +118,25 @@ class MyProvider extends ChangeNotifier {
         .collection('goods')
         .where("Category", isEqualTo: 1)
         .get();
+
+  final firebaseUser =
+        await FirebaseAuth.instance.currentUser; 
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+ 
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+
+
     querySnapshot.docs.forEach((element) {
       kidsModle = Product(
         image: element.data()['image'],
@@ -82,8 +146,10 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
       );
+
+      if (element.data()['owner'] != uiduser) {
       newKidsList.add(kidsModle);
-      kidsList = newKidsList;
+      kidsList = newKidsList;}
     });
     notifyListeners();
   }
@@ -101,6 +167,25 @@ class MyProvider extends ChangeNotifier {
         .collection('goods')
         .where("Category", isEqualTo: 2) //2
         .get();
+
+  final firebaseUser =
+        await FirebaseAuth.instance.currentUser; 
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+ 
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+
+
     querySnapshot.docs.forEach((element) {
       HouseModle = Product(
         image: element.data()['image'],
@@ -110,8 +195,9 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
       );
+      if (element.data()['owner'] != uiduser) {
       newHouseList.add(HouseModle);
-      HouseList = newHouseList;
+      HouseList = newHouseList; }
     });
     notifyListeners();
   }
@@ -129,6 +215,27 @@ class MyProvider extends ChangeNotifier {
         .collection('goods')
         .where("Category", isEqualTo: 4)
         .get();
+
+
+  final firebaseUser =
+        await FirebaseAuth.instance.currentUser; 
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+ 
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+
+
+
     querySnapshot.docs.forEach((element) {
       BagModle = Product(
         image: element.data()['image'],
@@ -138,8 +245,9 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
       );
+      if (element.data()['owner'] != uiduser) {
       newBagList.add(BagModle);
-      BagList = newBagList;
+      BagList = newBagList; }
     });
     notifyListeners();
   }
@@ -157,6 +265,26 @@ class MyProvider extends ChangeNotifier {
         .collection('goods')
         .where("Category", isEqualTo: 5)
         .get();
+
+
+  final firebaseUser =
+        await FirebaseAuth.instance.currentUser; 
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+ 
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+
+
     querySnapshot.docs.forEach((element) {
       perfumeModle = Product(
         image: element.data()['image'],
@@ -166,8 +294,9 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
       );
+      if (element.data()['owner'] != uiduser) {
       newPerfumeList.add(perfumeModle);
-      perfumeList = newPerfumeList;
+      perfumeList = newPerfumeList; }
     });
     notifyListeners();
   }
@@ -185,6 +314,25 @@ class MyProvider extends ChangeNotifier {
         .collection('goods')
         .where("Category", isEqualTo: 6)
         .get();
+
+
+  final firebaseUser =
+        await FirebaseAuth.instance.currentUser; 
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+ 
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+
     querySnapshot.docs.forEach((element) {
       gymModle = Product(
         image: element.data()['image'],
@@ -194,8 +342,9 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
       );
+      if (element.data()['owner'] != uiduser) {
       newGymList.add(gymModle);
-      gymList = newGymList;
+      gymList = newGymList;}
     });
     notifyListeners();
   }
@@ -213,6 +362,26 @@ class MyProvider extends ChangeNotifier {
         .collection('goods')
         .where("Category", isEqualTo: 7)
         .get();
+
+
+
+  final firebaseUser =
+        await FirebaseAuth.instance.currentUser; 
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+ 
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+
     querySnapshot.docs.forEach((element) {
       clothesModle = Product(
         image: element.data()['image'],
@@ -222,8 +391,9 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
       );
+      if (element.data()['owner'] != uiduser) {
       newClothesList.add(clothesModle);
-      clothesList = newClothesList;
+      clothesList = newClothesList; }
     });
     notifyListeners();
   }
@@ -241,6 +411,26 @@ class MyProvider extends ChangeNotifier {
         .collection('goods')
         .where("Category", isEqualTo: 8)
         .get();
+
+
+  final firebaseUser =
+        await FirebaseAuth.instance.currentUser; 
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+ 
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+
+
     querySnapshot.docs.forEach((element) {
       petModle = Product(
         image: element.data()['image'],
@@ -250,8 +440,9 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
       );
+      if (element.data()['owner'] != uiduser) {
       newPetList.add(petModle);
-      petList = newPetList;
+      petList = newPetList; }
     });
     notifyListeners();
   }

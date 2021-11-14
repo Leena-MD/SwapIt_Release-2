@@ -277,17 +277,17 @@ class _pet extends State<pet> {
                     children: petList
                         .map(
                           (e) => BottomContainer(
-                            //  onTap: () {
-                            // Navigator.of(context).pushReplacement(
-                            //MaterialPageRoute(
-                            //  builder: (context) => DetailPage(
-                            //     image: e.image,
-                            //    name: e.title,
-
-                            //    ),
-                            //   ),
-                            //  );
-                            //  },
+                            onTap: () {
+                            Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                         builder: (context) => DetailPage(
+                             image: e.image,
+                            name: e.title,
+ description: e.description,
+                              ),
+                             ),
+                            );
+                            },
                             image: e.image,
 
                             name: e.title,
