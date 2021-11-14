@@ -17,8 +17,8 @@ import 'package:first_swap/models/goods.dart';
 
 
 
-
 class ItemCard extends StatelessWidget {
+  
   final Product product;
   //final Function press;
   const ItemCard({
@@ -29,13 +29,17 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return GestureDetector(
      
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          
           Expanded(
+           
             child: Container(
+              
               padding: EdgeInsets.all(kDefaultPaddin),
               // For  demo we use fixed height  and width
               // Now we dont need them
@@ -47,7 +51,7 @@ class ItemCard extends StatelessWidget {
               ),
               child: Hero(
                 tag: "${product.id}",
-                child: Image.asset(product.image),
+                child: Image.network(product.image),
               ),
             ),
           ),

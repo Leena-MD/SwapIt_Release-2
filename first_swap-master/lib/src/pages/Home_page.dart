@@ -1,5 +1,6 @@
 import 'package:first_swap/fluttericon.dart';
 import 'package:first_swap/src/pages/books_category.dart';
+import 'package:first_swap/src/pages/computer_category.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/fluttericon.dart';
@@ -10,6 +11,7 @@ import 'Intrests_page.dart';
 import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
+import 'kids_category.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -189,7 +192,7 @@ class CategoryContainer extends StatelessWidget {
                    
             child:  GestureDetector(
                 onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => MyItems())),
+                    MaterialPageRoute(builder: (context) => ComputerCat())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(
@@ -242,7 +245,7 @@ class CategoryContainer extends StatelessWidget {
                    
             child:  GestureDetector(
                 onTap: () => Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => MyItems())),
+                    MaterialPageRoute(builder: (context) => KidsCat())),
                 child: Column(
                   children: <Widget>[
                     Image.asset(

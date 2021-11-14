@@ -1,4 +1,3 @@
-
 import 'package:first_swap/provider/my_provider.dart';
 
 import 'package:first_swap/src/pages/Home_page.dart';
@@ -17,12 +16,12 @@ import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
 
-class BooksCat extends StatefulWidget {
+class ComputerCat extends StatefulWidget {
   @override
-  _BooksCat createState() => _BooksCat();
+  _ComputerCat createState() => _ComputerCat();
 }
 
-class _BooksCat extends State<BooksCat> {
+class _ComputerCat extends State<ComputerCat> {
   
   List<Product> booksList = [];
 
@@ -31,7 +30,10 @@ class _BooksCat extends State<BooksCat> {
   //3rd
   List<Product> kidsList = [];
   //4th
-  List<Product> HouseList = [];
+  List<Product> drinkList = [];
+
+  List<Product> singleFoodList = [];
+
   //5th
   List<Product> BagList = [];
 
@@ -45,9 +47,6 @@ class _BooksCat extends State<BooksCat> {
   List<Product> clothesList = [];
 //9th
   List<Product> petList = [];
-
-
-  List<Product> singleFoodList = [];
 
   List<Product> burgerCategoriesList = [];
   List<Product> recipeCategoriesList = [];
@@ -166,7 +165,7 @@ class _BooksCat extends State<BooksCat> {
   /////4th
   Widget drink() {
     return Row(
-      children: HouseList
+      children: drinkList
           .map(
             (e) => categoriesContainer(
               image: e.image,
@@ -197,7 +196,7 @@ class _BooksCat extends State<BooksCat> {
     computerList = provider.throwComputerList;
     //3rd
     provider.getHouseCategory();
-    HouseList = provider.throwHouseList;
+    drinkList = provider.throwHouseList;
     // 4th
     provider.getKidsCategory();
     kidsList = provider.throwKidsList;
@@ -221,8 +220,6 @@ class _BooksCat extends State<BooksCat> {
     // 9th
     provider.getPetCategory();
     petList = provider.throwPetList;
-
-
 
     //////////////single food list/////////
     provider.getFoodList();
@@ -290,7 +287,7 @@ class _BooksCat extends State<BooksCat> {
                 childAspectRatio: 0.8,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
-                children: booksList
+                children: computerList
                     .map(
                       (e) => BottomContainer(
                     //  onTap: () {

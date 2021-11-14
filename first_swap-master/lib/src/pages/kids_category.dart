@@ -1,4 +1,3 @@
-
 import 'package:first_swap/provider/my_provider.dart';
 
 import 'package:first_swap/src/pages/Home_page.dart';
@@ -17,12 +16,12 @@ import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
 
-class BooksCat extends StatefulWidget {
+class KidsCat extends StatefulWidget {
   @override
-  _BooksCat createState() => _BooksCat();
+  _KidsCat createState() => _KidsCat();
 }
 
-class _BooksCat extends State<BooksCat> {
+class _KidsCat extends State<KidsCat> {
   
   List<Product> booksList = [];
 
@@ -32,6 +31,7 @@ class _BooksCat extends State<BooksCat> {
   List<Product> kidsList = [];
   //4th
   List<Product> HouseList = [];
+  
   //5th
   List<Product> BagList = [];
 
@@ -45,7 +45,6 @@ class _BooksCat extends State<BooksCat> {
   List<Product> clothesList = [];
 //9th
   List<Product> petList = [];
-
 
   List<Product> singleFoodList = [];
 
@@ -223,7 +222,6 @@ class _BooksCat extends State<BooksCat> {
     petList = provider.throwPetList;
 
 
-
     //////////////single food list/////////
     provider.getFoodList();
     singleFoodList = provider.throwFoodModleList;
@@ -290,7 +288,7 @@ class _BooksCat extends State<BooksCat> {
                 childAspectRatio: 0.8,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
-                children: booksList
+                children: kidsList
                     .map(
                       (e) => BottomContainer(
                     //  onTap: () {
