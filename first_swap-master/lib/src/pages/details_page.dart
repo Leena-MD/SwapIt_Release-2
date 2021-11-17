@@ -1,3 +1,4 @@
+import 'package:first_swap/constants.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/provider/my_provider.dart';
@@ -8,7 +9,8 @@ class DetailPage extends StatefulWidget {
   final String image;
   final String description;
   final String name;
-  DetailPage({required this.image, required this.name , required this.description} );
+  DetailPage(
+      {required this.image, required this.name, required this.description});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -21,7 +23,10 @@ class _DetailPageState extends State<DetailPage> {
     MyProvider provider = Provider.of<MyProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
+        backgroundColor: Colors.cyan[800],
+        title: Center(
+            child: Text('معلومات المنتج   ', style: TextStyle(fontSize: 23))),
+        automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -33,142 +38,175 @@ class _DetailPageState extends State<DetailPage> {
           },
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              child: CircleAvatar(
-                radius: 110,
-                backgroundImage: NetworkImage(widget.image),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Card(
+          color: Colors.white,
+          shadowColor: Colors.grey,
+          elevation: 9,
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(kDefaultPaddin),
+                  // For  demo we use fixed height  and width
+                  // Now we dont need them
+                  // height: 180,
+                  // width: 160,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Hero(
+                    tag: "${widget.name}",
+                    child: Image.network(widget.image),
+                  ),
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: Color(0xff3a3e3e),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.name,
-                    style: TextStyle(fontSize: 40, color: Colors.white),
-                  ),
-                  Text(
-                    "Any text..",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              /* Expanded( ////////old image style//////
+                  child: Container(
+                padding: EdgeInsets.only(top: 15.0),
+
+                /*padding: EdgeInsets.symmetric(horizontal: 15),
+            width: 250,
+            height: 200,
+            color: Colors.white,
+            child: Image.network(
+              widget.image,
+              fit: BoxFit.scaleDown,
+            ),*/
+                alignment: Alignment.center,
+                child: Container(
+                  width: 300.0,
+                  height: 300.0,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      image: DecorationImage(
+                          image: NetworkImage(
+                            widget.image,
+                          ),
+                          fit: BoxFit.fill)),
+                ),
+              )),*/
+              SizedBox(height: 10),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 35),
+                  width: double.infinity,
+                  // color: Colors.white,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15))),
+                  child: Column(
+                    //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                    /*  Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                if (quantity > 1) quantity--;
-                              });
-                            },
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
+                      ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0)),
+                        selected: true,
+                        selectedTileColor: Colors.white70,
+                        // selectedTileColor: Colors.white38,
+                        leading:
+                            Icon(Icons.production_quantity_limits_outlined),
+                        title: Text(
+                          " المنتج ",
+                          textScaleFactor: 1,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.blueGrey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        minLeadingWidth: double.minPositive,
+                      ),
+                      Divider(
+                        height: 0.2,
+                        color: Colors.grey,
+                      ),
+                      ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0)),
+                        selected: true,
+                        selectedTileColor: Colors.white70,
+                        title: Text(
+                          widget.name,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                        ),
+                        minLeadingWidth: double.minPositive,
+                      ),
+                      ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0)),
+                        selected: true,
+                        selectedTileColor: Colors.white70,
+                        //selectedTileColor: Colors.white38,
+                        title: Text(
+                          " وصف المنتج ",
+                          textScaleFactor: 1,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.blueGrey,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        minLeadingWidth: double.minPositive,
+                      ),
+                      Divider(
+                        height: 0.2,
+                        color: Colors.grey,
+                      ),
+                      ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0)),
+                        selected: true,
+                        selectedTileColor: Colors.white70,
+                        title: Text(
+                          widget.description,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                        ),
+                        subtitle: Text(''),
+                        isThreeLine: true,
+                        minLeadingWidth: double.minPositive,
+                      ),
+                      SizedBox(height: 15),
+                      RaisedButton(
+                        color: Colors.cyan[800],
+                        onPressed: () {},
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        elevation: 5,
+                        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.swap_calls_rounded,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              "بدّل",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 18,
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Icon(Icons.remove),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            '$quantity',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                quantity++;
-                              });
-                            },
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Icon(
-                                Icons.add,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),*/
-                      Text(
-                      "test",
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      )
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                  Text(
-                   "Description",
-                    style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    widget.description,
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  Container(
-                    height: 55,
-                    width: double.infinity,
-                    child: RaisedButton(
-                      color: Color(0xff2b2b2b),
-                      onPressed: () {
-                     
-                      },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.shopping_cart,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Add to Cart",
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

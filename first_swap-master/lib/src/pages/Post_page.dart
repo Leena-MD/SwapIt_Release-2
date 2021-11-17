@@ -133,12 +133,12 @@ class _PostPage extends State<PostPage> {
                                         labelText: 'اسم المنتج',
                                       ),
                                       validator: (value) {
-                                        RegExp regex = new RegExp(r'\w{3,15}$');
+                                        RegExp regex = new RegExp(r'^.{3,15}$');
                                         if (value!.isEmpty) {
                                           return ("*الحقل مطلوب");
                                         }
                                         if (!regex.hasMatch(value)) {
-                                          return ("اسم المنتج حد أدنى ٣ ");
+                                          return ("اسم المنتج حد أدنى ٣ واعلى ١٥ ");
                                         }
                                         return null;
                                       },
