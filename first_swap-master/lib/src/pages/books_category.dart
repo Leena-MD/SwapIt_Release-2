@@ -63,6 +63,231 @@ class _BooksCat extends State<BooksCat> {
   List<Product> pizzaCategoriesList = [];
   List<Product> drinkCategoriesList = [];
 
+  List<String> selectedCategory = [];
+
+  String category1 = 'الأجهزة الإلكترونية و ملحقاتها';
+  String category2 = ' منتجات الأطفال و الألعاب';
+  String category3 = 'المنزل و المطبخ';
+  String category4 = 'المستلزمات  المكتبية و الكتب';
+String category5 = 'الاكسسوارات و الحقائب و الأحذية';
+String category6 = '  الجمال و العطور';
+String category7 = ' الرياضة و اللياقة ';
+String category8 = '  الملابس ';
+String category9 = 'مستلزمات الحيوان';
+
+
+Widget header(){
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(top: 4.0, left: 0.0, right: 0.0, bottom: 6.0),
+          child: Container(
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 4.0,),
+                  Container(
+                    margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+               
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: (){
+                            selectedCategory = [];
+                            selectedCategory.add(category1);
+                            setState(() {});
+                          Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => ComputerCat()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            decoration: BoxDecoration(
+                              color: selectedCategory.contains(category1) ? Colors.cyan[100] : Colors.grey[300],
+                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                            ),
+                            child: Text('الأجهزة الإلكترونية و ملحقاتها',
+                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                          ),
+                        ),
+                        SizedBox(width: 2.0,),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: (){
+                            selectedCategory = [];
+                            selectedCategory.add(category2);
+                            setState(() {});
+                             Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => KidsCat()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            decoration: BoxDecoration(
+                              color: selectedCategory.contains(category2) ? Colors.cyan[100] : Colors.grey[300],
+                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                            ),
+                            child: Text(' منتجات الأطفال و الألعاب',
+                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                          ),
+                        ),
+                        SizedBox(width: 2.0,),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: (){
+                            selectedCategory = [];
+                            selectedCategory.add(category3);
+                            setState(() {});
+                             Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => houseK()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            decoration: BoxDecoration(
+                              color: selectedCategory.contains(category3) ? Colors.cyan[100] : Colors.grey[300],
+                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                            ),
+                            child: Text('المنزل و المطبخ',
+                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                          ),
+                        ),
+                        SizedBox(width: 2.0,),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: (){
+                            selectedCategory = [];
+                            selectedCategory.add(category4);
+                            setState(() {});
+                             Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => BooksCat()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            decoration: BoxDecoration(
+                              color: selectedCategory.contains(category4) ? Colors.cyan[100] : Colors.grey[300],
+                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                            ),
+                            child: Text('المستلزمات  المكتبية و الكتب',
+                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                          ),
+                        ),
+                        SizedBox(width: 2.0,),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: (){
+                            selectedCategory = [];
+                            selectedCategory.add(category5);
+                            setState(() {});
+                             Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => bags()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            decoration: BoxDecoration(
+                              color: selectedCategory.contains(category5) ? Colors.cyan[100] : Colors.grey[300],
+                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                            ),
+                            child: Text(' الاكسسوارات و الحقائب و الأحذية',
+                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                          ),
+                        ),
+                        SizedBox(width: 2.0,),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: (){
+                            selectedCategory = [];
+                            selectedCategory.add(category6);
+                            setState(() {});
+                             Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => perfume()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            decoration: BoxDecoration(
+                              color: selectedCategory.contains(category6) ? Colors.cyan[100] : Colors.grey[300],
+                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                            ),
+                            child: Text('الجمال و العطور',
+                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                          ),
+                        ),
+                        SizedBox(width: 2.0,),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: (){
+                            selectedCategory = [];
+                            selectedCategory.add(category7);
+                            setState(() {});
+                             Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => gym()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            decoration: BoxDecoration(
+                              color: selectedCategory.contains(category7) ? Colors.cyan[100] : Colors.grey[300],
+                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                            ),
+                            child: Text('الرياضة و اللياقة',
+                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                          ),
+                        ),
+                        SizedBox(width: 2.0,),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: (){
+                            selectedCategory = [];
+                            selectedCategory.add(category8);
+                            setState(() {});
+                             Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => clothes()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            decoration: BoxDecoration(
+                              color: selectedCategory.contains(category8) ? Colors.cyan[100] : Colors.grey[300],
+                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                            ),
+                            child: Text(' الملابس',
+                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                          ),
+                        ),
+                        SizedBox(width: 2.0,),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: (){
+                            selectedCategory = [];
+                            selectedCategory.add(category9);
+                            setState(() {});
+                             Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => pet()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            decoration: BoxDecoration(
+                              color: selectedCategory.contains(category9) ? Colors.cyan[100] : Colors.grey[300],
+                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                            ),
+                            child: Text('مستلزمات الحيوان',
+                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 6.0,)
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+
+
+
   Widget categoriesContainer(
       {
       required String image,
@@ -96,18 +321,6 @@ class _BooksCat extends State<BooksCat> {
     );
   }
 
-  Widget drawerItem({required String name, required IconData icon}) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: Colors.white,
-      ),
-      title: Text(
-        name,
-        style: TextStyle(fontSize: 20, color: Colors.white),
-      ),
-    );
-  }
 
   ////1st
   Widget burger() {
@@ -277,181 +490,22 @@ class _BooksCat extends State<BooksCat> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       
         children: [
-          
-       /* SingleChildScrollView(
-         scrollDirection: Axis.horizontal,
-
-         reverse: true,
+          SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
            child: Row(
-             
-            children: <Widget>[
-              Container(
-                width: 120,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => BooksCat())),
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/bookshelf.png",
-                        width: 50,
-                      ),
-                      SizedBox(height: 15),
-                      Text("المستلزمات المكتبية و الكتب",
-                          textAlign: TextAlign.center),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 120,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => ComputerCat())),
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/computer.png",
-                        width: 50,
-                      ),
-                      SizedBox(height: 15),
-                      Text("الأجهزة الالكترونية و ملحقاتها",
-                          textAlign: TextAlign.center)
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 120,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => houseK())),
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/kitchen.png",
-                        width: 50,
-                      ),
-                      SizedBox(height: 15),
-                      Text("المنزل و المطبخ", textAlign: TextAlign.center)
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 120,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => clothes())),
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/clothes-rack.png",
-                        width: 50,
-                      ),
-                      SizedBox(height: 15),
-                      Text("الملابس", textAlign: TextAlign.center)
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 120,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => KidsCat())),
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/brick.png",
-                        width: 50,
-                      ),
-                      SizedBox(height: 15),
-                      Text("منتجات الأطفال و الألعاب",
-                          textAlign: TextAlign.center)
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 120,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => gym())),
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/dumbbell.png",
-                        width: 50,
-                      ),
-                      SizedBox(height: 15),
-                      Text("الرياضة و اللياقة", textAlign: TextAlign.center)
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 120,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => bags())),
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/handbag.png",
-                        width: 50,
-                      ),
-                      SizedBox(height: 15),
-                      Text("الاكسسوارات  و الحقائب و  الأحذية",
-                          textAlign: TextAlign.center)
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 120,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => perfume())),
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/make-up.png",
-                        width: 50,
-                      ),
-                      SizedBox(height: 15),
-                      Text("الجمال و العطور", textAlign: TextAlign.center)
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 120,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => pet())),
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/pet-house.png",
-                        width: 50,
-                      ),
-                      SizedBox(height: 15),
-                      Text("مستلزمات الحيوان", textAlign: TextAlign.center)
-                    ],
-                  ),
-                ),
-              ),
-             ],)) , */
-            //  children: [
-              //  burger(),
+           children: [
+              header(),
               //  recipe(),
              //   pizza(),
             //    drink(),
                 
-           //   ],
-           // ),
-        // ),
+          ],
+         ),
+       ),
+      
+             
+             
+      
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10),
             height: 510,
@@ -459,9 +513,9 @@ class _BooksCat extends State<BooksCat> {
                 shrinkWrap: false,
                 primary: false,
                 crossAxisCount: 2,
-                childAspectRatio: 0.8,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
+                childAspectRatio: 0.9,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 10,
                
                 children: booksList
                     .map(
