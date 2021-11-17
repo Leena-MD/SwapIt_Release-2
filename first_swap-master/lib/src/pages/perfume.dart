@@ -585,6 +585,7 @@ class _perfume extends State<perfume> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SingleChildScrollView(
+                  reverse: true,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [

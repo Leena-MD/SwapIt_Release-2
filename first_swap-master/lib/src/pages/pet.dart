@@ -585,6 +585,7 @@ class _pet extends State<pet> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SingleChildScrollView(
+                  reverse: true,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [

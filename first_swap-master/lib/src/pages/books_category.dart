@@ -88,6 +88,7 @@ class _BooksCat extends State<BooksCat> {
                   Container(
                     margin: EdgeInsets.only(left: 10.0, right: 10.0),
                     child: Row(
+                      
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         InkWell(
@@ -573,6 +574,7 @@ class _BooksCat extends State<BooksCat> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SingleChildScrollView(
+                 reverse: true,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [

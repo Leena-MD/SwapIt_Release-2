@@ -588,6 +588,7 @@ class _ComputerCat extends State<ComputerCat> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SingleChildScrollView(
+                  reverse: true,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
