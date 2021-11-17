@@ -28,10 +28,8 @@ class _DetailPageState extends State<DetailPage> {
             child: Text('معلومات المنتج   ', style: TextStyle(fontSize: 23))),
         leading: IconButton(
           onPressed: () {
-            // if (cat) {
-            // Navigator.of(context).pushReplacement(
-            //    MaterialPageRoute(builder: (context) => ComputerCat()));
-            //   }
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => HomePage()));
           },
           icon: Icon(Icons.arrow_back),
         ),
