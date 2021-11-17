@@ -65,213 +65,320 @@ class _perfume extends State<perfume> {
   String category2 = ' منتجات الأطفال و الألعاب';
   String category3 = 'المنزل و المطبخ';
   String category4 = 'المستلزمات  المكتبية و الكتب';
-String category5 = 'الاكسسوارات و الحقائب و الأحذية';
-String category6 = '  الجمال و العطور';
-String category7 = ' الرياضة و اللياقة ';
-String category8 = '  الملابس ';
-String category9 = 'مستلزمات الحيوان';
+  String category5 = 'الاكسسوارات و الحقائب و الأحذية';
+  String category6 = '  الجمال و العطور';
+  String category7 = ' الرياضة و اللياقة ';
+  String category8 = '  الملابس ';
+  String category9 = 'مستلزمات الحيوان';
 
-
-Widget header(){
+  Widget header() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Container(
-          padding: EdgeInsets.only(top: 4.0, left: 0.0, right: 0.0, bottom: 6.0),
+          padding:
+              EdgeInsets.only(top: 4.0, left: 0.0, right: 0.0, bottom: 6.0),
           child: Container(
             child: Center(
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 4.0,),
+                  SizedBox(
+                    height: 4.0,
+                  ),
                   Container(
                     margin: EdgeInsets.only(left: 10.0, right: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-               
                         InkWell(
                           splashColor: Colors.cyan[100],
-                          onTap: (){
+                          onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category1);
                             setState(() {});
-                          Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => ComputerCat()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => ComputerCat()));
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 12.0),
                             decoration: BoxDecoration(
-                              color: selectedCategory.contains(category1) ? Colors.cyan[100] : Colors.grey[300],
-                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                              color: selectedCategory.contains(category1)
+                                  ? Colors.cyan[100]
+                                  : Colors.grey[300],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(48.0)),
                             ),
-                            child: Text('الأجهزة الإلكترونية و ملحقاتها',
-                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                            child: Text(
+                              'الأجهزة الإلكترونية و ملحقاتها',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 2.0,),
+                        SizedBox(
+                          width: 2.0,
+                        ),
                         InkWell(
                           splashColor: Colors.cyan[100],
-                          onTap: (){
+                          onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category2);
                             setState(() {});
-                             Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => KidsCat()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => KidsCat()));
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 12.0),
                             decoration: BoxDecoration(
-                              color: selectedCategory.contains(category2) ? Colors.cyan[100] : Colors.grey[300],
-                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                              color: selectedCategory.contains(category2)
+                                  ? Colors.cyan[100]
+                                  : Colors.grey[300],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(48.0)),
                             ),
-                            child: Text(' منتجات الأطفال و الألعاب',
-                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                            child: Text(
+                              ' منتجات الأطفال و الألعاب',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 2.0,),
+                        SizedBox(
+                          width: 2.0,
+                        ),
                         InkWell(
                           splashColor: Colors.cyan[100],
-                          onTap: (){
+                          onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category3);
                             setState(() {});
-                             Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => houseK()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => houseK()));
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 12.0),
                             decoration: BoxDecoration(
-                              color: selectedCategory.contains(category3) ? Colors.cyan[100] : Colors.grey[300],
-                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                              color: selectedCategory.contains(category3)
+                                  ? Colors.cyan[100]
+                                  : Colors.grey[300],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(48.0)),
                             ),
-                            child: Text('المنزل و المطبخ',
-                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                            child: Text(
+                              'المنزل و المطبخ',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 2.0,),
+                        SizedBox(
+                          width: 2.0,
+                        ),
                         InkWell(
                           splashColor: Colors.cyan[100],
-                          onTap: (){
+                          onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category4);
                             setState(() {});
-                             Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => BooksCat()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => BooksCat()));
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 12.0),
                             decoration: BoxDecoration(
-                              color: selectedCategory.contains(category4) ? Colors.cyan[100] : Colors.grey[300],
-                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                              color: selectedCategory.contains(category4)
+                                  ? Colors.cyan[100]
+                                  : Colors.grey[300],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(48.0)),
                             ),
-                            child: Text('المستلزمات  المكتبية و الكتب',
-                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                            child: Text(
+                              'المستلزمات  المكتبية و الكتب',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 2.0,),
+                        SizedBox(
+                          width: 2.0,
+                        ),
                         InkWell(
                           splashColor: Colors.cyan[100],
-                          onTap: (){
+                          onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category5);
                             setState(() {});
-                             Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => bags()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => bags()));
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 12.0),
                             decoration: BoxDecoration(
-                              color: selectedCategory.contains(category5) ? Colors.cyan[100] : Colors.grey[300],
-                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                              color: selectedCategory.contains(category5)
+                                  ? Colors.cyan[100]
+                                  : Colors.grey[300],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(48.0)),
                             ),
-                            child: Text(' الاكسسوارات و الحقائب و الأحذية',
-                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                            child: Text(
+                              ' الاكسسوارات و الحقائب و الأحذية',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 2.0,),
+                        SizedBox(
+                          width: 2.0,
+                        ),
                         InkWell(
                           splashColor: Colors.cyan[100],
-                          onTap: (){
+                          onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category6);
                             setState(() {});
-                             Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => perfume()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => perfume()));
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 12.0),
                             decoration: BoxDecoration(
-                              color: selectedCategory.contains(category6) ? Colors.cyan[100] : Colors.grey[300],
-                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                              color: selectedCategory.contains(category6)
+                                  ? Colors.cyan[100]
+                                  : Colors.grey[300],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(48.0)),
                             ),
-                            child: Text('الجمال و العطور',
-                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                            child: Text(
+                              'الجمال و العطور',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 2.0,),
+                        SizedBox(
+                          width: 2.0,
+                        ),
                         InkWell(
                           splashColor: Colors.cyan[100],
-                          onTap: (){
+                          onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category7);
                             setState(() {});
-                             Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => gym()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) => gym()));
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 12.0),
                             decoration: BoxDecoration(
-                              color: selectedCategory.contains(category7) ? Colors.cyan[100] : Colors.grey[300],
-                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                              color: selectedCategory.contains(category7)
+                                  ? Colors.cyan[100]
+                                  : Colors.grey[300],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(48.0)),
                             ),
-                            child: Text('الرياضة و اللياقة',
-                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                            child: Text(
+                              'الرياضة و اللياقة',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 2.0,),
+                        SizedBox(
+                          width: 2.0,
+                        ),
                         InkWell(
                           splashColor: Colors.cyan[100],
-                          onTap: (){
+                          onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category8);
                             setState(() {});
-                             Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => clothes()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => clothes()));
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 12.0),
                             decoration: BoxDecoration(
-                              color: selectedCategory.contains(category8) ? Colors.cyan[100] : Colors.grey[300],
-                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                              color: selectedCategory.contains(category8)
+                                  ? Colors.cyan[100]
+                                  : Colors.grey[300],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(48.0)),
                             ),
-                            child: Text(' الملابس',
-                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                            child: Text(
+                              ' الملابس',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 2.0,),
+                        SizedBox(
+                          width: 2.0,
+                        ),
                         InkWell(
                           splashColor: Colors.cyan[100],
-                          onTap: (){
+                          onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category9);
                             setState(() {});
-                             Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => pet()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) => pet()));
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 12.0),
                             decoration: BoxDecoration(
-                              color: selectedCategory.contains(category9) ? Colors.cyan[100] : Colors.grey[300],
-                              borderRadius: BorderRadius.all(Radius.circular(48.0)),
+                              color: selectedCategory.contains(category9)
+                                  ? Colors.cyan[100]
+                                  : Colors.grey[300],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(48.0)),
                             ),
-                            child: Text('مستلزمات الحيوان',
-                              style: TextStyle(color: Colors.grey[900], fontSize: 10.0, fontWeight: FontWeight.w500),),
+                            child: Text(
+                              'مستلزمات الحيوان',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 6.0,)
+                  SizedBox(
+                    height: 6.0,
+                  )
                 ],
               ),
             ),
@@ -280,7 +387,6 @@ Widget header(){
       ],
     );
   }
-
 
   Widget categoriesContainer({required String image, required String name}) {
     return Column(
@@ -470,57 +576,50 @@ Widget header(){
             defaultSelectedIndex: 0,
           ),
           appBar: AppBar(
-            elevation: 0.0,
-            actions: [
-              Padding(
-                padding: const EdgeInsets.all(9.0),
-                //child: CircleAvatar(
-                // backgroundImage: AssetImage('images/profile.jpg'),
-                // ),
-              )
-            ],
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.cyan[800],
+            title: Center(
+                child: Text('الجمال والعطور', style: TextStyle(fontSize: 20))),
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-             SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-           child: Row(
-           children: [
-              header(),
-              //  recipe(),
-             //   pizza(),
-            //    drink(),
-                
-          ],
-         ),
-       ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    header(),
+                    //  recipe(),
+                    //   pizza(),
+                    //    drink(),
+                  ],
+                ),
+              ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 height: 510,
                 child: GridView.count(
                     shrinkWrap: false,
                     primary: false,
-                   crossAxisCount: 2,
-                childAspectRatio: 0.9,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 10,
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.9,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 10,
                     children: perfumeList
                         .map(
                           (e) => BottomContainer(
                             onTap: () {
-                           Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                           builder: (context) => DetailPage(
-                           image: e.image,
-                             name: e.title,
- description: e.description,
-                               ),
-                              ),
-                             );
-                           },
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                    image: e.image,
+                                    name: e.title,
+                                    description: e.description,
+                                  ),
+                                ),
+                              );
+                            },
                             image: e.image,
-
                             name: e.title,
                           ),
                         )

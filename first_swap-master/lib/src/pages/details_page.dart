@@ -26,16 +26,14 @@ class _DetailPageState extends State<DetailPage> {
         backgroundColor: Colors.cyan[800],
         title: Center(
             child: Text('معلومات المنتج   ', style: TextStyle(fontSize: 23))),
-        automaticallyImplyLeading: false,
         leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
           onPressed: () {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomePage()));
+            // if (cat) {
+            // Navigator.of(context).pushReplacement(
+            //    MaterialPageRoute(builder: (context) => ComputerCat()));
+            //   }
           },
+          icon: Icon(Icons.arrow_back),
         ),
       ),
       body: Padding(

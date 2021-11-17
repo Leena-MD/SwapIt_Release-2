@@ -16,18 +16,15 @@ import 'package:first_swap/src/pages/login_page.dart';
 import 'package:first_swap/constants.dart';
 import 'package:first_swap/models/goods.dart';
 
-
-
 class Product {
-  final String image, title, description, status , owner , id;
+  final String image, title, description, status, owner, id;
 
-  
   Product({
     required this.id,
     required this.image,
     required this.title,
     required this.description,
     required this.status,
-   required this.owner,
+    required this.owner,
   });
 }
