@@ -1,5 +1,13 @@
 import 'package:first_swap/constants.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
+import 'package:first_swap/src/pages/bags.dart';
+import 'package:first_swap/src/pages/clothes.dart';
+import 'package:first_swap/src/pages/computer_category.dart';
+import 'package:first_swap/src/pages/gym.dart';
+import 'package:first_swap/src/pages/house.dart';
+import 'package:first_swap/src/pages/kids_category.dart';
+import 'package:first_swap/src/pages/perfume.dart';
+import 'package:first_swap/src/pages/pet.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/provider/my_provider.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +17,12 @@ class DetailPage extends StatefulWidget {
   final String image;
   final String description;
   final String name;
+  final String cate;
   DetailPage(
-      {required this.image, required this.name, required this.description});
+      {required this.image,
+      required this.name,
+      required this.description,
+      required this.cate});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -28,8 +40,50 @@ class _DetailPageState extends State<DetailPage> {
             child: Text('معلومات المنتج   ', style: TextStyle(fontSize: 23))),
         leading: IconButton(
           onPressed: () {
-            Navigator.push(this.context,
-                MaterialPageRoute(builder: (context) => HomePage()));
+            if (widget.cate == "2") {
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => houseK()));
+            }
+            if (widget.cate == "0") {
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => ComputerCat()));
+            }
+            if (widget.cate == "1") {
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => KidsCat()));
+            }
+            if (widget.cate == "3") {
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => BooksCat()));
+            }
+            if (widget.cate == "4") {
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => bags()));
+            }
+            if (widget.cate == "5") {
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => perfume()));
+            }
+            if (widget.cate == "6") {
+              Navigator.push(
+                  this.context, MaterialPageRoute(builder: (context) => gym()));
+            }
+            if (widget.cate == "7") {
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => clothes()));
+            }
+            if (widget.cate == "8") {
+              Navigator.push(
+                  this.context, MaterialPageRoute(builder: (context) => pet()));
+            }
+            if (widget.cate == "9") {
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => HomePage()));
+            }
+            if (widget.cate == "42") {
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => HomePage()));
+            }
           },
           icon: Icon(Icons.arrow_back),
         ),

@@ -585,7 +585,7 @@ class _gym extends State<gym> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SingleChildScrollView(
-                  reverse: true,
+                reverse: true,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
@@ -616,6 +616,7 @@ class _gym extends State<gym> {
                                     image: e.image,
                                     name: e.title,
                                     description: e.description,
+                                    cate: e.cate,
                                   ),
                                 ),
                               );

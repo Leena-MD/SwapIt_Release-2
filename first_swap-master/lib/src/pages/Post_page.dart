@@ -33,6 +33,7 @@ class _PostPage extends State<PostPage> {
 
   String _currentSelectedValue = "one";
   int _value = 42;
+  String cate = "42";
 
   String imagePath = "";
   String imageName = "";
@@ -188,75 +189,75 @@ class _PostPage extends State<PostPage> {
                                                                 .category_outlined),
                                                             isDense: true,
                                                             isExpanded: true,
-                                                            value: _value,
+                                                            value: cate,
                                                             items: <
                                                                 DropdownMenuItem<
-                                                                    int>>[
+                                                                    String>>[
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     'اختر فئة المنتج'),
                                                                 enabled: false,
-                                                                value: 42,
+                                                                value: '42',
                                                               ),
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     'الأجهزة الإلكترونية و ملحقاتها'),
-                                                                value: 0,
+                                                                value: '0',
                                                               ),
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     'منتجات الأطفال و الألعاب'),
-                                                                value: 1,
+                                                                value: '1',
                                                               ),
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     'المنزل و المطبخ'),
-                                                                value: 2,
+                                                                value: '2',
                                                               ),
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     'المستلزمات المكتبية و الكتب'),
-                                                                value: 3,
+                                                                value: '3',
                                                               ),
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     'الاكسسوارات و الحقائب و الأحذية'),
-                                                                value: 4,
+                                                                value: '4',
                                                               ),
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     'الجمال والعطور'),
-                                                                value: 5,
+                                                                value: '5',
                                                               ),
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     'الرياضة و اللياقة'),
-                                                                value: 6,
+                                                                value: '6',
                                                               ),
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     ' الملابس'),
-                                                                value: 7,
+                                                                value: '7',
                                                               ),
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     'مستلزمات الحيوان '),
-                                                                value: 8,
+                                                                value: '8',
                                                               ),
                                                               new DropdownMenuItem(
                                                                 child: new Text(
                                                                     'اخرى'),
-                                                                value: 9,
+                                                                value: '9',
                                                               ),
                                                             ],
                                                             validator: (value) =>
-                                                                value == 42
+                                                                value == '42'
                                                                     ? 'الحقل مطلوب *'
                                                                     : null,
-                                                            onChanged:
-                                                                (int? value) {
+                                                            onChanged: (String?
+                                                                value) {
                                                               setState(() {
-                                                                _value = value!;
+                                                                cate = value!;
                                                               });
                                                             }),
                                                   ),
@@ -428,7 +429,7 @@ class _PostPage extends State<PostPage> {
                                           color: Colors.white, fontSize: 18),
                                     ),
                                     icon: Icon(
-                                      Icons.post_add_outlined,
+                                      Icons.post_add_sharp,
                                       size: 30.0,
                                     ),
                                     onPressed: () {
@@ -487,7 +488,7 @@ class _PostPage extends State<PostPage> {
   String uiduser = '';
   String st = "available";
   addgood(String name, String des, int cat, String url, String userID, int num,
-      String st) async {
+      String st, String cate) async {
     final _auth = FirebaseAuth.instance;
 
     // calling our firestore
@@ -509,6 +510,7 @@ class _PostPage extends State<PostPage> {
     goodsMo.gnum = num;
     goodsMo.stat = st;
     goodsMo.own = uiduser;
+    goodsMo.cate = cate;
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
 
@@ -545,6 +547,7 @@ class _PostPage extends State<PostPage> {
           'numGood': num,
           'Status': st,
           'owner': uiduser,
+          'cate': cate,
         });
         Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
 
@@ -565,6 +568,7 @@ class _PostPage extends State<PostPage> {
     String id,
     int num,
     String st,
+    String cate,
   ) async {
     await addgood(
       name,
@@ -574,11 +578,20 @@ class _PostPage extends State<PostPage> {
       id,
       num,
       st,
+      cate,
     );
   }
 
   submitAction(BuildContext context) {
-    addadata(GoodsNController.text, GoodsDController.text, _value, url, userID,
-        num, st);
+    addadata(
+      GoodsNController.text,
+      GoodsDController.text,
+      _value,
+      url,
+      userID,
+      num,
+      st,
+      cate,
+    );
   }
 }

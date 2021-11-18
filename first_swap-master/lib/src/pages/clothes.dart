@@ -584,7 +584,7 @@ class _clothes extends State<clothes> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SingleChildScrollView(
-                  reverse: true,
+                reverse: true,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
@@ -615,6 +615,7 @@ class _clothes extends State<clothes> {
                                     image: e.image,
                                     name: e.title,
                                     description: e.description,
+                                    cate: e.cate,
                                   ),
                                 ),
                               );

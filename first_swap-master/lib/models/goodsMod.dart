@@ -7,6 +7,7 @@ class goodsModel {
   String? stat;
   int? gnum;
   String? own;
+  String? cate;
 
   goodsModel(
       {this.uid,
@@ -16,7 +17,8 @@ class goodsModel {
       this.img,
       this.gnum,
       this.stat,
-      this.own});
+      this.own,
+      this.cate});
 
   // receiving data from server
   factory goodsModel.fromMap(map) {
@@ -28,7 +30,8 @@ class goodsModel {
         img: map['image'],
         gnum: map['numGood'],
         stat: map['Status'],
-        own: map['owner']);
+        own: map['owner'],
+        cate: map['cate']);
   }
 
   // sending data to our server
@@ -41,7 +44,8 @@ class goodsModel {
       'image': img,
       'numGood': gnum,
       'Status': stat,
-      'owner': own
+      'owner': own,
+      'cate': cate
     };
   }
 }
