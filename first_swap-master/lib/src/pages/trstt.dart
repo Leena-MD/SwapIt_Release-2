@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 class NoteList extends StatelessWidget {
 final db = FirebaseFirestore.instance;
   String uiduser = '';
-
+final FirebaseAuth auth = FirebaseAuth.instance;
+void inputData() {
+  final User? user = auth.currentUser;
+  final uid = user!.uid;
+}
    Future<void>  getUserList() async {
         final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
@@ -28,7 +32,7 @@ final db = FirebaseFirestore.instance;
         .collection('goods')
         .where(
           "owner",
-          isEqualTo: 'uid',
+          isEqualTo: firebaseUser!.uid,
         )
         .get();}
 
@@ -38,7 +42,20 @@ final db = FirebaseFirestore.instance;
 Widget build(BuildContext context) {
 
 
-
+  final firebaseUser =  FirebaseAuth.instance.currentUser;
+  if (firebaseUser != null) {
+     FirebaseFirestore.instance
+        .collection('users')
+        .doc(firebaseUser.uid)
+        .get()
+    //.then((value) => null)
+        .then((ds) {
+      uiduser= ds.data()!['uid'];
+    }).catchError((e) {
+      print(e);
+    });
+  }
+String userid= firebaseUser!.uid;
 
 
   
@@ -52,11 +69,11 @@ centerTitle: true,
 body: StreamBuilder<QuerySnapshot>
 
 (
-stream: 
+stream:
 
 //querySnapshot
 
-db.collection('goods').where("owner",isEqualTo: 'uid',).snapshots(),
+db.collection('goods').where("owner",isEqualTo: userid,).snapshots(),
 
 
 
@@ -68,17 +85,23 @@ if (!snapshot.hasData) {
 return Center(
 child: CircularProgressIndicator(),
 );
-} else
-return ListView(
+}
+else {
+  List<DropdownMenuItem> currencyItems = [];
+  for (int i = 0; i < snapshot.data!.docs.length; i++) {
+  DocumentSnapshot snap = snapshot.data!.docs[i];}
+  return ListView(
 
-children: snapshot.data!.docs.map((doc) {
-return Card(
-child: ListTile(
-title: Text(doc.data()['gName']),
-),
-);
-}).toList(),
-);
+
+    children: snapshot.data!.docs.map((doc) {
+      return Card(
+        child: ListTile(
+          title: Text(doc.data()['gName']),
+        ),
+      );
+    }).toList(),
+  );
+}
 },
 ),
 );
