@@ -29,10 +29,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e6bf522-e4ba-4112-9733-49fd7c9c167a" name="Default Changelist" comment="edit first and last name with using only alphabets">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+    <list default="true" id="2e6bf522-e4ba-4112-9733-49fd7c9c167a" name="Default Changelist" comment="userid">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/trstt.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/trstt.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635864593973</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="userid">
+      <created>1637606932965</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1637606932965</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -227,6 +232,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add nav bar" />
     <MESSAGE value="edit first and last name with using only alphabets" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit first and last name with using only alphabets" />
+    <MESSAGE value="userid" />
+    <option name="LAST_COMMIT_MESSAGE" value="userid" />
   </component>
 </project>

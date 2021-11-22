@@ -4,6 +4,7 @@ import 'package:first_swap/models/goodsMod.dart';
 import 'package:flutter/material.dart';
 class NoteList extends StatelessWidget {
 final db = FirebaseFirestore.instance;
+var a;
   String uiduser = '';
 final FirebaseAuth auth = FirebaseAuth.instance;
 void inputData() {
@@ -75,28 +76,32 @@ stream:
 
 db.collection('goods').where("owner",isEqualTo: userid,).snapshots(),
 
-
-
-
-
-
 builder: (context, snapshot) {
 if (!snapshot.hasData) {
-return Center(
+return const Center(
 child: CircularProgressIndicator(),
 );
 }
 else {
-  List<DropdownMenuItem> currencyItems = [];
+
   for (int i = 0; i < snapshot.data!.docs.length; i++) {
   DocumentSnapshot snap = snapshot.data!.docs[i];}
+
+
   return ListView(
 
 
     children: snapshot.data!.docs.map((doc) {
       return Card(
-        child: ListTile(
+
+        child: new RadioListTile(
+
           title: Text(doc.data()['gName']),
+          groupValue: null,
+          onChanged: (Null? value) {  },
+          value: null,
+
+
         ),
       );
     }).toList(),
