@@ -31,18 +31,38 @@ final db = FirebaseFirestore.instance;
           isEqualTo: 'uid',
         )
         .get();}
+
+
+        
 @override
 Widget build(BuildContext context) {
+
+
+
+
+
+  
 return Scaffold(
+
+  
 appBar: AppBar(
-title: Text("goods"),
+title: Text("my goods "),
 centerTitle: true,
 ),
-body: StreamBuilder<QuerySnapshot>(
+body: StreamBuilder<QuerySnapshot>
+
+(
 stream: 
 
+//querySnapshot
 
-db.collection('goods').snapshots(),
+db.collection('goods').where("owner",isEqualTo: 'uid',).snapshots(),
+
+
+
+
+
+
 builder: (context, snapshot) {
 if (!snapshot.hasData) {
 return Center(
@@ -50,6 +70,7 @@ child: CircularProgressIndicator(),
 );
 } else
 return ListView(
+
 children: snapshot.data!.docs.map((doc) {
 return Card(
 child: ListTile(
@@ -66,6 +87,10 @@ title: Text(doc.data()['gName']),
 
   @override
   Widget build(BuildContext context) {
+
+
+        List<goodsModel> posts = [];
+
     // TODO: implement build
     throw UnimplementedError();
   }
