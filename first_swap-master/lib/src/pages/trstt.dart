@@ -84,27 +84,48 @@ child: CircularProgressIndicator(),
 }
 else {
 
-  for (int i = 0; i < snapshot.data!.docs.length; i++) {
-  DocumentSnapshot snap = snapshot.data!.docs[i];}
+  getListViewItems(String item){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text(item),
+          actions: <Widget>[
+            FlatButton(
+              child: new Text("بدل"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: new Text("تراجع"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-
+  String _selectedIndex;
+int index=1;
   return ListView(
 
 
-    children: snapshot.data!.docs.map((doc) {
-      return Card(
+    children: snapshot.data!.docs.map((doc) =>  ListTile(
 
-        child: new RadioListTile(
+          title: Text(_selectedIndex=doc.data()['gName']),
 
-          title: Text(doc.data()['gName']),
-          groupValue: null,
-          onChanged: (Null? value) {  },
-          value: null,
+          onTap: ()=>{
+            getListViewItems(_selectedIndex)
+          },
+
 
 
         ),
-      );
-    }).toList(),
+  ).toList(),
   );
 }
 },
