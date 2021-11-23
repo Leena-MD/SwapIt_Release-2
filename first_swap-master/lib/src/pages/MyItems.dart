@@ -1,5 +1,6 @@
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'MyItemCard.dart';
 import 'Post_page.dart';
 import 'Home_page.dart';
 import 'Offers.dart';
@@ -9,31 +10,129 @@ class MyItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            backgroundColor: Colors.white,
-            bottomNavigationBar: CustomBottomNavigationBar(
-              iconList: [
-                Icons.home,
-                Icons.add_to_photos,
-                Icons.add_a_photo,
-                Icons.reorder_rounded,
-                Icons.person,
+          backgroundColor: Colors.white,
+          bottomNavigationBar: CustomBottomNavigationBar(
+            iconList: [
+              Icons.home,
+              Icons.add_to_photos,
+              Icons.add_a_photo,
+              Icons.reorder_rounded,
+              Icons.person,
+            ],
+            onChange: (val) {
+              setState(() {
+                var _selectedItem = val;
+              });
+            },
+            defaultSelectedIndex: 1,
+          ),
+          appBar: AppBar(
+            backgroundColor: Colors.cyan[800],
+            title: Center(child: Text('منتجاتي', style: TextStyle(fontSize: 30))),
+            automaticallyImplyLeading: false,
+          ),
+          body: Container(
+            padding:
+            EdgeInsets.symmetric(horizontal: 15) + EdgeInsets.only(top: 10),
+            child: ListView(
+              children: [
+                MyItemCard(
+                  name: "منتج",
+                  description: "وصف المنتج الرهيب",
+                  onTap: () {
+                    showModal(context);
+                  },
+                  image:
+                  "https://images.pexels.com/photos/4352247/pexels-photo-4352247.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+                )
               ],
-              onChange: (val) {
-                setState(() {
-                  var _selectedItem = val;
-                });
-              },
-              defaultSelectedIndex: 1,
             ),
-            appBar: AppBar(
-              backgroundColor: Colors.cyan[800],
-              title: Center(
-                  child: Text('منتجاتي', style: TextStyle(fontSize: 30))),
-              automaticallyImplyLeading: false,
-            )));
+          ),
+        ));
   }
 
   void setState(Null Function() param0) {}
+
+  showModal(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+        builder: (context) => Container(
+          // height: 150,
+            padding: EdgeInsets.symmetric(horizontal: 15) +
+                EdgeInsets.only(bottom: 10),
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 20),
+                height: 5,
+                width: 50,
+                decoration: BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              InkWell(
+                onTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.delete_outline_outlined,
+                        color: Color(0xFFFD691F),
+                        size: 28,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "حذف",
+                        style: TextStyle(
+                            color: Color(0xFFFD691F),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Divider(
+                thickness: 1,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.edit,
+                        color: Color(0xFF666666),
+                        size: 28,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "تعديل",
+                        style: TextStyle(
+                            color: Color(0xFF666666),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ])));
+  }
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -43,8 +142,8 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
   CustomBottomNavigationBar(
       {this.defaultSelectedIndex = 0,
-      required this.iconList,
-      required this.onChange});
+        required this.iconList,
+        required this.onChange});
 
   @override
   _CustomBottomNavigationBarState createState() =>
@@ -108,17 +207,17 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         width: MediaQuery.of(this.context).size.width / _iconList.length,
         decoration: index == _selectedIndex
             ? BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 4, color: Colors.blueGrey),
-                ),
-                gradient: LinearGradient(colors: [
-                  Colors.blueGrey.withOpacity(0.3),
-                  Colors.blueGrey.withOpacity(0.015),
-                ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
+            border: Border(
+              bottom: BorderSide(width: 4, color: Colors.blueGrey),
+            ),
+            gradient: LinearGradient(colors: [
+              Colors.blueGrey.withOpacity(0.3),
+              Colors.blueGrey.withOpacity(0.015),
+            ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
 
-                //color: index == _selectedItemIndex ? Colors.green : Colors.white,
+          //color: index == _selectedItemIndex ? Colors.green : Colors.white,
 
-                )
+        )
             : BoxDecoration(),
         child: Column(
           children: <Widget>[
