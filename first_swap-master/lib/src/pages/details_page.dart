@@ -8,6 +8,8 @@ import 'package:first_swap/src/pages/house.dart';
 import 'package:first_swap/src/pages/kids_category.dart';
 import 'package:first_swap/src/pages/perfume.dart';
 import 'package:first_swap/src/pages/pet.dart';
+import 'package:first_swap/src/pages/Menugoods.dart';
+import 'package:first_swap/src/pages/swap_request.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/provider/my_provider.dart';
 import 'package:provider/provider.dart';
@@ -226,7 +228,13 @@ class _DetailPageState extends State<DetailPage> {
                       SizedBox(height: 15),
                       RaisedButton(
                         color: Colors.cyan[800],
-                        onPressed: () {},
+                        onPressed: () {
+                           Navigator.push(
+                this.context, MaterialPageRoute(builder: (context) => 
+                
+                swapRequest()));
+
+                        },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),

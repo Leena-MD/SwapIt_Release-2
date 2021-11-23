@@ -39,6 +39,7 @@ class _Menugoods1 extends State<Menugoods> {
 
     
     List<goodsModel> posts = [];
+    
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where(
@@ -68,6 +69,7 @@ class _Menugoods1 extends State<Menugoods> {
    // notifyListeners();
   }
   get throwUserList {
+    UserList.toList();
     return UserList;
   }
   @override
@@ -81,7 +83,9 @@ class _Menugoods1 extends State<Menugoods> {
       appBar: AppBar(
         title: Text('Pop Menu with List'),
       ),
-      body: Column(
+      body:
+      
+       Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SingleChildScrollView(
@@ -96,7 +100,7 @@ class _Menugoods1 extends State<Menugoods> {
                   ],
                 ),
               ),
-              Container(
+        /*      Container(
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 height: 510,
                 child: GridView.count(
@@ -106,12 +110,30 @@ class _Menugoods1 extends State<Menugoods> {
                     childAspectRatio: 0.9,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 10,
-                  // children: UserList
-                        
-                   //    .toList()
+                   children: UserList.toList()
                        ),
+              )*/
+
+
+                            Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                height: 510,
+                child: GridView.count(
+                    shrinkWrap: false,
+                    primary: false,
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.9,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 10,
+                    children:UserList
+          .map((e) => categoriesContainer(
+           //     image: e.image,
+                name: e.name,
+          
+              ))
+          .toList(),
               )
-            ],
+                             ) ],
           ));
 
 
