@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goods.dart';
-
+import 'package:first_swap/models/requestModel.dart';
 import 'package:flutter/cupertino.dart';
 
 //import 'package:foodapp/modles/cart_modle.dart';
@@ -502,6 +502,56 @@ class MyProvider extends ChangeNotifier {
   get throwBurgerCategoriesList {
     return burgerCategoriesList;
   }
+
+  ////////////////request//////////////
+
+  List<Product> requestList = [];
+  late Product requestModle;
+  Future<void> getrequest() async {
+    List<Product> newrequestList = [];
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('goods')
+        .where("cate", isEqualTo: '5')
+        .get();
+
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+      //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+    querySnapshot.docs.forEach((element) {
+      petModle = Product(
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods:element.id
+      );
+      if (element.data()['owner'] != uiduser) {
+        newrequestList.add(requestModle);
+        requestList = newrequestList;
+      }
+    });
+    notifyListeners();
+  }
+
+  get throwrequstList {
+    return requestList;
+  }
+
+
 
   ///////////////Recipe categories list//////////
   List<Product> recipeCategoriesList = [];
