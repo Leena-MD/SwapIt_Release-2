@@ -8,6 +8,7 @@ class goodsModel {
   int? gnum;
   String? own;
   String? cate;
+  String?IDgoods;
 
   goodsModel(
       {this.uid,
@@ -18,7 +19,8 @@ class goodsModel {
       this.gnum,
       this.stat,
       this.own,
-      this.cate});
+      this.cate,
+      this.IDgoods});
 
   // receiving data from server
   factory goodsModel.fromMap(map) {

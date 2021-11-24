@@ -605,6 +605,9 @@ class _BooksCat extends State<BooksCat> {
                                     name: e.title,
                                     description: e.description,
                                     cate: e.cate,
+                                    owner:e.owner,
+                                    IDgoods:e.IDgoods,
+
                                   ),
                                 ),
                               );

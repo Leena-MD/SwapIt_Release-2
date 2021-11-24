@@ -53,7 +53,7 @@ class _Menugoods1 extends State<Menugoods> {
     querySnapshot.docs.forEach((element) {
       userModle = goodsModel(
      //   img: element.data()['image'],
-        name: element.data()['gName'],
+        IDgoods: element.data()['gName'].doc.id,
       //  description: element.data()['Description'],
       //  status: element.data()['Status'],
       //  owner: element.data()['owner'],

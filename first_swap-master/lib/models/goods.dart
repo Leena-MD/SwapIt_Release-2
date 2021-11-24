@@ -17,7 +17,7 @@ import 'package:first_swap/constants.dart';
 import 'package:first_swap/models/goods.dart';
 
 class Product {
-  final String image, title, description, status, owner, id, cate;
+  final String image, title, description, status, owner, id, cate,IDgoods;
 
   Product({
     required this.id,
@@ -26,6 +26,7 @@ class Product {
     required this.description,
     required this.status,
     required this.owner,
-    required this.cate,
+    required this.cate, 
+    required this.IDgoods, 
   });
 }

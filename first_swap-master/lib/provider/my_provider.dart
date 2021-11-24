@@ -49,6 +49,7 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
       );
       if (element.data()['owner'] != uiduser) {
         books.add(booksModle);
@@ -94,6 +95,7 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
       );
       if (element.data()['owner'] != uiduser) {
         newComputerList.add(computerModle);
@@ -140,6 +142,8 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
+
       );
 
       if (element.data()['owner'] != uiduser) {
@@ -187,6 +191,8 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
+
       );
       if (element.data()['owner'] != uiduser) {
         newHouseList.add(HouseModle);
@@ -233,6 +239,8 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
+
       );
       if (element.data()['owner'] != uiduser) {
         newBagList.add(BagModle);
@@ -279,6 +287,8 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
+
       );
       if (element.data()['owner'] != uiduser) {
         newPerfumeList.add(perfumeModle);
@@ -325,6 +335,7 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
       );
       if (element.data()['owner'] != uiduser) {
         newGymList.add(gymModle);
@@ -371,6 +382,7 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
       );
       if (element.data()['owner'] != uiduser) {
         newClothesList.add(clothesModle);
@@ -417,6 +429,7 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
       );
       if (element.data()['owner'] != uiduser) {
         newPetList.add(petModle);
@@ -479,6 +492,7 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
       );
       newBurgerCategoriesList.add(burgerCategoriesModle);
       burgerCategoriesList = newBurgerCategoriesList;
@@ -507,6 +521,7 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
       );
       newrecipeCategoriesList.add(recipeCategoriesModle);
       recipeCategoriesList = newrecipeCategoriesList;
@@ -535,6 +550,7 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
+        IDgoods:element.id
       );
       newPizzaCategoriesList.add(pizzaCategoriesModle);
       pizzaCategoriesList = newPizzaCategoriesList;

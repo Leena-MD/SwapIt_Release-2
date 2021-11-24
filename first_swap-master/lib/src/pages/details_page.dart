@@ -18,13 +18,19 @@ import 'books_category.dart';
 class DetailPage extends StatefulWidget {
   final String image;
   final String description;
+  final String owner ;
+  final String IDgoods ;
+
   final String name;
   final String cate;
   DetailPage(
       {required this.image,
       required this.name,
       required this.description,
-      required this.cate});
+      required this.owner,
+      required this.cate,
+      required this.IDgoods,
+       });
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -221,6 +227,7 @@ class _DetailPageState extends State<DetailPage> {
                           textAlign: TextAlign.right,
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                         ),
+                        
                         subtitle: Text(''),
                         isThreeLine: true,
                         minLeadingWidth: double.minPositive,
@@ -229,12 +236,37 @@ class _DetailPageState extends State<DetailPage> {
                       RaisedButton(
                         color: Colors.cyan[800],
                         onPressed: () {
-                           Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => 
-                
-                swapRequest()));
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => swapRequest(
 
-                        },
+                                    image: widget.image,
+                                    name: widget.name,
+                                    description: widget.description,
+                                    cate: widget.cate,
+                                    owner:widget.owner,
+                                    IDgoods:widget.IDgoods,
+
+                                  ),
+                                ),
+                              );
+                            },
+                        
+                        
+                        
+                //         {
+                //            Navigator.push(this.context, MaterialPageRoute(builder: (context) => 
+                
+                // swapRequest(
+                //      owner:e.owner,
+                //      IDgoods:e.IDgoods,
+
+
+
+
+                // )));
+
+                //         },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
