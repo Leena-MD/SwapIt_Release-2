@@ -29,18 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e6bf522-e4ba-4112-9733-49fd7c9c167a" name="Default Changelist" comment="edit first and last name with using only alphabets">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItems.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItems.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Offers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Offers.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Post_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Post_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/login_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/profile_page.dart" afterDir="false" />
-    </list>
+    <list default="true" id="2e6bf522-e4ba-4112-9733-49fd7c9c167a" name="Default Changelist" comment="Abeer list,edit and delete OwnerProduct" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635859517083</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Abeer list,edit and delete OwnerProduct">
+      <created>1637844327003</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1637844327003</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -223,7 +219,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add nav bar" />
     <MESSAGE value="edit first and last name with using only alphabets" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit first and last name with using only alphabets" />
+    <MESSAGE value="Abeer list,edit and delete OwnerProduct" />
+    <option name="LAST_COMMIT_MESSAGE" value="Abeer list,edit and delete OwnerProduct" />
   </component>
   <component name="WindowStateProjectService">
     <state x="140" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1637752743054">
