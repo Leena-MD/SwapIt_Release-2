@@ -21,8 +21,10 @@ import 'image_storage.dart';
 String userID = "";
 int num = 1;
 
-class PostPage extends StatefulWidget {
-  const PostPage({Key? key}) : super(key: key);
+class PostPage extends StatefulWidget { 
+  final String? userId;
+
+  const PostPage({Key? key, this.userId}) : super(key: key);
   @override
   _PostPage createState() => _PostPage();
 }
@@ -335,14 +337,7 @@ class _PostPage extends State<PostPage> {
                                     letterSpacing: 1.3,
                                   ),
                                 ),
-//new ListTile(
-                                //       leading: new Icon(Icons.photo_camera),
-                                //     title: new Text(
-                                //      'التقط صورة',
-                                //     textAlign: TextAlign.right,
-                                //    ),
-                                //   onTap: () {},
-                                //  ),
+
                                 new ListTile(
                                   leading: new Icon(Icons.image),
                                   title: new Text(
@@ -368,28 +363,6 @@ class _PostPage extends State<PostPage> {
                                         child: Image.file(File(imagePath)),
                                       )
                                     : Container(),
-
-                                //===> Goods descerption<===
-
-                                // TextFormField(
-                                //    textAlign: TextAlign.right,
-                                // onSaved: (String val) {
-                                //    _query = val;
-                                //  },
-                                //   controller: queryController,
-                                //   decoration: InputDecoration(
-                                //   border: OutlineInputBorder(
-                                //    borderRadius: BorderRadius.circular(10.0),
-                                //  ),
-                                //  hintText: 'وصف المنتج',
-                                //  labelText: 'وصف المنتج',
-                                //  ),
-                                //  keyboardType: TextInputType.text,
-                                // style: TextStyle(
-                                //  fontSize: 16.0,
-                                //   color: Colors.black),
-                                // maxLines: 3,
-                                //  ),
 
                                 Container(
                                   margin: EdgeInsets.only(top: 6.0, bottom: 5),
@@ -438,39 +411,9 @@ class _PostPage extends State<PostPage> {
                                       } else {
                                         num = num;
                                       }
-
-                                      // Validate returns true if the form is valid, or false otherwise.
-                                      /* if (_formKey.currentState!.validate()) {
-                                         storage
-   .uploadImage(imagePath, imageName)
-   .then((value) => print("done")); */
-                                      // If the form is valid, display a snackbar. In the real world,
-                                      // you'd often call a server or save the information in a database.
-                                      /*  ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text('Processing Data')),
-                                        ); */
-                                      // }
                                     },
                                   ),
                                 ),
-                                /*  child: MaterialButton(
-                                
-                                      color: Colors.cyan[800],
-                                      onPressed: () {},
-                          
-                                      child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 10.0, horizontal: 65.0),
-                                          child: Text(
-                                            "آرسل ",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18),
-                                          )),
-                                    )),*/
                               ],
                             )),
                       ),

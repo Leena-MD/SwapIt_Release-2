@@ -4,6 +4,7 @@ import 'Post_page.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
 class Offers extends StatelessWidget {
+ 
   @override
   Widget build(BuildContext context) {
     return SafeArea(

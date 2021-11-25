@@ -30,14 +30,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf522-e4ba-4112-9733-49fd7c9c167a" name="Default Changelist" comment="edit first and last name with using only alphabets">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItems.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItems.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Offers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Offers.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Post_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Post_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/login_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/profile_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Ghadah\.android\avd\Pixel_4_XL_API_30.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -77,14 +85,14 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunManager" selected="Flutter.main.dart">
-    <configuration name="main.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
+    <configuration name="main.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/first_swap-master/lib/main.dart" />
       <option name="workingDirectory" value="$PROJECT_DIR$/first_swap-master" />
       <method v="2" />
@@ -97,13 +105,8 @@
       <item itemvalue="Dart Command Line App.main.dart" />
       <item itemvalue="Flutter.main.dart" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Dart Command Line App.main.dart" />
-      </list>
-    </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -173,6 +176,17 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
               <option name="TEXT_FILTER_SETTINGS">
                 <TextFilterSettings>
                   <option name="REGEX" value="true" />
@@ -210,5 +224,35 @@
     <MESSAGE value="add nav bar" />
     <MESSAGE value="edit first and last name with using only alphabets" />
     <option name="LAST_COMMIT_MESSAGE" value="edit first and last name with using only alphabets" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="140" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1637752743054">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="140" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1637752743054" />
+    <state x="466" y="120" key="FileChooserDialogImpl" timestamp="1637752695626">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="466" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1637752695626" />
+    <state width="1303" height="176" key="GridCell.Tab.0.bottom" timestamp="1637792252873">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1303" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1637792252873" />
+    <state width="1303" height="176" key="GridCell.Tab.0.center" timestamp="1637792252873">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1303" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1637792252873" />
+    <state width="1303" height="176" key="GridCell.Tab.0.left" timestamp="1637792252873">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1303" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1637792252873" />
+    <state width="1303" height="176" key="GridCell.Tab.0.right" timestamp="1637792252873">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1303" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1637792252873" />
+    <state x="187" y="10" key="SettingsEditor" timestamp="1637752765670">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="187" y="10" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1637752765670" />
   </component>
 </project>
