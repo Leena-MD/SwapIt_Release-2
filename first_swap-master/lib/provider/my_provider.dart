@@ -18,7 +18,7 @@ class MyProvider extends ChangeNotifier {
 
 ///////////////////  Offers ////////////////
     List<Product> GoodsList = [];
-
+  
 late Product GoodsReceivingData;
   Future<void> getGoodsReceiving() async {
 
@@ -51,19 +51,6 @@ senderId=value.data()!['sender ID'];
         print(e);
       });
 
-
-// firebase.firestore().collection('status').doc(uid)
-// firebase.firestore().collection('status').doc(uid).collection('messages').doc('messageId')
-
-//FirebaseFirestore.instance.collection('goods').doc().id;
-//String goodsSend= FirebaseFirestore.instance.collection('Requests').doc('sender goods').;  //.collection('collectionPath').doc()
-
-//firebase.firestore.FieldPath.documentId()
-//String ss=FirebaseFirestore.instance.doc('goods').id;
-
-    //  String ff=     FirebaseFirestore.instance
-    //     .doc('sender good').collection('Requests').va
-    //   //  .where('sender goods')),
      var value ='';
 String idd=FirebaseFirestore.instance.collection('goods').doc().id;
 var seee=FirebaseFirestore.instance.collection('Requests');
@@ -152,7 +139,6 @@ print("object");
 
 
 
-//firebase.firestore().collection('status').doc(uid).collection('messages').doc('messageId')
 
 
  //   db.collection('goods')
