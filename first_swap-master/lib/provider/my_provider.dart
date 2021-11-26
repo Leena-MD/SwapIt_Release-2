@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goods.dart';
+import 'package:first_swap/models/request.dart';
 import 'package:first_swap/models/requestModel.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 //import 'package:foodapp/modles/cart_modle.dart';
 //import 'package:foodapp/modles/categories_modle.dart';
@@ -12,6 +14,252 @@ import 'package:flutter/cupertino.dart';
 class MyProvider extends ChangeNotifier {
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String uiduser = '';
+
+
+///////////////////  Offers ////////////////
+    List<Product> GoodsList = [];
+
+late Product GoodsReceivingData;
+  Future<void> getGoodsReceiving() async {
+
+   final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+String receiverId='';
+String goodsSend='';
+String senderId='';
+FirebaseFirestore.instance
+        .collection('Requests')
+      //  .where("receiverID")
+      .doc()
+        .get().then((value){
+receiverId=value.data()!['receiverID'];
+goodsSend=value.data()!['sender goods'];
+senderId=value.data()!['sender ID'];
+
+        } ).catchError((e) {
+        print(e);
+      });
+
+
+// firebase.firestore().collection('status').doc(uid)
+// firebase.firestore().collection('status').doc(uid).collection('messages').doc('messageId')
+
+//FirebaseFirestore.instance.collection('goods').doc().id;
+//String goodsSend= FirebaseFirestore.instance.collection('Requests').doc('sender goods').;  //.collection('collectionPath').doc()
+
+//firebase.firestore.FieldPath.documentId()
+//String ss=FirebaseFirestore.instance.doc('goods').id;
+
+    //  String ff=     FirebaseFirestore.instance
+    //     .doc('sender good').collection('Requests').va
+    //   //  .where('sender goods')),
+     var value ='';
+String idd=FirebaseFirestore.instance.collection('goods').doc().id;
+var seee=FirebaseFirestore.instance.collection('Requests');
+var docu=await seee.doc('sender ID').get();
+if(docu.exists){
+    Map<String,dynamic>?data=docu.data();
+    value=data?["sender goods"];
+}
+
+
+
+String rere=FirebaseFirestore.instance.collection('Requests').doc().id;
+
+var collection = FirebaseFirestore.instance.collection('Requests');
+var docSnapshot = await collection.doc(rere).get();
+print("22222object");
+
+if (docSnapshot.exists) {
+  Map<String, dynamic>? data = docSnapshot.data();
+print("object");
+  // You can then retrieve the value from the Map like this:
+  var value = data?['sender goods'];
+  print(value);
+
+}
+
+
+
+//doc('sender ID')
+
+
+  //  QuerySnapshot ses = await FirebaseFirestore.instance
+  //       .collection('Requests').where('receiverID',
+
+//     List<request> GoodsList1 = [];
+
+// late request GoodsReceivingData1;
+// late request goodsSender;
+
+//     List<request> GoodsReceiving1 = [];
+
+
+//  QuerySnapshot ses = await FirebaseFirestore.instance
+//         .collection('Requests')
+//         .where("receiverID", isEqualTo: uiduser)
+//         //.where('field')
+//         .get();
+
+
+//         ses.docs.forEach((element)  {
+// //goodsSender();
+
+//       GoodsReceivingData1 = request(
+
+
+//         //  receivergoods:element.data()['receiver goods'],
+//         // receiverID:element.data()['receiverID'],
+//         // senderID:element.data()['sender ID'],  
+//          sendergoods:element.data()['sender goods'],
+//    //requeststatus:element.data()['request status'],
+//    //     GoodsList1.map(element);
+
+
+
+// );
+//  }
+
+//      );
+
+
+
+
+//     GoodsReceiving1.add(GoodsReceivingData1);
+//        GoodsList1 = GoodsReceiving1;
+
+//         print("          GoodsList1=     ");
+//        // print(GoodsList1);
+
+     
+      
+    
+
+
+
+
+
+
+
+//firebase.firestore().collection('status').doc(uid).collection('messages').doc('messageId')
+
+
+ //   db.collection('goods')
+      //  .where(db.collection('goods').id,isEqualTo:
+        //  (db.collection('Requests').doc('sender goods')))
+        //  .snapshots()
+
+var ddddd=(FirebaseFirestore.instance.collection('Requests')
+       .doc().id);
+      //  then((value)
+      //   value.));
+print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+       print(ddddd);
+
+    List<Product> GoodsReceiving = [];
+    //for loop 
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('goods')
+    //    .doc(idd)
+    //    .collection('Requests')
+        .where(idd, isEqualTo: 
+       (FirebaseFirestore.instance.collection('Requests')
+       .doc(idd)))
+
+
+
+//        .where('sender goods', isEqualTo:idd)
+
+
+//         .where(//ماضبط الشرط
+// //          (FirebaseFirestore.instance.collection('goods').doc()),//doc
+//           idd,//doc
+// //ss فيها ايرور 
+//       //    whereIn: 
+//       arrayContainsAny:    
+//       GoodsList1
+// //GoodsList1
+// //ses
+//         //   (FirebaseFirestore.instance
+//         // .collection('Requests')
+//         // .where('sender goods')),
+//       //  goodsSend
+//       //sener id
+//   //    senderId
+//     //  'BP92cMZe70OKIpnoMqmCFraASx72'
+//       //sendergoods
+//         )
+        // .where((FirebaseFirestore.instance//شاكه فيهم
+        // .collection('Requests')
+        // .where("receiverID")),isEqualTo: uiduser)
+        .get();
+
+ 
+ if (receiverId == uiduser) {//غيريها بعدين 
+      print("جوا الشرط");
+              //alert msj
+
+
+        
+      }
+  
+
+    else{
+        print("55555555555555555555");
+
+        querySnapshot.docs.forEach((element) {
+      GoodsReceivingData = Product(
+        image: element.data()['image'],
+        title: element.data()['gName'],
+        description: element.data()['Description'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
+      );
+     GoodsReceiving.add(GoodsReceivingData);
+        GoodsList = GoodsReceiving;
+       print("hiiiiii");
+      
+    });
+        //alert msj
+        print("براااااااااا");
+      }
+    notifyListeners();
+       
+  }
+
+ get throwGoodsReceivingList {
+    return GoodsList;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ///////////////////  category 1 ////////////////
   List<Product> booksList = [];

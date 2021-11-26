@@ -2,14 +2,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goods.dart';
 import 'package:first_swap/models/goodsMod.dart';
+import 'package:first_swap/models/request.dart';
 import 'package:first_swap/models/requestModel.dart';
 import 'package:first_swap/provider/my_provider.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
+import 'package:first_swap/src/widgets/bottom_Container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Post_page.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
+import 'details_page.dart';
+      final firebaseUser =  FirebaseAuth.instance.currentUser;
+       String userid= firebaseUser!.uid;
+
 class Offers extends StatefulWidget {
 
   _Offers createState() => _Offers();
@@ -17,286 +23,433 @@ class Offers extends StatefulWidget {
   @override
 
   class _Offers extends State<Offers> {
-    String? receivergoods;
-    String? receiverID;
-    String? requeststatus;
-    String? senderID;
-    String? sendergoods;
-
-
-    _Offers(
-        {this.receivergoods,
-          this.receiverID,
-          this.requeststatus,
-          this.senderID,
-          this.sendergoods,
-        });
-
-    // receiving data from server
-    factory _Offers.fromMap(map) {
-      return _Offers(
-        receivergoods: map['receiver goods'],
-        receiverID: map['receiverID'],
-        requeststatus: map['request status'],
-        senderID: map['sender ID'],
-        sendergoods: map['sender goods'],
-
-      );
-    }
-
-    List<Product> RequestList = [];
-    Widget burger() {
-      return Row(
-        // children: RequestList
-        //     .map((e) => categoriesContainer(
-        //           image: e.image,
-        //           name: e.title,
-
-        //         ))
-        //     .toList(),
-      );
-    }
+    String receivergoods='';
+    String receiverID='';
+    String requeststatus='';
+    String senderID='';
+    String sendergoods='';
+ 
     final db = FirebaseFirestore.instance;
 
     String uiduser = '';
-    final rReqId = '';
+    // final rReqId = '';
     final FirebaseAuth auth = FirebaseAuth.instance;
     void inputData() {
       final User? user = auth.currentUser;
       final uid = user!.uid;
     }
-    Future<void>  getUserList() async {
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('Requests')
-          .get();
-      querySnapshot.docs.forEach((element) {
-        String rReqId=element.id;
-      });
-
-      // DocumentSnapshot snapshot =
-      // await db.collection('Requests').id.get();
-      //  String myData = await snapshot.data['receiverID'];
-
-      // final firebaseUser = await FirebaseAuth.instance.currentUser;
-      // if (firebaseUser != null) {
-      //   await FirebaseFirestore.instance
-      //       .collection('users')
-      //       .doc(firebaseUser.uid)
-      //       .get()
-      //   //.then((value) => null)
-      //       .then((ds) {
-      //     uiduser = ds.data()!['uid'];
-      //   }).catchError((e) {
-      //     print(e);
-      //   });
-      // }
-
-
-      List<goodsModel> posts = [];
-
-      // QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-      //     .collection('goods')
-      //     .where(
-      //   "owner",
-      //   isEqualTo: firebaseUser!.uid,
-      // )
-      //     .get();
 
 
 
+  Future<bool> _fetchReq() async {
+      final testo= db.collection('goods')
+      .where("owner",isEqualTo: userid ,)
+      .where("Status",isEqualTo:"available").snapshots();
+      // فيه ايرور بالسناب شوت كابشن 
 
+       final myRequest=  db.collection('Requests')
+      .where("receiverID",isEqualTo: userid )
+     .where("request status",isEqualTo:"process")
+      .snapshots();     
 
-      //
-      // querySnapshot.docs.forEach((element) {
-      //
-      //
-      //
-      //
-      //   //    userModle = goodsModel(
-      //   //   img: element.data()['image'],
-      //   //       name: element.data()['gName'],
-      //   //  description: element.data()['Description'],
-      //   //  status: element.data()['Status'],
-      //   //  owner: element.data()['owner'],
-      //   //  id: element.data()['owner'],
-      //   //  cate: element.data()['cate'],
-      //   //     );
-      //   // if (element.data()['owner'] != uiduser) {
-      //   //  UserList.add(userModle);
-      //   // UserList = UserList;
-      //   //}
-      //
-      // });
+  // QuerySnapshot myRequest = await 
+  // FirebaseFirestore.instance
+  //       .collection('Requests')
+  //       .where("receiverID", isEqualTo: userid)
+  //       .where("request status",isEqualTo:"process")
+  //       .get()
+        
+      ;
+  if (myRequest==null) {
 
-    }
+   //alert msj
+   AlertDialog(
+            title: new Text("!لم تصلك اي طلبات "),);
+   print("لا توجد لديك طلبات");
+    return  false;
+    
+  }else{
+    
+//   late  request Offers1;
 
+//  myRequest.docs.forEach((element) {
+//        Offers1 = request(
 
-    Widget build(BuildContext context) {
-      MyProvider provider = Provider.of<MyProvider>(context);
+//         receivergoods:element.data()['receiver goods'],
+//         receiverID:element.data()['receiverID'],
+//         senderID:element.data()['sender ID'],
+//         sendergoods:element.data()['sender goods'],
+// requeststatus:element.data()['request status'],
 
+//       );
+//       //   db.collection('goods')
+//       //  .where(db.collection('goods').id
+//      // if (element.data()['sender goods'] == uiduser) {
+//  //   db.collection('goods')
+//       //  .where(db.collection('goods').id,isEqualTo:
+//       //   (db.collection('Requests').doc('sender goods')))
+//       //    .snapshots()
 
+//     });
 
-      final firebaseUser =  FirebaseAuth.instance.currentUser;
-      final firebasereq =  FirebaseAuth.instance;
-      if (firebaseUser != null) {
-        FirebaseFirestore.instance
-            .collection('users')
-            .doc(firebaseUser.uid)
-            .get()
-            .then((ds) {
-          uiduser= ds.data()!['uid'];
-        }).catchError((e) {
-          print(e);
-        });
+ //  _getGoodsReceiving();
+    print("كففوو");
+
+      return true;
       }
-      // if (firebasereq != null) {
-      //   FirebaseFirestore.instance.collection('Requests')
-      //       .get()
-      //       .then((ds) {
-      //     rReqId= ds.id;
-      //   }).catchError((e) {
-      //     print(e);
-      //   });
-      // }
-      String userid= firebaseUser!.uid;
-      final SendGoods = FirebaseFirestore.instance.collection('Requests').where("receiverID",isEqualTo: userid ,).where("request status",isEqualTo:"process");
+  }
+
+
+
+    List<Product> GoodsList = [];
+
+    late Product GoodsReceivingData;
+
+Future<void> _getGoodsReceiving() async {
+
+    
+  QuerySnapshot GoodsReceiving = await FirebaseFirestore.instance
+        .collection('goods')
+        .where((db.collection('goods').doc()),
+        isEqualTo: sendergoods)
+        .get()
+        .catchError((e) {
+        print(e);
+      });;
+        
+  // if (GoodsReceiving==null) {
+
+  //   print("لا تجد لديك طلبات");
+  //   return false;
+    
+  // }
+    List<Product> newGoodsList = [];
+
+ GoodsReceiving.docs.forEach((element) {
+      GoodsReceivingData = Product(
+        image: element.data()['image'],
+        title: element.data()['gName'],
+        description: element.data()['Description'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
+      );
+
+        newGoodsList.add(GoodsReceivingData);
+        GoodsList = newGoodsList;
+       });
+    //   notifyListeners();
+       
+}
+ get throwGoodsReceivingList {
+    return GoodsList;
+  }
+
+
+
+
+    Widget build(BuildContext context)
+    
+    
+    
+    {
+  //    _fetchReq();
+
+
+          MyProvider provider = Provider.of<MyProvider>(context);
+    
+    provider.getGoodsReceiving();
+    GoodsList = provider.throwGoodsReceivingList;
+   
+
+    return SafeArea(
+      
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          bottomNavigationBar: CustomBottomNavigationBar(
+            iconList: [
+              Icons.home,
+              Icons.add_to_photos,
+              Icons.add_a_photo,
+              Icons.reorder_rounded,
+              Icons.person,
+            ],
+            onChange: (val) {
+              setState(() {
+                var _selectedItem = val;
+              });
+            },
+            defaultSelectedIndex: 0,
+          ),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.cyan[800],
+            title: Center(
+                child: Text("المفروض عروضي او وات ايفر",
+                    style: TextStyle(fontSize: 20))),
+          ),
+          body:
+//            StreamBuilder<QuerySnapshot>
+//         (stream:
+
+// //querySnapshot
+
+// db.collection('Requests')
+//       .where("receiverID",isEqualTo: userid )
+//      .where("request status",isEqualTo:"process")
+//       .snapshots(),     //SendGoods.snapshots(),
+
+//         builder: (context, snapshot) {
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: 
+            [
+              
+              SingleChildScrollView(
+                reverse: true,
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                   // header(),
+                    //  recipe(),
+                    //   pizza(),
+                    //    drink(),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                height: 510,
+                child: GridView.count(
+                    shrinkWrap: false,
+                    primary: false,
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.9,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 10,
+                    
+                    children: GoodsList
+                        .map(
+                          (e) => BottomContainer(
+                            onTap: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => DetailPage(// بغيرها تصير صفحه خاصه في القبول والخ 
+                                    image: e.image,
+                                    name: e.title,
+                                    description: e.description,
+                                    cate: e.cate,
+                                    owner:e.owner,
+                                    IDgoods:e.IDgoods,
+
+                                  ),
+                                ),
+                              );
+                            },
+                            image: e.image,
+                            name: e.title,
+                          ),
+                        )
+                        .toList()),
+              )
+            ],
+          )
+  // throw UnimplementedError();
+  //       }
+      )
+      //),
+    
+    //}else here{}
+    
+    );
+  }
+    
+
+
+
+/*
+     {
+
+    
   return SafeArea(
-  child: Scaffold(
+      child: Builder(
+        
+        builder: (context) => Scaffold(
+backgroundColor: Colors.white,
+          bottomNavigationBar: CustomBottomNavigationBar(
+            iconList: [
+              Icons.home,
+              Icons.add_to_photos,
+ Icons.add_a_photo,
+              Icons.reorder_rounded,
+              Icons.person,
+            ],
+            onChange: (val) {
+              setState(() {
+                var _selectedItem = val;
+              });
+            },
+            defaultSelectedIndex:4,
+          ),
 
-  backgroundColor: Colors.white,
-  bottomNavigationBar: CustomBottomNavigationBar(
-  iconList: [
-  Icons.home,
-  Icons.add_to_photos,
-  Icons.add_a_photo,
-  Icons.reorder_rounded,
-  Icons.person,
-  ],
-  onChange: (val) {
-  setState(() {
-  var _selectedItem = val;
-  });
-  },
-  defaultSelectedIndex: 3,
-  ),
 
-  appBar: AppBar(
-  backgroundColor: Colors.cyan[800],
-  title: Center(child: Text('الطلبات', style: TextStyle(fontSize: 30))),
-  automaticallyImplyLeading: false,
-  ),
-      body: StreamBuilder<QuerySnapshot>
+          body:Center(
 
-  (
-  stream:
+ 
+ child: SingleChildScrollView(
+            child: FutureBuilder(
 
-//querySnapshot
+              future: _fetchReq(),
+              builder: (context, snapshot) {
+                
+                //  if (snapshot.connectionState != ConnectionState.done)
+                //return Text("");
+                return buildOffers();
+                
+              },
+              
+            ),
+           
+          ),
 
-          db.collection('goods').where("owner",isEqualTo: (db.collection('Requests').doc('receiverID'))).snapshots(),
 
-    builder: (context, snapshot) {
+
+ ),
+
+
+
+        )  ),
+        );
+  }//bulid conext
+
+
+*/
+
+
+
+
+  Widget buildOffers()  => Column(
+
+  
+    children:
+
+    <Widget>[
+      
+      
+     
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Container(
+            height: 150,
+            width: 150,
+            decoration: BoxDecoration(
+                
+                
+               
+                image: DecorationImage(
+  
+                    fit: BoxFit.fitWidth,
+                       
+                    image: AssetImage("assets/Screen Shot 1443-03-02 at 6.09.18 PM.png"))
+                
+                ),
+          ),
+        ),
+   
+Container(
+   child: Center(
+        child: Text(
+     
+        '@'+ 'title',
+      style: TextStyle(
+              color: Colors.black, fontSize: 24, fontWeight: FontWeight.w800),
+      ),)),
+      Container(
+      child:
+       ListTile(
+      title: Text(  "المعلومات الشخصية",
+     textAlign: TextAlign.right,
+        style: TextStyle(fontSize: 16),
+     
+      ),)
+     
+    ),
     
-    
-      if (!snapshot.hasData) {
-        return new Text("Loading");
-      }
-      else {
-//
-//         getListViewItems(String GoodsName,String id){
-//           //id GoodsIDselected of sender
-//           showDialog(
-//             context: context,
-//             builder: (BuildContext context) {
-//               return AlertDialog(
-//                 title: new Text("؟"+GoodsName+"هل تريد تبديل"),
-//                 actions: <Widget>[
-//                   FlatButton(
-//                     child: new Text("بدل"),
-//                     onPressed: () {
-//                       print("i am here 1");
-//
-//
-//                       // getAllDocs() {
-//                       //          const ref = this.db.collection('items');
-//                       //          return ref.valueChanges({idField: 'customIdName'});
-//                       //     }
-//
-//
-//
-// // db.collection('goods').add({
-// //   ''
-// // });
-//
-//
-//                       Navigator.of(context).pop();
-//                     },
-//                   ),
-//                   FlatButton(
-//                     child: new Text("تراجع"),
-//                     onPressed: () {
-//                       Navigator.of(context).pop();
-//                     },
-//                   ),
-//                 ],
-//               );
-//             },
-//           );
-//         }
+      
+      Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 4,
+        child: Column(
+          children: [
+       
+      ListTile(
+              leading: Icon(Icons.email),
+              title: Text('Email'),
+                
+            ),
+      Divider(
+              height: 0.6,
+              color: Colors.black87,
+            ),
 
-        String GoodsNameselected;
-        // String GoodsIDselected;
-        print(rReqId+"hiiiii");
-        // int index=1;(db.collection('Requests').doc('receiverID'))
-        if (db.collection('goods').where("id",isEqualTo:sendergoods ).where(db.collection('Requests').where("receiverID",isEqualTo:uiduser )).snapshots()!=null) {
-           return ListView(
+      ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('FName'+' '+ 'LName'),
+            ),
+       Divider(
+              height: 0.6,
+              color: Colors.black87,
+            ),
+   
+      const SizedBox(height: 8),
 
-    children: snapshot.data!.docs.map((doc) =>
-        ListTile(
+       ListTile(
+              leading: Icon(Icons.phone),
+              title: Text('phoneN'),
+            ),
+       Divider(
+              height: 0.6,
+              color: Colors.black87,
+            ),
 
-          title: Text(GoodsNameselected = doc.data()['gName']),
-          subtitle: Text(doc.data()['Description']),
-          onTap: () =>
-          {
-            // _selectedIndex
-//doc.data().doc.id,;
+      //  const SizedBox(height: 24),
 
-            // GoodsIDselected=doc.id,
-            //
-            // getListViewItems(GoodsNameselected,GoodsIDselected)
-          },
+     
+
+
+
+
+   
+   
+
+
+          ],
+
+ 
+
 
 
         ),
-    ).toList(),
-  );
+        
+      ),
+      
+      ),    
+      const SizedBox(height: 20),
+     // Center(child: MyInterest() ),
+      const SizedBox(height: 20),
 
-        }
-        else{
-          return AlertDialog(
-            title: new Text("!لم تصلك اي طلبات "),
-            actions: <Widget>[
+     // Center(child: buildUpgradeButton() ),
+      const SizedBox(height: 23),
 
-
-            ],
-          );
-
-
-        }
-
-      }
-      return Text("data");
-    },
-  ),
-  ));
-  }
-
-
-
-  @override
-  State<StatefulWidget> createState() {
-  // TODO: implement createState
-  throw UnimplementedError();
-  }
+      //Center(child: signOut() ),
+      ]
+      
+      
+      );
+      
   }
 
   class CustomBottomNavigationBar extends StatefulWidget {
@@ -313,16 +466,6 @@ class Offers extends StatefulWidget {
   _CustomBottomNavigationBarState createState() =>
   _CustomBottomNavigationBarState();
   }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -436,8 +579,3 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   }
 }
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
