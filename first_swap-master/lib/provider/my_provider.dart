@@ -15,10 +15,8 @@ class MyProvider extends ChangeNotifier {
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String uiduser = '';
 
-
 ///////////////////  Offers ////////////////
     List<Product> GoodsList = [];
-  
 late Product GoodsReceivingData;
   Future<void> getGoodsReceiving() async {
 
@@ -38,173 +36,24 @@ late Product GoodsReceivingData;
 String receiverId='';
 String goodsSend='';
 String senderId='';
-FirebaseFirestore.instance
-        .collection('Requests')
-      //  .where("receiverID")
-      .doc()
-        .get().then((value){
-receiverId=value.data()!['receiverID'];
-goodsSend=value.data()!['sender goods'];
-senderId=value.data()!['sender ID'];
-
-        } ).catchError((e) {
-        print(e);
-      });
-
-     var value ='';
-String idd=FirebaseFirestore.instance.collection('goods').doc().id;
-var seee=FirebaseFirestore.instance.collection('Requests');
-var docu=await seee.doc('sender ID').get();
-if(docu.exists){
-    Map<String,dynamic>?data=docu.data();
-    value=data?["sender goods"];
-}
-
-
-
-String rere=FirebaseFirestore.instance.collection('Requests').doc().id;
-
-var collection = FirebaseFirestore.instance.collection('Requests');
-var docSnapshot = await collection.doc(rere).get();
-print("22222object");
-
-if (docSnapshot.exists) {
-  Map<String, dynamic>? data = docSnapshot.data();
-print("object");
-  // You can then retrieve the value from the Map like this:
-  var value = data?['sender goods'];
-  print(value);
-
-}
-
-
-
-//doc('sender ID')
-
-
-  //  QuerySnapshot ses = await FirebaseFirestore.instance
-  //       .collection('Requests').where('receiverID',
-
-//     List<request> GoodsList1 = [];
-
-// late request GoodsReceivingData1;
-// late request goodsSender;
-
-//     List<request> GoodsReceiving1 = [];
-
-
-//  QuerySnapshot ses = await FirebaseFirestore.instance
-//         .collection('Requests')
-//         .where("receiverID", isEqualTo: uiduser)
-//         //.where('field')
-//         .get();
-
-
-//         ses.docs.forEach((element)  {
-// //goodsSender();
-
-//       GoodsReceivingData1 = request(
-
-
-//         //  receivergoods:element.data()['receiver goods'],
-//         // receiverID:element.data()['receiverID'],
-//         // senderID:element.data()['sender ID'],  
-//          sendergoods:element.data()['sender goods'],
-//    //requeststatus:element.data()['request status'],
-//    //     GoodsList1.map(element);
-
-
-
-// );
-//  }
-
-//      );
-
-
-
-
-//     GoodsReceiving1.add(GoodsReceivingData1);
-//        GoodsList1 = GoodsReceiving1;
-
-//         print("          GoodsList1=     ");
-//        // print(GoodsList1);
-
-     
-      
-    
-
-
-
-
-
-
-
-
-
- //   db.collection('goods')
-      //  .where(db.collection('goods').id,isEqualTo:
-        //  (db.collection('Requests').doc('sender goods')))
-        //  .snapshots()
-
-var ddddd=(FirebaseFirestore.instance.collection('Requests')
-       .doc().id);
-      //  then((value)
-      //   value.));
-print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-       print(ddddd);
-
-    List<Product> GoodsReceiving = [];
-    //for loop 
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('goods')
-    //    .doc(idd)
-    //    .collection('Requests')
-        .where(idd, isEqualTo: 
-       (FirebaseFirestore.instance.collection('Requests')
-       .doc(idd)))
-
-
-
-//        .where('sender goods', isEqualTo:idd)
-
-
-//         .where(//ماضبط الشرط
-// //          (FirebaseFirestore.instance.collection('goods').doc()),//doc
-//           idd,//doc
-// //ss فيها ايرور 
-//       //    whereIn: 
-//       arrayContainsAny:    
-//       GoodsList1
-// //GoodsList1
-// //ses
-//         //   (FirebaseFirestore.instance
-//         // .collection('Requests')
-//         // .where('sender goods')),
-//       //  goodsSend
-//       //sener id
-//   //    senderId
-//     //  'BP92cMZe70OKIpnoMqmCFraASx72'
-//       //sendergoods
-//         )
-        // .where((FirebaseFirestore.instance//شاكه فيهم
-        // .collection('Requests')
-        // .where("receiverID")),isEqualTo: uiduser)
-        .get();
-
  
- if (receiverId == uiduser) {//غيريها بعدين 
-      print("جوا الشرط");
-              //alert msj
-
 
         
-      }
+    List<Product> GoodsReceiving = [];
+    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
+        .collection('goods')
+        .where("Status", isEqualTo:
+         "waiting"
+    )
+        .where("receiverID", isEqualTo:
+    uiduser
+         )
+        .get()) ;
+
+ 
   
-
-    else{
-        print("55555555555555555555");
-
         querySnapshot.docs.forEach((element) {
+
       GoodsReceivingData = Product(
         image: element.data()['image'],
         title: element.data()['gName'],
@@ -217,12 +66,10 @@ print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
       );
      GoodsReceiving.add(GoodsReceivingData);
         GoodsList = GoodsReceiving;
-       print("hiiiiii");
       
     });
-        //alert msj
-        print("براااااااااا");
-      }
+      
+      
     notifyListeners();
        
   }
@@ -230,21 +77,6 @@ print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
  get throwGoodsReceivingList {
     return GoodsList;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ///////////////////  category 1 ////////////////
@@ -257,6 +89,10 @@ print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
         .where(
           "cate",
           isEqualTo: '3',
+        )
+        .where(
+          "Status",
+          isEqualTo: 'available',
         )
         .get();
 
@@ -351,6 +187,10 @@ print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '1')
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;

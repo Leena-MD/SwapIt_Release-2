@@ -1,39 +1,203 @@
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'EditItem.dart';
+import 'MyItemCard.dart';
+import 'MyItems.dart';
 import 'Post_page.dart';
 import 'Home_page.dart';
 import 'Offers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class MyItems extends StatelessWidget {
+class MyItems extends StatefulWidget {
+  final db = FirebaseFirestore.instance;
+  final String? userId;
+
+  MyItems({Key? key, this.userId}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _MyItems();
+  }
+}
+
+class _MyItems extends State<MyItems> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            backgroundColor: Colors.white,
-            bottomNavigationBar: CustomBottomNavigationBar(
-              iconList: [
-                Icons.home,
-                Icons.add_to_photos,
-                Icons.add_a_photo,
-                Icons.reorder_rounded,
-                Icons.person,
-              ],
-              onChange: (val) {
-                setState(() {
-                  var _selectedItem = val;
-                });
-              },
-              defaultSelectedIndex: 1,
-            ),
-            appBar: AppBar(
-              backgroundColor: Colors.cyan[800],
-              title: Center(
-                  child: Text('منتجاتي', style: TextStyle(fontSize: 30))),
-              automaticallyImplyLeading: false,
-            )));
+      backgroundColor: Colors.white,
+      bottomNavigationBar: CustomBottomNavigationBar(
+        iconList: [
+          Icons.home,
+          Icons.add_to_photos,
+          Icons.add_a_photo,
+          Icons.reorder_rounded,
+          Icons.person,
+        ],
+        onChange: (val) {
+          setState(() {
+            var _selectedItem = val;
+          });
+        },
+        defaultSelectedIndex: 1,
+      ),
+      appBar: AppBar(
+        backgroundColor: Colors.cyan[800],
+        title: Center(child: Text('منتجاتي', style: TextStyle(fontSize: 30))),
+        automaticallyImplyLeading: false,
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: widget.db.collection('goods').snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else
+            return ListView(
+              children: snapshot.data!.docs.map((doc) {
+                var imageUrl = doc.data()['image'];
+                if (doc.data()['owner'] == widget.userId) {
+                  return MyItemCard(
+                    name: doc.data()['gName'],
+                    description: doc.data()['Description'],
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20))),
+                          builder: (context) => Container(
+                              // height: 150,
+                              padding: EdgeInsets.symmetric(horizontal: 15) +
+                                  EdgeInsets.only(bottom: 10),
+                              child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(top: 10, bottom: 20),
+                                      height: 5,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                          color: Colors.black54,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        widget.db
+                                            .collection('goods')
+                                            .doc(doc.id)
+                                            .delete();
+                                        Fluttertoast.showToast(
+                                            msg: 'تم حذف العنصر المحدد');
+                                        Navigator.pop(context);
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.delete_outline_outlined,
+                                              color: Color(0xFFFD691F),
+                                              size: 28,
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "حذف",
+                                              style: TextStyle(
+                                                  color: Color(0xFFFD691F),
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Divider(
+                                      thickness: 1,
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        /*  Fluttertoast.showToast(
+                                            msg: doc.id.toString()); */
+                                        await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => EditItem(
+                                                      docId: doc.id,
+                                                      category: int.parse(doc
+                                                          .data()['Category']
+                                                          .toString()),
+                                                      statues:
+                                                          doc.data()['Status'],
+                                                      numgood: int.parse(doc
+                                                          .data()['numGood']
+                                                          .toString()),
+                                                      name: doc.data()['gName'],
+                                                      owner:
+                                                          doc.data()['owner'],
+                                                      cat: doc.data()['cate'],
+                                                      desc: doc.data()[
+                                                          'Description'],
+                                                      image:
+                                                          doc.data()['image'],
+                                                    )));
+
+                                        Navigator.pop(context);
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.edit,
+                                              color: Color(0xFF666666),
+                                              size: 28,
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "تعديل",
+                                              style: TextStyle(
+                                                  color: Color(0xFF666666),
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ])));
+                    },
+                    image: imageUrl,
+                  );
+                } else {
+                  return Spacer();
+                }
+              }).toList(),
+            );
+        },
+      ),
+    ));
   }
 
-  void setState(Null Function() param0) {}
+  showModal(BuildContext context, QueryDocumentSnapshot queryDocumentSnapshot,
+      var instance) {}
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -57,7 +221,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _selectedIndex = widget.defaultSelectedIndex;
@@ -66,14 +229,14 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _navBarItemList = [];
+    List<Widget> _navBarMyItems = [];
 
     for (var i = 0; i < _iconList.length; i++) {
-      _navBarItemList.add(buildNavBarItem(_iconList[i], i));
+      _navBarMyItems.add(buildNavBarItem(_iconList[i], i));
     }
 
     return Row(
-      children: _navBarItemList,
+      children: _navBarMyItems,
     );
   }
 
@@ -137,3 +300,4 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     );
   }
 }
+

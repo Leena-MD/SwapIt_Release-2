@@ -13,63 +13,63 @@ import 'Post_page.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
 import 'details_page.dart';
-      final firebaseUser =  FirebaseAuth.instance.currentUser;
-       String userid= firebaseUser!.uid;
+final firebaseUser =  FirebaseAuth.instance.currentUser;
+String userid= firebaseUser!.uid;
 
 class Offers extends StatefulWidget {
 
   _Offers createState() => _Offers();
 }
-  @override
+@override
 
-  class _Offers extends State<Offers> {
-    String receivergoods='';
-    String receiverID='';
-    String requeststatus='';
-    String senderID='';
-    String sendergoods='';
- 
-    final db = FirebaseFirestore.instance;
+class _Offers extends State<Offers> {
+  String receivergoods='';
+  String receiverID='';
+  String requeststatus='';
+  String senderID='';
+  String sendergoods='';
 
-    String uiduser = '';
-    // final rReqId = '';
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    void inputData() {
-      final User? user = auth.currentUser;
-      final uid = user!.uid;
-    }
+  final db = FirebaseFirestore.instance;
+
+  String uiduser = '';
+  // final rReqId = '';
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  void inputData() {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+  }
 
 
 
   Future<bool> _fetchReq() async {
-      final testo= db.collection('goods')
-      .where("owner",isEqualTo: userid ,)
-      .where("Status",isEqualTo:"available").snapshots();
-      // فيه ايرور بالسناب شوت كابشن 
+    final testo= db.collection('goods')
+        .where("owner",isEqualTo: userid ,)
+        .where("Status",isEqualTo:"available").snapshots();
+    // فيه ايرور بالسناب شوت كابشن
 
-       final myRequest=  db.collection('Requests')
-      .where("receiverID",isEqualTo: userid )
-     .where("request status",isEqualTo:"process")
-      .snapshots();     
+    final myRequest=  db.collection('Requests')
+        .where("receiverID",isEqualTo: userid )
+        .where("request status",isEqualTo:"process")
+        .snapshots();
 
-  // QuerySnapshot myRequest = await 
-  // FirebaseFirestore.instance
-  //       .collection('Requests')
-  //       .where("receiverID", isEqualTo: userid)
-  //       .where("request status",isEqualTo:"process")
-  //       .get()
-        
-      ;
-  if (myRequest==null) {
+    // QuerySnapshot myRequest = await
+    // FirebaseFirestore.instance
+    //       .collection('Requests')
+    //       .where("receiverID", isEqualTo: userid)
+    //       .where("request status",isEqualTo:"process")
+    //       .get()
 
-   //alert msj
-   AlertDialog(
-            title: new Text("!لم تصلك اي طلبات "),);
-   print("لا توجد لديك طلبات");
-    return  false;
-    
-  }else{
-    
+        ;
+    if (myRequest==null) {
+
+      //alert msj
+      AlertDialog(
+        title: new Text("!لم تصلك اي طلبات "),);
+      print("لا توجد لديك طلبات");
+      return  false;
+
+    }else{
+
 //   late  request Offers1;
 
 //  myRequest.docs.forEach((element) {
@@ -92,105 +92,105 @@ class Offers extends StatefulWidget {
 
 //     });
 
- //  _getGoodsReceiving();
-    print("كففوو");
+      //  _getGoodsReceiving();
+      print("كففوو");
 
       return true;
-      }
+    }
   }
 
 
 
-    List<Product> GoodsList = [];
+  List<Product> GoodsList = [];
 
-    late Product GoodsReceivingData;
+  late Product GoodsReceivingData;
 
-Future<void> _getGoodsReceiving() async {
+  Future<void> _getGoodsReceiving() async {
 
-    
-  QuerySnapshot GoodsReceiving = await FirebaseFirestore.instance
+
+    QuerySnapshot GoodsReceiving = await FirebaseFirestore.instance
         .collection('goods')
         .where((db.collection('goods').doc()),
         isEqualTo: sendergoods)
         .get()
         .catchError((e) {
-        print(e);
-      });;
-        
-  // if (GoodsReceiving==null) {
+      print(e);
+    });;
 
-  //   print("لا تجد لديك طلبات");
-  //   return false;
-    
-  // }
+    // if (GoodsReceiving==null) {
+
+    //   print("لا تجد لديك طلبات");
+    //   return false;
+
+    // }
     List<Product> newGoodsList = [];
 
- GoodsReceiving.docs.forEach((element) {
+    GoodsReceiving.docs.forEach((element) {
       GoodsReceivingData = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods:element.id
       );
 
-        newGoodsList.add(GoodsReceivingData);
-        GoodsList = newGoodsList;
-       });
+      newGoodsList.add(GoodsReceivingData);
+      GoodsList = newGoodsList;
+    });
     //   notifyListeners();
-       
-}
- get throwGoodsReceivingList {
+
+  }
+  get throwGoodsReceivingList {
     return GoodsList;
   }
 
 
 
 
-    Widget build(BuildContext context)
-    
-    
-    
-    {
-  //    _fetchReq();
+  Widget build(BuildContext context)
 
 
-          MyProvider provider = Provider.of<MyProvider>(context);
-    
+
+  {
+    //    _fetchReq();
+
+
+    MyProvider provider = Provider.of<MyProvider>(context);
+
     provider.getGoodsReceiving();
     GoodsList = provider.throwGoodsReceivingList;
-   
+
 
     return SafeArea(
-      
-      child: Scaffold(
-          backgroundColor: Colors.white,
-          bottomNavigationBar: CustomBottomNavigationBar(
-            iconList: [
-              Icons.home,
-              Icons.add_to_photos,
-              Icons.add_a_photo,
-              Icons.reorder_rounded,
-              Icons.person,
-            ],
-            onChange: (val) {
-              setState(() {
-                var _selectedItem = val;
-              });
-            },
-            defaultSelectedIndex: 0,
-          ),
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.cyan[800],
-            title: Center(
-                child: Text("المفروض عروضي او وات ايفر",
-                    style: TextStyle(fontSize: 20))),
-          ),
-          body:
+
+        child: Scaffold(
+            backgroundColor: Colors.white,
+            bottomNavigationBar: CustomBottomNavigationBar(
+              iconList: [
+                Icons.home,
+                Icons.add_to_photos,
+                Icons.add_a_photo,
+                Icons.reorder_rounded,
+                Icons.person,
+              ],
+              onChange: (val) {
+                setState(() {
+                  var _selectedItem = val;
+                });
+              },
+              defaultSelectedIndex: 3,
+            ),
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.cyan[800],
+              title: Center(
+                  child: Text("المفروض عروضي او وات ايفر",
+                      style: TextStyle(fontSize: 20))),
+            ),
+            body:
 //            StreamBuilder<QuerySnapshot>
 //         (stream:
 
@@ -202,80 +202,79 @@ Future<void> _getGoodsReceiving() async {
 //       .snapshots(),     //SendGoods.snapshots(),
 
 //         builder: (context, snapshot) {
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: 
-            [
-              
-              SingleChildScrollView(
-                reverse: true,
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                   // header(),
-                    //  recipe(),
-                    //   pizza(),
-                    //    drink(),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                height: 510,
-                child: GridView.count(
-                    shrinkWrap: false,
-                    primary: false,
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.9,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 10,
-                    
-                    children: GoodsList
-                        .map(
-                          (e) => BottomContainer(
-                            onTap: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => DetailPage(// بغيرها تصير صفحه خاصه في القبول والخ 
-                                    image: e.image,
-                                    name: e.title,
-                                    description: e.description,
-                                    cate: e.cate,
-                                    owner:e.owner,
-                                    IDgoods:e.IDgoods,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children:
+              [
 
-                                  ),
+                SingleChildScrollView(
+                  reverse: true,
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      // header(),
+                      //  recipe(),
+                      //   pizza(),
+                      //    drink(),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  height: 510,
+                  child: GridView.count(
+                      shrinkWrap: false,
+                      primary: false,
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.9,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 10,
+
+                      children: GoodsList
+                          .map(
+                            (e) => BottomContainer(
+                          onTap: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => DetailPage(// بغيرها تصير صفحه خاصه في القبول والخ
+                                  image: e.image,
+                                  name: e.title,
+                                  description: e.description,
+                                  cate: e.cate,
+                                  owner:e.owner,
+                                  IDgoods:e.IDgoods,
+
                                 ),
-                              );
-                            },
-                            image: e.image,
-                            name: e.title,
-                          ),
-                        )
-                        .toList()),
-              )
-            ],
-          )
-  // throw UnimplementedError();
-  //       }
-      )
+                              ),
+                            );
+                          },
+                          image: e.image,
+                          name: e.title,
+                        ),
+                      )
+                          .toList()),
+                )
+              ],
+            )
+          // throw UnimplementedError();
+          //       }
+        )
       //),
-    
-    //}else here{}
-    
+
+      //}else here{}
+
     );
   }
-    
+
 
 
 
 /*
      {
 
-    
   return SafeArea(
       child: Builder(
-        
+
         builder: (context) => Scaffold(
 backgroundColor: Colors.white,
           bottomNavigationBar: CustomBottomNavigationBar(
@@ -293,38 +292,26 @@ backgroundColor: Colors.white,
             },
             defaultSelectedIndex:4,
           ),
-
-
           body:Center(
 
- 
  child: SingleChildScrollView(
             child: FutureBuilder(
-
               future: _fetchReq(),
               builder: (context, snapshot) {
-                
+
                 //  if (snapshot.connectionState != ConnectionState.done)
                 //return Text("");
                 return buildOffers();
-                
+
               },
-              
+
             ),
-           
+
           ),
-
-
-
  ),
-
-
-
         )  ),
         );
   }//bulid conext
-
-
 */
 
 
@@ -332,125 +319,125 @@ backgroundColor: Colors.white,
 
   Widget buildOffers()  => Column(
 
-  
-    children:
 
-    <Widget>[
-      
-      
-     
+      children:
+
+      <Widget>[
+
+
+
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: Container(
             height: 150,
             width: 150,
             decoration: BoxDecoration(
-                
-                
-               
+
+
+
                 image: DecorationImage(
-  
+
                     fit: BoxFit.fitWidth,
-                       
+
                     image: AssetImage("assets/Screen Shot 1443-03-02 at 6.09.18 PM.png"))
-                
-                ),
+
+            ),
           ),
         ),
-   
-Container(
-   child: Center(
-        child: Text(
-     
-        '@'+ 'title',
-      style: TextStyle(
-              color: Colors.black, fontSize: 24, fontWeight: FontWeight.w800),
-      ),)),
-      Container(
-      child:
-       ListTile(
-      title: Text(  "المعلومات الشخصية",
-     textAlign: TextAlign.right,
-        style: TextStyle(fontSize: 16),
-     
-      ),)
-     
-    ),
-    
-      
-      Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        elevation: 4,
-        child: Column(
-          children: [
-       
-      ListTile(
-              leading: Icon(Icons.email),
-              title: Text('Email'),
-                
-            ),
-      Divider(
-              height: 0.6,
-              color: Colors.black87,
-            ),
 
-      ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('FName'+' '+ 'LName'),
-            ),
-       Divider(
-              height: 0.6,
-              color: Colors.black87,
-            ),
-   
-      const SizedBox(height: 8),
+        Container(
+            child: Center(
+              child: Text(
 
-       ListTile(
-              leading: Icon(Icons.phone),
-              title: Text('phoneN'),
-            ),
-       Divider(
-              height: 0.6,
-              color: Colors.black87,
-            ),
+                '@'+ 'title',
+                style: TextStyle(
+                    color: Colors.black, fontSize: 24, fontWeight: FontWeight.w800),
+              ),)),
+        Container(
+            child:
+            ListTile(
+              title: Text(  "المعلومات الشخصية",
+                textAlign: TextAlign.right,
+                style: TextStyle(fontSize: 16),
 
-      //  const SizedBox(height: 24),
-
-     
-
-
-
-
-   
-   
-
-
-          ],
-
- 
-
-
+              ),)
 
         ),
-        
-      ),
-      
-      ),    
-      const SizedBox(height: 20),
-     // Center(child: MyInterest() ),
-      const SizedBox(height: 20),
 
-     // Center(child: buildUpgradeButton() ),
-      const SizedBox(height: 23),
 
-      //Center(child: signOut() ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            elevation: 4,
+            child: Column(
+              children: [
+
+                ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text('Email'),
+
+                ),
+                Divider(
+                  height: 0.6,
+                  color: Colors.black87,
+                ),
+
+                ListTile(
+                  leading: Icon(Icons.account_circle),
+                  title: Text('FName'+' '+ 'LName'),
+                ),
+                Divider(
+                  height: 0.6,
+                  color: Colors.black87,
+                ),
+
+                const SizedBox(height: 8),
+
+                ListTile(
+                  leading: Icon(Icons.phone),
+                  title: Text('phoneN'),
+                ),
+                Divider(
+                  height: 0.6,
+                  color: Colors.black87,
+                ),
+
+                //  const SizedBox(height: 24),
+
+
+
+
+
+
+
+
+
+
+              ],
+
+
+
+
+
+            ),
+
+          ),
+
+        ),
+        const SizedBox(height: 20),
+        // Center(child: MyInterest() ),
+        const SizedBox(height: 20),
+
+        // Center(child: buildUpgradeButton() ),
+        const SizedBox(height: 23),
+
+        //Center(child: signOut() ),
       ]
-      
-      
-      );
-      
-  }
+
+
+  );
+
+}
 
   class CustomBottomNavigationBar extends StatefulWidget {
   final int defaultSelectedIndex;
@@ -466,6 +453,11 @@ Container(
   _CustomBottomNavigationBarState createState() =>
   _CustomBottomNavigationBarState();
   }
+
+
+
+
+
 
 
 
@@ -515,17 +507,17 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           if(_selectedIndex==0)
             Navigator.push(
                 this.context, MaterialPageRoute(builder: (context) => HomePage()));
-                if(_selectedIndex==1)
+          if(_selectedIndex==1)
             Navigator.push(
                 this.context, MaterialPageRoute(builder: (context) => MyItems()));
-                  if(_selectedIndex==2)
+          if(_selectedIndex==2)
             Navigator.push(
                 this.context, MaterialPageRoute(builder: (context) => PostPage()));
 
-                if(_selectedIndex==3)
+          if(_selectedIndex==3)
             Navigator.push(
                 this.context, MaterialPageRoute(builder: (context) => Offers()));
-                if(_selectedIndex==4)
+          if(_selectedIndex==4)
             Navigator.push(
                 this.context, MaterialPageRoute(builder: (context) => ProfilePage()));
 
@@ -563,7 +555,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               Text('الرئيسية'),
             if(index==1)
               Text('منتجاتي'),
-             if(index==2)
+            if(index==2)
               Text('اضافة'),
             if(index==3)
               Text('الطلبات'),
@@ -578,4 +570,3 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     );
   }
 }
-

@@ -168,7 +168,7 @@ class _swapRequest extends State<swapRequest> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(),//علامه التحميل للداتا
             );
           }
           else {
@@ -221,7 +221,9 @@ class _swapRequest extends State<swapRequest> {
 
             int index=1;
 
-            if (db.collection('goods').where("owner",isEqualTo: userid,).where("Status",isEqualTo:"available").snapshots()!=null) {
+            if (db.collection('goods').where("owner",isEqualTo: userid,)
+            .where("Status",isEqualTo:"available")
+            .snapshots()!=null) {
 
 
               return ListView(
@@ -269,40 +271,59 @@ class _swapRequest extends State<swapRequest> {
     );
   }
 //Future<void>
-  SendRequest(String name ,String id) async
+  SendRequest(String name ,String ids) async
 
   {
-    bool sameRequedt=db.collection("Requests")
+    bool sameRequedt=true;
+     if(db.collection("Requests")
         .where("receiver goods",isEqualTo: "${widget.IDgoods}",)
         .where("receiverID",isEqualTo:"${widget.owner}",)
         .where("sender ID",isEqualTo:uiduser,)
-        .where("sender goods",isEqualTo: id,)
-        .snapshots()==true;
-    if (true) {
+        .where("sender goods",isEqualTo: ids,)
+        ==null){
+sameRequedt==false;
+        };
+    if (sameRequedt) {
+print("object11");
+
+
+      var status ="waiting";
+
+//FirebaseFirestore.instance.collection('Requests').doc(id);
+// print(ids);
 
 
 
-      var status ="process";
 
-      await FirebaseFirestore.instance.collection('Requests').add({
-
+      await FirebaseFirestore.instance.collection('goods').doc(ids)
+      .update// add
+     ({
+ 
         'receiver goods':"${widget.IDgoods}",//widget.IDgoods
         'receiverID': "${widget.owner}",//widget.owner
-        'request status': status,
-        'sender ID': uiduser,
-        'sender goods': id,
+        'Status':status,
+       // 'request status': status,
+     //   'sender ID': uiduser,
+      //  'sender goods': id,
+
       });
+      // await FirebaseFirestore.instance.collection('goods').add({
+      //   'numReq': numReq,
+      // });
+
       Fluttertoast.showToast(msg: "تم إرسال الطلب بنجاح!");
 
-      Navigator.of(this.context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomePage()));
+      // Navigator.of(this.context).pushReplacement(
+      //     MaterialPageRoute(builder: (context) => HomePage()));
 
 
 
 // widget.owner;
 // widget.IDgoods;
     }
-    else {
+    if(sameRequedt==false){
+      print("object222222");
+
       Fluttertoast.showToast(msg: "تم ارسال هذا الطلب مسبقا!");
 
     }
