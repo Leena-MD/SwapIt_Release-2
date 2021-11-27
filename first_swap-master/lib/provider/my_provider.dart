@@ -42,9 +42,11 @@ String senderId='';
     List<Product> GoodsReceiving = [];
     QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
         .collection('goods')
-    
-        .where("owner", isEqualTo: 
-  'BP92cMZe70OKIpnoMqmCFraASx72'
+        .where("Status", isEqualTo:
+         "waiting"
+    )
+        .where("receiverID", isEqualTo:
+    uiduser
          )
         .get()) ;
 
@@ -62,10 +64,8 @@ String senderId='';
         cate: element.data()['cate'],
         IDgoods:element.id
       );
-      if (element.data()['receiverID'] == uiduser) {
      GoodsReceiving.add(GoodsReceivingData);
         GoodsList = GoodsReceiving;
-      }
       
     });
       
@@ -187,6 +187,10 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '1')
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
