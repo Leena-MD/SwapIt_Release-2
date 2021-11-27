@@ -585,7 +585,7 @@ class _houseK extends State<houseK> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SingleChildScrollView(
-                  reverse: true,
+                reverse: true,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
@@ -612,6 +612,9 @@ class _houseK extends State<houseK> {
                                 image: e.image,
                                 name: e.title,
                                 description: e.description,
+                                cate: e.cate,
+                                owner:e.owner,
+                                IDgoods:e.IDgoods,
                               ),
                             ),
                           );

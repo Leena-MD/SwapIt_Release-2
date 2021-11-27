@@ -16,17 +16,22 @@ import 'package:first_swap/src/pages/login_page.dart';
 import 'package:first_swap/constants.dart';
 import 'package:first_swap/models/goods.dart';
 
-class Product {
-  final String image, title, description, status, owner, id, cate,IDgoods;
+class request {
+  final String 
+  //receivergoods,
+  //receiverID,
+    // requeststatus,
+    // senderID,
+     sendergoods;
 
-  Product({
-    required this.id,
-    required this.image,
-    required this.title,
-    required this.description,
-    required this.status,
-    required this.owner,
-    required this.cate, 
-    required this.IDgoods, 
-  });
+  request(
+      {
+      //   required this.receivergoods,
+      //  required this.receiverID,
+      //  required this.requeststatus,
+      //   required this.senderID,
+       required this.sendergoods,
+});
+
 }
+

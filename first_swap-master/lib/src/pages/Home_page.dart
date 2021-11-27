@@ -349,7 +349,11 @@ class DealsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+<<<<<<< HEAD
      //   Navigator.pushNamed(context, '/details');
+=======
+        //   Navigator.pushNamed(context, '/details');
+>>>>>>> 2e348b3f87dd6e93a2f78ae536c36019ed3b0179
       },
       child: Container(
         child: Column(

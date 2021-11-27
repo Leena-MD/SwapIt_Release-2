@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goods.dart';
-
+import 'package:first_swap/models/request.dart';
+import 'package:first_swap/models/requestModel.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 //import 'package:foodapp/modles/cart_modle.dart';
 //import 'package:foodapp/modles/categories_modle.dart';
@@ -10,8 +12,240 @@ import 'package:flutter/cupertino.dart';
 //import 'package:foodapp/modles/food_modle.dart';
 
 class MyProvider extends ChangeNotifier {
-final firebaseUser = FirebaseAuth.instance.currentUser;
+  final firebaseUser = FirebaseAuth.instance.currentUser;
   String uiduser = '';
+
+
+///////////////////  Offers ////////////////
+    List<Product> GoodsList = [];
+  
+late Product GoodsReceivingData;
+  Future<void> getGoodsReceiving() async {
+
+   final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+String receiverId='';
+String goodsSend='';
+String senderId='';
+FirebaseFirestore.instance
+        .collection('Requests')
+      //  .where("receiverID")
+      .doc()
+        .get().then((value){
+receiverId=value.data()!['receiverID'];
+goodsSend=value.data()!['sender goods'];
+senderId=value.data()!['sender ID'];
+
+        } ).catchError((e) {
+        print(e);
+      });
+
+     var value ='';
+String idd=FirebaseFirestore.instance.collection('goods').doc().id;
+var seee=FirebaseFirestore.instance.collection('Requests');
+var docu=await seee.doc('sender ID').get();
+if(docu.exists){
+    Map<String,dynamic>?data=docu.data();
+    value=data?["sender goods"];
+}
+
+
+
+String rere=FirebaseFirestore.instance.collection('Requests').doc().id;
+
+var collection = FirebaseFirestore.instance.collection('Requests');
+var docSnapshot = await collection.doc(rere).get();
+print("22222object");
+
+if (docSnapshot.exists) {
+  Map<String, dynamic>? data = docSnapshot.data();
+print("object");
+  // You can then retrieve the value from the Map like this:
+  var value = data?['sender goods'];
+  print(value);
+
+}
+
+
+
+//doc('sender ID')
+
+
+  //  QuerySnapshot ses = await FirebaseFirestore.instance
+  //       .collection('Requests').where('receiverID',
+
+//     List<request> GoodsList1 = [];
+
+// late request GoodsReceivingData1;
+// late request goodsSender;
+
+//     List<request> GoodsReceiving1 = [];
+
+
+//  QuerySnapshot ses = await FirebaseFirestore.instance
+//         .collection('Requests')
+//         .where("receiverID", isEqualTo: uiduser)
+//         //.where('field')
+//         .get();
+
+
+//         ses.docs.forEach((element)  {
+// //goodsSender();
+
+//       GoodsReceivingData1 = request(
+
+
+//         //  receivergoods:element.data()['receiver goods'],
+//         // receiverID:element.data()['receiverID'],
+//         // senderID:element.data()['sender ID'],  
+//          sendergoods:element.data()['sender goods'],
+//    //requeststatus:element.data()['request status'],
+//    //     GoodsList1.map(element);
+
+
+
+// );
+//  }
+
+//      );
+
+
+
+
+//     GoodsReceiving1.add(GoodsReceivingData1);
+//        GoodsList1 = GoodsReceiving1;
+
+//         print("          GoodsList1=     ");
+//        // print(GoodsList1);
+
+     
+      
+    
+
+
+
+
+
+
+
+
+
+ //   db.collection('goods')
+      //  .where(db.collection('goods').id,isEqualTo:
+        //  (db.collection('Requests').doc('sender goods')))
+        //  .snapshots()
+
+var ddddd=(FirebaseFirestore.instance.collection('Requests')
+       .doc().id);
+      //  then((value)
+      //   value.));
+print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+       print(ddddd);
+
+    List<Product> GoodsReceiving = [];
+    //for loop 
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('goods')
+    //    .doc(idd)
+    //    .collection('Requests')
+        .where(idd, isEqualTo: 
+       (FirebaseFirestore.instance.collection('Requests')
+       .doc(idd)))
+
+
+
+//        .where('sender goods', isEqualTo:idd)
+
+
+//         .where(//ماضبط الشرط
+// //          (FirebaseFirestore.instance.collection('goods').doc()),//doc
+//           idd,//doc
+// //ss فيها ايرور 
+//       //    whereIn: 
+//       arrayContainsAny:    
+//       GoodsList1
+// //GoodsList1
+// //ses
+//         //   (FirebaseFirestore.instance
+//         // .collection('Requests')
+//         // .where('sender goods')),
+//       //  goodsSend
+//       //sener id
+//   //    senderId
+//     //  'BP92cMZe70OKIpnoMqmCFraASx72'
+//       //sendergoods
+//         )
+        // .where((FirebaseFirestore.instance//شاكه فيهم
+        // .collection('Requests')
+        // .where("receiverID")),isEqualTo: uiduser)
+        .get();
+
+ 
+ if (receiverId == uiduser) {//غيريها بعدين 
+      print("جوا الشرط");
+              //alert msj
+
+
+        
+      }
+  
+
+    else{
+        print("55555555555555555555");
+
+        querySnapshot.docs.forEach((element) {
+      GoodsReceivingData = Product(
+        image: element.data()['image'],
+        title: element.data()['gName'],
+        description: element.data()['Description'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
+      );
+     GoodsReceiving.add(GoodsReceivingData);
+        GoodsList = GoodsReceiving;
+       print("hiiiiii");
+      
+    });
+        //alert msj
+        print("براااااااااا");
+      }
+    notifyListeners();
+       
+  }
+
+ get throwGoodsReceivingList {
+    return GoodsList;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ///////////////////  category 1 ////////////////
   List<Product> booksList = [];
@@ -21,13 +255,12 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where(
-          "Category",
-          isEqualTo: 3,
+          "cate",
+          isEqualTo: '3',
         )
         .get();
 
-    final firebaseUser =
-        await FirebaseAuth.instance.currentUser; 
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -36,7 +269,6 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
           //.then((value) => null)
           .then((ds) {
         uiduser = ds.data()!['uid'];
-    
       }).catchError((e) {
         print(e);
       });
@@ -50,6 +282,8 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
       );
       if (element.data()['owner'] != uiduser) {
         books.add(booksModle);
@@ -70,12 +304,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newComputerList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: 0)
+        .where("cate", isEqualTo: "0")
         .get();
 
-
-        final firebaseUser =
-        await FirebaseAuth.instance.currentUser; 
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -84,7 +316,6 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
           //.then((value) => null)
           .then((ds) {
         uiduser = ds.data()!['uid'];
- 
       }).catchError((e) {
         print(e);
       });
@@ -97,10 +328,13 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
       );
       if (element.data()['owner'] != uiduser) {
-      newComputerList.add(computerModle);
-      computerList = newComputerList; }
+        newComputerList.add(computerModle);
+        computerList = newComputerList;
+      }
     });
     notifyListeners();
   }
@@ -116,11 +350,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newKidsList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: 1)
+        .where("cate", isEqualTo: '1')
         .get();
 
-  final firebaseUser =
-        await FirebaseAuth.instance.currentUser; 
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -129,13 +362,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
           //.then((value) => null)
           .then((ds) {
         uiduser = ds.data()!['uid'];
- 
       }).catchError((e) {
         print(e);
       });
     }
-
-
 
     querySnapshot.docs.forEach((element) {
       kidsModle = Product(
@@ -145,11 +375,15 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
+
       );
 
       if (element.data()['owner'] != uiduser) {
-      newKidsList.add(kidsModle);
-      kidsList = newKidsList;}
+        newKidsList.add(kidsModle);
+        kidsList = newKidsList;
+      }
     });
     notifyListeners();
   }
@@ -165,11 +399,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newHouseList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: 2) //2
+        .where("cate", isEqualTo: "2") //2
         .get();
 
-  final firebaseUser =
-        await FirebaseAuth.instance.currentUser; 
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -178,13 +411,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
           //.then((value) => null)
           .then((ds) {
         uiduser = ds.data()!['uid'];
- 
       }).catchError((e) {
         print(e);
       });
     }
-
-
 
     querySnapshot.docs.forEach((element) {
       HouseModle = Product(
@@ -194,10 +424,14 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
+
       );
       if (element.data()['owner'] != uiduser) {
-      newHouseList.add(HouseModle);
-      HouseList = newHouseList; }
+        newHouseList.add(HouseModle);
+        HouseList = newHouseList;
+      }
     });
     notifyListeners();
   }
@@ -213,12 +447,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newBagList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: 4)
+        .where("cate", isEqualTo: '4')
         .get();
 
-
-  final firebaseUser =
-        await FirebaseAuth.instance.currentUser; 
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -227,14 +459,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
           //.then((value) => null)
           .then((ds) {
         uiduser = ds.data()!['uid'];
- 
       }).catchError((e) {
         print(e);
       });
     }
-
-
-
 
     querySnapshot.docs.forEach((element) {
       BagModle = Product(
@@ -244,10 +472,14 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
+
       );
       if (element.data()['owner'] != uiduser) {
-      newBagList.add(BagModle);
-      BagList = newBagList; }
+        newBagList.add(BagModle);
+        BagList = newBagList;
+      }
     });
     notifyListeners();
   }
@@ -263,12 +495,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newPerfumeList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: 5)
+        .where("cate", isEqualTo: '5')
         .get();
 
-
-  final firebaseUser =
-        await FirebaseAuth.instance.currentUser; 
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -277,13 +507,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
           //.then((value) => null)
           .then((ds) {
         uiduser = ds.data()!['uid'];
- 
       }).catchError((e) {
         print(e);
       });
     }
-
-
 
     querySnapshot.docs.forEach((element) {
       perfumeModle = Product(
@@ -293,10 +520,14 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
+
       );
       if (element.data()['owner'] != uiduser) {
-      newPerfumeList.add(perfumeModle);
-      perfumeList = newPerfumeList; }
+        newPerfumeList.add(perfumeModle);
+        perfumeList = newPerfumeList;
+      }
     });
     notifyListeners();
   }
@@ -312,12 +543,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newGymList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: 6)
+        .where("cate", isEqualTo: '6')
         .get();
 
-
-  final firebaseUser =
-        await FirebaseAuth.instance.currentUser; 
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -326,12 +555,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
           //.then((value) => null)
           .then((ds) {
         uiduser = ds.data()!['uid'];
- 
       }).catchError((e) {
         print(e);
       });
     }
-
 
     querySnapshot.docs.forEach((element) {
       gymModle = Product(
@@ -341,10 +568,13 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
       );
       if (element.data()['owner'] != uiduser) {
-      newGymList.add(gymModle);
-      gymList = newGymList;}
+        newGymList.add(gymModle);
+        gymList = newGymList;
+      }
     });
     notifyListeners();
   }
@@ -360,13 +590,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newClothesList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: 7)
+        .where("cate", isEqualTo: '7')
         .get();
 
-
-
-  final firebaseUser =
-        await FirebaseAuth.instance.currentUser; 
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -375,12 +602,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
           //.then((value) => null)
           .then((ds) {
         uiduser = ds.data()!['uid'];
- 
       }).catchError((e) {
         print(e);
       });
     }
-
 
     querySnapshot.docs.forEach((element) {
       clothesModle = Product(
@@ -390,10 +615,13 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
       );
       if (element.data()['owner'] != uiduser) {
-      newClothesList.add(clothesModle);
-      clothesList = newClothesList; }
+        newClothesList.add(clothesModle);
+        clothesList = newClothesList;
+      }
     });
     notifyListeners();
   }
@@ -409,12 +637,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newPetList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: 8)
+        .where("cate", isEqualTo: '8')
         .get();
 
-
-  final firebaseUser =
-        await FirebaseAuth.instance.currentUser; 
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -423,13 +649,10 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
           //.then((value) => null)
           .then((ds) {
         uiduser = ds.data()!['uid'];
- 
       }).catchError((e) {
         print(e);
       });
     }
-
-
 
     querySnapshot.docs.forEach((element) {
       petModle = Product(
@@ -439,10 +662,13 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
       );
       if (element.data()['owner'] != uiduser) {
-      newPetList.add(petModle);
-      petList = newPetList; }
+        newPetList.add(petModle);
+        petList = newPetList;
+      }
     });
     notifyListeners();
   }
@@ -460,6 +686,7 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         await FirebaseFirestore.instance.collection('goods').get();
     querySnapshot.docs.forEach(
       (element) {
+        /*
         foodModle = Product(
           image: element.data()['image'],
           title: element.data()['gName'],
@@ -467,8 +694,9 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
+          cate: element.data()['cate'],
         );
-        newSingleFoodList.add(foodModle);
+        newSingleFoodList.add(foodModle);*/
       },
     );
 
@@ -487,7 +715,7 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newBurgerCategoriesList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: "0")
+        .where("cate", isEqualTo: "00")
         .get();
     querySnapshot.docs.forEach((element) {
       burgerCategoriesModle = Product(
@@ -497,6 +725,8 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
       );
       newBurgerCategoriesList.add(burgerCategoriesModle);
       burgerCategoriesList = newBurgerCategoriesList;
@@ -507,6 +737,56 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     return burgerCategoriesList;
   }
 
+  ////////////////request//////////////
+
+  List<Product> requestList = [];
+  late Product requestModle;
+  Future<void> getrequest() async {
+    List<Product> newrequestList = [];
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('goods')
+        .where("cate", isEqualTo: '5')
+        .get();
+
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+      //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+    querySnapshot.docs.forEach((element) {
+      petModle = Product(
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods:element.id
+      );
+      if (element.data()['owner'] != uiduser) {
+        newrequestList.add(requestModle);
+        requestList = newrequestList;
+      }
+    });
+    notifyListeners();
+  }
+
+  get throwrequstList {
+    return requestList;
+  }
+
+
+
   ///////////////Recipe categories list//////////
   List<Product> recipeCategoriesList = [];
   late Product recipeCategoriesModle;
@@ -514,7 +794,7 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newrecipeCategoriesList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: "5")
+        .where("cate", isEqualTo: "55")
         .get();
     querySnapshot.docs.forEach((element) {
       recipeCategoriesModle = Product(
@@ -524,6 +804,8 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
       );
       newrecipeCategoriesList.add(recipeCategoriesModle);
       recipeCategoriesList = newrecipeCategoriesList;
@@ -541,7 +823,7 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
     List<Product> newPizzaCategoriesList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("Category", isEqualTo: "6")
+        .where("cate", isEqualTo: "66")
         .get();
     querySnapshot.docs.forEach((element) {
       pizzaCategoriesModle = Product(
@@ -551,6 +833,8 @@ final firebaseUser = FirebaseAuth.instance.currentUser;
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id
       );
       newPizzaCategoriesList.add(pizzaCategoriesModle);
       pizzaCategoriesList = newPizzaCategoriesList;
