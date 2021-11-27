@@ -62,8 +62,10 @@ String senderId='';
         cate: element.data()['cate'],
         IDgoods:element.id
       );
+      if (element.data()['receiverID'] == uiduser) {
      GoodsReceiving.add(GoodsReceivingData);
         GoodsList = GoodsReceiving;
+      }
       
     });
       
