@@ -87,31 +87,6 @@ class _DetailRequestState extends State<DetailRequest> {
                   ),
                 ),
               ),
-              /* Expanded( ////////old image style//////
-                  child: Container(
-                padding: EdgeInsets.only(top: 15.0),
-
-                /*padding: EdgeInsets.symmetric(horizontal: 15),
-            width: 250,
-            height: 200,
-            color: Colors.white,
-            child: Image.network(
-              widget.image,
-              fit: BoxFit.scaleDown,
-            ),*/
-                alignment: Alignment.center,
-                child: Container(
-                  width: 300.0,
-                  height: 300.0,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                            widget.image,
-                          ),
-                          fit: BoxFit.fill)),
-                ),
-              )),*/
               SizedBox(height: 10),
               Expanded(
                 flex: 2,
@@ -211,19 +186,7 @@ class _DetailRequestState extends State<DetailRequest> {
 
 
 
-                        //         {
-                        //            Navigator.push(this.context, MaterialPageRoute(builder: (context) =>
-
-                        // swapRequest(
-                        //      owner:e.owner,
-                        //      IDgoods:e.IDgoods,
-
-
-
-
-                        // )));
-
-                        //         },
+                  
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -262,19 +225,6 @@ class _DetailRequestState extends State<DetailRequest> {
 
 
 
-                        //         {
-                        //            Navigator.push(this.context, MaterialPageRoute(builder: (context) =>
-
-                        // swapRequest(
-                        //      owner:e.owner,
-                        //      IDgoods:e.IDgoods,
-
-
-
-
-                        // )));
-
-                        //         },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -326,7 +276,7 @@ class _DetailRequestState extends State<DetailRequest> {
 String reGoodsId ;
 
       await FirebaseFirestore.instance.collection('goods').doc(goodsId)
-          .update// add
+          .update
         ({
 
         'Status':status
@@ -341,7 +291,7 @@ String reGoodsId ;
       receivergoodsId = ds.data()!['receiver goods'];
         });
      await FirebaseFirestore.instance.collection('goods').doc(receivergoodsId)
-        .update// add
+        .update
       ({
 
       'Status':status
@@ -356,13 +306,14 @@ String reGoodsId ;
     receivergoodsId
     )
         .get());
-    // if (querySnapshot.docs.isNotEmpty) await querySnapshot.docs
-    //     .update('YourUpdateData');
-    //
-    // querySnapshot.docs.forEach((element) {
-    //   ["receiver goods"]=['available']
-    //
-    // });
+
+         querySnapshot.docs.forEach((element) {
+
+      rejecOtherGoods(element.id);
+      
+      
+    });
+    
 
       Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
 
@@ -378,7 +329,7 @@ String reGoodsId ;
 
     String goodsId =widget.IDgoods;
 
-    // print(widget.IDgoods);
+    
 
     var status ="available";
 
@@ -386,7 +337,7 @@ String reGoodsId ;
     String reGoodsId ;
 
     await FirebaseFirestore.instance.collection('goods').doc(goodsId)
-        .update// add
+        .update
       ({
 
       'Status':status,
@@ -400,6 +351,38 @@ String reGoodsId ;
 
 
     Fluttertoast.showToast(msg: "تم رفض الطلب بنجاح !");
+
+
+
+
+  }
+
+
+   rejecOtherGoods(String ids) async
+
+  {
+
+
+
+    var status ="available";
+
+
+
+    await FirebaseFirestore.instance.collection('goods').doc(ids)
+        .update
+      ({
+
+      'Status':status,
+      'receiver goods':'',
+      'receiverID':''
+
+    });
+
+
+
+
+
+    Fluttertoast.showToast(msg: "تم رفض بقية الطلبات بنجاح !");
 
 
 
