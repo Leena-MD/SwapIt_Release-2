@@ -56,8 +56,8 @@ class _DetailRequestState extends State<DetailRequest> {
         leading: IconButton(
           onPressed: () {
 
-              Navigator.push(this.context,
-                  MaterialPageRoute(builder: (context) => Offers()));
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => Offers()));
 
           },
           icon: Icon(Icons.arrow_back),
@@ -186,7 +186,7 @@ class _DetailRequestState extends State<DetailRequest> {
 
 
 
-                  
+
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -219,7 +219,7 @@ class _DetailRequestState extends State<DetailRequest> {
                               reject()
 
 
-                              );
+                          );
 
                         },
 
@@ -270,18 +270,18 @@ class _DetailRequestState extends State<DetailRequest> {
     String receivergoodsId="" ;
     // print(widget.IDgoods);
 
-      var status ="done";
+    var status ="done";
 
 
-String reGoodsId ;
+    String reGoodsId ;
 
-      await FirebaseFirestore.instance.collection('goods').doc(goodsId)
-          .update
-        ({
+    await FirebaseFirestore.instance.collection('goods').doc(goodsId)
+        .update
+      ({
 
-        'Status':status
+      'Status':status
 
-      });
+    });
     await FirebaseFirestore.instance
         .collection('goods')
         .doc(goodsId)
@@ -289,8 +289,8 @@ String reGoodsId ;
     //.then((value) => null)
         .then((ds) {
       receivergoodsId = ds.data()!['receiver goods'];
-        });
-     await FirebaseFirestore.instance.collection('goods').doc(receivergoodsId)
+    });
+    await FirebaseFirestore.instance.collection('goods').doc(receivergoodsId)
         .update
       ({
 
@@ -307,15 +307,15 @@ String reGoodsId ;
     )
         .get());
 
-         querySnapshot.docs.forEach((element) {
+    querySnapshot.docs.forEach((element) {
 
       rejecOtherGoods(element.id);
-      
-      
-    });
-    
 
-      Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
+
+    });
+
+
+    Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
 
 
 
@@ -329,7 +329,7 @@ String reGoodsId ;
 
     String goodsId =widget.IDgoods;
 
-    
+
 
     var status ="available";
 
@@ -352,13 +352,14 @@ String reGoodsId ;
 
     Fluttertoast.showToast(msg: "تم رفض الطلب بنجاح !");
 
-
+    Navigator.push(
+        this.context, MaterialPageRoute(builder: (context) => Offers()));
 
 
   }
 
 
-   rejecOtherGoods(String ids) async
+  rejecOtherGoods(String ids) async
 
   {
 

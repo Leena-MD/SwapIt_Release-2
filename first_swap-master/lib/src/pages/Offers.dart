@@ -163,8 +163,9 @@ class _Offers extends State<Offers> {
     MyProvider provider = Provider.of<MyProvider>(context);
 
     provider.getGoodsReceiving();
-    GoodsList = provider.throwGoodsReceivingList;
-
+    if(provider.throwGoodsReceivingList!=null) {
+      GoodsList = provider.throwGoodsReceivingList;
+    }
 
     return SafeArea(
 
@@ -189,7 +190,7 @@ class _Offers extends State<Offers> {
               automaticallyImplyLeading: false,
               backgroundColor: Colors.cyan[800],
               title: Center(
-                  child: Text("المفروض عروضي او وات ايفر",
+                  child: Text("الطلبات",
                       style: TextStyle(fontSize: 20))),
             ),
             body:
@@ -201,7 +202,7 @@ class _Offers extends State<Offers> {
 // db.collection('Requests')
 //       .where("receiverID",isEqualTo: userid )
 //      .where("request status",isEqualTo:"process")
-//       .snapshots(),     //SendGoods.snapshots(),
+//       .snapshots(),     //S`endGoods.snapshots(),
 
 //         builder: (context, snapshot) {
             Column(
@@ -233,6 +234,7 @@ class _Offers extends State<Offers> {
                       mainAxisSpacing: 10,
 
                       children: GoodsList
+
                           .map(
                             (e) => BottomContainer(
                           onTap: () {
@@ -270,175 +272,6 @@ class _Offers extends State<Offers> {
   }
 
 
-
-
-/*
-     {
-
-  return SafeArea(
-      child: Builder(
-
-        builder: (context) => Scaffold(
-backgroundColor: Colors.white,
-          bottomNavigationBar: CustomBottomNavigationBar(
-            iconList: [
-              Icons.home,
-              Icons.add_to_photos,
- Icons.add_a_photo,
-              Icons.reorder_rounded,
-              Icons.person,
-            ],
-            onChange: (val) {
-              setState(() {
-                var _selectedItem = val;
-              });
-            },
-            defaultSelectedIndex:4,
-          ),
-          body:Center(
-
- child: SingleChildScrollView(
-            child: FutureBuilder(
-              future: _fetchReq(),
-              builder: (context, snapshot) {
-
-                //  if (snapshot.connectionState != ConnectionState.done)
-                //return Text("");
-                return buildOffers();
-
-              },
-
-            ),
-
-          ),
- ),
-        )  ),
-        );
-  }//bulid conext
-*/
-
-
-
-
-  Widget buildOffers()  => Column(
-
-
-      children:
-
-      <Widget>[
-
-
-
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Container(
-            height: 150,
-            width: 150,
-            decoration: BoxDecoration(
-
-
-
-                image: DecorationImage(
-
-                    fit: BoxFit.fitWidth,
-
-                    image: AssetImage("assets/Screen Shot 1443-03-02 at 6.09.18 PM.png"))
-
-            ),
-          ),
-        ),
-
-        Container(
-            child: Center(
-              child: Text(
-
-                '@'+ 'title',
-                style: TextStyle(
-                    color: Colors.black, fontSize: 24, fontWeight: FontWeight.w800),
-              ),)),
-        Container(
-            child:
-            ListTile(
-              title: Text(  "المعلومات الشخصية",
-                textAlign: TextAlign.right,
-                style: TextStyle(fontSize: 16),
-
-              ),)
-
-        ),
-
-
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Card(
-            elevation: 4,
-            child: Column(
-              children: [
-
-                ListTile(
-                  leading: Icon(Icons.email),
-                  title: Text('Email'),
-
-                ),
-                Divider(
-                  height: 0.6,
-                  color: Colors.black87,
-                ),
-
-                ListTile(
-                  leading: Icon(Icons.account_circle),
-                  title: Text('FName'+' '+ 'LName'),
-                ),
-                Divider(
-                  height: 0.6,
-                  color: Colors.black87,
-                ),
-
-                const SizedBox(height: 8),
-
-                ListTile(
-                  leading: Icon(Icons.phone),
-                  title: Text('phoneN'),
-                ),
-                Divider(
-                  height: 0.6,
-                  color: Colors.black87,
-                ),
-
-                //  const SizedBox(height: 24),
-
-
-
-
-
-
-
-
-
-
-              ],
-
-
-
-
-
-            ),
-
-          ),
-
-        ),
-        const SizedBox(height: 20),
-        // Center(child: MyInterest() ),
-        const SizedBox(height: 20),
-
-        // Center(child: buildUpgradeButton() ),
-        const SizedBox(height: 23),
-
-        //Center(child: signOut() ),
-      ]
-
-
-  );
 
 }
 
