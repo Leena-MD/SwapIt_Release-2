@@ -13,6 +13,7 @@ import 'Post_page.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
 import 'details_page.dart';
+import 'details_requests.dart';
 final firebaseUser =  FirebaseAuth.instance.currentUser;
 String userid= firebaseUser!.uid;
 
@@ -134,7 +135,8 @@ class _Offers extends State<Offers> {
           owner: element.data()['owner'],
           id: element.data()['owner'],
           cate: element.data()['cate'],
-          IDgoods:element.id
+          IDgoods:element.id,
+
       );
 
       newGoodsList.add(GoodsReceivingData);
@@ -236,13 +238,14 @@ class _Offers extends State<Offers> {
                           onTap: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => DetailPage(// بغيرها تصير صفحه خاصه في القبول والخ
+                                builder: (context) => DetailRequest(// بغيرها تصير صفحه خاصه في القبول والخ
                                   image: e.image,
                                   name: e.title,
                                   description: e.description,
                                   cate: e.cate,
                                   owner:e.owner,
                                   IDgoods:e.IDgoods,
+
 
                                 ),
                               ),

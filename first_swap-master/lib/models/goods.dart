@@ -27,6 +27,6 @@ class Product {
     required this.status,
     required this.owner,
     required this.cate, 
-    required this.IDgoods, 
+    required this.IDgoods,
   });
 }

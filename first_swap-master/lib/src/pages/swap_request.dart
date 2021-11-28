@@ -173,48 +173,48 @@ class _swapRequest extends State<swapRequest> {
           }
           else {
 
-            getListViewItems(String GoodsName,String id){
-              //id GoodsIDselected of sender
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: new Text("؟"+GoodsName+"هل تريد تبديل"),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: new Text("بدل"),
-                        onPressed: () {
-                          print("i am here 1");
-                          SendRequest(GoodsName,id);
-                          widget.owner;
-                          widget.IDgoods;
-
-                          // getAllDocs() {
-                          //          const ref = this.db.collection('items');
-                          //          return ref.valueChanges({idField: 'customIdName'});
-                          //     }
-
-
-
-// db.collection('goods').add({
-//   ''
-// });
-
-
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      FlatButton(
-                        child: new Text("تراجع"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            }
+//             getListViewItems(String GoodsName,String id){
+//               //id GoodsIDselected of sender
+//               showDialog(
+//                 context: context,
+//                 builder: (BuildContext context) {
+//                   return AlertDialog(
+//                     title: new Text("؟"+GoodsName+"هل تريد تبديل"),
+//                     actions: <Widget>[
+//                       FlatButton(
+//                         child: new Text("بدل"),
+//                         onPressed: () {
+//                           print("i am here 1");
+//                           SendRequest(GoodsName,id);
+//                           widget.owner;
+//                           widget.IDgoods;
+//
+//                           // getAllDocs() {
+//                           //          const ref = this.db.collection('items');
+//                           //          return ref.valueChanges({idField: 'customIdName'});
+//                           //     }
+//
+//
+//
+// // db.collection('goods').add({
+// //   ''
+// // });
+//
+//
+//                           Navigator.of(context).pop();
+//                         },
+//                       ),
+//                       FlatButton(
+//                         child: new Text("تراجع"),
+//                         onPressed: () {
+//                           Navigator.of(context).pop();
+//                         },
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               );
+//             }
 
             String GoodsNameselected;
             String GoodsIDselected;
@@ -230,14 +230,52 @@ class _swapRequest extends State<swapRequest> {
 
                 children: snapshot.data!.docs.map((doc) =>  ListTile(
 
-                  title: Text(GoodsNameselected=doc.data()['gName']),
+                  title: Text(doc.data()['gName']),
                   onTap: ()=>{
                     // _selectedIndex
 //doc.data().doc.id,;
 
-                    GoodsIDselected=doc.id,
+                    // GoodsIDselected=doc.id,
+                  showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                  return AlertDialog(
+                  title: new Text("؟"+doc.data()['gName']+"هل تريد تبديل"),
+                  actions: <Widget>[
+                  FlatButton(
+                  child: new Text("بدل"),
+                  onPressed: () {
+                  print("i am here 1");
+                  SendRequest(doc.data()['gName'],doc.id);
+                  widget.owner;
+                  widget.IDgoods;
 
-                    getListViewItems(GoodsNameselected,GoodsIDselected)
+                  // getAllDocs() {
+                  //          const ref = this.db.collection('items');
+                  //          return ref.valueChanges({idField: 'customIdName'});
+                  //     }
+
+
+
+// db.collection('goods').add({
+//   ''
+// });
+
+
+                  Navigator.of(context).pop();
+                  },
+                  ),
+                  FlatButton(
+                  child: new Text("تراجع"),
+                  onPressed: () {
+                  Navigator.of(context).pop();
+                  },
+                  ),
+                  ],
+                  );
+                  },
+                  )
+                    //getListViewItems(GoodsNameselected,GoodsIDselected)
                   },
 
 

@@ -62,7 +62,7 @@ String senderId='';
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
-        IDgoods:element.id
+        IDgoods:element.id,
       );
      GoodsReceiving.add(GoodsReceivingData);
         GoodsList = GoodsReceiving;
@@ -141,6 +141,10 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: "0")
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -240,6 +244,10 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: "2") //2
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -288,6 +296,11 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '4')
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
+
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -336,6 +349,10 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '5')
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -384,6 +401,10 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '6')
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -431,6 +452,10 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '7')
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -478,6 +503,10 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '8')
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -556,6 +585,10 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: "00")
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
     querySnapshot.docs.forEach((element) {
       burgerCategoriesModle = Product(
@@ -635,6 +668,10 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: "55")
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
     querySnapshot.docs.forEach((element) {
       recipeCategoriesModle = Product(
@@ -664,6 +701,10 @@ String senderId='';
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: "66")
+        .where(
+      "Status",
+      isEqualTo: 'available',
+    )
         .get();
     querySnapshot.docs.forEach((element) {
       pizzaCategoriesModle = Product(
