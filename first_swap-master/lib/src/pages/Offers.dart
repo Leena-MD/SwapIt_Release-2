@@ -442,20 +442,25 @@ backgroundColor: Colors.white,
 
 }
 
-class CustomBottomNavigationBar extends StatefulWidget {
+  class CustomBottomNavigationBar extends StatefulWidget {
   final int defaultSelectedIndex;
   final Function(int) onChange;
   final List<IconData> iconList;
 
   CustomBottomNavigationBar(
-      {this.defaultSelectedIndex = 0,
-        required this.iconList,
-        required this.onChange});
+  {this.defaultSelectedIndex = 0,
+  required this.iconList,
+  required this.onChange});
 
   @override
   _CustomBottomNavigationBarState createState() =>
-      _CustomBottomNavigationBarState();
-}
+  _CustomBottomNavigationBarState();
+  }
+
+
+
+
+
 
 
 
