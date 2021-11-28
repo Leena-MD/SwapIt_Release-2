@@ -347,7 +347,22 @@ String reGoodsId ;
       'Status':status
 
     });
-
+    // QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
+    //     .collection('goods')
+    //     .where("Status", isEqualTo:
+    // "waiting"
+    // )
+    //     .where("receiver goods", isEqualTo:
+    // receivergoodsId
+    // )
+    //     .get());
+    // if (querySnapshot.docs.isNotEmpty) await querySnapshot.docs
+    //     .update('YourUpdateData');
+    //
+    // querySnapshot.docs.forEach((element) {
+    //   ["receiver goods"]=['available']
+    //
+    // });
 
       Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
 
