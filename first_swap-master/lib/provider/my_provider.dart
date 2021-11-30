@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goods.dart';
-
+import 'package:first_swap/models/request.dart';
+import 'package:first_swap/models/requestModel.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 //import 'package:foodapp/modles/cart_modle.dart';
 //import 'package:foodapp/modles/categories_modle.dart';
@@ -12,6 +14,56 @@ import 'package:flutter/cupertino.dart';
 class MyProvider extends ChangeNotifier {
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String uiduser = '';
+
+///////////////////  Offers ////////////////
+  List<Product> GoodsList = [];
+  late Product GoodsReceivingData;
+  Future<void> getGoodsReceiving() async {
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+    String receiverId = '';
+    String goodsSend = '';
+    String senderId = '';
+
+    List<Product> GoodsReceiving = [];
+    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
+        .collection('goods')
+        .where("Status", isEqualTo: "waiting")
+        .where("receiverID", isEqualTo: uiduser)
+        .get());
+
+    querySnapshot.docs.forEach((element) {
+      GoodsReceivingData = Product(
+        image: element.data()['image'],
+        title: element.data()['gName'],
+        description: element.data()['Description'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods: element.id,
+      );
+      GoodsReceiving.add(GoodsReceivingData);
+      GoodsList = GoodsReceiving;
+    });
+
+    notifyListeners();
+  }
+
+  get throwGoodsReceivingList {
+    return GoodsList;
+  }
 
 ///////////////////  category 1 ////////////////
   List<Product> booksList = [];
@@ -23,6 +75,10 @@ class MyProvider extends ChangeNotifier {
         .where(
           "cate",
           isEqualTo: '3',
+        )
+        .where(
+          "Status",
+          isEqualTo: 'available',
         )
         .get();
 
@@ -42,15 +98,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       booksModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         books.add(booksModle);
         booksList = books;
@@ -71,6 +126,10 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: "0")
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -88,15 +147,14 @@ class MyProvider extends ChangeNotifier {
     }
     querySnapshot.docs.forEach((element) {
       computerModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         newComputerList.add(computerModle);
         computerList = newComputerList;
@@ -117,6 +175,10 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '1')
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -135,16 +197,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       kidsModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
 
       if (element.data()['owner'] != uiduser) {
         newKidsList.add(kidsModle);
@@ -166,6 +226,10 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: "2") //2
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -184,16 +248,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       HouseModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         newHouseList.add(HouseModle);
         HouseList = newHouseList;
@@ -214,6 +276,10 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '4')
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -232,16 +298,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       BagModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         newBagList.add(BagModle);
         BagList = newBagList;
@@ -262,6 +326,10 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '5')
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -280,16 +348,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       perfumeModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         newPerfumeList.add(perfumeModle);
         perfumeList = newPerfumeList;
@@ -310,6 +376,10 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '6')
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -328,15 +398,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       gymModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         newGymList.add(gymModle);
         gymList = newGymList;
@@ -357,6 +426,10 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '7')
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -375,15 +448,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       clothesModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         newClothesList.add(clothesModle);
         clothesList = newClothesList;
@@ -404,6 +476,10 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: '8')
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
@@ -422,15 +498,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       petModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         newPetList.add(petModle);
         petList = newPetList;
@@ -482,18 +557,21 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: "00")
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
     querySnapshot.docs.forEach((element) {
       burgerCategoriesModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       newBurgerCategoriesList.add(burgerCategoriesModle);
       burgerCategoriesList = newBurgerCategoriesList;
     });
@@ -501,6 +579,53 @@ class MyProvider extends ChangeNotifier {
 
   get throwBurgerCategoriesList {
     return burgerCategoriesList;
+  }
+
+  ////////////////request//////////////
+
+  List<Product> requestList = [];
+  late Product requestModle;
+  Future<void> getrequest() async {
+    List<Product> newrequestList = [];
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('goods')
+        .where("cate", isEqualTo: '5')
+        .get();
+
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+    querySnapshot.docs.forEach((element) {
+      petModle = Product(
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
+      if (element.data()['owner'] != uiduser) {
+        newrequestList.add(requestModle);
+        requestList = newrequestList;
+      }
+    });
+    notifyListeners();
+  }
+
+  get throwrequstList {
+    return requestList;
   }
 
   ///////////////Recipe categories list//////////
@@ -511,18 +636,21 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: "55")
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
     querySnapshot.docs.forEach((element) {
       recipeCategoriesModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       newrecipeCategoriesList.add(recipeCategoriesModle);
       recipeCategoriesList = newrecipeCategoriesList;
     });
@@ -540,18 +668,21 @@ class MyProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
         .where("cate", isEqualTo: "66")
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
         .get();
     querySnapshot.docs.forEach((element) {
       pizzaCategoriesModle = Product(
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id
-      );
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods: element.id);
       newPizzaCategoriesList.add(pizzaCategoriesModle);
       pizzaCategoriesList = newPizzaCategoriesList;
     });

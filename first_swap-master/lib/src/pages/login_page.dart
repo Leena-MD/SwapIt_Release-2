@@ -230,6 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(color: Colors.black54),
                     ),
                     SizedBox(height: 50),
+               
                   ],
                 ),
               ),
@@ -248,10 +249,8 @@ class _LoginPageState extends State<LoginPage> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "تم تسجيل الدخول بنجاح"),
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => HomePage(
-                            userId: uid.user!.uid.toString(),
-                          ))),
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => HomePage())),
                 });
         pass1cont.clear();
 

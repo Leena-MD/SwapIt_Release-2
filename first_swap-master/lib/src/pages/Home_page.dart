@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/fluttericon.dart';
 import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/books_category.dart';
@@ -10,6 +8,11 @@ import 'package:first_swap/src/pages/perfume.dart';
 import 'package:first_swap/src/pages/pet.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:first_swap/fluttericon.dart';
+import 'package:first_swap/src/widgets/app_outlinebutton.dart';
+import 'package:first_swap/src/widgets/app_textfield.dart';
+import 'package:first_swap/themes.dart';
+import 'Intrests_page.dart';
 import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
@@ -21,14 +24,8 @@ import 'bags.dart';
 import 'pet.dart';
 
 class HomePage extends StatefulWidget {
-  final String? userId;
-
-  const HomePage({Key? key, this.userId}) : super(key: key);
-
   @override
-  State<StatefulWidget> createState() {
-    return _HomePage();
-  }
+  _HomePage createState() => _HomePage();
 }
 
 class _HomePage extends State<HomePage> {
@@ -38,7 +35,6 @@ class _HomePage extends State<HomePage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         bottomNavigationBar: CustomBottomNavigationBar(
-          uid: widget.userId,
           iconList: [
             Icons.home,
             Icons.add_to_photos,
@@ -445,7 +441,6 @@ class SingleItem extends StatelessWidget {
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  final String? uid;
   final int defaultSelectedIndex;
   final Function(int) onChange;
   final List<IconData> iconList;
@@ -453,8 +448,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
   CustomBottomNavigationBar(
       {this.defaultSelectedIndex = 0,
       required this.iconList,
-      required this.onChange,
-      this.uid});
+      required this.onChange});
 
   @override
   _CustomBottomNavigationBarState createState() =>
@@ -493,47 +487,23 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         widget.onChange(index);
 
         setState(() {
-          String? id;
-          final firebaseUser = FirebaseAuth.instance.currentUser;
-          if (firebaseUser != null)
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(firebaseUser.uid)
-                .get()
-                .then((ds) {
-              id = ds.data()!['uid'];
-            }).catchError((e) {
-              print(e);
-            });
           _selectedIndex = index;
           if (_selectedIndex == 0)
             Navigator.push(this.context,
                 MaterialPageRoute(builder: (context) => HomePage()));
           if (_selectedIndex == 1)
-            Navigator.push(
-                this.context,
-                MaterialPageRoute(
-                    builder: (context) => MyItems(
-                          userId: widget.uid,
-                        )));
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => MyItems()));
           if (_selectedIndex == 2)
-            Navigator.push(
-                this.context,
-                MaterialPageRoute(
-                    builder: (context) => PostPage(
-                          userId: widget.uid,
-                        )));
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => PostPage()));
 
           if (_selectedIndex == 3)
             Navigator.push(this.context,
                 MaterialPageRoute(builder: (context) => Offers()));
           if (_selectedIndex == 4)
-            Navigator.push(
-                this.context,
-                MaterialPageRoute(
-                    builder: (context) => ProfilePage(
-                          userId: widget.uid,
-                        )));
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => ProfilePage()));
         });
       },
       child: Container(
