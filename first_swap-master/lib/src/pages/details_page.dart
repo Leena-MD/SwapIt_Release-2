@@ -183,7 +183,7 @@ class _DetailPageState extends State<DetailPage> {
                       Divider(
                         height: 0.2,
                         color: Colors.grey,
-                      ),
+                      ),   
                       ListTile(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0.0)),

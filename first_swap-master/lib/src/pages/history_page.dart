@@ -12,7 +12,7 @@ import 'Post_page.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
 import 'details_page.dart';
-import 'details_requests.dart';
+import 'details_requests.dart';   
 final firebaseUser =  FirebaseAuth.instance.currentUser;
 String userid= firebaseUser!.uid;
 

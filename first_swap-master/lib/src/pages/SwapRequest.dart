@@ -42,7 +42,7 @@ class _swapRequest extends State<swapRequest> {
   String receivergoods='';
   String receiverID='';
   String requeststatus='';
-  String senderID='';
+  String senderID='';    
   String sendergoods='';
 
   final db = FirebaseFirestore.instance;

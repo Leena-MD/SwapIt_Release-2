@@ -14,7 +14,7 @@ import 'details_page.dart';
 import 'details_requests.dart';
 final firebaseUser =  FirebaseAuth.instance.currentUser;
 String userid= firebaseUser!.uid;
-
+  
 class Offers extends StatefulWidget {
 
   _Offers createState() => _Offers();

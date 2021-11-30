@@ -79,7 +79,7 @@ late Product GoodsReceivingData;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
-          .doc(firebaseUser.uid)
+          .doc(firebaseUser.uid)  
           .get()
           //.then((value) => null)
           .then((ds) {
