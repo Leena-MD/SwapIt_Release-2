@@ -249,19 +249,6 @@ class _swapRequest extends State<swapRequest> {
                   SendRequest(doc.data()['gName'],doc.id);
                   widget.owner;
                   widget.IDgoods;
-
-                  // getAllDocs() {
-                  //          const ref = this.db.collection('items');
-                  //          return ref.valueChanges({idField: 'customIdName'});
-                  //     }
-
-
-
-// db.collection('goods').add({
-//   ''
-// });
-
-
                   Navigator.of(context).pop();
                   },
                   ),
@@ -275,7 +262,6 @@ class _swapRequest extends State<swapRequest> {
                   );
                   },
                   )
-                    //getListViewItems(GoodsNameselected,GoodsIDselected)
                   },
 
 

@@ -79,6 +79,70 @@ String senderId='';
   }
 
 
+
+///////////////////  History ////////////////
+    List<Product> HistoryList = [];
+late Product HistoryListData;
+  Future<void> getHistoryList() async {
+
+   final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+String receiverId='';
+String goodsSend='';
+String senderId='';
+ 
+
+        
+    List<Product> GoodsHistory = [];
+    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
+        .collection('goods')
+        .where("Status", isEqualTo:
+         "done"
+    )
+        .where("receiverID", isEqualTo:
+    uiduser
+         )
+        .get()) ;
+
+ 
+  
+        querySnapshot.docs.forEach((element) {
+
+      HistoryListData = Product(
+        image: element.data()['image'],
+        title: element.data()['gName'],
+        description: element.data()['Description'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id,
+      );
+     GoodsHistory.add(HistoryListData);
+        HistoryList = GoodsHistory;
+      
+    });
+      
+      
+    notifyListeners();
+       
+  }
+
+ get throwHistoryList {
+    return HistoryList;
+  }
+
 ///////////////////  category 1 ////////////////
   List<Product> booksList = [];
   late Product booksModle;
@@ -394,7 +458,7 @@ String senderId='';
   }
 
 /////////////////category 7 /////////////
-  List<Product> gymList = [];
+  List<Product>? gymList = [];
   late Product gymModle;
   Future<void> getGymCategory() async {
     List<Product> newGymList = [];
