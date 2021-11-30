@@ -1,17 +1,15 @@
-// ignore: file_names
-// ignore: file_names
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goodsMod.dart';
+import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/MyItems.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'image_storage.dart';
-
 
 String userID = "";
 int num = 1;
@@ -52,7 +50,6 @@ class _EditItem extends State<EditItem> {
 
   String imagePath = "";
   String imageName = "";
-  bool Path = false;
 
   final picker = ImagePicker();
 
@@ -72,12 +69,17 @@ class _EditItem extends State<EditItem> {
     goodDesc.text = widget.desc.toString();
     cate = widget.cat.toString();
     imagePath = widget.image.toString();
-    Path = false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var studentNumberController;
+    var validateStudentNumber;
+    var studentEmailController;
+    var studentPhoneNumberController;
+    var queryController;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -311,7 +313,6 @@ class _EditItem extends State<EditItem> {
                                     textAlign: TextAlign.right,
                                   ),
                                   onTap: () async {
-                                    // ignore: deprecated_member_use
                                     final pickedFile = await picker.getImage(
                                         source: ImageSource.gallery);
 
@@ -319,7 +320,6 @@ class _EditItem extends State<EditItem> {
                                       setState(() {
                                         imagePath = pickedFile.path;
                                         imageName = goodName.text;
-                                        Path = true;
                                       });
                                     }
                                   },
@@ -366,7 +366,6 @@ class _EditItem extends State<EditItem> {
                                   ),
                                   height: 60.0,
                                   padding: const EdgeInsets.all(10.0),
-                                  // ignore: deprecated_member_use
                                   child: RaisedButton.icon(
                                     color: Colors.cyan[800],
                                     label: Text(
@@ -402,15 +401,15 @@ class _EditItem extends State<EditItem> {
 
   String url = "";
 
-  String uiduser = userID = FirebaseAuth.instance.currentUser!.uid;
+  String uiduser = '';
   String st = "available";
   update(String doc, String name, String des, int cat, String url,
-      String userID, int num, String st, String cate, bool path) async {
+      String userID, int num, String st, String cate) async {
     final _auth = FirebaseAuth.instance;
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
-    this.url = url;
+
     goodsModel goodsMo = goodsModel();
 
     goodsMo.name = goodName.text;
@@ -425,11 +424,11 @@ class _EditItem extends State<EditItem> {
     final firebaseUser = await FirebaseAuth.instance.currentUser;
 
     if (_formKey.currentState!.validate()) {
-      if (Path == true) {
+      if (imagePath != "") {
         storage.uploadImage(imagePath, imageName).then((value) => url = value);
         url = await Storage().uploadImage(imagePath, imageName);
         print("1");
-      } else if (imagePath == "") {
+      } else {
         Fluttertoast.showToast(msg: "يجب اضافة صورة ");
       }
 
@@ -447,38 +446,14 @@ class _EditItem extends State<EditItem> {
       print("2");
 
       print("3");
-      if (imagePath != "" && path == true) {
-        //   FirebaseFirestore.instance.collection("goods").doc(doc).delete();
-        var ref = FirebaseFirestore.instance.collection("goods").doc(doc);
-
-        ref.update({
+      if (imagePath != "") {
+        FirebaseFirestore.instance.collection("goods").doc(doc).delete();
+        var ref = FirebaseFirestore.instance.collection("goods").doc();
+        ref.set({
           'gName': name,
           'Description': des,
           'Category': cat,
           'image': url,
-          'numGood': num,
-          'Status': st,
-          'owner': uiduser,
-          'cate': cate,
-        });
-
-        Fluttertoast.showToast(msg: "تم التعديل بنجاح ");
-
-        Navigator.of(this.context).pushReplacement(MaterialPageRoute(
-            builder: (context) => MyItems(
-                  userId: userID,
-                )));
-        return true;
-      } else if (imagePath != "" && path == false) {
-        //   FirebaseFirestore.instance.collection("goods").doc(doc).delete();
-        var ref = FirebaseFirestore.instance.collection("goods").doc(doc);
-        goodsModel goodsMo = goodsModel();
-        // // storage.uploadImage(imagePath, imageName).then((value) => url = value);
-        url = await goodsMo.img.toString();
-        ref.update({
-          'gName': name,
-          'Description': des,
-          'Category': cat,
           'numGood': num,
           'Status': st,
           'owner': uiduser,
@@ -519,12 +494,11 @@ class _EditItem extends State<EditItem> {
       num,
       st,
       cate,
-      Path,
     );
   }
 
   submitAction(BuildContext context) {
-    update(
+    addadata(
       doc,
       goodName.text,
       goodDesc.text,
@@ -534,7 +508,6 @@ class _EditItem extends State<EditItem> {
       num,
       st,
       cate,
-      Path,
     );
   }
 }

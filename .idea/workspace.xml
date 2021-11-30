@@ -28,7 +28,20 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e6bf522-e4ba-4112-9733-49fd7c9c167a" name="Default Changelist" comment="Abeer" />
+    <list default="true" id="2e6bf522-e4ba-4112-9733-49fd7c9c167a" name="Default Changelist" comment="Abeer">
+      <change afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/SwapRequest.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_contact.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/provider/my_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/provider/my_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/EditItem.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/EditItem.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItemCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItemCard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItems.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItems.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Offers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Offers.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_requests.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_requests.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/history_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/history_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/swap_request.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/swap_request.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -187,7 +200,28 @@
       <option name="project" value="LOCAL" />
       <updated>1638301329644</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Abeer">
+      <created>1638301623836</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1638301623836</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Abeer">
+      <created>1638301637826</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1638301637826</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Abeer">
+      <created>1638301752292</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1638301752292</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -303,14 +337,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="651" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1637851699727" />
+    <state x="132" y="57" key="MergeDialog" timestamp="1638301817766">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="132" y="57" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1638301817766" />
+    <state x="324" y="127" key="MultipleFileMergeDialog" timestamp="1638301819044">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="324" y="127" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1638301819044" />
     <state x="187" y="10" key="SettingsEditor" timestamp="1637752765670">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="187" y="10" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1637752765670" />
-    <state x="278" y="98" key="Vcs.Push.Dialog.v2" timestamp="1638301632412">
+    <state x="278" y="98" key="Vcs.Push.Dialog.v2" timestamp="1638301755846">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="278" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1638301632412" />
+    <state x="278" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1638301755846" />
     <state x="495" y="279" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1638301316859">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
