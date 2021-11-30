@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_swap/constants.dart';
-import 'package:first_swap/models/product.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/clothes.dart';
@@ -50,7 +49,6 @@ class _DetailRequestState extends State<DetailRequest> {
   Widget build(BuildContext context) {
     MyProvider provider = Provider.of<MyProvider>(context);
     return Scaffold(
-      
       appBar: AppBar(
         backgroundColor: Colors.cyan[800],
         title: Center(
@@ -176,51 +174,13 @@ class _DetailRequestState extends State<DetailRequest> {
                         isThreeLine: true,
                         minLeadingWidth: double.minPositive,
                       ),
-                       Divider(
-                        height: 0.2,
-                        color: Colors.grey,
-                      ),
-ListTile(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(0.0)),
-                        selected: true,
-                        selectedTileColor: Colors.white70,
-                        //selectedTileColor: Colors.white38,
-                        
-                        title: Text(
-                          " يريد التبادل معك بهذا المنتج",
-                          textScaleFactor: 1,
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.blueGrey,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        minLeadingWidth: double.minPositive,
-                      ),
-
- 
-                      
                       SizedBox(height: 15),
-
-
-
-
-
-
-
-
-
-
-
-
                       RaisedButton(
                         color: Colors.lightGreen,
                         onPressed: () {
                           (
-//mygoods()
-                            accept()
-                              
+
+                              accept()
                           );
                         },
 
@@ -285,7 +245,6 @@ ListTile(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             )
-                            
                           ],
                         ),
                       ),
@@ -307,17 +266,14 @@ ListTile(
 
 
 
-
-
-
     String goodsId =widget.IDgoods;
     String receivergoodsId="" ;
-    String ownerGoods="";
     // print(widget.IDgoods);
 
     var status ="done";
 
 
+    String reGoodsId ;
 
     await FirebaseFirestore.instance.collection('goods').doc(goodsId)
         .update
@@ -333,18 +289,14 @@ ListTile(
     //.then((value) => null)
         .then((ds) {
       receivergoodsId = ds.data()!['receiver goods'];
-      ownerGoods=ds.data()!['owner'];
-
     });
     await FirebaseFirestore.instance.collection('goods').doc(receivergoodsId)
         .update
       ({
-'receiver goods':goodsId,
-      'Status':status,
-'receiverID':ownerGoods
+
+      'Status':status
 
     });
-
     QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
         .collection('goods')
         .where("Status", isEqualTo:
@@ -399,11 +351,6 @@ ListTile(
 
 
     Fluttertoast.showToast(msg: "تم رفض الطلب بنجاح !");
-    MyProvider provider = Provider.of<MyProvider>(context);
-   List<Product> GoodsList = [];
-
-    provider.getGoodsReceiving();
-      GoodsList = provider.throwGoodsReceivingList;
 
     Navigator.push(
         this.context, MaterialPageRoute(builder: (context) => Offers()));
@@ -442,88 +389,4 @@ ListTile(
 
 
   }
-  mygoods () async {
-    var  myimage;
-     
-
-    var receivergoodsId;
-    String goodsId =widget.IDgoods;
-await FirebaseFirestore.instance
-        .collection('goods')
-        .doc(goodsId)
-        .get()
-    //.then((value) => null)
-        .then((ds) {
-      receivergoodsId = ds.data()!['receiver goods'];
-
-    });
-
-
-
-
-
-
-
-String mygoodsName='';
-
- await FirebaseFirestore.instance
-        .collection('goods')
-        .doc(receivergoodsId)
-        .get()
-        .then((ds) {
-      mygoodsName = ds.data()!['gName'];
-      myimage= ds.data()!['image'];
-
-
-    });
-// categoriesContainer1(myimage,mygoodsName);
-      
-        showDialog(
-
-
-
-
-
-          
-                  context: context,
-                  builder: (BuildContext context) {
-                  return AlertDialog( 
-
-
-          title:Column(
-          children:[
-            Image.network(myimage,
-              width: 200, height: 200, fit: BoxFit.cover
-
-              ),
-              SizedBox(
-          height: 10,
-        ),
-            Text(mygoodsName,
-            style: TextStyle(
-            fontSize: 20,
-            color: Colors.blueGrey[900],
-          ),)
-            ]
-          ),
-                  actions: <Widget>[
-                  FlatButton(
-                  child: new Text("تراجع",
-                   style: TextStyle(
-            fontSize: 20,
-            color: Colors.blueGrey[900],
-          ),),
-                  onPressed: () {               
-                   Navigator.of(context).pop();
-                  },
-                  ),
-                 
-                  ],
-                  );
-                  },
-                  );
-         
-
-  }
-   
 }

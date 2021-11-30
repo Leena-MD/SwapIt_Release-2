@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_swap/models/goodsMod.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/MyItems.dart';
@@ -10,6 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'image_storage.dart';
+
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
 
 String userID = "";
 int num = 1;
@@ -50,6 +54,7 @@ class _EditItem extends State<EditItem> {
 
   String imagePath = "";
   String imageName = "";
+  bool Path = false;
 
   final picker = ImagePicker();
 
@@ -69,6 +74,7 @@ class _EditItem extends State<EditItem> {
     goodDesc.text = widget.desc.toString();
     cate = widget.cat.toString();
     imagePath = widget.image.toString();
+    Path = false;
     super.initState();
   }
 
@@ -320,6 +326,7 @@ class _EditItem extends State<EditItem> {
                                       setState(() {
                                         imagePath = pickedFile.path;
                                         imageName = goodName.text;
+                                        Path = true;
                                       });
                                     }
                                   },
@@ -401,15 +408,15 @@ class _EditItem extends State<EditItem> {
 
   String url = "";
 
-  String uiduser = '';
+  String uiduser = userID = FirebaseAuth.instance.currentUser!.uid;
   String st = "available";
   update(String doc, String name, String des, int cat, String url,
-      String userID, int num, String st, String cate) async {
+      String userID, int num, String st, String cate, bool path) async {
     final _auth = FirebaseAuth.instance;
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
-
+    this.url = url;
     goodsModel goodsMo = goodsModel();
 
     goodsMo.name = goodName.text;
@@ -424,11 +431,11 @@ class _EditItem extends State<EditItem> {
     final firebaseUser = await FirebaseAuth.instance.currentUser;
 
     if (_formKey.currentState!.validate()) {
-      if (imagePath != "") {
+      if (Path == true) {
         storage.uploadImage(imagePath, imageName).then((value) => url = value);
         url = await Storage().uploadImage(imagePath, imageName);
         print("1");
-      } else {
+      } else if (imagePath == "") {
         Fluttertoast.showToast(msg: "يجب اضافة صورة ");
       }
 
@@ -446,14 +453,38 @@ class _EditItem extends State<EditItem> {
       print("2");
 
       print("3");
-      if (imagePath != "") {
-        FirebaseFirestore.instance.collection("goods").doc(doc).delete();
-        var ref = FirebaseFirestore.instance.collection("goods").doc();
-        ref.set({
+      if (imagePath != "" && path == true) {
+        //   FirebaseFirestore.instance.collection("goods").doc(doc).delete();
+        var ref = FirebaseFirestore.instance.collection("goods").doc(doc);
+
+        ref.update({
           'gName': name,
           'Description': des,
           'Category': cat,
           'image': url,
+          'numGood': num,
+          'Status': st,
+          'owner': uiduser,
+          'cate': cate,
+        });
+
+        Fluttertoast.showToast(msg: "تم التعديل بنجاح ");
+
+        Navigator.of(this.context).pushReplacement(MaterialPageRoute(
+            builder: (context) => MyItems(
+                  userId: userID,
+                )));
+        return true;
+      } else if (imagePath != "" && path == false) {
+        //   FirebaseFirestore.instance.collection("goods").doc(doc).delete();
+        var ref = FirebaseFirestore.instance.collection("goods").doc(doc);
+        goodsModel goodsMo = goodsModel();
+        // // storage.uploadImage(imagePath, imageName).then((value) => url = value);
+        url = await goodsMo.img.toString();
+        ref.update({
+          'gName': name,
+          'Description': des,
+          'Category': cat,
           'numGood': num,
           'Status': st,
           'owner': uiduser,
@@ -494,11 +525,12 @@ class _EditItem extends State<EditItem> {
       num,
       st,
       cate,
+      Path,
     );
   }
 
   submitAction(BuildContext context) {
-    addadata(
+    update(
       doc,
       goodName.text,
       goodDesc.text,
@@ -508,6 +540,7 @@ class _EditItem extends State<EditItem> {
       num,
       st,
       cate,
+      Path,
     );
   }
 }

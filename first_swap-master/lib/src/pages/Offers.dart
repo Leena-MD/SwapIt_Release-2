@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goods.dart';
 import 'package:first_swap/models/goodsMod.dart';
+import 'package:first_swap/models/request.dart';
+import 'package:first_swap/models/requestModel.dart';
 import 'package:first_swap/provider/my_provider.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:first_swap/src/widgets/bottom_Container.dart';
@@ -40,14 +42,112 @@ class _Offers extends State<Offers> {
 
 
 
+  Future<bool> _fetchReq() async {
+    final testo= db.collection('goods')
+        .where("owner",isEqualTo: userid ,)
+        .where("Status",isEqualTo:"available").snapshots();
+    // فيه ايرور بالسناب شوت كابشن
 
-   List<Product> GoodsList = [];
+    final myRequest=  db.collection('Requests')
+        .where("receiverID",isEqualTo: userid )
+        .where("request status",isEqualTo:"process")
+        .snapshots();
 
-  // late Product GoodsReceivingData;
+    // QuerySnapshot myRequest = await
+    // FirebaseFirestore.instance
+    //       .collection('Requests')
+    //       .where("receiverID", isEqualTo: userid)
+    //       .where("request status",isEqualTo:"process")
+    //       .get()
 
-//    List<Product> newGoodsList = [];
+        ;
+    if (myRequest==null) {
+
+      //alert msj
+      AlertDialog(
+        title: new Text("!لم تصلك اي طلبات "),);
+      print("لا توجد لديك طلبات");
+      return  false;
+
+    }else{
+
+//   late  request Offers1;
+
+//  myRequest.docs.forEach((element) {
+//        Offers1 = request(
+
+//         receivergoods:element.data()['receiver goods'],
+//         receiverID:element.data()['receiverID'],
+//         senderID:element.data()['sender ID'],
+//         sendergoods:element.data()['sender goods'],
+// requeststatus:element.data()['request status'],
+
+//       );
+//       //   db.collection('goods')
+//       //  .where(db.collection('goods').id
+//      // if (element.data()['sender goods'] == uiduser) {
+//  //   db.collection('goods')
+//       //  .where(db.collection('goods').id,isEqualTo:
+//       //   (db.collection('Requests').doc('sender goods')))
+//       //    .snapshots()
+
+//     });
+
+      //  _getGoodsReceiving();
+      print("كففوو");
+
+      return true;
+    }
+  }
 
 
+
+  List<Product> GoodsList = [];
+
+  late Product GoodsReceivingData;
+
+  Future<void> _getGoodsReceiving() async {
+
+
+    QuerySnapshot GoodsReceiving = await FirebaseFirestore.instance
+        .collection('goods')
+        .where((db.collection('goods').doc()),
+        isEqualTo: sendergoods)
+        .get()
+        .catchError((e) {
+      print(e);
+    });;
+
+    // if (GoodsReceiving==null) {
+
+    //   print("لا تجد لديك طلبات");
+    //   return false;
+
+    // }
+    List<Product> newGoodsList = [];
+
+    GoodsReceiving.docs.forEach((element) {
+      GoodsReceivingData = Product(
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          cate: element.data()['cate'],
+          IDgoods:element.id,
+
+      );
+
+      newGoodsList.add(GoodsReceivingData);
+      GoodsList = newGoodsList;
+    });
+    //   notifyListeners();
+
+  }
+  get throwGoodsReceivingList {
+    return GoodsList;
+  }
 
 
 
@@ -57,19 +157,15 @@ class _Offers extends State<Offers> {
 
 
   {
-    
+    //    _fetchReq();
 
 
     MyProvider provider = Provider.of<MyProvider>(context);
 
     provider.getGoodsReceiving();
-    
+    if(provider.throwGoodsReceivingList!=null) {
       GoodsList = provider.throwGoodsReceivingList;
-
-  
-   if(GoodsList.isEmpty){
-     Text("لاتوجد لديك طلبات");
-   }
+    }
 
     return SafeArea(
 
@@ -97,7 +193,18 @@ class _Offers extends State<Offers> {
                   child: Text("الطلبات",
                       style: TextStyle(fontSize: 20))),
             ),
-            body:         
+            body:
+//            StreamBuilder<QuerySnapshot>
+//         (stream:
+
+// //querySnapshot
+
+// db.collection('Requests')
+//       .where("receiverID",isEqualTo: userid )
+//      .where("request status",isEqualTo:"process")
+//       .snapshots(),     //S`endGoods.snapshots(),
+
+//         builder: (context, snapshot) {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children:
@@ -154,9 +261,18 @@ class _Offers extends State<Offers> {
                 )
               ],
             )
+          // throw UnimplementedError();
+          //       }
         )
+      //),
+
+      //}else here{}
+
     );
   }
+
+
+
 }
 
   class CustomBottomNavigationBar extends StatefulWidget {
@@ -289,5 +405,4 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
     );
   }
-  
 }
