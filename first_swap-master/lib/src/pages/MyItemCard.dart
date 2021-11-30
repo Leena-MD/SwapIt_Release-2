@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 
 class MyItemCard extends StatelessWidget {
   const MyItemCard(
-      {Key? key, this.image, this.name, this.description, this.onTap})
+      {Key? key,
+      this.image,
+      this.name,
+      this.description,
+      this.status,
+      this.onTap})
       : super(key: key);
 
   final String? image;
   final String? name;
   final String? description;
+  final String? status;
   final Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -18,10 +24,9 @@ class MyItemCard extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.0),
-              color: Colors.transparent,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black12,
+                  color: Colors.white12,
                   offset: const Offset(0.0, 0.0),
                   blurRadius: 4.0,
                   //spreadRadius: 1.0,
@@ -31,9 +36,15 @@ class MyItemCard extends StatelessWidget {
                   fit: BoxFit.fitWidth, image: NetworkImage(this.image ?? "")),
             ),
             height: 149,
+            margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            // width: MediaQuery.of(context).size.width*0.8,
           ),
           Container(
             height: 149,
+            margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            //  width: MediaQuery.of(context).size.width*0.8,
             alignment: Alignment.bottomRight,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
@@ -67,9 +78,34 @@ class MyItemCard extends StatelessWidget {
               ),
             ),
           ),
+          Container(
+            height: 60,
+            margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+            width: MediaQuery.of(context).size.width * 0.3,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.topCenter,
+                    colors: [Colors.black38, Colors.transparent])),
+            child: Container(
+              padding: EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  Text(
+                    "${this.status}",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
-

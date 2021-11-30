@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_swap/constants.dart';
-import 'package:first_swap/models/product.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/clothes.dart';
@@ -17,7 +16,7 @@ import 'package:provider/provider.dart';
 import 'Offers.dart';
 import 'books_category.dart';
 
-class DetailRequest extends StatefulWidget {
+class DetailContact extends StatefulWidget {
   final String image;
   final String description;
   final String owner ;
@@ -25,7 +24,7 @@ class DetailRequest extends StatefulWidget {
 
   final String name;
   final String cate;
-  DetailRequest(
+  DetailContact(
       {required this.image,
         required this.name,
         required this.description,
@@ -36,16 +35,21 @@ class DetailRequest extends StatefulWidget {
       });
 
   @override
-  _DetailRequestState createState() => _DetailRequestState();
+  _Details createState() => _Details();
 
 }
 final db = FirebaseFirestore.instance;
 
-class _DetailRequestState extends State<DetailRequest> {
+class _Details extends State<DetailContact> {
+    String FName='';
+  String LName='';
+  String phoneN='';
+  String userName='';
 
   int quantity = 1;
   @override
   Widget build(BuildContext context) {
+    accept();
     MyProvider provider = Provider.of<MyProvider>(context);
     return Scaffold(
       
@@ -174,19 +178,19 @@ class _DetailRequestState extends State<DetailRequest> {
                         isThreeLine: true,
                         minLeadingWidth: double.minPositive,
                       ),
-                       Divider(
+                        Divider(
                         height: 0.2,
                         color: Colors.grey,
                       ),
+                      
 ListTile(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
                         //selectedTileColor: Colors.white38,
-                        
                         title: Text(
-                          " يريد التبادل معك بهذا المنتج",
+                          "  التبادل  بهذا المنتج",
                           textScaleFactor: 1,
                           textAlign: TextAlign.right,
                           style: TextStyle(
@@ -197,96 +201,77 @@ ListTile(
                         minLeadingWidth: double.minPositive,
                       ),
 
- 
+
+                     
                       
-                      SizedBox(height: 15),
+                      // SizedBox(height: 15),
+                      
+ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0)),
+                        selected: true,
+                        selectedTileColor: Colors.white70,
+                        //selectedTileColor: Colors.white38,
+                        
+                        title: Text(
+                          phoneN+LName+FName+ "يمكنك التواصل مع ",
+                          textScaleFactor: 1,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.blueGrey,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        minLeadingWidth: double.minPositive,
+                      ),
 
+  
 
+//                       RaisedButton(
+//                         color: Colors.lightGreen,
+//                         onPressed: () {
+//                           (
 
-
-
-
-
-
-
-
-
-
-                      RaisedButton(
-                        color: Colors.lightGreen,
-                        onPressed: () {
-                          (
-//mygoods()
-                            accept()
+// // mygoods()
+//                               accept()
                               
-                          );
-                        },
+//                           );
+//                         },
 
 
 
 
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        elevation: 5,
-                        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.swap_calls_rounded,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              "قبول الطلب",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      RaisedButton(
-                        color: Colors.redAccent,
-                        onPressed: () {
-                          (
-
-                              reject()
-
-
-                          );
-
-                        },
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(30),
+//                         ),
+//                         elevation: 5,
+//                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+//                         child: Row(
+//                           mainAxisAlignment: MainAxisAlignment.center,
+//                           children: [
+//                             Icon(
+//                               Icons.swap_calls_rounded,
+//                               color: Colors.white,
+//                             ),
+//                             Text(
+//                               "قبول الطلب",
+//                               textAlign: TextAlign.center,
+//                               style: TextStyle(
+//                                   fontSize: 18,
+//                                   color: Colors.white,
+//                                   fontWeight: FontWeight.bold),
+//                             )
+//                           ],
+//                         ),
+//                       ),
 
 
 
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        elevation: 5,
-                        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.swap_calls_rounded,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              "رفض الطلب",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )
-                            
-                          ],
-                        ),
-                      ),
+
+
+
+
+
                     ],
                   ),
                 ),
@@ -313,17 +298,9 @@ ListTile(
     String ownerGoods="";
     // print(widget.IDgoods);
 
-    var status ="done";
 
 
 
-    await FirebaseFirestore.instance.collection('goods').doc(goodsId)
-        .update
-      ({
-
-      'Status':status
-
-    });
     await FirebaseFirestore.instance
         .collection('goods')
         .doc(goodsId)
@@ -334,36 +311,35 @@ ListTile(
       ownerGoods=ds.data()!['owner'];
 
     });
-    await FirebaseFirestore.instance.collection('goods').doc(receivergoodsId)
-        .update
-      ({
-'receiver goods':goodsId,
-      'Status':status,
-'receiverID':ownerGoods
+// print(ownerGoods);
+     await FirebaseFirestore.instance
+        .collection('users')
+        .doc(ownerGoods)
+        .get()
+        
+        .then((ds) {
+      FName = ds.data()!['FirstName'];
+      print(FName);
+      LName = ds.data()!['LastName'];
+      print(LName);
+      phoneN = ds.data()!['phoneN'];
+      print(phoneN);
+      userName = ds.data()!['UserName'];
+      print(userName);
 
-    });
+      });
 
-    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
-        .collection('goods')
-        .where("Status", isEqualTo:
-    "waiting"
-    )
-        .where("receiver goods", isEqualTo:
-    receivergoodsId
-    )
-        .get());
+    
+    
+   
 
-    querySnapshot.docs.forEach((element) {
+ 
 
-      rejecOtherGoods(element.id);
+    
+      print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"
+      +FName);
 
-
-    });
-
-
-    Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
-
-
+      //print(FName);
 
 
   }
@@ -397,11 +373,6 @@ ListTile(
 
 
     Fluttertoast.showToast(msg: "تم رفض الطلب بنجاح !");
-    MyProvider provider = Provider.of<MyProvider>(context);
-   List<Product> GoodsList = [];
-
-    provider.getGoodsReceiving();
-      GoodsList = provider.throwGoodsReceivingList;
 
     Navigator.push(
         this.context, MaterialPageRoute(builder: (context) => Offers()));
@@ -504,6 +475,14 @@ String mygoodsName='';
           ),)
             ]
           ),
+        //   SizedBox(
+        //   height: 10,
+        // ),
+       
+        
+
+                    
+                //  title: new Text("؟"+mygoodsName),
                   actions: <Widget>[
                   FlatButton(
                   child: new Text("تراجع",
