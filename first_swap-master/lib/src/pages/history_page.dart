@@ -153,17 +153,6 @@ String senderId='';
                       ),
             ),
             body:
-//            StreamBuilder<QuerySnapshot>
-//         (stream:
-
-// //querySnapshot
-
-// db.collection('Requests')
-//       .where("receiverID",isEqualTo: userid )
-//      .where("request status",isEqualTo:"process")
-//       .snapshots(),     //S`endGoods.snapshots(),
-
-//         builder: (context, snapshot) {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children:

@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goods.dart';
-import 'package:first_swap/models/request.dart';
-import 'package:first_swap/models/requestModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
@@ -15,11 +13,71 @@ class MyProvider extends ChangeNotifier {
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String uiduser = '';
 
+
+///////////////////  MyGoods ////////////////
+    List<Product> MyGoodsList = [];
+late Product MyGoodsData;
+  Future<void> getMyGoods() async {
+
+   final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+String receiverId='';
+String goodsSend='';
+String senderId='';
+ 
+
+        
+    List<Product> MyGoods = [];
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('goods')
+        .where("owner",isEqualTo: uiduser ,)
+        .where("Status",isEqualTo:"available")
+        .get();
+   
+        querySnapshot.docs.forEach((element) {
+      
+      MyGoodsData = Product(  
+        image: element.data()['image'],
+        title: element.data()['gName'],
+        description: element.data()['Description'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id,
+      );
+     MyGoods.add(MyGoodsData);
+        MyGoodsList = MyGoods; 
+      
+    });
+    if(querySnapshot.docs.isEmpty){
+  MyGoodsList=List.empty();
+}
+
+    notifyListeners();
+       
+  }
+
+ get throwMyGoodsList {    
+    return MyGoodsList;
+  }
 ///////////////////  Offers ////////////////
-  List<Product> GoodsList = [];
-  late Product GoodsReceivingData;
+    List<Product> GoodsList = [];
+late Product GoodsReceivingData;
   Future<void> getGoodsReceiving() async {
-    final firebaseUser = await FirebaseAuth.instance.currentUser;
+
+   final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -32,19 +90,26 @@ class MyProvider extends ChangeNotifier {
         print(e);
       });
     }
-    String receiverId = '';
-    String goodsSend = '';
-    String senderId = '';
+String receiverId='';
+String goodsSend='';
+String senderId='';
+ 
 
+        
     List<Product> GoodsReceiving = [];
     QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
         .collection('goods')
-        .where("Status", isEqualTo: "waiting")
-        .where("receiverID", isEqualTo: uiduser)
-        .get());
-
-    querySnapshot.docs.forEach((element) {
-      GoodsReceivingData = Product(
+        .where("Status", isEqualTo:
+         "waiting"
+    )
+        .where("receiverID", isEqualTo:
+    uiduser
+         )
+        .get()) ;
+   
+        querySnapshot.docs.forEach((element) {
+      
+      GoodsReceivingData = Product(  
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
@@ -52,18 +117,90 @@ class MyProvider extends ChangeNotifier {
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
-        IDgoods: element.id,
+        IDgoods:element.id,
       );
-      GoodsReceiving.add(GoodsReceivingData);
-      GoodsList = GoodsReceiving;
+     GoodsReceiving.add(GoodsReceivingData);
+        GoodsList = GoodsReceiving; 
+      
     });
 
+    if(querySnapshot.docs.isEmpty){
+  GoodsList=List.empty();
+}
+
     notifyListeners();
+       
   }
 
-  get throwGoodsReceivingList {
+ get throwGoodsReceivingList {    
     return GoodsList;
   }
+
+
+
+///////////////////  History ////////////////
+    List<Product> HistoryList = [];
+late Product HistoryListData;
+  Future<void> getHistoryList() async {
+
+   final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+String receiverId='';
+String goodsSend='';
+String senderId='';
+ 
+
+        
+    List<Product> GoodsHistory = [];
+    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
+        .collection('goods')
+        .where("Status", isEqualTo:
+         "done"
+    )
+        .where("receiverID", isEqualTo:
+    uiduser
+         )
+        .get()) ;
+
+ 
+  
+        querySnapshot.docs.forEach((element) {
+
+      HistoryListData = Product(
+        image: element.data()['image'],
+        title: element.data()['gName'],
+        description: element.data()['Description'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id,
+      );
+     GoodsHistory.add(HistoryListData);
+        HistoryList = GoodsHistory;
+      
+    });
+      
+      
+    notifyListeners();
+       
+  }
+
+ get throwHistoryList {
+    return HistoryList;
+  }
+
 
 ///////////////////  category 1 ////////////////
   List<Product> booksList = [];
