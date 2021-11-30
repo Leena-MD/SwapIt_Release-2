@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_swap/constants.dart';
+import 'package:first_swap/models/product.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/clothes.dart';
@@ -217,9 +218,8 @@ ListTile(
                         color: Colors.lightGreen,
                         onPressed: () {
                           (
-
-mygoods()
-                           //   accept()
+//mygoods()
+                            accept()
                               
                           );
                         },
@@ -399,6 +399,11 @@ mygoods()
 
 
     Fluttertoast.showToast(msg: "تم رفض الطلب بنجاح !");
+    MyProvider provider = Provider.of<MyProvider>(context);
+   List<Product> GoodsList = [];
+
+    provider.getGoodsReceiving();
+      GoodsList = provider.throwGoodsReceivingList;
 
     Navigator.push(
         this.context, MaterialPageRoute(builder: (context) => Offers()));
@@ -501,14 +506,6 @@ String mygoodsName='';
           ),)
             ]
           ),
-        //   SizedBox(
-        //   height: 10,
-        // ),
-       
-        
-
-                    
-                //  title: new Text("؟"+mygoodsName),
                   actions: <Widget>[
                   FlatButton(
                   child: new Text("تراجع",

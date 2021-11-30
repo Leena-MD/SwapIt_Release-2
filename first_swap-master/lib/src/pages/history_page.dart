@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goods.dart';
 import 'package:first_swap/models/goodsMod.dart';
-import 'package:first_swap/models/request.dart';
-import 'package:first_swap/models/requestModel.dart';
 import 'package:first_swap/provider/my_provider.dart';
 import 'package:first_swap/src/pages/Offers.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
