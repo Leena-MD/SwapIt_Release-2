@@ -6,6 +6,7 @@ import 'package:first_swap/provider/my_provider.dart';
 import 'package:first_swap/src/pages/Offers.dart';
 import 'package:first_swap/src/pages/details_contact.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
+import 'package:first_swap/src/pages/waiting.dart';
 import 'package:first_swap/src/widgets/bottom_Container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +33,7 @@ class _History extends State<History> {
   List<String> selectedCategory = [];
   String category1 = 'الطلبات';
   String category2 = ' السجل';
+  String category3 = 'قائمة الانتظار';
   final db = FirebaseFirestore.instance;
 
   String uiduser = '';
@@ -140,7 +142,7 @@ String senderId='';
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 70.0),
+                                vertical: 3.0, horizontal: 30.0),
 
                             decoration: BoxDecoration(
 
@@ -183,7 +185,7 @@ String senderId='';
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 70.0),
+                                vertical: 3.0, horizontal: 30.0),
                             decoration: BoxDecoration(
                               gradient: LinearGradient(colors: [
                                 Colors.blueGrey.withOpacity(0.3),
@@ -205,6 +207,38 @@ String senderId='';
                         SizedBox(
                           width: 2.0,
                         ),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: () {
+                            selectedCategory = [];
+                            selectedCategory.add(category3);
+
+                            setState(() {});
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => waiting()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 3.0, horizontal: 20.0),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                                Colors.blueGrey.withOpacity(0.3),
+                                Colors.blueGrey.withOpacity(0.015),
+                              ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(0)),
+                            ),
+                            child: Text(
+                              ' قائمة الانتظار',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+
+                          ),
+                        ),
 
                       ],
                     ),
@@ -220,6 +254,7 @@ String senderId='';
       ],
     );
   }
+
 
 
   Widget build(BuildContext context)
