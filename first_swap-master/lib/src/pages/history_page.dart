@@ -4,6 +4,7 @@ import 'package:first_swap/models/goods.dart';
 import 'package:first_swap/models/goodsMod.dart';
 import 'package:first_swap/provider/my_provider.dart';
 import 'package:first_swap/src/pages/Offers.dart';
+import 'package:first_swap/src/pages/details_contact.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:first_swap/src/widgets/bottom_Container.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,9 @@ class _History extends State<History> {
   String requeststatus='';
   String senderID='';
   String sendergoods='';
-
+  List<String> selectedCategory = [];
+  String category1 = 'الطلبات';
+  String category2 = ' السجل';
   final db = FirebaseFirestore.instance;
 
   String uiduser = '';
@@ -105,7 +108,118 @@ String senderId='';
     return HistoryList;
   }
 
+  Widget header() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          padding:
+          EdgeInsets.only(top: 4.0, left: 0.0, right: 0.0, bottom: 6.0),
+          child: Container(
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 4.0,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: () {
+                            selectedCategory = [];
+                            selectedCategory.add(category1);
 
+                            setState(() {});
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => Offers()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 70.0),
+
+                            decoration: BoxDecoration(
+
+                              gradient: LinearGradient(colors: [
+
+                                Colors.blueGrey.withOpacity(0.3),
+                                Colors.blueGrey.withOpacity(0.015),
+
+                              ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+
+                              borderRadius: BorderRadius.circular(0), // Creates border
+
+
+
+                            ),
+
+                            child: Text(
+                              'الطلبات',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+
+                          ),
+                        ),
+                        SizedBox(
+                          width: 2.0,
+                        ),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: () {
+                            selectedCategory = [];
+                            selectedCategory.add(category2);
+
+                            setState(() {});
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => History()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 70.0),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                                Colors.blueGrey.withOpacity(0.3),
+                                Colors.blueGrey.withOpacity(0.015),
+                              ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(0)),
+                            ),
+                            child: Text(
+                              ' السجل',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+
+                          ),
+                        ),
+                        SizedBox(
+                          width: 2.0,
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 6.0,
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
 
   Widget build(BuildContext context)
@@ -148,9 +262,10 @@ String senderId='';
               backgroundColor: Colors.cyan[800],
               
               title: Center(
-                  child: Text("الطلبات",
+                  child: Text("السجل",
                       style: TextStyle(fontSize: 20))
                       ),
+
             ),
             body:
             Column(
@@ -163,7 +278,7 @@ String senderId='';
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      // header(),
+                       header(),
                       //  recipe(),
                       //   pizza(),
                       //    drink(),
@@ -188,7 +303,7 @@ String senderId='';
                           onTap: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => DetailRequest(// بغيرها تصير صفحه خاصه في القبول والخ
+                                builder: (context) => DetailContact(// بغيرها تصير صفحه خاصه في القبول والخ
                                   image: e.image,
                                   name: e.title,
                                   description: e.description,
