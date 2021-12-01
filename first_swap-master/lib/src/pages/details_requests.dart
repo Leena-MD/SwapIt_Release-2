@@ -178,13 +178,31 @@ class _DetailRequestState extends State<DetailRequest> {
                         height: 0.2,
                         color: Colors.grey,
                       ),
-ListTile(
+                      ListTile(
                         shape: RoundedRectangleBorder(
+
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
                         //selectedTileColor: Colors.white38,
-                        
+
+                        leading:FlatButton(onPressed: () {
+                          mygoods();
+
+                        }, child: Column(
+
+                          children: <Widget>[
+                            Icon(Icons.launch , color: Colors.green ,size: 30,),
+
+
+
+
+
+
+                          ],
+                        ),
+
+                        ),
                         title: Text(
                           " يريد التبادل معك بهذا المنتج",
                           textScaleFactor: 1,
@@ -196,94 +214,65 @@ ListTile(
                         ),
                         minLeadingWidth: double.minPositive,
                       ),
-
- 
-                      
-                      SizedBox(height: 15),
-
-
-
-
-
-
-
-
-
-
-
-
-                      RaisedButton(
-                        color: Colors.lightGreen,
-                        onPressed: () {
-                          (
-//mygoods()
-                            accept()
-                              
-                          );
-                        },
-
-
-
-
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        elevation: 5,
-                        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      ElevatedButtonTheme(
+                        data: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(minimumSize: Size(120,60))) ,
+                        child: ButtonBar(
+                          mainAxisSize: MainAxisSize.max,
                           children: [
-                            Icon(
-                              Icons.swap_calls_rounded,
-                              color: Colors.white,
+                            new SizedBox(
+                              width: 100.0,
+                              height: 60.0,
+                              child: RaisedButton(
+
+                                child: Text('قبول الطلب',textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                                color: Colors.lightGreen,
+
+                                onPressed: () {
+                                  accept();
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 5,
+                                padding:EdgeInsets.fromLTRB(20, 15, 2, 5) ,
+                              ),
                             ),
-                            Text(
-                              "قبول الطلب",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                            SizedBox(
+                                width: 50),
+                            new SizedBox(
+                              width: 100.0,
+                              height: 60.0,
+                              child:RaisedButton(
+
+                                child: Text('رفض الطلب',textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+
+                                color: Colors.redAccent,
+                                onPressed: () {
+                                  reject();
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+
+                                ),
+                                elevation: 5,
+                                padding: EdgeInsets.fromLTRB(20, 15, 2, 5),
+
+                                //   child: Row(
+                                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                //     children: [
+                                //       Container(
+                                //         margin: EdgeInsets.all(1.0),
+                                //         padding: EdgeInsets.all(2.0),),
+                              ),
                             )
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      RaisedButton(
-                        color: Colors.redAccent,
-                        onPressed: () {
-                          (
-
-                              reject()
-
-
-                          );
-
-                        },
-
-
-
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        elevation: 5,
-                        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.swap_calls_rounded,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              "رفض الطلب",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )
-                            
                           ],
                         ),
                       ),
