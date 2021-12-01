@@ -214,6 +214,8 @@ class _DetailRequestState extends State<DetailRequest> {
                         ),
                         minLeadingWidth: double.minPositive,
                       ),
+                      SizedBox(
+                          width: 20),
                       ElevatedButtonTheme(
                         data: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(minimumSize: Size(120,60))) ,
                         child: ButtonBar(
@@ -242,7 +244,7 @@ class _DetailRequestState extends State<DetailRequest> {
                               ),
                             ),
                             SizedBox(
-                                width: 50),
+                                width: 30),
                             new SizedBox(
                               width: 100.0,
                               height: 60.0,
@@ -276,6 +278,8 @@ class _DetailRequestState extends State<DetailRequest> {
                           ],
                         ),
                       ),
+                      SizedBox(
+                          width: 20),
                     ],
                   ),
                 ),

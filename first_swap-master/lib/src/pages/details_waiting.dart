@@ -204,15 +204,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                         ),
 
                         ),
-                        title: Text(
-                          "لقد أرسلت طلب تبادل على هذا المنتج",
-                          textScaleFactor: 1,
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.blueGrey,
-                              fontWeight: FontWeight.bold),
-                        ),
+
                         minLeadingWidth: double.minPositive,
                       ),
                       ElevatedButtonTheme(
@@ -279,7 +271,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               elevation: 5,
-                              padding: EdgeInsets.fromLTRB(80, 10, 80, 10),
+                              padding: EdgeInsets.fromLTRB(70, 7, 70, 7),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -288,7 +280,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                                     "تراجع عن الطلب",
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 17,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   )
