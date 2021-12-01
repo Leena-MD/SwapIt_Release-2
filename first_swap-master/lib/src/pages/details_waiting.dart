@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_swap/constants.dart';
+import 'package:first_swap/models/product.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/clothes.dart';
 import 'package:first_swap/src/pages/computer_category.dart';
 import 'package:first_swap/src/pages/gym.dart';
-import 'package:first_swap/src/pages/history_page.dart';
 import 'package:first_swap/src/pages/house.dart';
 import 'package:first_swap/src/pages/kids_category.dart';
 import 'package:first_swap/src/pages/perfume.dart';
@@ -17,7 +17,7 @@ import 'package:provider/provider.dart';
 import 'Offers.dart';
 import 'books_category.dart';
 
-class DetailContact extends StatefulWidget {
+class Detailwaiting extends StatefulWidget {
   final String image;
   final String description;
   final String owner ;
@@ -25,7 +25,7 @@ class DetailContact extends StatefulWidget {
 
   final String name;
   final String cate;
-  DetailContact(
+  Detailwaiting(
       {required this.image,
         required this.name,
         required this.description,
@@ -36,21 +36,16 @@ class DetailContact extends StatefulWidget {
       });
 
   @override
-  _Details createState() => _Details();
+  _Detailwaiting createState() => _Detailwaiting();
 
 }
 final db = FirebaseFirestore.instance;
 
-class _Details extends State<DetailContact> {
-    String FName='';
-  String LName='';
-  String phoneN='';
-  String userName='';
+class _Detailwaiting extends State<Detailwaiting> {
 
   int quantity = 1;
   @override
   Widget build(BuildContext context) {
-    accept();
     MyProvider provider = Provider.of<MyProvider>(context);
     return Scaffold(
       
@@ -62,7 +57,7 @@ class _Details extends State<DetailContact> {
           onPressed: () {
 
             Navigator.push(this.context,
-                MaterialPageRoute(builder: (context) => History()));
+                MaterialPageRoute(builder: (context) => Offers()));
 
           },
           icon: Icon(Icons.arrow_back),
@@ -179,11 +174,10 @@ class _Details extends State<DetailContact> {
                         isThreeLine: true,
                         minLeadingWidth: double.minPositive,
                       ),
-                        Divider(
+                       Divider(
                         height: 0.2,
                         color: Colors.grey,
                       ),
-
                       ListTile(
                         shape: RoundedRectangleBorder(
 
@@ -210,7 +204,7 @@ class _Details extends State<DetailContact> {
 
                         ),
                         title: Text(
-                          " التبادل سيكون بهذا المنتج ",
+                          "لقد أرسلت طلب تبادل على هذا المنتج",
                           textScaleFactor: 1,
                           textAlign: TextAlign.right,
                           style: TextStyle(
@@ -220,99 +214,47 @@ class _Details extends State<DetailContact> {
                         ),
                         minLeadingWidth: double.minPositive,
                       ),
+                      ElevatedButtonTheme(
+                        data: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(minimumSize: Size(120,60))) ,
+                        child: ButtonBar(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            
+                            SizedBox(
+                                width: 50),
+                            new SizedBox(
+                              width: 100.0,
+                              height: 60.0,
+                              child:RaisedButton(
 
+                                child: Text('إلغاء الطلب',textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
 
+                                color: Colors.redAccent,
+                                onPressed: () {
+                                  reject();
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
 
-                      Divider(
-                        height: 0.2,
-                        color: Colors.grey,
-                      ),
-                      // SizedBox(height: 15),
+                                ),
+                                elevation: 5,
+                                padding: EdgeInsets.fromLTRB(20, 15, 2, 5),
 
-                      ListTile(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(0.0)),
-                        selected: true,
-                        selectedTileColor: Colors.white70,
-                        //selectedTileColor: Colors.white38,
-
-                        title: Text(
-                          "يمكنك التواصل مع "+FName+" "+LName,
-                          textScaleFactor: 1,
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.blueGrey,
-                              fontWeight: FontWeight.bold),
+                                //   child: Row(
+                                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                //     children: [
+                                //       Container(
+                                //         margin: EdgeInsets.all(1.0),
+                                //         padding: EdgeInsets.all(2.0),),
+                              ),
+                            )
+                          ],
                         ),
-                        minLeadingWidth: double.minPositive,
                       ),
-
-                      ListTile(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(0.0)),
-                        selected: true,
-                        selectedTileColor: Colors.white70,
-                        //selectedTileColor: Colors.white38,
-
-                        title: Text(
-                          phoneN+" : رقم الهاتف" ,
-                          textScaleFactor: 1,
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.blueGrey,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        minLeadingWidth: double.minPositive,
-                      ),
-
-
-//                       RaisedButton(
-//                         color: Colors.lightGreen,
-//                         onPressed: () {
-//                           (
-
-// // mygoods()
-//                               accept()
-                              
-//                           );
-//                         },
-
-
-
-
-//                         shape: RoundedRectangleBorder(
-//                           borderRadius: BorderRadius.circular(30),
-//                         ),
-//                         elevation: 5,
-//                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-//                         child: Row(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             Icon(
-//                               Icons.swap_calls_rounded,
-//                               color: Colors.white,
-//                             ),
-//                             Text(
-//                               "قبول الطلب",
-//                               textAlign: TextAlign.center,
-//                               style: TextStyle(
-//                                   fontSize: 18,
-//                                   color: Colors.white,
-//                                   fontWeight: FontWeight.bold),
-//                             )
-//                           ],
-//                         ),
-//                       ),
-
-
-
-
-
-
-
-
                     ],
                   ),
                 ),
@@ -339,9 +281,17 @@ class _Details extends State<DetailContact> {
     String ownerGoods="";
     // print(widget.IDgoods);
 
+    var status ="done";
 
 
 
+    await FirebaseFirestore.instance.collection('goods').doc(goodsId)
+        .update
+      ({
+
+      'Status':status
+
+    });
     await FirebaseFirestore.instance
         .collection('goods')
         .doc(goodsId)
@@ -352,23 +302,35 @@ class _Details extends State<DetailContact> {
       ownerGoods=ds.data()!['owner'];
 
     });
-// print(ownerGoods);
-     await FirebaseFirestore.instance
-        .collection('users')
-        .doc(ownerGoods)
-        .get()
-        
-        .then((ds) {
-      FName = ds.data()!['FirstName'];
-     
-      LName = ds.data()!['LastName'];
-     
-      phoneN = ds.data()!['phoneN'];
-     
-      userName = ds.data()!['UserName'];
-  
+    await FirebaseFirestore.instance.collection('goods').doc(receivergoodsId)
+        .update
+      ({
+'receiver goods':goodsId,
+      'Status':status,
+'receiverID':ownerGoods
 
-      });
+    });
+
+    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
+        .collection('goods')
+        .where("Status", isEqualTo:
+    "waiting"
+    )
+        .where("receiver goods", isEqualTo:
+    receivergoodsId
+    )
+        .get());
+
+    querySnapshot.docs.forEach((element) {
+
+      rejecOtherGoods(element.id);
+
+
+    });
+
+
+    Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
+
 
 
 
@@ -386,7 +348,6 @@ class _Details extends State<DetailContact> {
     var status ="available";
 
 
-    String reGoodsId ;
 
     await FirebaseFirestore.instance.collection('goods').doc(goodsId)
         .update
@@ -402,10 +363,8 @@ class _Details extends State<DetailContact> {
 
 
 
-    Fluttertoast.showToast(msg: "تم رفض الطلب بنجاح !");
+    Fluttertoast.showToast(msg: "تم إلغاء الطلب بنجاح !");
 
-    Navigator.push(
-        this.context, MaterialPageRoute(builder: (context) => Offers()));
 
 
   }
@@ -505,14 +464,6 @@ String mygoodsName='';
           ),)
             ]
           ),
-        //   SizedBox(
-        //   height: 10,
-        // ),
-       
-        
-
-                    
-                //  title: new Text("؟"+mygoodsName),
                   actions: <Widget>[
                   FlatButton(
                   child: new Text("تراجع",

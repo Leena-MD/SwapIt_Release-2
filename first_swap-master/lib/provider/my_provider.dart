@@ -137,6 +137,71 @@ String senderId='';
   }
 
 
+///////////////////  waiting ////////////////
+    List<Product> waitingList = [];
+late Product waitingReceivingData;
+  Future<void> getwaiting() async {
+
+   final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)  
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+String receiverId='';
+String goodsSend='';
+String senderId='';
+ 
+
+        
+    List<Product> waitingReceiving = [];
+    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
+        .collection('goods')
+        .where("Status", isEqualTo:
+         "waiting"
+    )
+        .where("owner", isEqualTo:
+    uiduser
+         )
+        .get()) ;
+   
+        querySnapshot.docs.forEach((element) {
+      
+      waitingReceivingData = Product(  
+        image: element.data()['image'],
+        title: element.data()['gName'],
+        description: element.data()['Description'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods:element.id,
+      );
+     waitingReceiving.add(waitingReceivingData);
+        waitingList = waitingReceiving; 
+      
+    });
+
+    if(querySnapshot.docs.isEmpty){
+  waitingList=List.empty();
+}
+
+    notifyListeners();
+       
+  }
+
+ get throwwaitingReceivingList {    
+    return waitingList;
+  }
+
+
 
 ///////////////////  History ////////////////
     List<Product> HistoryList = [];
