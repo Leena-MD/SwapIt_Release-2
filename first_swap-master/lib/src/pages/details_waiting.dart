@@ -10,6 +10,7 @@ import 'package:first_swap/src/pages/house.dart';
 import 'package:first_swap/src/pages/kids_category.dart';
 import 'package:first_swap/src/pages/perfume.dart';
 import 'package:first_swap/src/pages/pet.dart';
+import 'package:first_swap/src/pages/waiting.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/provider/my_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -57,7 +58,7 @@ class _Detailwaiting extends State<Detailwaiting> {
           onPressed: () {
 
             Navigator.push(this.context,
-                MaterialPageRoute(builder: (context) => Offers()));
+                MaterialPageRoute(builder: (context) => waiting()));
 
           },
           icon: Icon(Icons.arrow_back),
@@ -222,36 +223,78 @@ class _Detailwaiting extends State<Detailwaiting> {
                             
                             SizedBox(
                                 width: 50),
-                            new SizedBox(
-                              width: 100.0,
-                              height: 60.0,
-                              child:RaisedButton(
+                            // new SizedBox(
+                            //   width: 100.0,
+                            //   height: 60.0,
+                            //   child:RaisedButton(
+                            //
+                            //     child: Text('إلغاء الطلب',textAlign: TextAlign.right,
+                            //         style: TextStyle(
+                            //             fontSize: 18,
+                            //             color: Colors.white,
+                            //             fontWeight: FontWeight.bold)),
+                            //
+                            //     color: Colors.redAccent,
+                            //     onPressed: () {
+                            //       reject();
+                            //     },
+                            //     shape: RoundedRectangleBorder(
+                            //       borderRadius: BorderRadius.circular(10),
+                            //
+                            //     ),
+                            //     elevation: 5,
+                            //     padding: EdgeInsets.fromLTRB(20, 15, 2, 5),
+                            //
+                            //     //   child: Row(
+                            //     //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            //     //     children: [
+                            //     //       Container(
+                            //     //         margin: EdgeInsets.all(1.0),
+                            //     //         padding: EdgeInsets.all(2.0),),
+                            //   ),
+                            // )
+                            RaisedButton(
+                              color: Colors.orangeAccent,
+                              onPressed: () {
+                                reject();
 
-                                child: Text('إلغاء الطلب',textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold)),
+                              },
 
-                                color: Colors.redAccent,
-                                onPressed: () {
-                                  reject();
-                                },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
 
-                                ),
-                                elevation: 5,
-                                padding: EdgeInsets.fromLTRB(20, 15, 2, 5),
 
-                                //   child: Row(
-                                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                //     children: [
-                                //       Container(
-                                //         margin: EdgeInsets.all(1.0),
-                                //         padding: EdgeInsets.all(2.0),),
+                              //         {
+                              //            Navigator.push(this.context, MaterialPageRoute(builder: (context) =>
+
+                              // swapRequest(
+                              //      owner:e.owner,
+                              //      IDgoods:e.IDgoods,
+
+
+
+
+                              // )));
+
+                              //         },
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
                               ),
-                            )
+                              elevation: 5,
+                              padding: EdgeInsets.fromLTRB(80, 10, 80, 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+
+                                  Text(
+                                    "تراجع عن الطلب",
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
