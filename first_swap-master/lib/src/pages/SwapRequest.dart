@@ -95,6 +95,20 @@ class _swapRequest extends State<swapRequest> {
               title: Center(
                   child: Text("منتجاتي",
                       style: TextStyle(fontSize: 20))),
+              leading: IconButton(
+                onPressed: () {
+
+                  Navigator.push(this.context,
+                      MaterialPageRoute(builder: (context) => DetailPage(image: widget.image,
+                        name: widget.name,
+                        description: widget.description,
+                        cate: widget.cate,
+                        owner:widget.owner,
+                        IDgoods:widget.IDgoods,)));
+
+                },
+                icon: Icon(Icons.arrow_back),
+              ),
             ),
             body:         
             Column(
