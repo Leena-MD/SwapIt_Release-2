@@ -5,6 +5,7 @@ import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/clothes.dart';
 import 'package:first_swap/src/pages/computer_category.dart';
 import 'package:first_swap/src/pages/gym.dart';
+import 'package:first_swap/src/pages/history_page.dart';
 import 'package:first_swap/src/pages/house.dart';
 import 'package:first_swap/src/pages/kids_category.dart';
 import 'package:first_swap/src/pages/perfume.dart';
@@ -61,7 +62,7 @@ class _Details extends State<DetailContact> {
           onPressed: () {
 
             Navigator.push(this.context,
-                MaterialPageRoute(builder: (context) => Offers()));
+                MaterialPageRoute(builder: (context) => History()));
 
           },
           icon: Icon(Icons.arrow_back),
@@ -182,15 +183,34 @@ class _Details extends State<DetailContact> {
                         height: 0.2,
                         color: Colors.grey,
                       ),
-                      
-ListTile(
+
+                      ListTile(
                         shape: RoundedRectangleBorder(
+
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
                         //selectedTileColor: Colors.white38,
+
+                        leading:FlatButton(onPressed: () {
+                          mygoods();
+
+                        }, child: Column(
+
+                          children: <Widget>[
+                            Icon(Icons.launch , color: Colors.green ,size: 30,),
+
+
+
+
+
+
+                          ],
+                        ),
+
+                        ),
                         title: Text(
-                          "  التبادل  بهذا المنتج",
+                          " التبادل سيكون بهذا المنتج ",
                           textScaleFactor: 1,
                           textAlign: TextAlign.right,
                           style: TextStyle(
@@ -202,19 +222,22 @@ ListTile(
                       ),
 
 
-                     
-                      
+
+                      Divider(
+                        height: 0.2,
+                        color: Colors.grey,
+                      ),
                       // SizedBox(height: 15),
-                      
-ListTile(
+
+                      ListTile(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
                         //selectedTileColor: Colors.white38,
-                        
+
                         title: Text(
-                          phoneN+LName+FName+ "يمكنك التواصل مع ",
+                          "يمكنك التواصل مع "+FName+" "+LName,
                           textScaleFactor: 1,
                           textAlign: TextAlign.right,
                           style: TextStyle(
@@ -225,7 +248,25 @@ ListTile(
                         minLeadingWidth: double.minPositive,
                       ),
 
-  
+                      ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0)),
+                        selected: true,
+                        selectedTileColor: Colors.white70,
+                        //selectedTileColor: Colors.white38,
+
+                        title: Text(
+                          phoneN+" : رقم الهاتف" ,
+                          textScaleFactor: 1,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.blueGrey,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        minLeadingWidth: double.minPositive,
+                      ),
+
 
 //                       RaisedButton(
 //                         color: Colors.lightGreen,
