@@ -221,36 +221,12 @@ class _DetailRequestState extends State<DetailRequest> {
                         child: ButtonBar(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            new SizedBox(
+                              new SizedBox(
                               width: 100.0,
-                              height: 60.0,
-                              child: RaisedButton(
-
-                                child: Text('قبول الطلب',textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold)),
-                                color: Colors.lightGreen,
-
-                                onPressed: () {
-                                  accept();
-                                },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                elevation: 5,
-                                padding:EdgeInsets.fromLTRB(20, 15, 2, 5) ,
-                              ),
-                            ),
-                            SizedBox(
-                                width: 30),
-                            new SizedBox(
-                              width: 100.0,
-                              height: 60.0,
+                              height: 50.0,
                               child:RaisedButton(
 
-                                child: Text('رفض الطلب',textAlign: TextAlign.right,
+                                child: Text('رفض الطلب ',textAlign: TextAlign.right,
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Colors.white,
@@ -274,7 +250,32 @@ class _DetailRequestState extends State<DetailRequest> {
                                 //         margin: EdgeInsets.all(1.0),
                                 //         padding: EdgeInsets.all(2.0),),
                               ),
-                            )
+                            ),
+                            SizedBox(width: 20),
+                            new SizedBox(
+                              width: 100.0,
+                              height: 50.0,
+                              child: RaisedButton(
+
+                                child: Text('قبول الطلب ',textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                                color: Colors.lightGreen,
+
+                                onPressed: () {
+                                  accept();
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 5,
+                                padding:EdgeInsets.fromLTRB(20, 15, 2, 5) ,
+                              ),
+                            ),
+                            
+                          
                           ],
                         ),
                       ),

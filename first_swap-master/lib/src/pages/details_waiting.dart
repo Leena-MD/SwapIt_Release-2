@@ -271,7 +271,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               elevation: 5,
-                              padding: EdgeInsets.fromLTRB(70, 7, 70, 7),
+                              padding: EdgeInsets.fromLTRB(60, 6, 60, 6),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
