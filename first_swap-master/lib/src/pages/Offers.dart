@@ -4,6 +4,7 @@ import 'package:first_swap/models/goods.dart';
 import 'package:first_swap/models/goodsMod.dart';
 import 'package:first_swap/provider/my_provider.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
+import 'package:first_swap/src/pages/waiting.dart';
 import 'package:first_swap/src/widgets/bottom_Container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +33,7 @@ class _Offers extends State<Offers> {
   List<String> selectedCategory = [];
   String category1 = 'الطلبات';
   String category2 = ' السجل';
+  String category3 = 'قائمة الانتظار';
 bool index=true;
   final db = FirebaseFirestore.instance;
 
@@ -85,7 +87,7 @@ bool index=true;
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 70.0),
+                                vertical: 3.0, horizontal: 30.0),
 
                             decoration: BoxDecoration(
 
@@ -128,7 +130,7 @@ bool index=true;
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 70.0),
+                                vertical: 3.0, horizontal: 30.0),
                             decoration: BoxDecoration(
                                 gradient: LinearGradient(colors: [
                                   Colors.blueGrey.withOpacity(0.3),
@@ -149,6 +151,38 @@ bool index=true;
                         ),
                         SizedBox(
                           width: 2.0,
+                        ),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: () {
+                            selectedCategory = [];
+                            selectedCategory.add(category3);
+
+                            setState(() {});
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => waiting()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 3.0, horizontal: 20.0),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                                Colors.blueGrey.withOpacity(0.3),
+                                Colors.blueGrey.withOpacity(0.015),
+                              ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(0)),
+                            ),
+                            child: Text(
+                              ' قائمة الانتظار',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+
+                          ),
                         ),
 
                       ],
