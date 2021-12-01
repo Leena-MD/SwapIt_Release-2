@@ -12,6 +12,7 @@ import 'Home_page.dart';
 import 'MyItems.dart';
 import 'details_page.dart';
 import 'details_requests.dart';
+import 'history_page.dart';
 final firebaseUser =  FirebaseAuth.instance.currentUser;
 String userid= firebaseUser!.uid;
   
@@ -21,13 +22,17 @@ class Offers extends StatefulWidget {
 }
 @override
 
+
 class _Offers extends State<Offers> {
   String receivergoods='';
   String receiverID='';
   String requeststatus='';
   String senderID='';
   String sendergoods='';
-
+  List<String> selectedCategory = [];
+  String category1 = 'الطلبات';
+  String category2 = ' السجل';
+bool index=true;
   final db = FirebaseFirestore.instance;
 
   String uiduser = '';
@@ -48,7 +53,118 @@ class _Offers extends State<Offers> {
 //    List<Product> newGoodsList = [];
 
 
+  Widget header() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          padding:
+          EdgeInsets.only(top: 4.0, left: 0.0, right: 0.0, bottom: 6.0),
+          child: Container(
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 4.0,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: () {
+                            selectedCategory = [];
+                            selectedCategory.add(category1);
 
+                            setState(() {});
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => Offers()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 70.0),
+
+                            decoration: BoxDecoration(
+
+                              gradient: LinearGradient(colors: [
+
+                                Colors.blueGrey.withOpacity(0.3),
+                                Colors.blueGrey.withOpacity(0.015),
+
+                              ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+
+                                  borderRadius: BorderRadius.circular(0), // Creates border
+
+
+
+                            ),
+
+                            child: Text(
+                              'الطلبات',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+
+                          ),
+                        ),
+                        SizedBox(
+                          width: 2.0,
+                        ),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: () {
+                            selectedCategory = [];
+                            selectedCategory.add(category2);
+
+                            setState(() {});
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => History()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 70.0),
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(colors: [
+                                  Colors.blueGrey.withOpacity(0.3),
+                                  Colors.blueGrey.withOpacity(0.015),
+                                ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(0)),
+                            ),
+                            child: Text(
+                              ' السجل',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+
+                          ),
+                        ),
+                        SizedBox(
+                          width: 2.0,
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 6.0,
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
 
 
@@ -57,16 +173,16 @@ class _Offers extends State<Offers> {
 
 
   {
-    
+
 
 
     MyProvider provider = Provider.of<MyProvider>(context);
 
     provider.getGoodsReceiving();
-    
+
       GoodsList = provider.throwGoodsReceivingList;
 
-  
+
    if(GoodsList.isEmpty){
      Text("لاتوجد لديك طلبات");
    }
@@ -96,8 +212,40 @@ class _Offers extends State<Offers> {
               title: Center(
                   child: Text("الطلبات",
                       style: TextStyle(fontSize: 20))),
+
+              // leading: FlatButton(
+              //
+              //   onPressed: () {
+              //
+              //     Navigator.push(this.context,
+              //         MaterialPageRoute(builder: (context) => History()));
+              //
+              //   },
+              //   padding: const EdgeInsets.symmetric(horizontal: 6),
+              //   shape: RoundedRectangleBorder(
+              //     borderRadius: new BorderRadius.circular(18.0),),
+              //
+              //
+              //   child: Column(
+              //
+              //     children: <Widget>[
+              //       Icon(Icons.archive , color: Colors.white,size: 30,),
+              //
+              //       Text("السجل", style: TextStyle(color: Colors.white,fontSize: 15)),
+              //
+              //
+              //
+              //
+              //     ],
+              //   ),
+              //
+              //
+              //
+              //
+              //
+              // ),
             ),
-            body:         
+            body:
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children:
@@ -108,7 +256,7 @@ class _Offers extends State<Offers> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      // header(),
+                      header(),
                       //  recipe(),
                       //   pizza(),
                       //    drink(),
