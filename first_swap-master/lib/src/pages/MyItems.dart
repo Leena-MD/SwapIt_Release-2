@@ -58,12 +58,12 @@ class _MyItems extends State<MyItems> {
           } else
             return ListView(
               children: snapshot.data!.docs.map((doc) {
-                var imageUrl = doc.data()['image'];
                 if (doc.data()['owner'] ==
                     FirebaseAuth.instance.currentUser!.uid) {
                   if (doc.data()['Status'] == "done") {
                     return MyItemCard(
                       name: doc.data()['gName'],
+                      image: doc.data()['image'],
                       description: doc.data()['Description'],
                       status: " تم التبديل",
                       onTap: () {
@@ -74,7 +74,7 @@ class _MyItems extends State<MyItems> {
                                     topLeft: Radius.circular(20),
                                     topRight: Radius.circular(20))),
                             builder: (context) => Container(
-                                height: 150,
+                                height: 170,
                                 padding: EdgeInsets.symmetric(horizontal: 15) +
                                     EdgeInsets.only(bottom: 10),
                                 child: Column(
@@ -193,11 +193,11 @@ class _MyItems extends State<MyItems> {
                                       ),
                                     ])));
                       },
-                      image: "assets/bookshelf.png",
                     );
                   } else if (doc.data()['Status'] == "waiting") {
                     return MyItemCard(
                       name: doc.data()['gName'],
+                      image: doc.data()['image'],
                       description: doc.data()['Description'],
                       status: "قيد الانتظار",
                       onTap: () {
@@ -208,7 +208,7 @@ class _MyItems extends State<MyItems> {
                                     topLeft: Radius.circular(20),
                                     topRight: Radius.circular(20))),
                             builder: (context) => Container(
-                                height: 150,
+                                height: 170,
                                 padding: EdgeInsets.symmetric(horizontal: 15) +
                                     EdgeInsets.only(bottom: 10),
                                 child: Column(
@@ -327,11 +327,11 @@ class _MyItems extends State<MyItems> {
                                       ),
                                     ])));
                       },
-                      image: "assets/bookshelf.png",
                     );
                   } else {
                     return MyItemCard(
                       name: doc.data()['gName'],
+                      image: doc.data()['image'],
                       description: doc.data()['Description'],
                       status: " ",
                       onTap: () {
@@ -342,7 +342,7 @@ class _MyItems extends State<MyItems> {
                                     topLeft: Radius.circular(20),
                                     topRight: Radius.circular(20))),
                             builder: (context) => Container(
-                                height: 150,
+                                height: 170,
                                 padding: EdgeInsets.symmetric(horizontal: 15) +
                                     EdgeInsets.only(bottom: 10),
                                 child: Column(
@@ -461,11 +461,10 @@ class _MyItems extends State<MyItems> {
                                       ),
                                     ])));
                       },
-                      image: "assets/bookshelf.png",
                     );
                   }
                 } else {
-                  return Spacer();
+                  return Center();
                 }
               }).toList(),
             );

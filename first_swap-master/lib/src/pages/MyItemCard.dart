@@ -29,7 +29,7 @@ class MyItemCard extends StatelessWidget {
                   color: Colors.white12,
                   offset: const Offset(0.0, 0.0),
                   blurRadius: 4.0,
-                  //spreadRadius: 1.0,
+                  spreadRadius: 1.0,
                 ),
               ],
               image: DecorationImage(
@@ -79,21 +79,21 @@ class MyItemCard extends StatelessWidget {
             ),
           ),
           Container(
-            height: 60,
-            margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+            height: 43,
+            margin: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 10),
             width: MediaQuery.of(context).size.width * 0.3,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.topCenter,
-                    colors: [Colors.black38, Colors.transparent])),
+                    colors: [Colors.black38, Colors.white70])),
             child: Container(
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.all(8),
               child: Column(
                 children: [
                   Text(
-                    "${this.status}", //this is new comment
+                    "${this.status}",
                     style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,
