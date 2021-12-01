@@ -169,26 +169,44 @@ showDialog(
             ]
           ),
                   actions: <Widget>[
+                    SizedBox(width: 10,),
                     FlatButton(
-                  child: new Text("بدل"),
+                  child: new Text("بدل" ,textAlign: TextAlign.center,style: TextStyle(
+                    fontSize: 20,
+                      color: Colors.white,
+
+                    )
+                  ),
+
+                      color: Colors.cyan[800],
                   onPressed: () {
                   SendRequest(e.title,e.IDgoods);
                   // widget.owner;
                   // widget.IDgoods;
                   Navigator.of(context).pop();
                   },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+
+                      ),
                   ),
-                    
+                   SizedBox(width: 50,),
                   FlatButton(
-                  child: new Text("تراجع",
+                  child: new Text("تراجع",textAlign: TextAlign.center,
                    style: TextStyle(
             fontSize: 20,
-            color: Colors.blueGrey[900],
+            color: Colors.white,
           ),),
+                    color: Colors.orangeAccent,
                   onPressed: () {               
                    Navigator.of(context).pop();
                   },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+
+                    ),
                   ),
+                    SizedBox(width: 10,),
                  
                   ],
                   );
