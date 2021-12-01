@@ -333,7 +333,7 @@ class _MyItems extends State<MyItems> {
                       name: doc.data()['gName'],
                       image: doc.data()['image'],
                       description: doc.data()['Description'],
-                      status: " ",
+                      status: "متاح ",
                       onTap: () {
                         showModalBottomSheet(
                             context: context,
