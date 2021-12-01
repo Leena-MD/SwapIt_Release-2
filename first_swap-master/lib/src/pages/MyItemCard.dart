@@ -7,6 +7,7 @@ class MyItemCard extends StatelessWidget {
       this.name,
       this.description,
       this.status,
+      this.colorStatus,
       this.onTap})
       : super(key: key);
 
@@ -14,6 +15,7 @@ class MyItemCard extends StatelessWidget {
   final String? name;
   final String? description;
   final String? status;
+  final Color? colorStatus;
   final Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -95,7 +97,7 @@ class MyItemCard extends StatelessWidget {
                   Text(
                     "${this.status}",
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: colorStatus,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),

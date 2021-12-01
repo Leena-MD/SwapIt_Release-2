@@ -66,6 +66,7 @@ class _MyItems extends State<MyItems> {
                       image: doc.data()['image'],
                       description: doc.data()['Description'],
                       status: " تم التبديل",
+                      colorStatus: Colors.brown[600],
                       onTap: () {
                         showModalBottomSheet(
                             context: context,
@@ -200,6 +201,7 @@ class _MyItems extends State<MyItems> {
                       image: doc.data()['image'],
                       description: doc.data()['Description'],
                       status: "قيد الانتظار",
+                      colorStatus: Colors.yellow[600],
                       onTap: () {
                         showModalBottomSheet(
                             context: context,
@@ -334,6 +336,7 @@ class _MyItems extends State<MyItems> {
                       image: doc.data()['image'],
                       description: doc.data()['Description'],
                       status: "متاح ",
+                      colorStatus: Colors.green,
                       onTap: () {
                         showModalBottomSheet(
                             context: context,
