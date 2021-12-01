@@ -93,7 +93,7 @@ class MyItemCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "${this.status}",
+                    "${this.status}", //this is new comment
                     style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,
