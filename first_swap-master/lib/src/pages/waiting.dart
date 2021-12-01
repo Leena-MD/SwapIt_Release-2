@@ -26,6 +26,7 @@ class waiting extends StatefulWidget {
 
 
 class _waiting extends State<waiting> {
+
   String receivergoods='';
   String receiverID='';
   String requeststatus='';
@@ -34,7 +35,8 @@ class _waiting extends State<waiting> {
   List<String> selectedCategory = [];
   String category1 = 'الطلبات';
   String category2 = ' السجل';
-bool index=true;
+  String category3 = 'قائمة الانتظار';
+late int index;
   final db = FirebaseFirestore.instance;
 
   String uiduser = '';
@@ -87,7 +89,7 @@ bool index=true;
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 70.0),
+                                 horizontal: 30.0),
 
                             decoration: BoxDecoration(
 
@@ -98,7 +100,7 @@ bool index=true;
 
                               ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
 
-                                  borderRadius: BorderRadius.circular(0), // Creates border
+                              // Creates border
 
 
 
@@ -130,12 +132,12 @@ bool index=true;
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 70.0),
+                                 horizontal: 30.0),
                             decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Colors.blueGrey.withOpacity(0.3),
-                                  Colors.blueGrey.withOpacity(0.015),
-                                ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                              gradient: LinearGradient(colors: [
+                                Colors.blueGrey.withOpacity(0.3),
+                                Colors.blueGrey.withOpacity(0.015),
+                              ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
                               borderRadius:
                               BorderRadius.all(Radius.circular(0)),
                             ),
@@ -152,6 +154,38 @@ bool index=true;
                         SizedBox(
                           width: 2.0,
                         ),
+                        InkWell(
+                          splashColor: Colors.cyan[100],
+                          onTap: () {
+                            selectedCategory = [];
+                            selectedCategory.add(category3);
+
+                            setState(() {});
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => waiting()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                 horizontal: 20.0),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                                Colors.blueGrey.withOpacity(0.3),
+                                Colors.blueGrey.withOpacity(0.015),
+                              ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(0)),
+                            ),
+                            child: Text(
+                              ' قائمة الانتظار',
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+
+                          ),
+                        ),
 
                       ],
                     ),
@@ -167,6 +201,7 @@ bool index=true;
       ],
     );
   }
+
 
 
 
@@ -189,9 +224,13 @@ bool index=true;
      Text("لاتوجد لديك طلبات");
    }
 
-    return SafeArea(
+    TabController? _controller;
 
+    return DefaultTabController(
+
+        length: 3,
         child: Scaffold(
+
             backgroundColor: Colors.white,
             bottomNavigationBar: CustomBottomNavigationBar(
               iconList: [
@@ -208,12 +247,24 @@ bool index=true;
               },
               defaultSelectedIndex: 3,
             ),
+
             appBar: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: Colors.cyan[800],
               title: Center(
-                  child: Text("الطلبات",
+                  child: Text("قائمة الانتظار",
                       style: TextStyle(fontSize: 20))),
+              // bottom: TabBar(
+              //   controller: _controller,
+              //   tabs: [
+              //     Tab(text: category1),
+              //     Tab(text: category2),
+              //     Tab(text: category3),
+              //
+              //   ],
+              //
+              //
+              // ),
 
               // leading: FlatButton(
               //
@@ -248,6 +299,7 @@ bool index=true;
               // ),
             ),
             body:
+
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children:
@@ -259,6 +311,7 @@ bool index=true;
                   child: Row(
                     children: [
                       header(),
+
                       //  recipe(),
                       //   pizza(),
                       //    drink(),
