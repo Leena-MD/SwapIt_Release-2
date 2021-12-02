@@ -78,8 +78,9 @@ class _PostPage extends State<PostPage> {
           automaticallyImplyLeading: false,
         ),
         body: SafeArea(
-            top: false,
+          top: false,
             bottom: false,
+          child : Scrollbar(
             child: SingleChildScrollView(
               child: Container(
                 child: Column(
@@ -479,7 +480,7 @@ class _PostPage extends State<PostPage> {
                 ),
               ),
             )),
-      ),
+         )   ),
     );
   }
 
