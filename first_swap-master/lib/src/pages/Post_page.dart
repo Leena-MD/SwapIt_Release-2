@@ -149,7 +149,7 @@ class _PostPage extends State<PostPage> {
                                     ),
                                   ),
                                 ),
-                                //===> Drop Down Menu starts from here <===
+
                                 Padding(
                                     padding: EdgeInsets.only(
                                         top: 15.0,
@@ -283,17 +283,7 @@ class _PostPage extends State<PostPage> {
                                       textAlign: TextAlign.right,
                                       controller: GoodsDController,
                                       keyboardType: TextInputType.emailAddress,
-                                      /*    validator: (value) {
-                                        RegExp regex =
-                                            new RegExp(r'^[a-zA-Z]{10,}$');
-                                        if (value!.isEmpty) {
-                                          return ("*الحقل مطلوب");
-                                        }
-                                        if (!regex.hasMatch(value)) {
-                                          return ("الرجاء إدخال وصف كافي");
-                                        }
-                                        return null;
-                                      }, */
+
                                       style: TextStyle(
                                           fontSize: 16.0, color: Colors.black),
                                       decoration: InputDecoration(
@@ -335,14 +325,6 @@ class _PostPage extends State<PostPage> {
                                     letterSpacing: 1.3,
                                   ),
                                 ),
-//new ListTile(
-                                //       leading: new Icon(Icons.photo_camera),
-                                //     title: new Text(
-                                //      'التقط صورة',
-                                //     textAlign: TextAlign.right,
-                                //    ),
-                                //   onTap: () {},
-                                //  ),
                                 new ListTile(
                                   leading: new Icon(Icons.image),
                                   title: new Text(
@@ -368,28 +350,6 @@ class _PostPage extends State<PostPage> {
                                         child: Image.file(File(imagePath)),
                                       )
                                     : Container(),
-
-                                //===> Goods descerption<===
-
-                                // TextFormField(
-                                //    textAlign: TextAlign.right,
-                                // onSaved: (String val) {
-                                //    _query = val;
-                                //  },
-                                //   controller: queryController,
-                                //   decoration: InputDecoration(
-                                //   border: OutlineInputBorder(
-                                //    borderRadius: BorderRadius.circular(10.0),
-                                //  ),
-                                //  hintText: 'وصف المنتج',
-                                //  labelText: 'وصف المنتج',
-                                //  ),
-                                //  keyboardType: TextInputType.text,
-                                // style: TextStyle(
-                                //  fontSize: 16.0,
-                                //   color: Colors.black),
-                                // maxLines: 3,
-                                //  ),
 
                                 Container(
                                   margin: EdgeInsets.only(top: 6.0, bottom: 5),
@@ -423,14 +383,15 @@ class _PostPage extends State<PostPage> {
                                   child: RaisedButton.icon(
                                     color: Colors.cyan[800],
                                     label: Text(
-                                      "",
+                                      "إضافة",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18),
                                     ),
                                     icon: Icon(
-                                      Icons.post_add_sharp,
+                                      Icons.post_add,
                                       size: 30.0,
+                                      color: Colors.white,
                                     ),
                                     onPressed: () {
                                       if (submitAction(context) == true) {
@@ -438,39 +399,9 @@ class _PostPage extends State<PostPage> {
                                       } else {
                                         num = num;
                                       }
-
-                                      // Validate returns true if the form is valid, or false otherwise.
-                                      /* if (_formKey.currentState!.validate()) {
-                                         storage
-   .uploadImage(imagePath, imageName)
-   .then((value) => print("done")); */
-                                      // If the form is valid, display a snackbar. In the real world,
-                                      // you'd often call a server or save the information in a database.
-                                      /*  ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text('Processing Data')),
-                                        ); */
-                                      // }
                                     },
                                   ),
                                 ),
-                                /*  child: MaterialButton(
-                                
-                                      color: Colors.cyan[800],
-                                      onPressed: () {},
-                          
-                                      child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 10.0, horizontal: 65.0),
-                                          child: Text(
-                                            "آرسل ",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18),
-                                          )),
-                                    )),*/
                               ],
                             )),
                       ),
