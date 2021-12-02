@@ -323,7 +323,14 @@ String senderId='';
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   height: 510,
-                  child: GridView.count(
+                  child:
+                  HistoryList.isEmpty
+                    ? Text(
+                        " لم تقم بالتبادل  ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      )
+                    : GridView.count(
                       shrinkWrap: false,
                       primary: false,
                       crossAxisCount: 2,
@@ -338,7 +345,7 @@ String senderId='';
                           onTap: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => DetailContact(// بغيرها تصير صفحه خاصه في القبول والخ
+                                builder: (context) => DetailContact(
                                   image: e.image,
                                   name: e.title,
                                   description: e.description,

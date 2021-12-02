@@ -204,7 +204,15 @@ class _Detailwaiting extends State<Detailwaiting> {
                         ),
 
                         ),
-
+                        title: Text(
+                          "لقد أرسلت طلب تبادل على هذا المنتج",
+                          textScaleFactor: 1,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.blueGrey,
+                              fontWeight: FontWeight.bold),
+                        ),
                         minLeadingWidth: double.minPositive,
                       ),
                       ElevatedButtonTheme(
@@ -215,36 +223,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                             
                             SizedBox(
                                 width: 50),
-                            // new SizedBox(
-                            //   width: 100.0,
-                            //   height: 60.0,
-                            //   child:RaisedButton(
-                            //
-                            //     child: Text('إلغاء الطلب',textAlign: TextAlign.right,
-                            //         style: TextStyle(
-                            //             fontSize: 18,
-                            //             color: Colors.white,
-                            //             fontWeight: FontWeight.bold)),
-                            //
-                            //     color: Colors.redAccent,
-                            //     onPressed: () {
-                            //       reject();
-                            //     },
-                            //     shape: RoundedRectangleBorder(
-                            //       borderRadius: BorderRadius.circular(10),
-                            //
-                            //     ),
-                            //     elevation: 5,
-                            //     padding: EdgeInsets.fromLTRB(20, 15, 2, 5),
-                            //
-                            //     //   child: Row(
-                            //     //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            //     //     children: [
-                            //     //       Container(
-                            //     //         margin: EdgeInsets.all(1.0),
-                            //     //         padding: EdgeInsets.all(2.0),),
-                            //   ),
-                            // )
+                          
                             RaisedButton(
                               color: Colors.orangeAccent,
                               onPressed: () {
@@ -253,20 +232,6 @@ class _Detailwaiting extends State<Detailwaiting> {
                               },
 
 
-
-                              //         {
-                              //            Navigator.push(this.context, MaterialPageRoute(builder: (context) =>
-
-                              // swapRequest(
-                              //      owner:e.owner,
-                              //      IDgoods:e.IDgoods,
-
-
-
-
-                              // )));
-
-                              //         },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               ),
@@ -280,7 +245,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                                     "تراجع عن الطلب",
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
-                                        fontSize: 17,
+                                        fontSize: 20,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   )
@@ -300,74 +265,6 @@ class _Detailwaiting extends State<Detailwaiting> {
       ),
 
     );
-
-  }
-  accept() async
-
-  {
-
-
-
-
-
-
-    String goodsId =widget.IDgoods;
-    String receivergoodsId="" ;
-    String ownerGoods="";
-    // print(widget.IDgoods);
-
-    var status ="done";
-
-
-
-    await FirebaseFirestore.instance.collection('goods').doc(goodsId)
-        .update
-      ({
-
-      'Status':status
-
-    });
-    await FirebaseFirestore.instance
-        .collection('goods')
-        .doc(goodsId)
-        .get()
-    //.then((value) => null)
-        .then((ds) {
-      receivergoodsId = ds.data()!['receiver goods'];
-      ownerGoods=ds.data()!['owner'];
-
-    });
-    await FirebaseFirestore.instance.collection('goods').doc(receivergoodsId)
-        .update
-      ({
-'receiver goods':goodsId,
-      'Status':status,
-'receiverID':ownerGoods
-
-    });
-
-    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
-        .collection('goods')
-        .where("Status", isEqualTo:
-    "waiting"
-    )
-        .where("receiver goods", isEqualTo:
-    receivergoodsId
-    )
-        .get());
-
-    querySnapshot.docs.forEach((element) {
-
-      rejecOtherGoods(element.id);
-
-
-    });
-
-
-    Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
-
-
-
 
   }
   reject() async
@@ -400,41 +297,11 @@ class _Detailwaiting extends State<Detailwaiting> {
 
     Fluttertoast.showToast(msg: "تم إلغاء الطلب بنجاح !");
 
-
-
-  }
-
-
-  rejecOtherGoods(String ids) async
-
-  {
-
-
-
-    var status ="available";
-
-
-
-    await FirebaseFirestore.instance.collection('goods').doc(ids)
-        .update
-      ({
-
-      'Status':status,
-      'receiver goods':'',
-      'receiverID':''
-
-    });
-
-
-
-
-
-    Fluttertoast.showToast(msg: "تم رفض بقية الطلبات بنجاح !");
-
-
-
+      Navigator.of(this.context).pushReplacement(
+          MaterialPageRoute(builder: (context) => waiting()));
 
   }
+
   mygoods () async {
     var  myimage;
      

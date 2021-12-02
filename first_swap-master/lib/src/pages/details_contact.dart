@@ -268,49 +268,6 @@ class _Details extends State<DetailContact> {
                       ),
 
 
-//                       RaisedButton(
-//                         color: Colors.lightGreen,
-//                         onPressed: () {
-//                           (
-
-// // mygoods()
-//                               accept()
-                              
-//                           );
-//                         },
-
-
-
-
-//                         shape: RoundedRectangleBorder(
-//                           borderRadius: BorderRadius.circular(30),
-//                         ),
-//                         elevation: 5,
-//                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-//                         child: Row(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             Icon(
-//                               Icons.swap_calls_rounded,
-//                               color: Colors.white,
-//                             ),
-//                             Text(
-//                               "قبول الطلب",
-//                               textAlign: TextAlign.center,
-//                               style: TextStyle(
-//                                   fontSize: 18,
-//                                   color: Colors.white,
-//                                   fontWeight: FontWeight.bold),
-//                             )
-//                           ],
-//                         ),
-//                       ),
-
-
-
-
-
-
 
 
                     ],
@@ -337,7 +294,6 @@ class _Details extends State<DetailContact> {
     String goodsId =widget.IDgoods;
     String receivergoodsId="" ;
     String ownerGoods="";
-    // print(widget.IDgoods);
 
 
 
@@ -352,7 +308,6 @@ class _Details extends State<DetailContact> {
       ownerGoods=ds.data()!['owner'];
 
     });
-// print(ownerGoods);
      await FirebaseFirestore.instance
         .collection('users')
         .doc(ownerGoods)
@@ -373,74 +328,7 @@ class _Details extends State<DetailContact> {
 
 
   }
-  reject() async
-
-  {
-
-
-
-    String goodsId =widget.IDgoods;
-
-
-
-    var status ="available";
-
-
-    String reGoodsId ;
-
-    await FirebaseFirestore.instance.collection('goods').doc(goodsId)
-        .update
-      ({
-
-      'Status':status,
-      'receiver goods':'',
-      'receiverID':''
-
-    });
-
-
-
-
-
-    Fluttertoast.showToast(msg: "تم رفض الطلب بنجاح !");
-
-    Navigator.push(
-        this.context, MaterialPageRoute(builder: (context) => Offers()));
-
-
-  }
-
-
-  rejecOtherGoods(String ids) async
-
-  {
-
-
-
-    var status ="available";
-
-
-
-    await FirebaseFirestore.instance.collection('goods').doc(ids)
-        .update
-      ({
-
-      'Status':status,
-      'receiver goods':'',
-      'receiverID':''
-
-    });
-
-
-
-
-
-    Fluttertoast.showToast(msg: "تم رفض بقية الطلبات بنجاح !");
-
-
-
-
-  }
+ 
   mygoods () async {
     var  myimage;
      
@@ -475,7 +363,6 @@ String mygoodsName='';
 
 
     });
-// categoriesContainer1(myimage,mygoodsName);
       
         showDialog(
 
@@ -505,14 +392,7 @@ String mygoodsName='';
           ),)
             ]
           ),
-        //   SizedBox(
-        //   height: 10,
-        // ),
-       
-        
 
-                    
-                //  title: new Text("؟"+mygoodsName),
                   actions: <Widget>[
                   FlatButton(
                   child: new Text("تراجع",

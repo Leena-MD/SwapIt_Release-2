@@ -217,9 +217,9 @@ bool index=true;
       GoodsList = provider.throwGoodsReceivingList;
 
 
-   if(GoodsList.isEmpty){
-     Text("لاتوجد لديك طلبات");
-   }
+  //  if(GoodsList.isEmpty){
+  //    Text("لاتوجد لديك طلبات");
+  //  }
 
     return SafeArea(
 
@@ -300,7 +300,13 @@ bool index=true;
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   height: 510,
-                  child: GridView.count(
+                  child:GoodsList.isEmpty
+                    ? Text(
+                        " لاتوجد لديك أي طلبات تبادل! ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      )
+                    : GridView.count(
                       shrinkWrap: false,
                       primary: false,
                       crossAxisCount: 2,

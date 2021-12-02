@@ -78,12 +78,11 @@ class _swapRequest extends State<swapRequest> {
       MyGoodsList = provider.throwMyGoodsList;
 
   
-   if(MyGoodsList.isEmpty){
+  //  if(MyGoodsList.isEmpty){
 
-     print(":hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-    //return 
-    Text("لاتوجد لديك منتجات للتبادل بها!");
-   }
+  //   //return 
+  //   Text("لاتوجد لديك منتجات للتبادل بها!");
+  //  }
 
     return SafeArea(
 
@@ -131,7 +130,13 @@ class _swapRequest extends State<swapRequest> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   height: 510,
-                  child: GridView.count(
+                  child:MyGoodsList.isEmpty
+                    ? Text(
+                        " لا يوجد لديك منتجات للتبادل بها! ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      )
+                    : GridView.count(
                       shrinkWrap: false,
                       primary: false,
                       crossAxisCount: 2,
@@ -244,18 +249,12 @@ showDialog(
      ({
        
  
-        'receiver goods':"${widget.IDgoods}",//widget.IDgoods
-        'receiverID': "${widget.owner}",//widget.owner
+        'receiver goods':"${widget.IDgoods}",
+        'receiverID': "${widget.owner}",
         'Status':status,
-       // 'request status': status,
-     //   'sender ID': uiduser,
-      //  'sender goods': id,
+
 
       });
-             print(ids);
-             print(widget.owner);
-             print(name);
-             print(widget.IDgoods);
 
 
       Fluttertoast.showToast(msg: "تم إرسال الطلب بنجاح!");

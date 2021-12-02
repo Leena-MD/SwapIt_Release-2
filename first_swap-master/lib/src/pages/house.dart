@@ -596,33 +596,39 @@ class _houseK extends State<houseK> {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 height: 510,
-                child: GridView.count(
-                    shrinkWrap: false,
-                    primary: false,
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.9,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 10,
-                    children: HouseList.map(
-                      (e) => BottomContainer(
-                        onTap: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => DetailPage(
-                                image: e.image,
-                                name: e.title,
-                                description: e.description,
-                                cate: e.cate,
-                                owner:e.owner,
-                                IDgoods:e.IDgoods,
-                              ),
-                            ),
-                          );
-                        },
-                        image: e.image,
-                        name: e.title,
-                      ),
-                    ).toList()),
+                child: HouseList.isEmpty
+                    ? Text(
+                        " لا يوجد منتجات لهذه الفئة",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      )
+                    : GridView.count(
+                        shrinkWrap: false,
+                        primary: false,
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.9,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 10,
+                        children: HouseList.map(
+                          (e) => BottomContainer(
+                            onTap: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                    image: e.image,
+                                    name: e.title,
+                                    description: e.description,
+                                    cate: e.cate,
+                                    owner: e.owner,
+                                    IDgoods: e.IDgoods,
+                                  ),
+                                ),
+                              );
+                            },
+                            image: e.image,
+                            name: e.title,
+                          ),
+                        ).toList()),
               )
             ],
           )),
