@@ -516,6 +516,31 @@ class _PostPage extends State<PostPage> {
 
     if (_formKey.currentState!.validate()) {
       if (imagePath != "") {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return Center(
+              child: new Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 1.5,
+                    ),
+                  ),
+                  /*Padding(
+                    padding: EdgeInsets.all(15),
+                  ),
+                   Text("جاري الإضافة",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 15, color: Colors.black)),*/
+                ],
+              ),
+            );
+          },
+        );
         storage.uploadImage(imagePath, imageName).then((value) => url = value);
         url = await Storage().uploadImage(imagePath, imageName);
         print("1");
@@ -551,7 +576,7 @@ class _PostPage extends State<PostPage> {
         });
         Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
 
-        Navigator.of(this.context).pushReplacement(
+        Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => HomePage()));
         return true;
       }

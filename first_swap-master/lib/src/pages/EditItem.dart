@@ -470,7 +470,7 @@ class _EditItem extends State<EditItem> {
 
         Fluttertoast.showToast(msg: "تم التعديل بنجاح ");
 
-        Navigator.of(this.context).pushReplacement(MaterialPageRoute(
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) => MyItems(
                   userId: userID,
                 )));
