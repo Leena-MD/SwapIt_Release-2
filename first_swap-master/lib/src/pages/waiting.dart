@@ -220,9 +220,9 @@ late int index;
       waitingList = provider.throwwaitingReceivingList;
 
 
-   if(waitingList.isEmpty){
-     Text("لاتوجد لديك طلبات");
-   }
+  //  if(waitingList.isEmpty){
+  //    Text("لاتوجد لديك طلبات");
+  //  }
 
     TabController? _controller;
 
@@ -312,16 +312,19 @@ late int index;
                     children: [
                       header(),
 
-                      //  recipe(),
-                      //   pizza(),
-                      //    drink(),
                     ],
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   height: 510,
-                  child: GridView.count(
+                  child:waitingList.isEmpty
+                    ? Text(
+                        " لا يوجد لديك منتجات بقائمة الانتظار! ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      )
+                    : GridView.count(
                       shrinkWrap: false,
                       primary: false,
                       crossAxisCount: 2,
@@ -336,7 +339,7 @@ late int index;
                           onTap: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => Detailwaiting(// بغيرها تصير صفحه خاصه في القبول والخ
+                                builder: (context) => Detailwaiting(
                                   image: e.image,
                                   name: e.title,
                                   description: e.description,

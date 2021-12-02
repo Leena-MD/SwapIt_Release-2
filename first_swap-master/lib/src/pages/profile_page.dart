@@ -65,15 +65,10 @@ class _ProfilePageState extends State<ProfilePage> {
       //.then((value) => null)
           .then((ds) {
         Email = ds.data()!['email'];
-      //  print(Email);
         FName = ds.data()!['FirstName'];
-      //  print(FName);
         LName = ds.data()!['LastName'];
-      //  print(LName);
         phoneN = ds.data()!['phoneN'];
-     //   print(phoneN);
         userName = ds.data()!['UserName'];
-      //  print(userName);
 
       })
           .catchError((e) {

@@ -210,11 +210,9 @@ void _changePassword(String currentPassword, String newPassword) async {
 if (_formkey.currentState!.validate()) {
 
 try {
-  print("i am here1");
 final user = await FirebaseAuth.instance.currentUser;
 final cred = EmailAuthProvider.credential(
     email: user!.email!, password: currentPassword);
- print("i am here2");
  
 user.reauthenticateWithCredential(cred).then((value) {
   flag2=1;
@@ -237,14 +235,12 @@ case 1:
 }
   
   flag1=true;
-   print("i am here3");
   user.updatePassword(newPassword).then((_) {
     
-  //    Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
+      Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
       pass1cont.clear();
                 Navigator.of(this.context).pushReplacement(
                     MaterialPageRoute(builder: (context) => EditProfilePage()));
-     print("i am here4");
     //Success, do something
   });}
   ); 

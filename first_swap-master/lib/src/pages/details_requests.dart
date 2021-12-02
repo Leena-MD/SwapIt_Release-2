@@ -5,7 +5,9 @@ import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/clothes.dart';
 import 'package:first_swap/src/pages/computer_category.dart';
+import 'package:first_swap/src/pages/details_contact.dart';
 import 'package:first_swap/src/pages/gym.dart';
+import 'package:first_swap/src/pages/history_page.dart';
 import 'package:first_swap/src/pages/house.dart';
 import 'package:first_swap/src/pages/kids_category.dart';
 import 'package:first_swap/src/pages/perfume.dart';
@@ -305,7 +307,6 @@ class _DetailRequestState extends State<DetailRequest> {
     String goodsId =widget.IDgoods;
     String receivergoodsId="" ;
     String ownerGoods="";
-    // print(widget.IDgoods);
 
     var status ="done";
 
@@ -358,6 +359,19 @@ class _DetailRequestState extends State<DetailRequest> {
     Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
 
 
+
+    Navigator.push(
+        this.context, MaterialPageRoute(builder: (context) => DetailContact(
+                                  image: widget.image,
+                                  name: widget.name,
+                                  description: widget.description,
+                                  cate: widget.cate,
+                                  owner:widget.owner,
+                                  IDgoods:widget.IDgoods,
+
+
+                                ),));
+            Fluttertoast.showToast(msg: "يمكنك مشاهدة تفاصيل ومعلومات التواصل ");
 
 
   }

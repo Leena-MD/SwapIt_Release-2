@@ -252,20 +252,7 @@ class _DetailPageState extends State<DetailPage> {
                             },
                         
                         
-                        
-                //         {
-                //            Navigator.push(this.context, MaterialPageRoute(builder: (context) => 
-                
-                // swapRequest(
-                //      owner:e.owner,
-                //      IDgoods:e.IDgoods,
-
-
-
-
-                // )));
-
-                //         },
+                  
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
