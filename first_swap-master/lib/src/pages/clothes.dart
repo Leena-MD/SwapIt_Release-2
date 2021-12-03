@@ -54,10 +54,6 @@ class _clothes extends State<clothes> {
 
   List<Product> singleFoodList = [];
 
-  List<Product> burgerCategoriesList = [];
-  List<Product> recipeCategoriesList = [];
-  List<Product> pizzaCategoriesList = [];
-  List<Product> drinkCategoriesList = [];
   List<String> selectedCategory = [];
 
   String category1 = 'الأجهزة الإلكترونية و ملحقاتها';
@@ -387,128 +383,7 @@ class _clothes extends State<clothes> {
     );
   }
 
-  Widget categoriesContainer({required String image, required String name}) {
-    return Column(
-      children: [
-        GestureDetector(
-          child: Container(
-            margin: EdgeInsets.only(left: 20),
-            height: 80,
-            width: 80,
-            decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(image)),
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          name,
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget drawerItem({required String name, required IconData icon}) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: Colors.white,
-      ),
-      title: Text(
-        name,
-        style: TextStyle(fontSize: 20, color: Colors.white),
-      ),
-    );
-  }
-
-  ////1st
-  Widget burger() {
-    return Row(
-      children: booksList
-          .map((e) => categoriesContainer(
-                image: e.image,
-                name: e.title,
-                // onTap: () {
-                // Navigator.of(context).pushReplacement(
-                // MaterialPageRoute(
-                // builder: (context) => Categories(
-                //  list: burgerCategoriesList,
-                //  ),
-                // ),
-                // );
-                // }
-              ))
-          .toList(),
-    );
-  }
-
-////2nd
-  Widget recipe() {
-    return Row(
-      children: computerList
-          .map((e) => categoriesContainer(
-                image: e.image,
-                name: e.title,
-                // onTap: () {
-                //Navigator.of(context).pushReplacement(
-                //MaterialPageRoute(
-                //   builder: (context) =>
-                //       Categories(list: recipeCategoriesList),
-                //  ),
-                // );
-                // },
-              ))
-          .toList(),
-    );
-  }
-
-  //3rd
-  Widget pizza() {
-    return Row(
-      children: kidsList
-          .map(
-            (e) => categoriesContainer(
-              image: e.image,
-              name: e.title,
-              // onTap: () {
-              //  Navigator.of(context).pushReplacement(
-              //  MaterialPageRoute(
-              //   builder: (context) => Categories(list: pizzaCategoriesList),
-              //  ),
-              //);
-              // },
-            ),
-          )
-          .toList(),
-    );
-  }
-
-  /////4th
-  Widget drink() {
-    return Row(
-      children: HouseList.map(
-        (e) => categoriesContainer(
-          image: e.image,
-          name: e.title,
-          // onTap: () {
-          //   Navigator.of(context).pushReplacement(
-          //     MaterialPageRoute(
-          //       builder: (context) => Categories(list: drinkCategoriesList),
-          //    ),
-          // );
-          //  },
-        ),
-      ).toList(),
-    );
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -546,16 +421,7 @@ class _clothes extends State<clothes> {
     provider.getPetCategory();
     petList = provider.throwPetList;
 
-    //////////////single food list/////////
-    provider.getFoodList();
-    singleFoodList = provider.throwFoodModleList;
-    provider.getBurgerCategoriesList();
-    burgerCategoriesList = provider.throwBurgerCategoriesList;
-    provider.getrecipeCategoriesList();
-    recipeCategoriesList = provider.throwRecipeCategoriesList;
-    provider.getPizzaCategoriesList();
-    pizzaCategoriesList = provider.throwPizzaCategoriesList;
-
+  
     return SafeArea(
       child: Scaffold(
           backgroundColor: Colors.white,
@@ -589,9 +455,6 @@ class _clothes extends State<clothes> {
                 child: Row(
                   children: [
                     header(),
-                    //  recipe(),
-                    //   pizza(),
-                    //    drink(),
                   ],
                 ),
               ),

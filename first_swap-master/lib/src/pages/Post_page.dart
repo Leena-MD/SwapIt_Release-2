@@ -419,7 +419,7 @@ class _PostPage extends State<PostPage> {
 
   String uiduser = '';
   String st = "available";
-  addgood(String name, String des, int cat, String url, String userID, int num,
+  addgood(String name, String des, String url, String userID, int num,
       String st, String cate) async {
     final _auth = FirebaseAuth.instance;
 
@@ -437,7 +437,6 @@ class _PostPage extends State<PostPage> {
 
     goodsMo.name = GoodsNController.text;
     goodsMo.desc = GoodsDController.text;
-    goodsMo.cat = _value;
     goodsMo.img = url;
     goodsMo.gnum = num;
     goodsMo.stat = st;
@@ -499,7 +498,6 @@ class _PostPage extends State<PostPage> {
         await FirebaseFirestore.instance.collection('goods').add({
           'gName': name,
           'Description': des,
-          'Category': cat,
           'image': url,
           'numGood': num,
           'Status': st,
@@ -520,7 +518,6 @@ class _PostPage extends State<PostPage> {
   addadata(
     String name,
     String des,
-    int cat,
     String url,
     String id,
     int num,
@@ -530,7 +527,6 @@ class _PostPage extends State<PostPage> {
     await addgood(
       name,
       des,
-      cat,
       url,
       id,
       num,
@@ -543,7 +539,6 @@ class _PostPage extends State<PostPage> {
     addadata(
       GoodsNController.text,
       GoodsDController.text,
-      _value,
       url,
       userID,
       num,
