@@ -106,10 +106,6 @@ class _DetailPageState extends State<DetailPage> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(kDefaultPaddin),
-                  // For  demo we use fixed height  and width
-                  // Now we dont need them
-                  // height: 180,
-                  // width: 160,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -119,44 +115,18 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ),
               ),
-              /* Expanded( ////////old image style//////
-                  child: Container(
-                padding: EdgeInsets.only(top: 15.0),
-
-                /*padding: EdgeInsets.symmetric(horizontal: 15),
-            width: 250,
-            height: 200,
-            color: Colors.white,
-            child: Image.network(
-              widget.image,
-              fit: BoxFit.scaleDown,
-            ),*/
-                alignment: Alignment.center,
-                child: Container(
-                  width: 300.0,
-                  height: 300.0,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                            widget.image,
-                          ),
-                          fit: BoxFit.fill)),
-                ),
-              )),*/
+              
               SizedBox(height: 10),
               Expanded(
                 flex: 2,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 35),
                   width: double.infinity,
-                  // color: Colors.white,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15))),
                   child: Column(
-                    //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       ListTile(
@@ -164,7 +134,6 @@ class _DetailPageState extends State<DetailPage> {
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
-                        // selectedTileColor: Colors.white38,
                         leading:
                             Icon(Icons.production_quantity_limits_outlined),
                         title: Text(
@@ -200,7 +169,6 @@ class _DetailPageState extends State<DetailPage> {
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
-                        //selectedTileColor: Colors.white38,
                         title: Text(
                           " وصف المنتج ",
                           textScaleFactor: 1,
