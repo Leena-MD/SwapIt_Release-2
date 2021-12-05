@@ -376,7 +376,7 @@ class _EditItem extends State<EditItem> {
                                   child: RaisedButton.icon(
                                     color: Colors.cyan[800],
                                     label: Text(
-                                      "",
+                                      "تعديل",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18),
@@ -384,6 +384,7 @@ class _EditItem extends State<EditItem> {
                                     icon: Icon(
                                       Icons.system_update,
                                       size: 30.0,
+                                      color: Colors.white,
                                     ),
                                     onPressed: () {
                                       if (submitAction(context) == true) {

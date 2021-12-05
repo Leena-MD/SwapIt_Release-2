@@ -59,7 +59,7 @@ class ForgotPage extends StatelessWidget {
             SizedBox(height: 40),
             SizedBox(height: 80),
             Text(
-              "لاستعادة كلمة المرور الرجاء إدخال البريد الإلكنروني",
+              "لاستعادة كلمة المرور الرجاء إدخال البريد الإلكتروني",
               textAlign: TextAlign.right,
               style: TextStyle(
                 color: Themes.colorHeader,

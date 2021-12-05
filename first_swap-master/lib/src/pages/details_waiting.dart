@@ -21,45 +21,40 @@ import 'books_category.dart';
 class Detailwaiting extends StatefulWidget {
   final String image;
   final String description;
-  final String owner ;
-  final String IDgoods ;
+  final String owner;
+  final String IDgoods;
 
   final String name;
   final String cate;
-  Detailwaiting(
-      {required this.image,
-        required this.name,
-        required this.description,
-        required this.owner,
-        required this.cate,
-        required this.IDgoods,
-
-      });
+  Detailwaiting({
+    required this.image,
+    required this.name,
+    required this.description,
+    required this.owner,
+    required this.cate,
+    required this.IDgoods,
+  });
 
   @override
   _Detailwaiting createState() => _Detailwaiting();
-
 }
+
 final db = FirebaseFirestore.instance;
 
 class _Detailwaiting extends State<Detailwaiting> {
-
   int quantity = 1;
   @override
   Widget build(BuildContext context) {
     MyProvider provider = Provider.of<MyProvider>(context);
     return Scaffold(
-      
       appBar: AppBar(
         backgroundColor: Colors.cyan[800],
         title: Center(
             child: Text('معلومات المنتج   ', style: TextStyle(fontSize: 23))),
         leading: IconButton(
           onPressed: () {
-
             Navigator.push(this.context,
                 MaterialPageRoute(builder: (context) => waiting()));
-
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -109,8 +104,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                         selected: true,
                         selectedTileColor: Colors.white70,
                         // selectedTileColor: Colors.white38,
-                        leading:
-                        Icon(Icons.production_quantity_limits_outlined),
+
                         title: Text(
                           " المنتج ",
                           textScaleFactor: 1,
@@ -170,39 +164,34 @@ class _Detailwaiting extends State<Detailwaiting> {
                           textAlign: TextAlign.right,
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                         ),
-
                         subtitle: Text(''),
                         isThreeLine: true,
                         minLeadingWidth: double.minPositive,
                       ),
-                       Divider(
+                      Divider(
                         height: 0.2,
                         color: Colors.grey,
                       ),
                       ListTile(
                         shape: RoundedRectangleBorder(
-
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
                         //selectedTileColor: Colors.white38,
 
-                        leading:FlatButton(onPressed: () {
-                          mygoods();
-
-                        }, child: Column(
-
-                          children: <Widget>[
-                            Icon(Icons.launch , color: Colors.green ,size: 30,),
-
-
-
-
-
-
-                          ],
-                        ),
-
+                        leading: FlatButton(
+                          onPressed: () {
+                            mygoods();
+                          },
+                          child: Column(
+                            children: <Widget>[
+                              Icon(
+                                Icons.launch,
+                                color: Colors.green,
+                                size: 30,
+                              ),
+                            ],
+                          ),
                         ),
                         title: Text(
                           "لقد أرسلت طلب تبادل على هذا المنتج",
@@ -216,22 +205,18 @@ class _Detailwaiting extends State<Detailwaiting> {
                         minLeadingWidth: double.minPositive,
                       ),
                       ElevatedButtonTheme(
-                        data: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(minimumSize: Size(120,60))) ,
+                        data: ElevatedButtonThemeData(
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: Size(120, 60))),
                         child: ButtonBar(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            
-                            SizedBox(
-                                width: 50),
-                          
+                            SizedBox(width: 50),
                             RaisedButton(
                               color: Colors.orangeAccent,
                               onPressed: () {
                                 reject();
-
                               },
-
-
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               ),
@@ -240,7 +225,6 @@ class _Detailwaiting extends State<Detailwaiting> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-
                                   Text(
                                     "تراجع عن الطلب",
                                     textAlign: TextAlign.right,
@@ -263,127 +247,81 @@ class _Detailwaiting extends State<Detailwaiting> {
           ),
         ),
       ),
-
     );
-
   }
-  reject() async
 
-  {
+  reject() async {
+    String goodsId = widget.IDgoods;
 
+    var status = "available";
 
-
-    String goodsId =widget.IDgoods;
-
-
-
-    var status ="available";
-
-
-
-    await FirebaseFirestore.instance.collection('goods').doc(goodsId)
-        .update
-      ({
-
-      'Status':status,
-      'receiver goods':'',
-      'receiverID':''
-
-    });
-
-
-
-
+    await FirebaseFirestore.instance
+        .collection('goods')
+        .doc(goodsId)
+        .update({'Status': status, 'receiver goods': '', 'receiverID': ''});
 
     Fluttertoast.showToast(msg: "تم إلغاء الطلب بنجاح !");
 
-      Navigator.of(this.context).pushReplacement(
-          MaterialPageRoute(builder: (context) => waiting()));
-
+    Navigator.of(this.context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => waiting()));
   }
 
-  mygoods () async {
-    var  myimage;
-     
+  mygoods() async {
+    var myimage;
 
     var receivergoodsId;
-    String goodsId =widget.IDgoods;
-await FirebaseFirestore.instance
-        .collection('goods')
-        .doc(goodsId)
-        .get()
-    //.then((value) => null)
+    String goodsId = widget.IDgoods;
+    await FirebaseFirestore.instance.collection('goods').doc(goodsId).get()
+        //.then((value) => null)
         .then((ds) {
       receivergoodsId = ds.data()!['receiver goods'];
-
     });
 
+    String mygoodsName = '';
 
-
-
-
-
-
-String mygoodsName='';
-
- await FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('goods')
         .doc(receivergoodsId)
         .get()
         .then((ds) {
       mygoodsName = ds.data()!['gName'];
-      myimage= ds.data()!['image'];
-
-
+      myimage = ds.data()!['image'];
     });
 // categoriesContainer1(myimage,mygoodsName);
-      
-        showDialog(
 
-
-
-
-
-          
-                  context: context,
-                  builder: (BuildContext context) {
-                  return AlertDialog( 
-
-
-          title:Column(
-          children:[
-            Image.network(myimage,
-              width: 200, height: 200, fit: BoxFit.cover
-
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Column(children: [
+            Image.network(myimage, width: 200, height: 200, fit: BoxFit.cover),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              mygoodsName,
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.blueGrey[900],
               ),
-              SizedBox(
-          height: 10,
-        ),
-            Text(mygoodsName,
-            style: TextStyle(
-            fontSize: 20,
-            color: Colors.blueGrey[900],
-          ),)
-            ]
-          ),
-                  actions: <Widget>[
-                  FlatButton(
-                  child: new Text("تراجع",
-                   style: TextStyle(
-            fontSize: 20,
-            color: Colors.blueGrey[900],
-          ),),
-                  onPressed: () {               
-                   Navigator.of(context).pop();
-                  },
-                  ),
-                 
-                  ],
-                  );
-                  },
-                  );
-         
-
+            )
+          ]),
+          actions: <Widget>[
+            FlatButton(
+              child: new Text(
+                "تراجع",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.blueGrey[900],
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
-   
 }
