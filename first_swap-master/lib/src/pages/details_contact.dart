@@ -317,7 +317,23 @@ class _Details extends State<DetailContact> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+       
           title: Column(children: [
+
+            FlatButton(
+              child: new Text(
+                "                                                         X",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.blueGrey[900],
+                ),
+                 textAlign: TextAlign.right
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+
             Image.network(myimage, width: 200, height: 200, fit: BoxFit.cover),
             SizedBox(
               height: 10,
@@ -330,20 +346,6 @@ class _Details extends State<DetailContact> {
               ),
             )
           ]),
-          actions: <Widget>[
-            FlatButton(
-              child: new Text(
-                "تراجع",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.blueGrey[900],
-                ),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
         );
       },
     );

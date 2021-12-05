@@ -234,12 +234,6 @@ class _DetailRequestState extends State<DetailRequest> {
                                 elevation: 5,
                                 padding: EdgeInsets.fromLTRB(20, 15, 2, 5),
 
-                                //   child: Row(
-                                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                //     children: [
-                                //       Container(
-                                //         margin: EdgeInsets.all(1.0),
-                                //         padding: EdgeInsets.all(2.0),),
                               ),
                             ),
                             SizedBox(width: 20),
@@ -345,14 +339,6 @@ class _DetailRequestState extends State<DetailRequest> {
 
     Fluttertoast.showToast(msg: "تم رفض الطلب  !");
 
-    // Navigator.push(
-    //     this.context,
-    //     MaterialPageRoute(
-    //       builder: (context) => Offers(
-    //       ),
-    //     ));
-
-
     Navigator.push(
         this.context, MaterialPageRoute(builder: (context) => Offers()));
   }
@@ -389,13 +375,28 @@ class _DetailRequestState extends State<DetailRequest> {
       mygoodsName = ds.data()!['gName'];
       myimage = ds.data()!['image'];
     });
-// categoriesContainer1(myimage,mygoodsName);
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+        
           title: Column(children: [
+
+            FlatButton(
+              child: new Text(
+                "                                                         X",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.blueGrey[900],
+                ),
+                 textAlign: TextAlign.right
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+
             Image.network(myimage, width: 200, height: 200, fit: BoxFit.cover),
             SizedBox(
               height: 10,
@@ -408,20 +409,6 @@ class _DetailRequestState extends State<DetailRequest> {
               ),
             )
           ]),
-          actions: <Widget>[
-            FlatButton(
-              child: new Text(
-                "تراجع",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.blueGrey[900],
-                ),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
         );
       },
     );
