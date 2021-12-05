@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/foundation.dart';
@@ -230,7 +231,6 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(color: Colors.black54),
                     ),
                     SizedBox(height: 50),
-               
                   ],
                 ),
               ),
@@ -243,15 +243,29 @@ class _LoginPageState extends State<LoginPage> {
 
   //login funaction that will validate and navigate to next page
   void LogIn(String email, String password) async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
     if (_formkey.currentState!.validate()) {
       try {
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
-                  Fluttertoast.showToast(msg: "تم تسجيل الدخول بنجاح"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => HomePage())),
+                  if (uid.user!.emailVerified == true)
+                    {
+                      user?.reload(),
+                      Fluttertoast.showToast(msg: "تم تسجيل الدخول بنجاح"),
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => HomePage())),
+                    }
+                  else
+                    {
+                      _auth.signOut(),
+                      Fluttertoast.showToast(
+                          msg: "الرجاء توثيق البريد الإلكتروني "),
+                    }
                 });
+
         pass1cont.clear();
 
         email1cont.clear();

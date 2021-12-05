@@ -12,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_swap/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'login_page.dart';
 import 'profile_page.dart';
 
 class regestp extends StatefulWidget {
@@ -414,10 +415,12 @@ class _regestpState extends State<regestp> {
         .doc(user.uid)
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "تمت عملية إنشاء الحساب بنجاح");
+    user.sendEmailVerification();
 
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => HomePage()), // غيرتها للبروفايل
+        MaterialPageRoute(
+            builder: (context) => LoginPage()), // غيرتها للبروفايل
         (route) => false);
   }
 }
