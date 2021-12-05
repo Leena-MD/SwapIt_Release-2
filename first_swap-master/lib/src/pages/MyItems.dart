@@ -144,9 +144,6 @@ class _MyItems extends State<MyItems> {
                                                   builder: (context) =>
                                                       EditItem(
                                                         docId: doc.id,
-                                                        category: int.parse(doc
-                                                            .data()['Category']
-                                                            .toString()),
                                                         statues: doc
                                                             .data()['Status'],
                                                         numgood: int.parse(doc
@@ -279,9 +276,6 @@ class _MyItems extends State<MyItems> {
                                                   builder: (context) =>
                                                       EditItem(
                                                         docId: doc.id,
-                                                        category: int.parse(doc
-                                                            .data()['Category']
-                                                            .toString()),
                                                         statues: doc
                                                             .data()['Status'],
                                                         numgood: int.parse(doc
@@ -414,9 +408,6 @@ class _MyItems extends State<MyItems> {
                                                   builder: (context) =>
                                                       EditItem(
                                                         docId: doc.id,
-                                                        category: int.parse(doc
-                                                            .data()['Category']
-                                                            .toString()),
                                                         statues: doc
                                                             .data()['Status'],
                                                         numgood: int.parse(doc

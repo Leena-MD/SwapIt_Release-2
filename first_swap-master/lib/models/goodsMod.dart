@@ -2,7 +2,6 @@ class goodsModel {
   String? uid;
   String? name;
   String? desc;
-  int? cat;
   String? img;
   String? stat;
   int? gnum;
@@ -14,7 +13,6 @@ class goodsModel {
       {this.uid,
       this.name,
       this.desc,
-      this.cat,
       this.img,
       this.gnum,
       this.stat,
@@ -28,7 +26,6 @@ class goodsModel {
         uid: map['uid'],
         name: map['gName'],
         desc: map['Description'],
-        cat: map['Category'],
         img: map['image'],
         gnum: map['numGood'],
         stat: map['Status'],
@@ -42,7 +39,6 @@ class goodsModel {
       'uid': uid,
       'gName': name,
       'Description': desc,
-      'Category': cat,
       'image': img,
       'numGood': gnum,
       'Status': stat,

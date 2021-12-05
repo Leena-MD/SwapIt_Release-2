@@ -24,7 +24,6 @@ class EditItem extends StatefulWidget {
   final String? cat;
   final String? desc;
   final String? image;
-  final int? category;
   final String? statues;
   final int? numgood;
   final String? owner;
@@ -34,7 +33,6 @@ class EditItem extends StatefulWidget {
       this.cat,
       this.desc,
       this.image,
-      this.category,
       this.statues,
       this.numgood,
       this.owner,
@@ -410,7 +408,7 @@ class _EditItem extends State<EditItem> {
 
   String uiduser = userID = FirebaseAuth.instance.currentUser!.uid;
   String st = "available";
-  update(String doc, String name, String des, int cat, String url,
+  update(String doc, String name, String des, String url,
       String userID, int num, String st, String cate, bool path) async {
     final _auth = FirebaseAuth.instance;
 
@@ -421,7 +419,6 @@ class _EditItem extends State<EditItem> {
 
     goodsMo.name = goodName.text;
     goodsMo.desc = goodDesc.text;
-    goodsMo.cat = _value;
     goodsMo.img = url;
     goodsMo.gnum = num;
     goodsMo.stat = st;
@@ -460,7 +457,6 @@ class _EditItem extends State<EditItem> {
         ref.update({
           'gName': name,
           'Description': des,
-          'Category': cat,
           'image': url,
           'numGood': num,
           'Status': st,
@@ -484,7 +480,6 @@ class _EditItem extends State<EditItem> {
         ref.update({
           'gName': name,
           'Description': des,
-          'Category': cat,
           'numGood': num,
           'Status': st,
           'owner': uiduser,
@@ -508,7 +503,6 @@ class _EditItem extends State<EditItem> {
     String doc,
     String name,
     String des,
-    int cat,
     String url,
     String id,
     int num,
@@ -519,7 +513,6 @@ class _EditItem extends State<EditItem> {
       doc,
       name,
       des,
-      cat,
       url,
       id,
       num,
@@ -534,7 +527,6 @@ class _EditItem extends State<EditItem> {
       doc,
       goodName.text,
       goodDesc.text,
-      _value,
       url,
       userID,
       num,
