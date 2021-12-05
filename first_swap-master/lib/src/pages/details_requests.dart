@@ -329,7 +329,6 @@ class _DetailRequestState extends State<DetailRequest> {
             IDgoods: widget.IDgoods,
           ),
         ));
-    Fluttertoast.showToast(msg: "يمكنك مشاهدة تفاصيل ومعلومات التواصل ");
   }
 
   reject() async {
@@ -344,12 +343,15 @@ class _DetailRequestState extends State<DetailRequest> {
         .doc(goodsId)
         .update({'Status': status, 'receiver goods': '', 'receiverID': ''});
 
-    Fluttertoast.showToast(msg: "تم رفض الطلب بنجاح !");
-    MyProvider provider = Provider.of<MyProvider>(context);
-    List<Product> GoodsList = [];
+    Fluttertoast.showToast(msg: "تم رفض الطلب  !");
 
-    provider.getGoodsReceiving();
-    GoodsList = provider.throwGoodsReceivingList;
+    // Navigator.push(
+    //     this.context,
+    //     MaterialPageRoute(
+    //       builder: (context) => Offers(
+    //       ),
+    //     ));
+
 
     Navigator.push(
         this.context, MaterialPageRoute(builder: (context) => Offers()));
