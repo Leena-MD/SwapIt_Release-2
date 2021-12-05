@@ -253,6 +253,9 @@ String senderId='';
       
     });
       
+       if(querySnapshot.docs.isEmpty){
+  HistoryList=List.empty();
+}
       
     notifyListeners();
        
