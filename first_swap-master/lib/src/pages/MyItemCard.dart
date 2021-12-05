@@ -37,13 +37,13 @@ class MyItemCard extends StatelessWidget {
               image: DecorationImage(
                   fit: BoxFit.fitWidth, image: NetworkImage(this.image ?? "")),
             ),
-            height: 149,
+            height: 170,
             margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             // width: MediaQuery.of(context).size.width*0.8,
           ),
           Container(
-            height: 149,
+            height: 170,
             margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             //  width: MediaQuery.of(context).size.width*0.8,
