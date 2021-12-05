@@ -17,19 +17,19 @@ import 'books_category.dart';
 class DetailPage extends StatefulWidget {
   final String image;
   final String description;
-  final String owner ;
-  final String IDgoods ;
+  final String owner;
+  final String IDgoods;
 
   final String name;
   final String cate;
-  DetailPage(
-      {required this.image,
-      required this.name,
-      required this.description,
-      required this.owner,
-      required this.cate,
-      required this.IDgoods,
-       });
+  DetailPage({
+    required this.image,
+    required this.name,
+    required this.description,
+    required this.owner,
+    required this.cate,
+    required this.IDgoods,
+  });
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -115,7 +115,6 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ),
               ),
-              
               SizedBox(height: 10),
               Expanded(
                 flex: 2,
@@ -134,8 +133,6 @@ class _DetailPageState extends State<DetailPage> {
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
-                        leading:
-                            Icon(Icons.production_quantity_limits_outlined),
                         title: Text(
                           " المنتج ",
                           textScaleFactor: 1,
@@ -151,7 +148,7 @@ class _DetailPageState extends State<DetailPage> {
                       Divider(
                         height: 0.2,
                         color: Colors.grey,
-                      ),   
+                      ),
                       ListTile(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0.0)),
@@ -194,7 +191,6 @@ class _DetailPageState extends State<DetailPage> {
                           textAlign: TextAlign.right,
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                         ),
-                        
                         subtitle: Text(''),
                         isThreeLine: true,
                         minLeadingWidth: double.minPositive,
@@ -203,24 +199,19 @@ class _DetailPageState extends State<DetailPage> {
                       RaisedButton(
                         color: Colors.cyan[800],
                         onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => swapRequest(
-
-                                    image: widget.image,
-                                    name: widget.name,
-                                    description: widget.description,
-                                    cate: widget.cate,
-                                    owner:widget.owner,
-                                    IDgoods:widget.IDgoods,
-
-                                  ),
-                                ),
-                              );
-                            },
-                        
-                        
-                  
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => swapRequest(
+                                image: widget.image,
+                                name: widget.name,
+                                description: widget.description,
+                                cate: widget.cate,
+                                owner: widget.owner,
+                                IDgoods: widget.IDgoods,
+                              ),
+                            ),
+                          );
+                        },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),

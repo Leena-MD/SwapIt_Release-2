@@ -55,33 +55,33 @@ class _PostPage extends State<PostPage> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
-        bottomNavigationBar: CustomBottomNavigationBar(
-          iconList: [
-            Icons.home,
-            Icons.add_to_photos,
-            Icons.add_a_photo,
-            Icons.reorder_rounded,
-            Icons.person,
-          ],
-          onChange: (val) {
-            setState(() {
-              var _selectedItem = val;
-            });
-          },
-          defaultSelectedIndex: 2,
-        ),
-        appBar: AppBar(
-          backgroundColor: Colors.cyan[800],
-          title:
-              Center(child: Text('منتج جديد', style: TextStyle(fontSize: 30))),
-          automaticallyImplyLeading: false,
-        ),
-        body: SafeArea(
-          top: false,
+          backgroundColor: Colors.white,
+          bottomNavigationBar: CustomBottomNavigationBar(
+            iconList: [
+              Icons.home,
+              Icons.add_to_photos,
+              Icons.add_a_photo,
+              Icons.reorder_rounded,
+              Icons.person,
+            ],
+            onChange: (val) {
+              setState(() {
+                var _selectedItem = val;
+              });
+            },
+            defaultSelectedIndex: 2,
+          ),
+          appBar: AppBar(
+            backgroundColor: Colors.cyan[800],
+            title: Center(
+                child: Text('منتج جديد', style: TextStyle(fontSize: 30))),
+            automaticallyImplyLeading: false,
+          ),
+          body: SafeArea(
+            top: false,
             bottom: false,
-          child : Scrollbar(
-            child: SingleChildScrollView(
+            child: Scrollbar(
+                child: SingleChildScrollView(
               child: Container(
                 child: Column(
                   children: [
@@ -302,7 +302,7 @@ class _PostPage extends State<PostPage> {
                                           return ("*الحقل مطلوب");
                                         }
                                         if (!regex.hasMatch(value)) {
-                                          return ("اسم المنتج حد أدنى و اعلى ٢٠٠ ");
+                                          return ("اسم المنتج حد أدنى ١٠ و اعلى ٢٠٠ ");
                                         }
                                         return null;
                                       },
@@ -384,7 +384,7 @@ class _PostPage extends State<PostPage> {
                                   child: RaisedButton.icon(
                                     color: Colors.cyan[800],
                                     label: Text(
-                                      "إضافة",
+                                      "اضافة",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18),
@@ -411,7 +411,7 @@ class _PostPage extends State<PostPage> {
                 ),
               ),
             )),
-         )   ),
+          )),
     );
   }
 
