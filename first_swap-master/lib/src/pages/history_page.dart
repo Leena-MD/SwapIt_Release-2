@@ -32,7 +32,7 @@ class _History extends State<History> {
   String sendergoods='';
   List<String> selectedCategory = [];
   String category1 = 'الطلبات';
-  String category2 = ' السجل';
+  String category2 = ' الأرشيف';
   String category3 = 'قائمة الانتظار';
   final db = FirebaseFirestore.instance;
 
@@ -195,7 +195,7 @@ String senderId='';
                               BorderRadius.all(Radius.circular(0)),
                             ),
                             child: Text(
-                              ' السجل',
+                              ' الأرشيف',
                               style: TextStyle(
                                   color: Colors.grey[900],
                                   fontSize: 20.0,
@@ -297,7 +297,7 @@ String senderId='';
               backgroundColor: Colors.cyan[800],
               
               title: Center(
-                  child: Text("السجل",
+                  child: Text("الأرشيف",
                       style: TextStyle(fontSize: 20))
                       ),
 

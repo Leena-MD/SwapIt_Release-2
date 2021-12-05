@@ -34,7 +34,7 @@ class _waiting extends State<waiting> {
   String sendergoods='';
   List<String> selectedCategory = [];
   String category1 = 'الطلبات';
-  String category2 = ' السجل';
+  String category2 = ' الأرشيف';
   String category3 = 'قائمة الانتظار';
 late int index;
   final db = FirebaseFirestore.instance;
@@ -142,7 +142,7 @@ late int index;
                               BorderRadius.all(Radius.circular(0)),
                             ),
                             child: Text(
-                              ' السجل',
+                              ' الأرشيف',
                               style: TextStyle(
                                   color: Colors.grey[900],
                                   fontSize: 20.0,
@@ -284,7 +284,7 @@ late int index;
               //     children: <Widget>[
               //       Icon(Icons.archive , color: Colors.white,size: 30,),
               //
-              //       Text("السجل", style: TextStyle(color: Colors.white,fontSize: 15)),
+              //       Text("الأرشيف", style: TextStyle(color: Colors.white,fontSize: 15)),
               //
               //
               //
