@@ -130,12 +130,39 @@ class _swapRequest extends State<swapRequest> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   height: 510,
-                  child:MyGoodsList.isEmpty
-                    ? Text(
+                  child:!MyGoodsList.isEmpty
+                    ? 
+                  //بعدلها لا ينحذف الكومنت 
+
+//                        RaisedButton(
+//                                 child: Text('ليس لديك منتج متاح للتبديل ! أضف منتج جديد ',
+//                                     textAlign: TextAlign.center,
+//                                     style: TextStyle(
+//                                         fontSize: 18,
+//                                         color: Colors.white,
+//                                         fontWeight: FontWeight.bold)
+//                                         ),
+//                                 color: Colors.cyan.shade800,
+//                                 onPressed: () {
+// Navigator.push(this.context,
+//                 MaterialPageRoute(builder: (context) => PostPage()));       
+//                                          },
+//                                 shape: RoundedRectangleBorder(
+//                                   borderRadius: BorderRadius.circular(4),
+//                                 ),
+//                                 elevation: 10,
+//                                 padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
+//                               ) 
+//بعدلها لا ينحذف الكومنت 
+                    Text(
                         " لا يوجد لديك منتجات للتبادل بها! ",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 18, color: Colors.grey),
+                     
                       )
+                      
+                      
+                      
                     : GridView.count(
                       shrinkWrap: false,
                       primary: false,
