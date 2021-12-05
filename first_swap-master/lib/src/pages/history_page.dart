@@ -262,15 +262,15 @@ String senderId='';
 
 
   {
-    //    _fetchReq();
+    
 
 
     MyProvider provider = Provider.of<MyProvider>(context);
 
     provider.getHistoryList();
-    if(provider.throwHistoryList!=null) {
+  
       HistoryList = provider.throwHistoryList;
-    }
+    
 
     return SafeArea(
 
@@ -314,9 +314,7 @@ String senderId='';
                   child: Row(
                     children: [
                        header(),
-                      //  recipe(),
-                      //   pizza(),
-                      //    drink(),
+                   
                     ],
                   ),
                 ),
@@ -325,7 +323,7 @@ String senderId='';
                   height: 510,
                   child:
                   HistoryList.isEmpty
-                    ? Text(
+                    ?Text(
                         " لم تقم بالتبادل  ",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 18, color: Colors.grey),
@@ -367,12 +365,10 @@ String senderId='';
                 
               ],
             )
-          // throw UnimplementedError();
-          //       }
+       
+          
         )
-      //),
-
-      //}else here{}
+  
 
     );
   }
@@ -412,7 +408,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _selectedIndex = widget.defaultSelectedIndex;
