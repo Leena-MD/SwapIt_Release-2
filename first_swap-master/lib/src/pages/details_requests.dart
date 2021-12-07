@@ -163,7 +163,7 @@ class _DetailRequestState extends State<DetailRequest> {
                         title: Text(
                           widget.description,
                           textAlign: TextAlign.right,
-                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                          style: TextStyle(fontSize: 14, color: Colors.black54),
                         ),
                         subtitle: Text(''),
                         isThreeLine: true,
@@ -214,13 +214,13 @@ class _DetailRequestState extends State<DetailRequest> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             new SizedBox(
-                              width: 100.0,
+                              width: 120.0,
                               height: 50.0,
                               child: RaisedButton(
                                 child: Text('رفض الطلب ',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold)),
 
@@ -238,13 +238,13 @@ class _DetailRequestState extends State<DetailRequest> {
                             ),
                             SizedBox(width: 20),
                             new SizedBox(
-                              width: 100.0,
+                              width: 120.0,
                               height: 50.0,
                               child: RaisedButton(
                                 child: Text('قبول الطلب ',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold)),
                                 color: Colors.lightGreen,

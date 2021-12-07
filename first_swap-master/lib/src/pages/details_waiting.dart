@@ -155,6 +155,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                         color: Colors.grey,
                       ),
                       ListTile(
+
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
@@ -162,7 +163,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                         title: Text(
                           widget.description,
                           textAlign: TextAlign.right,
-                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                          style: TextStyle(fontSize: 14, color: Colors.black54),
                         ),
                         subtitle: Text(''),
                         isThreeLine: true,
@@ -211,7 +212,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                         child: ButtonBar(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            SizedBox(width: 50),
+
                             RaisedButton(
                               color: Colors.orangeAccent,
                               onPressed: () {
@@ -221,7 +222,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               elevation: 5,
-                              padding: EdgeInsets.fromLTRB(60, 6, 60, 6),
+                              padding: EdgeInsets.fromLTRB(60, 4, 60, 4),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -232,12 +233,14 @@ class _Detailwaiting extends State<Detailwaiting> {
                                         fontSize: 20,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
+
                                   )
                                 ],
                               ),
                             ),
                           ],
                         ),
+
                       ),
                     ],
                   ),
