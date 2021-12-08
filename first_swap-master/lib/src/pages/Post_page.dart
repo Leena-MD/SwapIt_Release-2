@@ -245,11 +245,6 @@ class _PostPage extends State<PostPage> {
                                                                     'مستلزمات الحيوان '),
                                                                 value: '8',
                                                               ),
-                                                              new DropdownMenuItem(
-                                                                child: new Text(
-                                                                    'اخرى'),
-                                                                value: '9',
-                                                              ),
                                                             ],
                                                             validator: (value) =>
                                                                 value == '42'

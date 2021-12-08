@@ -135,7 +135,7 @@ class _regestpState extends State<regestp> {
             return ("*الحقل مطلوب");
           }
           if (!regex.hasMatch(value)) {
-            return ("الاسم الأخير حد أدنى حرف ٣ أحرف");
+            return ("الاسم الأخير حد أدنى ٣ أحرف");
           }
           if (!regex3.hasMatch(value)) {
             return ("يجب ان يتكون الاسم الأخير من احرف فقط");
@@ -214,7 +214,7 @@ class _regestpState extends State<regestp> {
           }
 
           if (!regex.hasMatch(value)) {
-            return ("يجب ان تحتوي كلمة المرور على :حرف كبير وصغير وارقام ورمز");
+            return ("يجب ان تحتوي كلمة المرور على : ٨ أحرف كبيرة وصغيرة وارقام ورمز");
           }
         },
         onSaved: (value) {
@@ -414,7 +414,8 @@ class _regestpState extends State<regestp> {
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "تمت عملية إنشاء الحساب بنجاح");
+    Fluttertoast.showToast(
+        msg: "تمت عملية إنشاء الحساب وإرسال بريد إلكتروني لتوثيق");
     user.sendEmailVerification();
 
     Navigator.pushAndRemoveUntil(
