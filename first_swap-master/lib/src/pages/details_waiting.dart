@@ -85,7 +85,7 @@ class _Detailwaiting extends State<Detailwaiting> {
               ),
               SizedBox(height: 10),
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 35),
                   width: double.infinity,
@@ -221,7 +221,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               elevation: 5,
-                              padding: EdgeInsets.fromLTRB(60, 6, 60, 6),
+                              padding: EdgeInsets.fromLTRB(54, 6, 54, 6),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
