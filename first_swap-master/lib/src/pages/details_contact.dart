@@ -90,7 +90,7 @@ class _Details extends State<DetailContact> {
               ),
               SizedBox(height: 10),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 35),
                   width: double.infinity,
@@ -225,7 +225,7 @@ class _Details extends State<DetailContact> {
                         //selectedTileColor: Colors.white38,
 
                         title: Text(
-                          "يمكنك التواصل مع " + FName + " " + LName,
+                          LName+' '+ FName  + " يمكنك التواصل مع ",
                           textScaleFactor: 1,
                           textAlign: TextAlign.right,
                           style: TextStyle(
