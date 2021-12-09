@@ -50,9 +50,6 @@ bool index=true;
 
    List<Product> GoodsList = [];
 
-  // late Product GoodsReceivingData;
-
-//    List<Product> newGoodsList = [];
 
 
   Widget header() {
@@ -217,9 +214,7 @@ bool index=true;
       GoodsList = provider.throwGoodsReceivingList;
 
 
-  //  if(GoodsList.isEmpty){
-  //    Text("لاتوجد لديك طلبات");
-  //  }
+
 
     return SafeArea(
 
@@ -247,37 +242,6 @@ bool index=true;
                   child: Text("الطلبات",
                       style: TextStyle(fontSize: 20))),
 
-              // leading: FlatButton(
-              //
-              //   onPressed: () {
-              //
-              //     Navigator.push(this.context,
-              //         MaterialPageRoute(builder: (context) => History()));
-              //
-              //   },
-              //   padding: const EdgeInsets.symmetric(horizontal: 6),
-              //   shape: RoundedRectangleBorder(
-              //     borderRadius: new BorderRadius.circular(18.0),),
-              //
-              //
-              //   child: Column(
-              //
-              //     children: <Widget>[
-              //       Icon(Icons.archive , color: Colors.white,size: 30,),
-              //
-              //       Text("الأرشيف", style: TextStyle(color: Colors.white,fontSize: 15)),
-              //
-              //
-              //
-              //
-              //     ],
-              //   ),
-              //
-              //
-              //
-              //
-              //
-              // ),
             ),
             body:
             Column(
@@ -291,9 +255,7 @@ bool index=true;
                   child: Row(
                     children: [
                       header(),
-                      //  recipe(),
-                      //   pizza(),
-                      //    drink(),
+               
                     ],
                   ),
                 ),

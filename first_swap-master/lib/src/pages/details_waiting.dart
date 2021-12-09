@@ -249,6 +249,7 @@ class _Detailwaiting extends State<Detailwaiting> {
       ),
     );
   }
+  //To undo the request
 
   reject() async {
     String goodsId = widget.IDgoods;
@@ -260,7 +261,7 @@ class _Detailwaiting extends State<Detailwaiting> {
         .doc(goodsId)
         .update({'Status': status, 'receiver goods': '', 'receiverID': ''});
 
-    Fluttertoast.showToast(msg: "تم إلغاء الطلب بنجاح !");
+    Fluttertoast.showToast(msg: "تم التراجع عن الطلب بنجاح !");
 
     Navigator.of(this.context)
         .pushReplacement(MaterialPageRoute(builder: (context) => waiting()));
