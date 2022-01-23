@@ -11,8 +11,6 @@ import 'edit_profile_page.dart';
 import 'package:first_swap/fluttericon.dart';
 import 'edit_profile_page.dart';
 
-
-
 class EditPasswordPage extends StatefulWidget {
   const EditPasswordPage({Key? key}) : super(key: key);
 
@@ -20,32 +18,29 @@ class EditPasswordPage extends StatefulWidget {
   _EditPasswordPageState createState() => _EditPasswordPageState();
 }
 
+class _EditPasswordPageState extends State<EditPasswordPage> {
+  int flag2 = -1;
 
-class _EditPasswordPageState  extends State<EditPasswordPage>  {
-int flag2=-1;
+  bool checkCurrentPasswordValid = true;
 
+  bool flag1 = true;
 
-bool checkCurrentPasswordValid = true;
-
- bool flag1=true;
-
- late bool flag3;
-    final _formkey = GlobalKey<FormState>();
+  late bool flag3;
+  final _formkey = GlobalKey<FormState>();
 
 // error Message
-  String errorMessage='';
-  
+  String errorMessage = '';
+
   final TextEditingController pass1cont = new TextEditingController(); // القديم
 
-  final passwordEditingController = new TextEditingController();//الجديد  
-  final confirmPasswordEditingController = new TextEditingController(); //اعادة الجديد
-
+  final passwordEditingController = new TextEditingController(); //الجديد
+  final confirmPasswordEditingController =
+      new TextEditingController(); //اعادة الجديد
 
   @override
   Widget build(BuildContext context) {
-
-var errorMsg="";
-    //password field and validation القديم 
+    var errorMsg = "";
+    //password field and validation القديم
     final passwordFieldPlace = TextFormField(
         autofocus: false,
         textAlign: TextAlign.right,
@@ -70,9 +65,9 @@ var errorMsg="";
           ),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "   كلمة المرور الحالية",
-           errorText: checkCurrentPasswordValid
-                            ? null
-                            : "Please double check your current password",
+          errorText: checkCurrentPasswordValid
+              ? null
+              : "Please double check your current password",
           labelStyle: TextStyle(
             color: Colors.grey,
             fontSize: 15,
@@ -86,19 +81,18 @@ var errorMsg="";
         controller: passwordEditingController,
         obscureText: true,
         validator: (value) {
-          
-       RegExp regex = new RegExp(
-             r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+          RegExp regex = new RegExp(
+              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
           if (value!.isEmpty) {
             return ("*الحقل مطلوب");
           }
-          
-    if (!regex.hasMatch(value)) {
-        return ("يجب ان تحتوي كلمة المرور على :حرف كبير وصغير وارقام ورمز");
-       }
+
+          if (!regex.hasMatch(value)) {
+            return ("يجب ان تحتوي كلمة المرور على : ٨ أحرف كبيرة وصغيرة وارقام ورمز");
+          }
         },
         onSaved: (value) {
-      //    firstNameEditingController.text = value!;
+          //    firstNameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
@@ -106,7 +100,6 @@ var errorMsg="";
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "كلمة المرور الجديدة",
         ));
-
 
     //confirm password field
     final confirmPasswordField = TextFormField(
@@ -133,8 +126,6 @@ var errorMsg="";
           hintText: " أعد إدخال كملة المرور الجديدة",
         ));
 
-
-
     final changeButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
@@ -143,10 +134,7 @@ var errorMsg="";
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-
             _changePassword(pass1cont.text, passwordEditingController.text);
-    
-
           },
           child: Text(
             "تغيير كلمة المرور",
@@ -156,8 +144,7 @@ var errorMsg="";
           )),
     );
 
-
-     return Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -176,7 +163,7 @@ var errorMsg="";
             child: Padding(
               padding: const EdgeInsets.all(36.0),
               child: Form(
-              key: _formkey,
+                key: _formkey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -187,7 +174,7 @@ var errorMsg="";
                           "assets/Screen Shot 1443-03-02 at 6.09.18 PM.png",
                           fit: BoxFit.contain,
                         )),
-      passwordFieldPlace,
+                    passwordFieldPlace,
                     SizedBox(height: 30),
                     passwordField,
                     SizedBox(height: 30),
@@ -204,83 +191,24 @@ var errorMsg="";
       ),
     );
   }
-void _changePassword(String currentPassword, String newPassword) async {
 
-  
-if (_formkey.currentState!.validate()) {
+  void _changePassword(String currentPassword, String newPassword) async {
+    if (_formkey.currentState!.validate()) {
+      final user = await FirebaseAuth.instance.currentUser;
+      final cred = EmailAuthProvider.credential(
+          email: user!.email!, password: currentPassword);
 
-try {
-final user = await FirebaseAuth.instance.currentUser;
-final cred = EmailAuthProvider.credential(
-    email: user!.email!, password: currentPassword);
- 
-user.reauthenticateWithCredential(cred).then((value) {
-  flag2=1;
-
-switch(flag2){
-  case -1:
-
-       Fluttertoast.showToast(msg: "كلمة المرور غير صحيحة!");
-       break;
-
-case 1:
-
-      Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
-      break;
-
-        default:
-       Fluttertoast.showToast(msg: "حدث خطأ في النظام");
-
-
-}
-  
-  flag1=true;
-  user.updatePassword(newPassword).then((_) {
-    
-      Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
-      pass1cont.clear();
-                Navigator.of(this.context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => EditProfilePage()));
-    //Success, do something
-  });}
-  ); 
-
-
-}
-
-on FirebaseAuthException catch (error){
-
-switch (error.code) {
-     //   validation of the email with the database records 
-          case "wrong-password":
-            errorMessage = " كلمة المرور غير صحيحة!";
-            break;
-         
-          case "too-many-requests":
-            errorMessage = "حدث خطأ  في النظام";
-            break;
-          case "operation-not-allowed":
-            errorMessage = "عملية غير مقبولة!";
-            break;
-          default:
-            errorMessage = "حدث خطأ في النظام";
-}
-        
-        Fluttertoast.showToast(msg: errorMessage);
-        print(error.code);
-    
-     
+      user.reauthenticateWithCredential(cred).then((value) {
+        user.updatePassword(newPassword).then((_) {
+          Fluttertoast.showToast(msg: "تم تغيير كلمة المرور بنجاح!");
+          pass1cont.clear();
+          Navigator.of(this.context).pushReplacement(
+              MaterialPageRoute(builder: (context) => EditProfilePage()));
+        });
+      }).catchError((error) {
+        //Error, show something
+        Fluttertoast.showToast(msg: "كلمة المرور الحالية غير صحيحة");
+      });
     }
-  
-
   }
-
-
-
-
-}
-
-
-
-
 }

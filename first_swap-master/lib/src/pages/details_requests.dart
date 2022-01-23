@@ -86,7 +86,7 @@ class _DetailRequestState extends State<DetailRequest> {
               ),
               SizedBox(height: 10),
               Expanded(
-                flex: 2,
+                flex: 5,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 35),
                   width: double.infinity,
@@ -223,7 +223,6 @@ class _DetailRequestState extends State<DetailRequest> {
                                         fontSize: 18,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold)),
-
                                 color: Colors.redAccent,
                                 onPressed: () {
                                   reject();
@@ -233,7 +232,6 @@ class _DetailRequestState extends State<DetailRequest> {
                                 ),
                                 elevation: 5,
                                 padding: EdgeInsets.fromLTRB(20, 15, 2, 5),
-
                               ),
                             ),
                             SizedBox(width: 20),
@@ -380,23 +378,19 @@ class _DetailRequestState extends State<DetailRequest> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-        
           title: Column(children: [
-
             FlatButton(
               child: new Text(
-                "                                                         X",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.blueGrey[900],
-                ),
-                 textAlign: TextAlign.right
-              ),
+                  "                                                         X",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.blueGrey[900],
+                  ),
+                  textAlign: TextAlign.right),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-
             Image.network(myimage, width: 200, height: 200, fit: BoxFit.cover),
             SizedBox(
               height: 10,

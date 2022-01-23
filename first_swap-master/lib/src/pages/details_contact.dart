@@ -90,7 +90,7 @@ class _Details extends State<DetailContact> {
               ),
               SizedBox(height: 10),
               Expanded(
-                flex: 3,
+                flex: 5,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 35),
                   width: double.infinity,
@@ -225,7 +225,7 @@ class _Details extends State<DetailContact> {
                         //selectedTileColor: Colors.white38,
 
                         title: Text(
-                          LName+' '+ FName  + " يمكنك التواصل مع ",
+                          LName + ' ' + FName + " يمكنك التواصل مع ",
                           textScaleFactor: 1,
                           textAlign: TextAlign.right,
                           style: TextStyle(
@@ -317,23 +317,19 @@ class _Details extends State<DetailContact> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-       
           title: Column(children: [
-
             FlatButton(
               child: new Text(
-                "                                                         X",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.blueGrey[900],
-                ),
-                 textAlign: TextAlign.right
-              ),
+                  "                                                         X",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.blueGrey[900],
+                  ),
+                  textAlign: TextAlign.right),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-
             Image.network(myimage, width: 200, height: 200, fit: BoxFit.cover),
             SizedBox(
               height: 10,

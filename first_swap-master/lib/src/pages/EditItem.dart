@@ -300,7 +300,7 @@ class _EditItem extends State<EditItem> {
                                           return ("*الحقل مطلوب");
                                         }
                                         if (!regex.hasMatch(value)) {
-                                          return ("اسم المنتج حد أدنى و اعلى ٢٠٠ ");
+                                          return ("وصف المنتج حد أدنى ١٠ و أعلى ٢٠٠ ");
                                         }
                                         return null;
                                       },
@@ -409,8 +409,8 @@ class _EditItem extends State<EditItem> {
 
   String uiduser = userID = FirebaseAuth.instance.currentUser!.uid;
   String st = "available";
-  update(String doc, String name, String des, String url,
-      String userID, int num, String st, String cate, bool path) async {
+  update(String doc, String name, String des, String url, String userID,
+      int num, String st, String cate, bool path) async {
     final _auth = FirebaseAuth.instance;
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;

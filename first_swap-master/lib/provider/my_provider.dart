@@ -4,18 +4,15 @@ import 'package:first_swap/models/goods.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-
 class MyProvider extends ChangeNotifier {
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String uiduser = '';
 
-
-///////////////////  MyGoods ////////////////
-    List<Product> MyGoodsList = [];
-late Product MyGoodsData;
+/////////////////// MyGoods ////////////////
+  List<Product> MyGoodsList = [];
+  late Product MyGoodsData;
   Future<void> getMyGoods() async {
-
-   final firebaseUser = await FirebaseAuth.instance.currentUser;
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -28,22 +25,22 @@ late Product MyGoodsData;
         print(e);
       });
     }
-String receiverId='';
-String goodsSend='';
-String senderId='';
- 
+    String receiverId = '';
+    String goodsSend = '';
+    String senderId = '';
 
-        
     List<Product> MyGoods = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('goods')
-        .where("owner",isEqualTo: uiduser ,)
-        .where("Status",isEqualTo:"available")
+        .where(
+          "owner",
+          isEqualTo: uiduser,
+        )
+        .where("Status", isEqualTo: "available")
         .get();
-   
-        querySnapshot.docs.forEach((element) {
-      
-      MyGoodsData = Product(  
+
+    querySnapshot.docs.forEach((element) {
+      MyGoodsData = Product(
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
@@ -51,160 +48,27 @@ String senderId='';
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
-        IDgoods:element.id,
+        IDgoods: element.id,
       );
-     MyGoods.add(MyGoodsData);
-        MyGoodsList = MyGoods; 
-      
+      MyGoods.add(MyGoodsData);
+      MyGoodsList = MyGoods;
     });
-    if(querySnapshot.docs.isEmpty){
-  MyGoodsList=List.empty();
-}
+    if (querySnapshot.docs.isEmpty) {
+      MyGoodsList = List.empty();
+    }
 
     notifyListeners();
-       
   }
 
- get throwMyGoodsList {    
+  get throwMyGoodsList {
     return MyGoodsList;
   }
-///////////////////  Offers ////////////////
-    List<Product> GoodsList = [];
-late Product GoodsReceivingData;
+
+/////////////////// Offers ////////////////
+  List<Product> GoodsList = [];
+  late Product GoodsReceivingData;
   Future<void> getGoodsReceiving() async {
-
-   final firebaseUser = await FirebaseAuth.instance.currentUser;
-    if (firebaseUser != null) {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(firebaseUser.uid)  
-          .get()
-          //.then((value) => null)
-          .then((ds) {
-        uiduser = ds.data()!['uid'];
-      }).catchError((e) {
-        print(e);
-      });
-    }
-String receiverId='';
-String goodsSend='';
-String senderId='';
- 
-
-        
-    List<Product> GoodsReceiving = [];
-    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
-        .collection('goods')
-        .where("Status", isEqualTo:
-         "waiting"
-    )
-        .where("receiverID", isEqualTo:
-    uiduser
-         )
-        .get()) ;
-   
-        querySnapshot.docs.forEach((element) {
-      
-      GoodsReceivingData = Product(  
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id,
-      );
-     GoodsReceiving.add(GoodsReceivingData);
-        GoodsList = GoodsReceiving; 
-      
-    });
-
-    if(querySnapshot.docs.isEmpty){
-  GoodsList=List.empty();
-}
-
-    notifyListeners();
-       
-  }
-
- get throwGoodsReceivingList {    
-    return GoodsList;
-  }
-
-
-///////////////////  waiting ////////////////
-    List<Product> waitingList = [];
-late Product waitingReceivingData;
-  Future<void> getwaiting() async {
-
-   final firebaseUser = await FirebaseAuth.instance.currentUser;
-    if (firebaseUser != null) {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(firebaseUser.uid)  
-          .get()
-          //.then((value) => null)
-          .then((ds) {
-        uiduser = ds.data()!['uid'];
-      }).catchError((e) {
-        print(e);
-      });
-    }
-String receiverId='';
-String goodsSend='';
-String senderId='';
- 
-
-        
-    List<Product> waitingReceiving = [];
-    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
-        .collection('goods')
-        .where("Status", isEqualTo:
-         "waiting"
-    )
-        .where("owner", isEqualTo:
-    uiduser
-         )
-        .get()) ;
-   
-        querySnapshot.docs.forEach((element) {
-      
-      waitingReceivingData = Product(  
-        image: element.data()['image'],
-        title: element.data()['gName'],
-        description: element.data()['Description'],
-        status: element.data()['Status'],
-        owner: element.data()['owner'],
-        id: element.data()['owner'],
-        cate: element.data()['cate'],
-        IDgoods:element.id,
-      );
-     waitingReceiving.add(waitingReceivingData);
-        waitingList = waitingReceiving; 
-      
-    });
-
-    if(querySnapshot.docs.isEmpty){
-  waitingList=List.empty();
-}
-
-    notifyListeners();
-       
-  }
-
- get throwwaitingReceivingList {    
-    return waitingList;
-  }
-
-
-
-///////////////////  History ////////////////
-    List<Product> HistoryList = [];
-late Product HistoryListData;
-  Future<void> getHistoryList() async {
-
-   final firebaseUser = await FirebaseAuth.instance.currentUser;
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -217,27 +81,126 @@ late Product HistoryListData;
         print(e);
       });
     }
-String receiverId='';
-String goodsSend='';
-String senderId='';
- 
+    String receiverId = '';
+    String goodsSend = '';
+    String senderId = '';
 
-        
+    List<Product> GoodsReceiving = [];
+    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
+        .collection('goods')
+        .where("Status", isEqualTo: "waiting")
+        .where("receiverID", isEqualTo: uiduser)
+        .get());
+
+    querySnapshot.docs.forEach((element) {
+      GoodsReceivingData = Product(
+        image: element.data()['image'],
+        title: element.data()['gName'],
+        description: element.data()['Description'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods: element.id,
+      );
+      GoodsReceiving.add(GoodsReceivingData);
+      GoodsList = GoodsReceiving;
+    });
+
+    if (querySnapshot.docs.isEmpty) {
+      GoodsList = List.empty();
+    }
+
+    notifyListeners();
+  }
+
+  get throwGoodsReceivingList {
+    return GoodsList;
+  }
+
+/////////////////// waiting ////////////////
+  List<Product> waitingList = [];
+  late Product waitingReceivingData;
+  Future<void> getwaiting() async {
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+    String receiverId = '';
+    String goodsSend = '';
+    String senderId = '';
+
+    List<Product> waitingReceiving = [];
+    QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
+        .collection('goods')
+        .where("Status", isEqualTo: "waiting")
+        .where("owner", isEqualTo: uiduser)
+        .get());
+
+    querySnapshot.docs.forEach((element) {
+      waitingReceivingData = Product(
+        image: element.data()['image'],
+        title: element.data()['gName'],
+        description: element.data()['Description'],
+        status: element.data()['Status'],
+        owner: element.data()['owner'],
+        id: element.data()['owner'],
+        cate: element.data()['cate'],
+        IDgoods: element.id,
+      );
+      waitingReceiving.add(waitingReceivingData);
+      waitingList = waitingReceiving;
+    });
+
+    if (querySnapshot.docs.isEmpty) {
+      waitingList = List.empty();
+    }
+
+    notifyListeners();
+  }
+
+  get throwwaitingReceivingList {
+    return waitingList;
+  }
+
+/////////////////// History ////////////////
+  List<Product> HistoryList = [];
+  late Product HistoryListData;
+  Future<void> getHistoryList() async {
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          //.then((value) => null)
+          .then((ds) {
+        uiduser = ds.data()!['uid'];
+      }).catchError((e) {
+        print(e);
+      });
+    }
+    String receiverId = '';
+    String goodsSend = '';
+    String senderId = '';
+
     List<Product> GoodsHistory = [];
     QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
         .collection('goods')
-        .where("Status", isEqualTo:
-         "done"
-    )
-        .where("receiverID", isEqualTo:
-    uiduser
-         )
-        .get()) ;
+        .where("Status", isEqualTo: "done")
+        .where("receiverID", isEqualTo: uiduser)
+        .get());
 
- 
-  
-        querySnapshot.docs.forEach((element) {
-
+    querySnapshot.docs.forEach((element) {
       HistoryListData = Product(
         image: element.data()['image'],
         title: element.data()['gName'],
@@ -246,27 +209,24 @@ String senderId='';
         owner: element.data()['owner'],
         id: element.data()['owner'],
         cate: element.data()['cate'],
-        IDgoods:element.id,
+        IDgoods: element.id,
       );
-     GoodsHistory.add(HistoryListData);
-        HistoryList = GoodsHistory;
-      
+      GoodsHistory.add(HistoryListData);
+      HistoryList = GoodsHistory;
     });
-      
-       if(querySnapshot.docs.isEmpty){
-  HistoryList=List.empty();
-}
-      
+
+    if (querySnapshot.docs.isEmpty) {
+      HistoryList = List.empty();
+    }
+
     notifyListeners();
-       
   }
 
- get throwHistoryList {
+  get throwHistoryList {
     return HistoryList;
   }
 
-
-///////////////////  category 1 ////////////////
+/////////////////// category 1 ////////////////
   List<Product> booksList = [];
   late Product booksModle;
   Future<void> getBookCategory() async {
@@ -312,6 +272,9 @@ String senderId='';
         booksList = books;
       }
     });
+    if (querySnapshot.docs.isEmpty) {
+      booksList = List.empty();
+    }
     notifyListeners();
   }
 
@@ -319,7 +282,7 @@ String senderId='';
     return booksList;
   }
 
-  ///////////////////  category 2 ////////////////
+  /////////////////// category 2 ////////////////
   List<Product> computerList = [];
   late Product computerModle;
   Future<void> getComputerCategory() async {
@@ -361,6 +324,9 @@ String senderId='';
         computerList = newComputerList;
       }
     });
+    if (querySnapshot.docs.isEmpty) {
+      computerList = List.empty();
+    }
     notifyListeners();
   }
 
@@ -412,6 +378,9 @@ String senderId='';
         kidsList = newKidsList;
       }
     });
+    if (querySnapshot.docs.isEmpty) {
+      kidsList = List.empty();
+    }
     notifyListeners();
   }
 
@@ -462,6 +431,9 @@ String senderId='';
         HouseList = newHouseList;
       }
     });
+    if (querySnapshot.docs.isEmpty) {
+      HouseList = List.empty();
+    }
     notifyListeners();
   }
 
@@ -512,6 +484,9 @@ String senderId='';
         BagList = newBagList;
       }
     });
+    if (querySnapshot.docs.isEmpty) {
+      BagList = List.empty();
+    }
     notifyListeners();
   }
 
@@ -562,6 +537,9 @@ String senderId='';
         perfumeList = newPerfumeList;
       }
     });
+    if (querySnapshot.docs.isEmpty) {
+      perfumeList = List.empty();
+    }
     notifyListeners();
   }
 
@@ -612,6 +590,9 @@ String senderId='';
         gymList = newGymList;
       }
     });
+    if (querySnapshot.docs.isEmpty) {
+      gymList = List.empty();
+    }
     notifyListeners();
   }
 
@@ -662,6 +643,9 @@ String senderId='';
         clothesList = newClothesList;
       }
     });
+    if (querySnapshot.docs.isEmpty) {
+      clothesList = List.empty();
+    }
     notifyListeners();
   }
 
@@ -712,6 +696,9 @@ String senderId='';
         petList = newPetList;
       }
     });
+    if (querySnapshot.docs.isEmpty) {
+      petList = List.empty();
+    }
     notifyListeners();
   }
 
@@ -764,5 +751,4 @@ String senderId='';
   get throwrequstList {
     return requestList;
   }
-
 }

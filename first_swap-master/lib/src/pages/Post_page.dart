@@ -297,7 +297,7 @@ class _PostPage extends State<PostPage> {
                                           return ("*الحقل مطلوب");
                                         }
                                         if (!regex.hasMatch(value)) {
-                                          return ("اسم المنتج حد أدنى ١٠ و اعلى ٢٠٠ ");
+                                          return ("وصف المنتج حد أدنى ١٠ و أعلى ٢٠٠ ");
                                         }
                                         return null;
                                       },
@@ -471,7 +471,7 @@ class _PostPage extends State<PostPage> {
         url = await Storage().uploadImage(imagePath, imageName);
         print("1");
       } else {
-        Fluttertoast.showToast(msg: "يجب اضافة صورة ");
+        Fluttertoast.showToast(msg: "يجب إضافة صورة ");
       }
 
       if (firebaseUser != null)
