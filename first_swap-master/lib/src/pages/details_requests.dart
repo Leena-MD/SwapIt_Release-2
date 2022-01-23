@@ -71,10 +71,6 @@ class _DetailRequestState extends State<DetailRequest> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(kDefaultPaddin),
-                  // For  demo we use fixed height  and width
-                  // Now we dont need them
-                  // height: 180,
-                  // width: 160,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -271,6 +267,7 @@ class _DetailRequestState extends State<DetailRequest> {
     );
   }
 
+//to accept  the swapping
   accept() async {
     String goodsId = widget.IDgoods;
     String receivergoodsId = "";
@@ -322,6 +319,7 @@ class _DetailRequestState extends State<DetailRequest> {
           ),
         ));
   }
+//to reject the swapping
 
   reject() async {
     String goodsId = widget.IDgoods;
@@ -340,6 +338,7 @@ class _DetailRequestState extends State<DetailRequest> {
     Navigator.push(
         this.context, MaterialPageRoute(builder: (context) => Offers()));
   }
+//If a good that had more than one request is accept, the rest of the requests will be rejected
 
   rejecOtherGoods(String ids) async {
     var status = "available";
@@ -349,8 +348,8 @@ class _DetailRequestState extends State<DetailRequest> {
         .doc(ids)
         .update({'Status': status, 'receiver goods': '', 'receiverID': ''});
 
-    Fluttertoast.showToast(msg: "تم رفض بقية الطلبات بنجاح !");
   }
+  //To view the goods that swapping with
 
   mygoods() async {
     var myimage;

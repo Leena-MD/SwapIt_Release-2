@@ -45,24 +45,20 @@ class _ProfilePageState extends State<ProfilePage> {
   void inputData() {
     final User? user = auth.currentUser;
     final uid = user!.uid;
-    // here you write the codes to input the data into firestore
   }
 
 
 
 
-  // CollectionReference users = FirebaseFirestore.instance.collection('users');
 
-  final userRef= FirebaseFirestore.instance.collection('users');
 
   Future<void> _fetch() async {
-    final firebaseUser = await FirebaseAuth.instance.currentUser;//(); شلتها لان تطلع لي ايرور
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null)// the user sign in
       await FirebaseFirestore.instance
           .collection('users')
           .doc(firebaseUser.uid)
           .get()
-      //.then((value) => null)
           .then((ds) {
         Email = ds.data()!['email'];
         FName = ds.data()!['FirstName'];
@@ -76,7 +72,6 @@ class _ProfilePageState extends State<ProfilePage> {
       });
   }
 
-  //final LoginPage _auth = LoginPage();
 
 
 

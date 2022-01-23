@@ -41,9 +41,9 @@ class swapRequest extends StatefulWidget {
 class _swapRequest extends State<swapRequest> {
   String receivergoods='';
   String receiverID='';
-  String requeststatus='';
-  String senderID='';    
-  String sendergoods='';
+  // String requeststatus='';
+  // String senderID='';    
+  // String sendergoods='';
 
   final db = FirebaseFirestore.instance;
 
@@ -78,11 +78,6 @@ class _swapRequest extends State<swapRequest> {
       MyGoodsList = provider.throwMyGoodsList;
 
   
-  //  if(MyGoodsList.isEmpty){
-
-  //   //return 
-  //   Text("لاتوجد لديك منتجات للتبادل بها!");
-  //  }
 
     return SafeArea(
 
@@ -251,6 +246,7 @@ showDialog(
     );
   }
 
+//To send a swap request
   SendRequest(String name ,String ids) async
 
   {

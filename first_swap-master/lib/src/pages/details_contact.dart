@@ -75,10 +75,7 @@ class _Details extends State<DetailContact> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(kDefaultPaddin),
-                  // For  demo we use fixed height  and width
-                  // Now we dont need them
-                  // height: 180,
-                  // width: 160,
+                 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -94,13 +91,11 @@ class _Details extends State<DetailContact> {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 35),
                   width: double.infinity,
-                  // color: Colors.white,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15))),
                   child: Column(
-                    //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       ListTile(
@@ -108,7 +103,6 @@ class _Details extends State<DetailContact> {
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
-                        // selectedTileColor: Colors.white38,
 
                         title: Text(
                           " المنتج ",
@@ -290,7 +284,7 @@ class _Details extends State<DetailContact> {
       userName = ds.data()!['UserName'];
     });
   }
-
+  //To view the goods that swapping with
   mygoods() async {
     var myimage;
 
