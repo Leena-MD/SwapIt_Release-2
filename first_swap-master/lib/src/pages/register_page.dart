@@ -396,7 +396,13 @@ class _regestpState extends State<regestp> {
     // sedning these values
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
-    int Rate = 5;
+    double Rate = 0;
+    String Rate1 = "0";
+    String Rate2 = "0";
+    String Rate3 = "0";
+    String Rate4 = "0";
+    String Rate5 = "0";
+    String NumRate = "0";
 
     UserModel userModel = UserModel();
 
@@ -408,6 +414,12 @@ class _regestpState extends State<regestp> {
     userModel.UserName = userNameEditingController.text;
     userModel.phoneN = phoneNumberEditingController.text;
     userModel.Rate = Rate;
+    userModel.Rate1 = Rate1;
+    userModel.Rate2 = Rate2;
+    userModel.Rate3 = Rate3;
+    userModel.Rate4 = Rate4;
+    userModel.Rate5 = Rate5;
+    userModel.NumRate = NumRate;
     userModel.Blacklist = false;
 
     await firebaseFirestore
