@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 class MyProvider extends ChangeNotifier {
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String uiduser = '';
-
+  String userRate= '';
 /////////////////// MyGoods ////////////////
   List<Product> MyGoodsList = [];
   late Product MyGoodsData;
@@ -47,6 +47,7 @@ class MyProvider extends ChangeNotifier {
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+         ownerRate: element.data()['ownerRate'].toString(),
         cate: element.data()['cate'],
         IDgoods: element.id,
       );
@@ -100,6 +101,7 @@ class MyProvider extends ChangeNotifier {
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+         ownerRate: element.data()['ownerRate'].toString(),
         cate: element.data()['cate'],
         IDgoods: element.id,
       );
@@ -154,6 +156,7 @@ class MyProvider extends ChangeNotifier {
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+         ownerRate: element.data()['ownerRate'].toString(),
         cate: element.data()['cate'],
         IDgoods: element.id,
       );
@@ -208,6 +211,7 @@ class MyProvider extends ChangeNotifier {
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+         ownerRate: element.data()['ownerRate'].toString(),
         cate: element.data()['cate'],
         IDgoods: element.id,
       );
@@ -266,6 +270,7 @@ class MyProvider extends ChangeNotifier {
           owner: element.data()['owner'],
           id: element.data()['owner'],
           cate: element.data()['cate'],
+          ownerRate: element.data()['ownerRate'].toString(),
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         books.add(booksModle);
@@ -318,6 +323,7 @@ class MyProvider extends ChangeNotifier {
           owner: element.data()['owner'],
           id: element.data()['owner'],
           cate: element.data()['cate'],
+           ownerRate: element.data()['ownerRate'].toString(),
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         newComputerList.add(computerModle);
@@ -370,6 +376,7 @@ class MyProvider extends ChangeNotifier {
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
+           ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
 
@@ -424,6 +431,7 @@ class MyProvider extends ChangeNotifier {
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
+           ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -477,6 +485,7 @@ class MyProvider extends ChangeNotifier {
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
+           ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -530,6 +539,7 @@ class MyProvider extends ChangeNotifier {
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
+           ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -583,6 +593,7 @@ class MyProvider extends ChangeNotifier {
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
+           ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -636,6 +647,7 @@ class MyProvider extends ChangeNotifier {
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
+           ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -689,6 +701,7 @@ class MyProvider extends ChangeNotifier {
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
+           ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -738,6 +751,7 @@ class MyProvider extends ChangeNotifier {
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
+           ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
