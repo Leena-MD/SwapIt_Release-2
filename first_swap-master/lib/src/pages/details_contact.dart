@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/constants.dart';
+import 'package:first_swap/models/goodsMod.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/clothes.dart';
@@ -14,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:first_swap/provider/my_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:first_swap/models/user_model.dart';
 import 'Offers.dart';
 import 'books_category.dart';
 
@@ -45,8 +49,20 @@ class _Details extends State<DetailContact> {
   String LName = '';
   String phoneN = '';
   String userName = '';
-
+  double ratep = 0;
+double userRate=0;
+double userRateNum=0;
+double userRate1=0;
+double userRate2=0;
+double userRate3=0;
+double userRate4=0;
+double userRate5=0;
+double AvgUserRate=0;
   int quantity = 1;
+
+
+
+  String? get goodsId => null;
   @override
   Widget build(BuildContext context) {
     accept();
@@ -75,7 +91,6 @@ class _Details extends State<DetailContact> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(kDefaultPaddin),
-                 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -103,7 +118,6 @@ class _Details extends State<DetailContact> {
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
-
                         title: Text(
                           " المنتج ",
                           textScaleFactor: 1,
@@ -248,6 +262,24 @@ class _Details extends State<DetailContact> {
                         ),
                         minLeadingWidth: double.minPositive,
                       ),
+                      TextButton.icon(
+                        onPressed: () {
+                          rate(context);
+                        },
+                        style: ButtonStyle(
+                            alignment: Alignment.center,
+                            backgroundColor: MaterialStateProperty.all(
+                                Colors.yellow.withOpacity(0.1))),
+                        icon: Icon(
+                          Icons.stars,
+                          color: Colors.yellow.withOpacity(0.9),
+                        ),
+                        label: Text(
+                          "قيمّ",
+                          style: Theme.of(context).textTheme.headline6,
+          
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -282,8 +314,15 @@ class _Details extends State<DetailContact> {
       phoneN = ds.data()!['phoneN'];
 
       userName = ds.data()!['UserName'];
+      userRateNum=double.parse(ds.get('NumRate'));
+      userRate1=double.parse(ds.get('rate1'));
+      userRate2=double.parse(ds.get('rate2'));
+      userRate3=double.parse(ds.get('rate3'));
+      userRate4=double.parse(ds.get('rate4'));
+      userRate5=double.parse(ds.get('rate5'));
     });
   }
+
   //To view the goods that swapping with
   mygoods() async {
     var myimage;
@@ -339,5 +378,144 @@ class _Details extends State<DetailContact> {
         );
       },
     );
+  }
+
+  final _auth = FirebaseAuth.instance;
+  rate(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
+          
+            child: Column(
+               mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 30),
+                Text("   قيّم المنتج   ",textAlign: TextAlign.right),
+                RatingBar.builder(
+                  textDirection:TextDirection.rtl,
+                    initialRating: ratep,
+                    maxRating: 5,
+                    minRating: 1,
+                    itemPadding: EdgeInsets.symmetric(horizontal: 4),
+                    itemSize: 30,
+                    updateOnDrag: true,
+                    itemBuilder: (context, _) =>
+                        Icon(Icons.star, color: Colors.amber),
+                    onRatingUpdate: (ratep) async {
+                      setState(() {
+                        this.ratep = ratep;
+                      });
+                      FirebaseFirestore firebaseFirestore =
+                          FirebaseFirestore.instance;
+                      User? user = _auth.currentUser;
+
+                      goodsModel goodsmodel = goodsModel();
+
+                      // writing  the values
+
+                      goodsmodel.PRate = ratep;
+                      String goodsId = widget.IDgoods;
+                      final firebaseUser =
+                          await FirebaseAuth.instance.currentUser;
+                      if (ratep != null) {
+                        if (firebaseUser != null)
+                          await FirebaseFirestore.instance
+                              .collection('goods')
+                              .doc(goodsId)
+                              .update({'rate': ratep});
+                      }
+                      ;
+                    }),
+               // Text("  التقيم هو $ratep "),
+                SizedBox(height: 15),
+                
+                  SizedBox(height: 15),
+                 Text("  قيّم صاحب المنتج  ",textAlign: TextAlign.right),
+                RatingBar.builder(
+                  textDirection:TextDirection.rtl,
+                    initialRating: userRate,
+                    maxRating: 5,
+                    minRating: 1,
+                    itemPadding: EdgeInsets.symmetric(horizontal: 4),
+                    itemSize: 30,
+                    updateOnDrag: true,
+                    itemBuilder: (context, _) =>
+                        Icon(Icons.star, color: Colors.amber),
+                    onRatingUpdate: (userRate) async {
+                      setState(() {
+                        this.userRate = userRate;
+                        userRateNum=userRateNum+1;
+                      });
+                    if(userRate==1){
+                    userRate1=userRate1+1;
+                    }
+                    if(userRate==2){
+                    userRate2=userRate2+1;
+                    }
+                    if(userRate==3){
+                    userRate3=userRate3+1;
+                    }
+                    if(userRate==4){
+                    userRate4=userRate4+1;
+                    }
+                    if(userRate==5){
+                    userRate5=userRate5+1;
+                    }
+                    AvgUserRate= (1*userRate1+2*userRate2+3*userRate3+4*userRate4+5*userRate5)/userRateNum;
+                    String ur1 = userRate1.toString();
+                    String ur2= userRate2.toString();
+                    String ur3 = userRate3.toString();
+                    String ur4 = userRate4.toString();
+                    String ur5 = userRate5.toString();
+                    String urNum = userRateNum.toString();
+
+                      FirebaseFirestore firebaseFirestore =
+                          FirebaseFirestore.instance;
+                      User? user = _auth.currentUser;
+
+                      UserModel Usermodel = UserModel();
+
+                      // writing  the values
+
+                      Usermodel.Rate = AvgUserRate;
+                      String ownerId = widget.owner;
+                      final firebaseUser =
+                          await FirebaseAuth.instance.currentUser;
+                      if (ratep != null) {
+                        if (firebaseUser != null)
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(ownerId)
+                              .update({'Rate': AvgUserRate , 'rate1':ur1 , 'rate2':ur2 , 'rate3':ur3,
+                              'rate4':ur4 , 'rate5':ur5 , 'NumRate':urNum
+                              });
+                      }
+                      if (ratep != null) {
+                        if (firebaseUser != null)
+                          await FirebaseFirestore.instance
+                              .collection('goods')
+                              .doc(ownerId)
+                              .update({'ownerRate': AvgUserRate 
+                              });
+                      }
+                      ;
+                    }),
+
+                    
+                TextButton(
+                  child: Text("تم"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                )
+              ],
+            ),
+          );
+        });
   }
 }
