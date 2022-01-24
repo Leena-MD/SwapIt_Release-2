@@ -486,6 +486,7 @@ class _perfume extends State<perfume> {
                                         cate: e.cate,
                                         owner: e.owner,
                                         IDgoods: e.IDgoods,
+                                        ownerRate: e.ownerRate,
                                       ),
                                     ),
                                   );
