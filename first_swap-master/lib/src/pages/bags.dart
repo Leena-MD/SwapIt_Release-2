@@ -485,6 +485,7 @@ class _bags extends State<bags> {
                                     cate: e.cate,
                                     owner: e.owner,
                                     IDgoods: e.IDgoods,
+                                    ownerRate: e.ownerRate,
                                   ),
                                 ),
                               );
