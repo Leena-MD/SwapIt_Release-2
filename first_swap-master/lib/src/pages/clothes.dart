@@ -487,6 +487,7 @@ class _clothes extends State<clothes> {
                                         cate: e.cate,
                                         owner: e.owner,
                                         IDgoods: e.IDgoods,
+                                        ownerRate: e.ownerRate,
                                       ),
                                     ),
                                   );
