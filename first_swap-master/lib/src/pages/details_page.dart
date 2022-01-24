@@ -11,6 +11,7 @@ import 'package:first_swap/src/pages/perfume.dart';
 import 'package:first_swap/src/pages/pet.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/provider/my_provider.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'books_category.dart';
 
@@ -19,7 +20,7 @@ class DetailPage extends StatefulWidget {
   final String description;
   final String owner;
   final String IDgoods;
-
+  final String ownerRate;
   final String name;
   final String cate;
   DetailPage({
@@ -28,6 +29,7 @@ class DetailPage extends StatefulWidget {
     required this.description,
     required this.owner,
     required this.cate,
+     required this.ownerRate,
     required this.IDgoods,
   });
 
@@ -128,6 +130,8 @@ class _DetailPageState extends State<DetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+Text(widget.ownerRate),
+
                       ListTile(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0.0)),
@@ -208,6 +212,7 @@ class _DetailPageState extends State<DetailPage> {
                                 cate: widget.cate,
                                 owner: widget.owner,
                                 IDgoods: widget.IDgoods,
+                                ownerRate: widget.ownerRate,
                               ),
                             ),
                           );
