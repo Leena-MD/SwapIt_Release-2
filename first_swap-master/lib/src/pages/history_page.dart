@@ -93,6 +93,7 @@ String senderId='';
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
+        ownerRate: element.data()['ownerRate'].toString(),
         cate: element.data()['cate'],
         IDgoods:element.id,
       );
