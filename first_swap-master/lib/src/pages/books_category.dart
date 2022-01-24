@@ -487,6 +487,7 @@ class _BooksCat extends State<BooksCat> {
                                         cate: e.cate,
                                         owner: e.owner,
                                         IDgoods: e.IDgoods,
+                                        ownerRate: e.ownerRate,
                                       ),
                                     ),
                                   );
