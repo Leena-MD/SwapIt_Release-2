@@ -487,6 +487,7 @@ class _KidsCat extends State<KidsCat> {
                                         cate: e.cate,
                                         owner: e.owner,
                                         IDgoods: e.IDgoods,
+                                        ownerRate: e.ownerRate,
                                       ),
                                     ),
                                   );
