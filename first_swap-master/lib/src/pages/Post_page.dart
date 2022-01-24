@@ -498,6 +498,7 @@ class _PostPage extends State<PostPage> {
           'Status': st,
           'owner': uiduser,
           'cate': cate,
+         // add owner rating  
         });
         Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
 
