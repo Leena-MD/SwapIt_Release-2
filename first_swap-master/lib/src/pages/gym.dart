@@ -488,6 +488,7 @@ class _gym extends State<gym> {
                                         cate: e.cate,
                                         owner: e.owner,
                                         IDgoods: e.IDgoods,
+                                        ownerRate: e.ownerRate,
                                       ),
                                     ),
                                   );
