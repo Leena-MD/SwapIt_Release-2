@@ -24,6 +24,7 @@ class swapRequest extends StatefulWidget {
   final String IDgoods ;
   final String name;
   final String cate;
+  final String ownerRate;
   swapRequest(
       { 
         required this.image,
@@ -32,6 +33,7 @@ class swapRequest extends StatefulWidget {
         required this.owner,
         required this.cate,
         required this.IDgoods,
+        required this.ownerRate,
       });
 
   _swapRequest createState() => _swapRequest();
@@ -98,7 +100,9 @@ class _swapRequest extends State<swapRequest> {
                         description: widget.description,
                         cate: widget.cate,
                         owner:widget.owner,
-                        IDgoods:widget.IDgoods,)));
+                        IDgoods:widget.IDgoods,
+                        ownerRate: widget.ownerRate,
+                        )));
 
                 },
                 icon: Icon(Icons.arrow_back),
@@ -279,9 +283,3 @@ showDialog(
   }
 
 }
-
-
-
-
-
-
