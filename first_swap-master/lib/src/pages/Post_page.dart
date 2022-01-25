@@ -20,7 +20,7 @@ import 'image_storage.dart';
 
 String userID = "";
 int num = 1;
-
+String ownerRate= "";
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
   @override
@@ -415,7 +415,7 @@ class _PostPage extends State<PostPage> {
   String uiduser = '';
   String st = "available";
   addgood(String name, String des, String url, String userID, int num,
-      String st, String cate) async {
+      String st, String cate , String ownerRate) async {
     final _auth = FirebaseAuth.instance;
 
     // calling our firestore
@@ -437,6 +437,7 @@ class _PostPage extends State<PostPage> {
     goodsMo.stat = st;
     goodsMo.own = uiduser;
     goodsMo.cate = cate;
+    goodsMo.ownerRate= ownerRate;
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
 
@@ -483,6 +484,8 @@ class _PostPage extends State<PostPage> {
             .then((ds) {
           uiduser = ds.data()!['uid'];
           print(uiduser);
+          ownerRate= ds.data()!['Rate'].toString();
+             print(ownerRate);
         }).catchError((e) {
           print(e);
         });
@@ -498,6 +501,7 @@ class _PostPage extends State<PostPage> {
           'Status': st,
           'owner': uiduser,
           'cate': cate,
+          'ownerRate': ownerRate
          // add owner rating  
         });
         Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
@@ -519,6 +523,7 @@ class _PostPage extends State<PostPage> {
     int num,
     String st,
     String cate,
+    String ownerRate
   ) async {
     await addgood(
       name,
@@ -528,6 +533,7 @@ class _PostPage extends State<PostPage> {
       num,
       st,
       cate,
+      ownerRate
     );
   }
 
@@ -540,6 +546,7 @@ class _PostPage extends State<PostPage> {
       num,
       st,
       cate,
+      ownerRate
     );
   }
 }
