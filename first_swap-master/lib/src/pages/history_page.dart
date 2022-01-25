@@ -14,22 +14,22 @@ import 'Post_page.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
 import 'details_page.dart';
-import 'details_requests.dart';   
-final firebaseUser =  FirebaseAuth.instance.currentUser;
-String userid= firebaseUser!.uid;
+import 'details_requests.dart';
+
+final firebaseUser = FirebaseAuth.instance.currentUser;
+String userid = firebaseUser!.uid;
 
 class History extends StatefulWidget {
-
   _History createState() => _History();
 }
-@override
 
+@override
 class _History extends State<History> {
-  String receivergoods='';
-  String receiverID='';
-  String requeststatus='';
-  String senderID='';
-  String sendergoods='';
+  String receivergoods = '';
+  String receiverID = '';
+  String requeststatus = '';
+  String senderID = '';
+  String sendergoods = '';
   List<String> selectedCategory = [];
   String category1 = 'الطلبات';
   String category2 = ' الأرشيف';
@@ -44,15 +44,11 @@ class _History extends State<History> {
     final uid = user!.uid;
   }
 
-
-
-
 ///////////////////  History ////////////////
-    List<Product> HistoryList = [];
-late Product HistoryListData;
+  List<Product> HistoryList = [];
+  late Product HistoryListData;
   Future<void> getHistoryList() async {
-
-   final firebaseUser = await FirebaseAuth.instance.currentUser;
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
@@ -65,28 +61,20 @@ late Product HistoryListData;
         print(e);
       });
     }
-String receiverId='';
-String goodsSend='';
-String senderId='';
- 
+    String receiverId = '';
+    String goodsSend = '';
+    String senderId = '';
 
-        
     List<Product> GoodsHistory = [];
     QuerySnapshot querySnapshot = (await FirebaseFirestore.instance
         .collection('goods')
-        .where("Status", isEqualTo:
-         "done"
-    )
-        .where("receiverID", isEqualTo:
-    uiduser
-         )
-        .get()) ;
+        .where("Status", isEqualTo: "done")
+        .where("receiverID", isEqualTo: uiduser)
+        .get());
 
- 
-  
-        querySnapshot.docs.forEach((element) {
-
+    querySnapshot.docs.forEach((element) {
       HistoryListData = Product(
+        ownerName: element.data()["ownerName"],
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
@@ -95,19 +83,16 @@ String senderId='';
         id: element.data()['owner'],
         ownerRate: element.data()['ownerRate'].toString(),
         cate: element.data()['cate'],
-        IDgoods:element.id,
+        IDgoods: element.id,
       );
-     GoodsHistory.add(HistoryListData);
-        HistoryList = GoodsHistory;
-      
+      GoodsHistory.add(HistoryListData);
+      HistoryList = GoodsHistory;
     });
-      
-      
+
     //notifyListeners();
-       
   }
 
- get throwHistoryList {
+  get throwHistoryList {
     return HistoryList;
   }
 
@@ -117,7 +102,7 @@ String senderId='';
       children: <Widget>[
         Container(
           padding:
-          EdgeInsets.only(top: 4.0, left: 0.0, right: 0.0, bottom: 6.0),
+              EdgeInsets.only(top: 4.0, left: 0.0, right: 0.0, bottom: 6.0),
           child: Container(
             child: Center(
               child: Column(
@@ -144,22 +129,18 @@ String senderId='';
                           child: Container(
                             padding: EdgeInsets.symmetric(
                                 vertical: 3.0, horizontal: 30.0),
-
                             decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [
+                                    Colors.blueGrey.withOpacity(0.3),
+                                    Colors.blueGrey.withOpacity(0.015),
+                                  ],
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter),
 
-                              gradient: LinearGradient(colors: [
-
-                                Colors.blueGrey.withOpacity(0.3),
-                                Colors.blueGrey.withOpacity(0.015),
-
-                              ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
-
-                              borderRadius: BorderRadius.circular(0), // Creates border
-
-
-
+                              borderRadius:
+                                  BorderRadius.circular(0), // Creates border
                             ),
-
                             child: Text(
                               'الطلبات',
                               style: TextStyle(
@@ -167,7 +148,6 @@ String senderId='';
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w500),
                             ),
-
                           ),
                         ),
                         SizedBox(
@@ -188,12 +168,15 @@ String senderId='';
                             padding: EdgeInsets.symmetric(
                                 vertical: 3.0, horizontal: 30.0),
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Colors.blueGrey.withOpacity(0.3),
-                                Colors.blueGrey.withOpacity(0.015),
-                              ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                              gradient: LinearGradient(
+                                  colors: [
+                                    Colors.blueGrey.withOpacity(0.3),
+                                    Colors.blueGrey.withOpacity(0.015),
+                                  ],
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter),
                               borderRadius:
-                              BorderRadius.all(Radius.circular(0)),
+                                  BorderRadius.all(Radius.circular(0)),
                             ),
                             child: Text(
                               ' الأرشيف',
@@ -202,7 +185,6 @@ String senderId='';
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w500),
                             ),
-
                           ),
                         ),
                         SizedBox(
@@ -223,12 +205,15 @@ String senderId='';
                             padding: EdgeInsets.symmetric(
                                 vertical: 3.0, horizontal: 20.0),
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Colors.blueGrey.withOpacity(0.3),
-                                Colors.blueGrey.withOpacity(0.015),
-                              ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                              gradient: LinearGradient(
+                                  colors: [
+                                    Colors.blueGrey.withOpacity(0.3),
+                                    Colors.blueGrey.withOpacity(0.015),
+                                  ],
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter),
                               borderRadius:
-                              BorderRadius.all(Radius.circular(0)),
+                                  BorderRadius.all(Radius.circular(0)),
                             ),
                             child: Text(
                               ' قائمة الانتظار',
@@ -237,10 +222,8 @@ String senderId='';
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w500),
                             ),
-
                           ),
                         ),
-
                       ],
                     ),
                   ),
@@ -256,25 +239,14 @@ String senderId='';
     );
   }
 
-
-
-  Widget build(BuildContext context)
-
-
-
-  {
-    
-
-
+  Widget build(BuildContext context) {
     MyProvider provider = Provider.of<MyProvider>(context);
 
     provider.getHistoryList();
-  
-      HistoryList = provider.throwHistoryList;
-    
+
+    HistoryList = provider.throwHistoryList;
 
     return SafeArea(
-
         child: Scaffold(
             backgroundColor: Colors.white,
             bottomNavigationBar: CustomBottomNavigationBar(
@@ -293,115 +265,79 @@ String senderId='';
               defaultSelectedIndex: 3,
             ),
             appBar: AppBar(
-              
               automaticallyImplyLeading: false,
               backgroundColor: Colors.cyan[800],
-              
               title: Center(
-                  child: Text("الأرشيف",
-                      style: TextStyle(fontSize: 20))
-                      ),
-
+                  child: Text("الأرشيف", style: TextStyle(fontSize: 20))),
             ),
-            body:
-            Column(
+            body: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:
-              [
-
+              children: [
                 SingleChildScrollView(
                   reverse: true,
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                       header(),
-                   
+                      header(),
                     ],
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   height: 510,
-                  child:
-                  HistoryList.isEmpty
-                    ?Text(
-                        " لم تقم بالتبادل  ",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
-                      )
-                    : GridView.count(
-                      shrinkWrap: false,
-                      primary: false,
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.9,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 10,
-
-                      children: HistoryList
-
-                          .map(
+                  child: HistoryList.isEmpty
+                      ? Text(
+                          " لم تقم بالتبادل  ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18, color: Colors.grey),
+                        )
+                      : GridView.count(
+                          shrinkWrap: false,
+                          primary: false,
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.9,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 10,
+                          children: HistoryList.map(
                             (e) => BottomContainer(
-                          onTap: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => DetailContact(
-                                  image: e.image,
-                                  name: e.title,
-                                  description: e.description,
-                                  cate: e.cate,
-                                  owner:e.owner,
-                                  IDgoods:e.IDgoods,
-
-
-                                ),
-                              ),
-                            );
-                          },
-                          image: e.image,
-                          name: e.title,
-                        ),
-                      )
-                          .toList()),
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailContact(
+                                      image: e.image,
+                                      name: e.title,
+                                      description: e.description,
+                                      cate: e.cate,
+                                      owner: e.owner,
+                                      IDgoods: e.IDgoods,
+                                    ),
+                                  ),
+                                );
+                              },
+                              image: e.image,
+                              name: e.title,
+                            ),
+                          ).toList()),
                 )
-                
               ],
-            )
-       
-          
-        )
-  
-
-    );
+            )));
   }
-
-
-
 }
 
-  class CustomBottomNavigationBar extends StatefulWidget {
+class CustomBottomNavigationBar extends StatefulWidget {
   final int defaultSelectedIndex;
   final Function(int) onChange;
   final List<IconData> iconList;
 
   CustomBottomNavigationBar(
-  {this.defaultSelectedIndex = 0,
-  required this.iconList,
-  required this.onChange});
+      {this.defaultSelectedIndex = 0,
+      required this.iconList,
+      required this.onChange});
 
   @override
   _CustomBottomNavigationBarState createState() =>
-  _CustomBottomNavigationBarState();
-  }
-
-
-
-
-
-
-
-
-
-
+      _CustomBottomNavigationBarState();
+}
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int _selectedIndex = 0;
@@ -419,11 +355,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget build(BuildContext context) {
     List<Widget> _navBarItemList = [];
 
-
-
     for (var i = 0; i < _iconList.length; i++) {
       _navBarItemList.add(buildNavBarItem(_iconList[i], i));
-
     }
 
     return Row(
@@ -432,80 +365,61 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   }
 
   Widget buildNavBarItem(IconData icon, int index) {
-
-
-
     return GestureDetector(
-
       onTap: () {
         widget.onChange(index);
 
         setState(() {
           _selectedIndex = index;
-          if(_selectedIndex==0)
-            Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => HomePage()));
-          if(_selectedIndex==1)
-            Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => MyItems()));
-          if(_selectedIndex==2)
-            Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => PostPage()));
+          if (_selectedIndex == 0)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => HomePage()));
+          if (_selectedIndex == 1)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => MyItems()));
+          if (_selectedIndex == 2)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => PostPage()));
 
-          if(_selectedIndex==3)
-            Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => Offers()));
-          if(_selectedIndex==4)
-            Navigator.push(
-                this.context, MaterialPageRoute(builder: (context) => ProfilePage()));
-
+          if (_selectedIndex == 3)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => Offers()));
+          if (_selectedIndex == 4)
+            Navigator.push(this.context,
+                MaterialPageRoute(builder: (context) => ProfilePage()));
         });
       },
       child: Container(
-
         height: 60,
         width: MediaQuery.of(this.context).size.width / _iconList.length,
         decoration: index == _selectedIndex
             ? BoxDecoration(
-            border: Border(
-              bottom: BorderSide(width: 4, color: Colors.blueGrey),
-            ),
-            gradient: LinearGradient(colors: [
-              Colors.blueGrey.withOpacity(0.3),
-              Colors.blueGrey.withOpacity(0.015),
-            ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
+                border: Border(
+                  bottom: BorderSide(width: 4, color: Colors.blueGrey),
+                ),
+                gradient: LinearGradient(colors: [
+                  Colors.blueGrey.withOpacity(0.3),
+                  Colors.blueGrey.withOpacity(0.015),
+                ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
 
-          //color: index == _selectedItemIndex ? Colors.green : Colors.white,
+                //color: index == _selectedItemIndex ? Colors.green : Colors.white,
 
-        )
+                )
             : BoxDecoration(),
-        child:
-
-        Column (
+        child: Column(
           children: <Widget>[
-            Icon(icon,
-
-              color: index ==_selectedIndex ? Colors.black : Colors.grey,),
-
-
-
-            if(index==0)
-              Text('الرئيسية'),
-            if(index==1)
-              Text('منتجاتي'),
-            if(index==2)
-              Text('اضافة'),
-            if(index==3)
-              Text('الطلبات'),
-            if(index==4)
-              Text('حسابي'),
+            Icon(
+              icon,
+              color: index == _selectedIndex ? Colors.black : Colors.grey,
+            ),
+            if (index == 0) Text('الرئيسية'),
+            if (index == 1) Text('منتجاتي'),
+            if (index == 2) Text('اضافة'),
+            if (index == 3) Text('الطلبات'),
+            if (index == 4) Text('حسابي'),
           ],
         ),
-
-
       ),
-
     );
   }
-  
 }

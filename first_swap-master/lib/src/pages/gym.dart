@@ -383,7 +383,6 @@ class _gym extends State<gym> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     MyProvider provider = Provider.of<MyProvider>(context);
@@ -419,8 +418,6 @@ class _gym extends State<gym> {
     // 9th
     provider.getPetCategory();
     petList = provider.throwPetList;
-
-  
 
     return SafeArea(
       child: Scaffold(
@@ -489,6 +486,7 @@ class _gym extends State<gym> {
                                         owner: e.owner,
                                         IDgoods: e.IDgoods,
                                         ownerRate: e.ownerRate,
+                                        ownerName: e.ownerName,
                                       ),
                                     ),
                                   );

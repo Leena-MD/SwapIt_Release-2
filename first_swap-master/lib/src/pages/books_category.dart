@@ -54,7 +54,6 @@ class _BooksCat extends State<BooksCat> {
 
   List<Product> singleFoodList = [];
 
-
   List<String> selectedCategory = [];
 
   String category1 = 'الأجهزة الإلكترونية و ملحقاتها';
@@ -420,7 +419,6 @@ class _BooksCat extends State<BooksCat> {
     provider.getPetCategory();
     petList = provider.throwPetList;
 
- 
     return SafeArea(
       child: Scaffold(
           backgroundColor: Colors.white,
@@ -488,6 +486,7 @@ class _BooksCat extends State<BooksCat> {
                                         owner: e.owner,
                                         IDgoods: e.IDgoods,
                                         ownerRate: e.ownerRate,
+                                        ownerName: e.ownerName,
                                       ),
                                     ),
                                   );

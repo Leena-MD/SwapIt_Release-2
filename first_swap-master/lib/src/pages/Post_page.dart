@@ -20,6 +20,8 @@ import 'image_storage.dart';
 
 String userID = "";
 int num = 1;
+String ownerRate = "";
+String ownerName = "";
 
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
@@ -415,7 +417,7 @@ class _PostPage extends State<PostPage> {
   String uiduser = '';
   String st = "available";
   addgood(String name, String des, String url, String userID, int num,
-      String st, String cate) async {
+      String st, String cate, String ownerRate, String ownerName) async {
     final _auth = FirebaseAuth.instance;
 
     // calling our firestore
@@ -437,6 +439,8 @@ class _PostPage extends State<PostPage> {
     goodsMo.stat = st;
     goodsMo.own = uiduser;
     goodsMo.cate = cate;
+    goodsMo.ownerRate = ownerRate;
+    goodsMo.ownerName = ownerName;
 
     final firebaseUser = await FirebaseAuth.instance.currentUser;
 
@@ -483,6 +487,10 @@ class _PostPage extends State<PostPage> {
             .then((ds) {
           uiduser = ds.data()!['uid'];
           print(uiduser);
+          ownerRate = ds.data()!['Rate'].toString();
+          print(ownerRate);
+          ownerName = ds.data()!['UserName'].toString();
+          print(ownerName);
         }).catchError((e) {
           print(e);
         });
@@ -498,7 +506,9 @@ class _PostPage extends State<PostPage> {
           'Status': st,
           'owner': uiduser,
           'cate': cate,
-         // add owner rating  
+          'ownerRate': ownerRate,
+          'ownerName': ownerName
+          // add owner rating
         });
         Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
 
@@ -511,35 +521,13 @@ class _PostPage extends State<PostPage> {
     userID = firebaseUser!.uid;
   }
 
-  addadata(
-    String name,
-    String des,
-    String url,
-    String id,
-    int num,
-    String st,
-    String cate,
-  ) async {
-    await addgood(
-      name,
-      des,
-      url,
-      id,
-      num,
-      st,
-      cate,
-    );
+  addadata(String name, String des, String url, String id, int num, String st,
+      String cate, String ownerRate, String ownerName) async {
+    await addgood(name, des, url, id, num, st, cate, ownerRate, ownerName);
   }
 
   submitAction(BuildContext context) {
-    addadata(
-      GoodsNController.text,
-      GoodsDController.text,
-      url,
-      userID,
-      num,
-      st,
-      cate,
-    );
+    addadata(GoodsNController.text, GoodsDController.text, url, userID, num, st,
+        cate, ownerRate, ownerName);
   }
 }

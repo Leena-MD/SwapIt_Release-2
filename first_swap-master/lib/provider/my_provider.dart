@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 class MyProvider extends ChangeNotifier {
   final firebaseUser = FirebaseAuth.instance.currentUser;
   String uiduser = '';
-  String userRate= '';
+  String userRate = '';
 /////////////////// MyGoods ////////////////
   List<Product> MyGoodsList = [];
   late Product MyGoodsData;
@@ -28,6 +28,7 @@ class MyProvider extends ChangeNotifier {
     String receiverId = '';
     String goodsSend = '';
     String senderId = '';
+    String ownerName = '';
 
     List<Product> MyGoods = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -47,7 +48,8 @@ class MyProvider extends ChangeNotifier {
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
-         ownerRate: element.data()['ownerRate'].toString(),
+        ownerRate: element.data()['ownerRate'].toString(),
+        ownerName: element.data()['ownerName'].toString(),
         cate: element.data()['cate'],
         IDgoods: element.id,
       );
@@ -95,13 +97,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       GoodsReceivingData = Product(
+        ownerName: element.data()['ownerName'].toString(),
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
-         ownerRate: element.data()['ownerRate'].toString(),
+        ownerRate: element.data()['ownerRate'].toString(),
         cate: element.data()['cate'],
         IDgoods: element.id,
       );
@@ -150,13 +153,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       waitingReceivingData = Product(
+        ownerName: element.data()['ownerName'].toString(),
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
-         ownerRate: element.data()['ownerRate'].toString(),
+        ownerRate: element.data()['ownerRate'].toString(),
         cate: element.data()['cate'],
         IDgoods: element.id,
       );
@@ -205,13 +209,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       HistoryListData = Product(
+        ownerName: element.data()['ownerName'].toString(),
         image: element.data()['image'],
         title: element.data()['gName'],
         description: element.data()['Description'],
         status: element.data()['Status'],
         owner: element.data()['owner'],
         id: element.data()['owner'],
-         ownerRate: element.data()['ownerRate'].toString(),
+        ownerRate: element.data()['ownerRate'].toString(),
         cate: element.data()['cate'],
         IDgoods: element.id,
       );
@@ -263,6 +268,7 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       booksModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
           image: element.data()['image'],
           title: element.data()['gName'],
           description: element.data()['Description'],
@@ -316,6 +322,7 @@ class MyProvider extends ChangeNotifier {
     }
     querySnapshot.docs.forEach((element) {
       computerModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
           image: element.data()['image'],
           title: element.data()['gName'],
           description: element.data()['Description'],
@@ -323,7 +330,7 @@ class MyProvider extends ChangeNotifier {
           owner: element.data()['owner'],
           id: element.data()['owner'],
           cate: element.data()['cate'],
-           ownerRate: element.data()['ownerRate'].toString(),
+          ownerRate: element.data()['ownerRate'].toString(),
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
         newComputerList.add(computerModle);
@@ -370,13 +377,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       kidsModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
           image: element.data()['image'],
           title: element.data()['gName'],
           description: element.data()['Description'],
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
-           ownerRate: element.data()['ownerRate'].toString(),
+          ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
 
@@ -425,13 +433,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       HouseModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
           image: element.data()['image'],
           title: element.data()['gName'],
           description: element.data()['Description'],
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
-           ownerRate: element.data()['ownerRate'].toString(),
+          ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -479,13 +488,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       BagModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
           image: element.data()['image'],
           title: element.data()['gName'],
           description: element.data()['Description'],
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
-           ownerRate: element.data()['ownerRate'].toString(),
+          ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -533,13 +543,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       perfumeModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
           image: element.data()['image'],
           title: element.data()['gName'],
           description: element.data()['Description'],
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
-           ownerRate: element.data()['ownerRate'].toString(),
+          ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -587,13 +598,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       gymModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
           image: element.data()['image'],
           title: element.data()['gName'],
           description: element.data()['Description'],
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
-           ownerRate: element.data()['ownerRate'].toString(),
+          ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -641,13 +653,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       clothesModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
           image: element.data()['image'],
           title: element.data()['gName'],
           description: element.data()['Description'],
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
-           ownerRate: element.data()['ownerRate'].toString(),
+          ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -695,13 +708,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       petModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
           image: element.data()['image'],
           title: element.data()['gName'],
           description: element.data()['Description'],
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
-           ownerRate: element.data()['ownerRate'].toString(),
+          ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {
@@ -745,13 +759,14 @@ class MyProvider extends ChangeNotifier {
 
     querySnapshot.docs.forEach((element) {
       petModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
           image: element.data()['image'],
           title: element.data()['gName'],
           description: element.data()['Description'],
           status: element.data()['Status'],
           owner: element.data()['owner'],
           id: element.data()['owner'],
-           ownerRate: element.data()['ownerRate'].toString(),
+          ownerRate: element.data()['ownerRate'].toString(),
           cate: element.data()['cate'],
           IDgoods: element.id);
       if (element.data()['owner'] != uiduser) {

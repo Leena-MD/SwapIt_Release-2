@@ -383,8 +383,6 @@ class _clothes extends State<clothes> {
     );
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     MyProvider provider = Provider.of<MyProvider>(context);
@@ -421,7 +419,6 @@ class _clothes extends State<clothes> {
     provider.getPetCategory();
     petList = provider.throwPetList;
 
-  
     return SafeArea(
       child: Scaffold(
           backgroundColor: Colors.white,
@@ -488,6 +485,7 @@ class _clothes extends State<clothes> {
                                         owner: e.owner,
                                         IDgoods: e.IDgoods,
                                         ownerRate: e.ownerRate,
+                                        ownerName: e.ownerName,
                                       ),
                                     ),
                                   );

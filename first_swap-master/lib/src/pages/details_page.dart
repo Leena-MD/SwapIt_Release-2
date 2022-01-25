@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/constants.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/SwapRequest.dart';
@@ -23,22 +27,33 @@ class DetailPage extends StatefulWidget {
   final String ownerRate;
   final String name;
   final String cate;
+  final String ownerName;
+
   DetailPage({
     required this.image,
     required this.name,
     required this.description,
     required this.owner,
     required this.cate,
-     required this.ownerRate,
+    required this.ownerRate,
     required this.IDgoods,
+    required this.ownerName,
   });
 
   @override
   _DetailPageState createState() => _DetailPageState();
 }
 
+final FirebaseAuth auth = FirebaseAuth.instance;
+
 class _DetailPageState extends State<DetailPage> {
+  final User? user = auth.currentUser;
+
+//To retrieve the string
+
   int quantity = 1;
+  double orate = 0;
+
   @override
   Widget build(BuildContext context) {
     MyProvider provider = Provider.of<MyProvider>(context);
@@ -130,8 +145,45 @@ class _DetailPageState extends State<DetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-Text(widget.ownerRate),
-
+                      ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0)),
+                        selected: true,
+                        selectedTileColor: Colors.white70,
+                        title: Text(
+                          "تقيم صاحب النتج \n" +
+                              widget.ownerName +
+                              "   " +
+                              widget.ownerRate +
+                              '/5',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                        ),
+                        leading: const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        minLeadingWidth: double.minPositive,
+                      ),
+                      RatingBar.builder(
+                          initialRating: double.parse(widget.ownerRate),
+                          updateOnDrag: false,
+                          tapOnlyMode: false,
+                          allowHalfRating: false,
+                          maxRating: orate,
+                          minRating: orate,
+                          textDirection: TextDirection.rtl,
+                          itemPadding: EdgeInsets.symmetric(horizontal: 4),
+                          itemSize: 20,
+                          itemBuilder: (context, _) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                          onRatingUpdate: (orate) async {
+                            setState(() {
+                              this.orate = double.parse(widget.ownerRate);
+                            });
+                          }),
                       ListTile(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0.0)),
@@ -206,6 +258,7 @@ Text(widget.ownerRate),
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => swapRequest(
+                                ownerName: widget.ownerName,
                                 image: widget.image,
                                 name: widget.name,
                                 description: widget.description,

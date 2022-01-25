@@ -419,8 +419,6 @@ class _KidsCat extends State<KidsCat> {
     provider.getPetCategory();
     petList = provider.throwPetList;
 
-   
-
     return SafeArea(
       child: Scaffold(
           backgroundColor: Colors.white,
@@ -488,6 +486,7 @@ class _KidsCat extends State<KidsCat> {
                                         owner: e.owner,
                                         IDgoods: e.IDgoods,
                                         ownerRate: e.ownerRate,
+                                        ownerName: e.ownerName,
                                       ),
                                     ),
                                   );
