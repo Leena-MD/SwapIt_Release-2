@@ -260,22 +260,48 @@ class _Details extends State<DetailContact> {
                         ),
                         minLeadingWidth: double.minPositive,
                       ),
-                      TextButton.icon(
-                        onPressed: () {
-                          rate(context);
-                        },
-                        style: ButtonStyle(
-                            alignment: Alignment.center,
-                            backgroundColor: MaterialStateProperty.all(
-                                Colors.yellow.withOpacity(0.1))),
-                        icon: Icon(
-                          Icons.stars,
-                          color: Colors.yellow.withOpacity(0.9),
+                      Divider(
+                        height: 0.2,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(height: 10),
+                      ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0)),
+                        selected: true,
+                        selectedTileColor: Colors.white70,
+                        //selectedTileColor: Colors.white38,
+                        title: Text(
+                          " يمكنك تقيم  " + widget.name + ' / ' + FName + " ",
+                          textScaleFactor: 1,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.blueGrey,
+                              fontWeight: FontWeight.bold),
                         ),
-                        label: Text(
-                          "قيمّ",
-                          style: Theme.of(context).textTheme.headline6,
+                        leading: TextButton.icon(
+                          onPressed: () {
+                            rate(context);
+                          },
+                          style: ButtonStyle(
+                              alignment: Alignment.center,
+                              backgroundColor: MaterialStateProperty.all(
+                                  Colors.yellow.withOpacity(0.1))),
+                          icon: Icon(
+                            Icons.stars,
+                            color: Colors.yellow.withOpacity(0.9),
+                          ),
+                          label: Text(
+                            "قيمّ",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.blueGrey,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
+
+                        minLeadingWidth: double.minPositive,
                       ),
                     ],
                   ),
@@ -383,22 +409,30 @@ class _Details extends State<DetailContact> {
         context: context,
         builder: (context) {
           return Dialog(
+            backgroundColor: Colors.white70,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: 30),
-                Text("   قيّم المنتج   ", textAlign: TextAlign.right),
+                Text(
+                  "   قيّم المنتج   ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.blueGrey[900],
+                  ),
+                ),
                 RatingBar.builder(
                     textDirection: TextDirection.rtl,
                     initialRating: ratep,
                     maxRating: 5,
                     minRating: 1,
                     itemPadding: EdgeInsets.symmetric(horizontal: 4),
-                    itemSize: 30,
+                    itemSize: 25,
                     updateOnDrag: true,
                     itemBuilder: (context, _) =>
                         Icon(Icons.star, color: Colors.amber),
@@ -431,14 +465,21 @@ class _Details extends State<DetailContact> {
                 SizedBox(height: 15),
 
                 SizedBox(height: 15),
-                Text("  قيّم صاحب المنتج  ", textAlign: TextAlign.right),
+                Text(
+                  "  قيّم صاحب المنتج  ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.blueGrey[900],
+                  ),
+                ),
                 RatingBar.builder(
                     textDirection: TextDirection.rtl,
                     initialRating: userRate,
                     maxRating: 5,
                     minRating: 1,
                     itemPadding: EdgeInsets.symmetric(horizontal: 4),
-                    itemSize: 30,
+                    itemSize: 25,
                     updateOnDrag: true,
                     itemBuilder: (context, _) =>
                         Icon(Icons.star, color: Colors.amber),
@@ -518,9 +559,19 @@ class _Details extends State<DetailContact> {
 
                       ;
                     }),
-
+                SizedBox(height: 15),
+                Divider(
+                  height: 0.2,
+                  color: Colors.grey,
+                ),
                 TextButton(
-                  child: Text("تم"),
+                  child: Text(
+                    "تم",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.pop(context);
                   },
