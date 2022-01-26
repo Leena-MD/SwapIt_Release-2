@@ -473,6 +473,7 @@ class _Details extends State<DetailContact> {
                     color: Colors.blueGrey[900],
                   ),
                 ),
+
                 RatingBar.builder(
                     textDirection: TextDirection.rtl,
                     initialRating: userRate,
@@ -523,7 +524,13 @@ class _Details extends State<DetailContact> {
                       UserModel Usermodel = UserModel();
 
                       // writing  the values
-                      Usermodel.Rate = AvgUserRate;
+                      print(avgrate);
+                      double c = double.parse(avgrate);
+                      int roundedRate = c.round();
+                      print("rounded rate $roundedRate");
+                      double DRR = roundedRate.toDouble();
+                      Usermodel.Rate = DRR;
+                      print(DRR);
 
                       String ownerId = widget.owner;
                       final firebaseUser =
@@ -534,7 +541,7 @@ class _Details extends State<DetailContact> {
                               .collection('users')
                               .doc(ownerId)
                               .update({
-                            'Rate': AvgUserRate,
+                            'Rate': DRR,
                             'rate1': ur1,
                             'rate2': ur2,
                             'rate3': ur3,
@@ -552,7 +559,7 @@ class _Details extends State<DetailContact> {
                             .then((querySnapshot) {
                           querySnapshot.docs.forEach((documentSnapshot) {
                             documentSnapshot.reference
-                                .update({'ownerRate': avgrate});
+                                .update({'ownerRate': DRR});
                           });
                         });
                       }
@@ -573,7 +580,15 @@ class _Details extends State<DetailContact> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
+                    if (userRate != 0 && ratep != 0)
+                      Navigator.pop(context);
+                    else if (userRate == 0 && ratep == 0)
+                      Fluttertoast.showToast(
+                          msg: " الرجاء التأكد من تقيم المنتج و صاحب المنتج!");
+                    else if (userRate == 0)
+                      Fluttertoast.showToast(msg: "تقيم صاحب المنتج مطلوب !");
+                    else if (ratep == 0)
+                      Fluttertoast.showToast(msg: "تقيم المنتج مطلوب !");
                   },
                 )
               ],
