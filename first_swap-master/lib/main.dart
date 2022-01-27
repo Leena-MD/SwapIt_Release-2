@@ -1,3 +1,5 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:first_swap/src/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,9 +8,26 @@ import 'package:first_swap/provider/my_provider.dart';
 import 'package:first_swap/src/pages/details_page.dart';
 import 'package:first_swap/src/pages/books_category.dart';
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+   WidgetsFlutterBinding.ensureInitialized();
  await Firebase.initializeApp();
- 
+  AwesomeNotifications().initialize(
+      null,
+      [
+        NotificationChannel(
+          channelKey: 'key1',
+          channelName: 'Proto Coders Point',
+          channelDescription: "Notification Swap",
+          defaultColor: Color(0XFF9050DD),
+          ledColor: Colors.white,
+          playSound: true,
+          enableLights:true,
+          enableVibration: true,
+          importance: NotificationImportance.High
+
+        )
+      ]
+  );
+   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(MyApp());
 }
 
@@ -43,4 +62,19 @@ class MyApp extends StatelessWidget {
     ),
     );
   }
+}
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+
+  print("Handling a background message: ${message.messageId}");
+print(message.data);
+    AwesomeNotifications().createNotification(
+        content: NotificationContent( 
+            id: 1,
+            channelKey: 'key1', //channel configuration key
+            title: message.data["title"],
+            body: message.data["body"],
+        )
+    );
+  //call awesomenotification to how the push notification.
+ AwesomeNotifications().createNotificationFromJsonData(message.data);
 }

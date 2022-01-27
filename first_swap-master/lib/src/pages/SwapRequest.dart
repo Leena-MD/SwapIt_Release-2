@@ -1,8 +1,10 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/models/goods.dart';
 import 'package:first_swap/models/goodsMod.dart';
 import 'package:first_swap/provider/my_provider.dart';
+import 'package:first_swap/push_notification.dart';
 import 'package:first_swap/src/pages/Offers.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:first_swap/src/widgets/bottom_Container.dart';
@@ -228,14 +230,28 @@ class _swapRequest extends State<swapRequest> {
   SendRequest(String name, String ids) async {
     {
       var status = "waiting";
+      var owner=widget.owner;
+     // String token=await FirebaseFirestore.instance.collection('users').where('uid')
 
       await FirebaseFirestore.instance.collection('goods').doc(ids).update({
         'receiver goods': "${widget.IDgoods}",
         'receiverID': "${widget.owner}",
         'Status': status,
       });
-
+       var token;
+    String goodsId = widget.IDgoods;
+    await FirebaseFirestore.instance.collection('users').doc(owner).get()
+        //.then((value) => null)
+        .then((ds) {
+      token = ds.data()!['token'];
+      print(token);
+    });
+    if(token!= null){
+      SendMessage.sendFcmMessage("New Request", "New Request For Swap", token);
+      }
+   SendMessage.notifiy("Swap Reques", "New Request For Swap");
       Fluttertoast.showToast(msg: "تم إرسال الطلب بنجاح!");
+      
 
       Navigator.of(this.context)
           .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_swap/constants.dart';
 import 'package:first_swap/models/product.dart';
+import 'package:first_swap/push_notification.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/clothes.dart';
@@ -303,9 +304,19 @@ class _DetailRequestState extends State<DetailRequest> {
     querySnapshot.docs.forEach((element) {
       rejecOtherGoods(element.id);
     });
-
+    //get token from Firebase and send notification to OwnerGood
+    var token;
+    await FirebaseFirestore.instance.collection('users').doc(ownerGoods).get()
+        //.then((value) => null)
+        .then((ds) {
+      token = ds.data()!['token'];
+      print(token);
+    });
+    if(token!= null){
+      SendMessage.sendFcmMessage("New Request", "New Request For Swap", token);
+      }
+   SendMessage.notifiy("Accept Reques", "Accept Request for Swap Product");
     Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
-
     Navigator.push(
         this.context,
         MaterialPageRoute(
