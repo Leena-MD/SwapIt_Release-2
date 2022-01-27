@@ -59,6 +59,7 @@ class _Details extends State<DetailContact> {
   double userRate5 = 0;
   double AvgUserRate = 0;
   int quantity = 1;
+   bool isVisible = true;
 
   String? get goodsId => null;
   @override
@@ -265,12 +266,18 @@ class _Details extends State<DetailContact> {
                         color: Colors.grey,
                       ),
                       SizedBox(height: 10),
+                         
+            Visibility(
+              visible: isVisible,
+              child:
                       ListTile(
+                        
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0.0)),
                         selected: true,
                         selectedTileColor: Colors.white70,
                         //selectedTileColor: Colors.white38,
+                        
                         title: Text(
                           " يمكنك تقيم  " + widget.name + ' / ' + FName + " ",
                           textScaleFactor: 1,
@@ -280,9 +287,12 @@ class _Details extends State<DetailContact> {
                               color: Colors.blueGrey,
                               fontWeight: FontWeight.bold),
                         ),
+          
+           
                         leading: TextButton.icon(
                           onPressed: () {
                             rate(context);
+                             
                           },
                           style: ButtonStyle(
                               alignment: Alignment.center,
@@ -302,7 +312,7 @@ class _Details extends State<DetailContact> {
                         ),
 
                         minLeadingWidth: double.minPositive,
-                      ),
+             ) ),
                     ],
                   ),
                 ),
@@ -580,8 +590,14 @@ class _Details extends State<DetailContact> {
                     ),
                   ),
                   onPressed: () {
-                    if (userRate != 0 && ratep != 0)
+                    if (userRate != 0 && ratep != 0){
                       Navigator.pop(context);
+                       Fluttertoast.showToast(
+                          msg: " تم التقييم بنجاح");
+                      setState(() {
+                  isVisible = !isVisible;
+                });
+                    }
                     else if (userRate == 0 && ratep == 0)
                       Fluttertoast.showToast(
                           msg: " الرجاء التأكد من تقيم المنتج و صاحب المنتج!");
