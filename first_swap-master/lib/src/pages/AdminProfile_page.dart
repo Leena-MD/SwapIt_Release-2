@@ -148,16 +148,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                   color: Colors.black87,
                 ),
 
-                const SizedBox(height: 8),
-
-                ListTile(
-                  leading: Icon(Icons.phone),
-                  title: Text(phoneN),
-                ),
-                Divider(
-                  height: 0.6,
-                  color: Colors.black87,
-                ),
+              
               
                 Divider(
                   height: 0.6,
@@ -169,9 +160,9 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
             ),
           ),
         ),
-        const SizedBox(height: 45),
-        const SizedBox(height: 45),
-        const SizedBox(height: 45),
+        const SizedBox(height: 65),
+        const SizedBox(height: 65),
+        const SizedBox(height: 65),
         Center(child: signOut()),
       ]);
 
