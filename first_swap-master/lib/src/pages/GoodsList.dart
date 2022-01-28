@@ -1,10 +1,13 @@
+import 'package:first_swap/models/goods.dart';
+import 'package:first_swap/src/widgets/bottom_Container.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/src/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'AdminHomePage.dart';
-
+import 'package:first_swap/provider/my_provider.dart';
 import 'AdminProfile_page.dart';
 import 'MyItems.dart';
 import 'UsersList.dart';
@@ -28,7 +31,7 @@ class _GoodsListState extends State<GoodsList> {
   String LName = '';
   String phoneN = '';
   String userName = '';
- 
+ List<Product> AllGoodsList = [];
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   void inputData() {
@@ -55,32 +58,118 @@ class _GoodsListState extends State<GoodsList> {
       });
   }
 
-  Widget build(BuildContext context) {
-    return SafeArea(
-      //  home: Scaffold(
+  Widget header() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          padding:
+              EdgeInsets.only(top: 4.0, left: 0.0, right: 0.0, bottom: 6.0),
+          child: Container(
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 4.0,
+                  ),
+  
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
-      child: Builder(
-          builder: (context) => Scaffold(
-                backgroundColor: Colors.white,
-                bottomNavigationBar: CustomBottomNavigationBar(
-                  iconList: [
-                    Icons.home,
+  @override
+  Widget build(BuildContext context) {
+    MyProvider provider = Provider.of<MyProvider>(context);
+    
+provider.getAllGoods();
+    AllGoodsList = provider.throwAllGoodsList;
+
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          bottomNavigationBar: CustomBottomNavigationBar(
+            iconList: [
+             Icons.home,
                     Icons.people,
                     Icons.reorder_rounded,
                     Icons.person,
-                   
+            ],
+            onChange: (val) {
+              setState(() {
+                var _selectedItem = val;
+              });
+            },
+            defaultSelectedIndex: 2,
+          ),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.cyan[800],
+            title: Center(
+                child:
+                    Text('جميع المنتجات ', style: TextStyle(fontSize: 20))),
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SingleChildScrollView(
+                reverse: true,
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    header(),
                   ],
-                  onChange: (val) {
-                    setState(() {
-                      var _selectedItem = val;
-                    });
-                  },
-                  defaultSelectedIndex: 2,
                 ),
-          )));
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                height: 510,
+                child: AllGoodsList.isEmpty
+                    ? Text(
+                        " لا يوجد منتجات لهذه الفئة",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      )
+                    : GridView.count(
+                        shrinkWrap: false,
+                        primary: false,
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.9,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 10,
+                        children: AllGoodsList
+                            .map(
+                              (e) => BottomContainer(
+                                onTap: () {
+                                 // Navigator.of(context).pushReplacement(
+                                   // MaterialPageRoute(
+                                    //  builder: (context) => DetailPage(
+                                     //   image: e.image,
+                                      //  name: e.title,
+                                      //  description: e.description,
+                                      //  cate: e.cate,
+                                      //  owner: e.owner,
+                                      //  IDgoods: e.IDgoods,
+                                      //  ownerRate: e.ownerRate,
+                                      //  ownerName: e.ownerName,
+                                      //),
+                                  //  ),
+                                 // );
+                                },
+                                image: e.image,
+                                name: e.title,
+                              ),
+                            )
+                            .toList()),
+              )
+            ],
+          )),
+    );
   }
-
- 
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -124,7 +213,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     );
   }
 
-  //navigation bar
   Widget buildNavBarItem(IconData icon, int index) {
     return GestureDetector(
       onTap: () {
@@ -145,6 +233,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           if (_selectedIndex == 3)
             Navigator.push(this.context,
                 MaterialPageRoute(builder: (context) => AdminProfilePage()));
+         
         });
       },
       child: Container(
@@ -170,7 +259,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               icon,
               color: index == _selectedIndex ? Colors.black : Colors.grey,
             ),
-            if (index == 0) Text('الرئيسية'),
+             if (index == 0) Text('الرئيسية'),
             if (index == 1) Text('المستخدمين'),
             if (index == 2) Text('المنتجات'),
             if (index == 3) Text('حسابي'),
@@ -180,4 +269,3 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     );
   }
 }
-

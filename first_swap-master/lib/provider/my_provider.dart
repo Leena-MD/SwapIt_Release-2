@@ -733,6 +733,48 @@ class MyProvider extends ChangeNotifier {
     return petList;
   }
 
+
+/////////////////Goods list /////////////
+  List<Product> AllGoodsList = [];
+  late Product AllGoodsModle;
+  Future<void> getAllGoods() async {
+    List<Product> newCAllGoodsList = [];
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('goods')
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
+        .get();
+
+    querySnapshot.docs.forEach((element) {
+      AllGoodsModle = Product(
+          ownerName: element.data()['ownerName'].toString(),
+          image: element.data()['image'],
+          title: element.data()['gName'],
+          description: element.data()['Description'],
+          status: element.data()['Status'],
+          owner: element.data()['owner'],
+          id: element.data()['owner'],
+          ownerRate: element.data()['ownerRate'].toString(),
+          cate: element.data()['cate'],
+          IDgoods: element.id);
+     
+        newCAllGoodsList.add(AllGoodsModle);
+        AllGoodsList = newCAllGoodsList;
+      
+    });
+    if (querySnapshot.docs.isEmpty) {
+      AllGoodsList = List.empty();
+    }
+    notifyListeners();
+  }
+
+  get throwAllGoodsList {
+    return AllGoodsList;
+  }
+
+
   ////////////////request//////////////
   List<Product> requestList = [];
   late Product requestModle;
