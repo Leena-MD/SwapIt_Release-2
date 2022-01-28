@@ -22,6 +22,7 @@ String userID = "";
 int num = 1;
 String ownerRate = "";
 String ownerName = "";
+double Prate = 0;
 
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
@@ -416,8 +417,17 @@ class _PostPage extends State<PostPage> {
 
   String uiduser = '';
   String st = "available";
-  addgood(String name, String des, String url, String userID, int num,
-      String st, String cate, String ownerRate, String ownerName) async {
+  addgood(
+      String name,
+      String des,
+      String url,
+      String userID,
+      int num,
+      String st,
+      String cate,
+      String ownerRate,
+      String ownerName,
+      double Prate) async {
     final _auth = FirebaseAuth.instance;
 
     // calling our firestore
@@ -507,7 +517,8 @@ class _PostPage extends State<PostPage> {
           'owner': uiduser,
           'cate': cate,
           'ownerRate': ownerRate,
-          'ownerName': ownerName
+          'ownerName': ownerName,
+          'rate': Prate
           // add owner rating
         });
         Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
@@ -522,12 +533,13 @@ class _PostPage extends State<PostPage> {
   }
 
   addadata(String name, String des, String url, String id, int num, String st,
-      String cate, String ownerRate, String ownerName) async {
-    await addgood(name, des, url, id, num, st, cate, ownerRate, ownerName);
+      String cate, String ownerRate, String ownerName, double Prate) async {
+    await addgood(
+        name, des, url, id, num, st, cate, ownerRate, ownerName, Prate);
   }
 
   submitAction(BuildContext context) {
     addadata(GoodsNController.text, GoodsDController.text, url, userID, num, st,
-        cate, ownerRate, ownerName);
+        cate, ownerRate, ownerName, Prate);
   }
 }

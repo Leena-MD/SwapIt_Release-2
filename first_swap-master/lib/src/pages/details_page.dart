@@ -222,6 +222,10 @@ class _DetailPageState extends State<DetailPage> {
                         isThreeLine: true,
                         minLeadingWidth: double.minPositive,
                       ),
+                      Divider(
+                        height: 0.2,
+                        color: Colors.grey,
+                      ),
                       ListTile(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(0.0)),
@@ -241,9 +245,17 @@ class _DetailPageState extends State<DetailPage> {
                             fontWeight: FontWeight.normal,
                           ),
                         ),
-                        leading: const Icon(
-                          Icons.star,
-                          color: Colors.amber,
+                        leading: RatingBarIndicator(
+                          textDirection: TextDirection.rtl,
+                          itemPadding: EdgeInsets.symmetric(horizontal: 4),
+                          rating: double.parse(widget.ownerRate),
+                          itemBuilder: (context, index) => Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          itemCount: 5,
+                          itemSize: 10,
+                          direction: Axis.horizontal,
                         ),
                         minLeadingWidth: double.minPositive,
                       ),

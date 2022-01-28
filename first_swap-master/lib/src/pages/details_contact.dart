@@ -59,9 +59,11 @@ class _Details extends State<DetailContact> {
   double userRate5 = 0;
   double AvgUserRate = 0;
   int quantity = 1;
-   bool isVisible = true;
+  bool Rcount = false;
+  bool isVisible = true;
 
-  String? get goodsId => null;
+  String goodRate = "";
+
   @override
   Widget build(BuildContext context) {
     accept();
@@ -266,53 +268,131 @@ class _Details extends State<DetailContact> {
                         color: Colors.grey,
                       ),
                       SizedBox(height: 10),
-                         
-            Visibility(
-              visible: isVisible,
-              child:
-                      ListTile(
-                        
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(0.0)),
-                        selected: true,
-                        selectedTileColor: Colors.white70,
-                        //selectedTileColor: Colors.white38,
-                        
-                        title: Text(
-                          " يمكنك تقيم  " + widget.name + ' / ' + FName + " ",
-                          textScaleFactor: 1,
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.blueGrey,
-                              fontWeight: FontWeight.bold),
-                        ),
-          
-           
-                        leading: TextButton.icon(
-                          onPressed: () {
-                            rate(context);
-                             
-                          },
-                          style: ButtonStyle(
-                              alignment: Alignment.center,
-                              backgroundColor: MaterialStateProperty.all(
-                                  Colors.yellow.withOpacity(0.1))),
-                          icon: Icon(
-                            Icons.stars,
-                            color: Colors.yellow.withOpacity(0.9),
-                          ),
-                          label: Text(
-                            "قيمّ",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.blueGrey,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
 
-                        minLeadingWidth: double.minPositive,
-             ) ),
+                      Visibility(
+                          visible: isVisible,
+                          child: ListTile(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(0.0)),
+                            selected: true,
+                            selectedTileColor: Colors.white70,
+                            //selectedTileColor: Colors.white38,
+
+                            title: Text(
+                              " يمكنك تقيم  " +
+                                  widget.name +
+                                  ' / ' +
+                                  FName +
+                                  " ",
+                              textScaleFactor: 1,
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.blueGrey,
+                                  fontWeight: FontWeight.bold),
+                            ),
+
+                            leading: TextButton.icon(
+                              onPressed: () {
+                                rate(context);
+                              },
+                              style: ButtonStyle(
+                                  alignment: Alignment.center,
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.yellow.withOpacity(0.1))),
+                              icon: Icon(
+                                Icons.stars,
+                                color: Colors.yellow.withOpacity(0.9),
+                              ),
+                              label: Text(
+                                "قيمّ",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.blueGrey,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+
+                            minLeadingWidth: double.minPositive,
+                          )),
+
+                      /*Visibility(
+                        visible: isVisible2,
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0.0)),
+                          selected: true,
+                          selectedTileColor: Colors.white70,
+                          //selectedTileColor: Colors.white38,
+                          title: Visibility(
+                            visible: isVisible2,
+                            child: Text(
+                              "  تقيمك للمنتج   ",
+                              textScaleFactor: 1,
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.blueGrey,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                          ),
+                          leading: Visibility(
+                            visible: isVisible2,
+                            child: RatingBarIndicator(
+                              textDirection: TextDirection.rtl,
+                              itemPadding: EdgeInsets.symmetric(horizontal: 4),
+                              rating: ratep,
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              itemCount: 5,
+                              itemSize: 13,
+                              direction: Axis.horizontal,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Visibility(
+                        visible: isVisible2,
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0.0)),
+                          selected: true,
+                          selectedTileColor: Colors.white70,
+                          //selectedTileColor: Colors.white38,
+
+                          title: Visibility(
+                            visible: isVisible2,
+                            child: Text(
+                              "  تقيمك لصاحب المنتج   ",
+                              textScaleFactor: 1,
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.blueGrey,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                          ),
+                          leading: Visibility(
+                            visible: isVisible2,
+                            child: RatingBarIndicator(
+                              textDirection: TextDirection.rtl,
+                              itemPadding: EdgeInsets.symmetric(horizontal: 4),
+                              rating: userRate,
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              itemCount: 5,
+                              itemSize: 13,
+                              direction: Axis.horizontal,
+                            ),
+                          ),
+                          minLeadingWidth: double.minPositive,
+                        ),
+                      ),*/
                     ],
                   ),
                 ),
@@ -334,6 +414,7 @@ class _Details extends State<DetailContact> {
         .then((ds) {
       receivergoodsId = ds.data()!['receiver goods'];
       ownerGoods = ds.data()!['owner'];
+      goodRate = ds.data()!['rate'].toString();
     });
     await FirebaseFirestore.instance
         .collection('users')
@@ -354,6 +435,11 @@ class _Details extends State<DetailContact> {
       userRate4 = double.parse(ds.get('rate4'));
       userRate5 = double.parse(ds.get('rate5'));
     });
+    if (goodRate == "0") {
+      isVisible = true;
+    } else {
+      isVisible = false;
+    }
   }
 
   //To view the goods that swapping with
@@ -471,6 +557,7 @@ class _Details extends State<DetailContact> {
                       }
                       ;
                     }),
+
                 // Text("  التقيم هو $ratep "),
                 SizedBox(height: 15),
 
@@ -495,86 +582,105 @@ class _Details extends State<DetailContact> {
                     itemBuilder: (context, _) =>
                         Icon(Icons.star, color: Colors.amber),
                     onRatingUpdate: (userRate) async {
-                      setState(() {
-                        this.userRate = userRate;
-                        userRateNum = userRateNum + 1;
-                      });
-                      if (userRate == 1) {
-                        userRate1 = userRate1 + 1;
-                      }
-                      if (userRate == 2) {
-                        userRate2 = userRate2 + 1;
-                      }
-                      if (userRate == 3) {
-                        userRate3 = userRate3 + 1;
-                      }
-                      if (userRate == 4) {
-                        userRate4 = userRate4 + 1;
-                      }
-                      if (userRate == 5) {
-                        userRate5 = userRate5 + 1;
-                      }
-                      AvgUserRate = (1 * userRate1 +
-                              2 * userRate2 +
-                              3 * userRate3 +
-                              4 * userRate4 +
-                              5 * userRate5) /
-                          userRateNum;
-                      String ur1 = userRate1.toString();
-                      String ur2 = userRate2.toString();
-                      String ur3 = userRate3.toString();
-                      String ur4 = userRate4.toString();
-                      String ur5 = userRate5.toString();
-                      String urNum = userRateNum.toString();
-                      String avgrate = AvgUserRate.toString();
-                      FirebaseFirestore firebaseFirestore =
-                          FirebaseFirestore.instance;
-                      User? user = _auth.currentUser;
-
-                      UserModel Usermodel = UserModel();
-
-                      // writing  the values
-                      print(avgrate);
-                      double c = double.parse(avgrate);
-                      int roundedRate = c.round();
-                      print("rounded rate $roundedRate");
-                      double DRR = roundedRate.toDouble();
-                      Usermodel.Rate = DRR;
-                      print(DRR);
-
-                      String ownerId = widget.owner;
-                      final firebaseUser =
-                          await FirebaseAuth.instance.currentUser;
-                      if (ratep != null) {
-                        if (firebaseUser != null)
-                          await FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(ownerId)
-                              .update({
-                            'Rate': DRR,
-                            'rate1': ur1,
-                            'rate2': ur2,
-                            'rate3': ur3,
-                            'rate4': ur4,
-                            'rate5': ur5,
-                            'NumRate': urNum
+                      if (ratep != 0) {
+                        if (Rcount == false) {
+                          setState(() {
+                            print("this is the userRate $userRate");
+                            this.userRate = userRate;
+                            print("this is the num of r $userRateNum");
+                            userRateNum = userRateNum + 1;
                           });
-                      }
 
-                      if (ratep != null) {
-                        FirebaseFirestore.instance
-                            .collection('goods')
-                            .where('owner', isEqualTo: ownerId)
-                            .get()
-                            .then((querySnapshot) {
-                          querySnapshot.docs.forEach((documentSnapshot) {
-                            documentSnapshot.reference
-                                .update({'ownerRate': DRR});
+                          if (userRate == 1) {
+                            userRate1 = userRate1 + 1;
+                          }
+                          if (userRate == 2) {
+                            userRate2 = userRate2 + 1;
+                          }
+                          if (userRate == 3) {
+                            userRate3 = userRate3 + 1;
+                          }
+                          if (userRate == 4) {
+                            userRate4 = userRate4 + 1;
+                          }
+                          if (userRate == 5) {
+                            userRate5 = userRate5 + 1;
+                          }
+                          AvgUserRate = (1 * userRate1 +
+                                  2 * userRate2 +
+                                  3 * userRate3 +
+                                  4 * userRate4 +
+                                  5 * userRate5) /
+                              userRateNum;
+                          String ur1 = userRate1.toString();
+                          String ur2 = userRate2.toString();
+                          String ur3 = userRate3.toString();
+                          String ur4 = userRate4.toString();
+                          String ur5 = userRate5.toString();
+                          String urNum = userRateNum.toString();
+                          String avgrate = AvgUserRate.toString();
+                          FirebaseFirestore firebaseFirestore =
+                              FirebaseFirestore.instance;
+                          User? user = _auth.currentUser;
+
+                          UserModel Usermodel = UserModel();
+
+                          // writing  the values
+                          print(avgrate);
+                          double c = double.parse(avgrate);
+                          int roundedRate = c.round();
+                          print("rounded rate $roundedRate");
+                          double DRR = roundedRate.toDouble();
+                          Usermodel.Rate = DRR;
+                          print(DRR);
+
+                          String ownerId = widget.owner;
+                          final firebaseUser =
+                              await FirebaseAuth.instance.currentUser;
+                          if (ratep != null) {
+                            if (firebaseUser != null)
+                              await FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(ownerId)
+                                  .update({
+                                'Rate': DRR,
+                                'rate1': ur1,
+                                'rate2': ur2,
+                                'rate3': ur3,
+                                'rate4': ur4,
+                                'rate5': ur5,
+                                'NumRate': urNum
+                              });
+                          }
+
+                          setState(() {
+                            isVisible = false;
                           });
-                        });
-                      }
+                          if (ratep != null) {
+                            FirebaseFirestore.instance
+                                .collection('goods')
+                                .where('owner', isEqualTo: ownerId)
+                                .get()
+                                .then((querySnapshot) {
+                              querySnapshot.docs.forEach((documentSnapshot) {
+                                documentSnapshot.reference
+                                    .update({'ownerRate': DRR});
+                              });
+                            });
+                          }
 
-                      ;
+                          ;
+                          Rcount = true;
+                        } else {
+                          if (Rcount == true) {
+                            Fluttertoast.showToast(
+                                msg: "لقد قيمت صاحب المنتج سابقاً !");
+                          }
+                        }
+                      } else {
+                        Icon(Icons.star, color: Colors.blue);
+                        Fluttertoast.showToast(msg: " قيم  المنتج اولاً !");
+                      }
                     }),
                 SizedBox(height: 15),
                 Divider(
@@ -590,15 +696,13 @@ class _Details extends State<DetailContact> {
                     ),
                   ),
                   onPressed: () {
-                    if (userRate != 0 && ratep != 0){
+                    if (userRate != 0 && ratep != 0) {
                       Navigator.pop(context);
-                       Fluttertoast.showToast(
-                          msg: " تم التقييم بنجاح");
+                      Fluttertoast.showToast(msg: " تم التقييم بنجاح");
                       setState(() {
-                  isVisible = !isVisible;
-                });
-                    }
-                    else if (userRate == 0 && ratep == 0)
+                        isVisible = false;
+                      });
+                    } else if (userRate == 0 && ratep == 0)
                       Fluttertoast.showToast(
                           msg: " الرجاء التأكد من تقيم المنتج و صاحب المنتج!");
                     else if (userRate == 0)
