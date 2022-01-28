@@ -312,10 +312,12 @@ class _DetailRequestState extends State<DetailRequest> {
       token = ds.data()!['token'];
       print(token);
     });
+    String title="تم قبول طلب التبديل";
+     String body="تم قبول طلب التبديل المرسل";
     if(token!= null){
-      SendMessage.sendFcmMessage("New Request", "New Request For Swap", token);
+      SendMessage.sendFcmMessage(title, body, token);
       }
-   SendMessage.notifiy("Accept Reques", "Accept Request for Swap Product");
+   SendMessage.notifiy(title, body);
     Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
     Navigator.push(
         this.context,

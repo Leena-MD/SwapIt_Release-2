@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -62,6 +64,7 @@ class _swapRequest extends State<swapRequest> {
 
   List<Product> MyGoodsList = [];
 
+  // ignore: annotate_overrides
   Widget build(BuildContext context) {
     MyProvider provider = Provider.of<MyProvider>(context);
 
@@ -238,6 +241,7 @@ class _swapRequest extends State<swapRequest> {
         'receiverID': "${widget.owner}",
         'Status': status,
       });
+      //get token for send notification
        var token;
     String goodsId = widget.IDgoods;
     await FirebaseFirestore.instance.collection('users').doc(owner).get()
@@ -246,11 +250,13 @@ class _swapRequest extends State<swapRequest> {
       token = ds.data()!['token'];
       print(token);
     });
+     String title="طلب تبديل";
+     String body="تم استلام طلب تبديل جديد";
     if(token!= null){
-      SendMessage.sendFcmMessage("New Request", "New Request For Swap", token);
+      SendMessage.sendFcmMessage(title, body, token);
       }
-   SendMessage.notifiy("Swap Reques", "New Request For Swap");
-      Fluttertoast.showToast(msg: "تم إرسال الطلب بنجاح!");
+      SendMessage.notifiy(title, body);
+      Fluttertoast.showToast(msg: "تم إرسال الطلب بنجاح!"+token);
       
 
       Navigator.of(this.context)
