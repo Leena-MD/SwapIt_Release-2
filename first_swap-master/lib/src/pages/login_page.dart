@@ -9,6 +9,7 @@ import 'package:first_swap/src/pages/register_page.dart';
 import 'package:first_swap/src/widgets/app_outlinebutton.dart';
 import 'package:first_swap/src/widgets/app_textfield.dart';
 import 'package:first_swap/themes.dart';
+import 'AdminHomePage.dart';
 import 'Forgot_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -254,9 +255,15 @@ class _LoginPageState extends State<LoginPage> {
                   if (uid.user!.emailVerified == true)
                     {
                       user?.reload(),
-                      Fluttertoast.showToast(msg: "تم تسجيل الدخول بنجاح"),
+                     Fluttertoast.showToast(msg: "تم تسجيل الدخول بنجاح"),
+                      if (email == "swap.gp05@gmail.com"){
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => AdminHomePage())),
+                      }
+                      else
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => HomePage())),
+
                     }
                   else
                     {
