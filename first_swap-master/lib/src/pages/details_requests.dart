@@ -14,6 +14,7 @@ import 'package:first_swap/src/pages/perfume.dart';
 import 'package:first_swap/src/pages/pet.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/provider/my_provider.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'Offers.dart';
@@ -24,17 +25,20 @@ class DetailRequest extends StatefulWidget {
   final String description;
   final String owner;
   final String IDgoods;
+  final String ownerName;
+  final String ownerRate;
 
   final String name;
   final String cate;
-  DetailRequest({
-    required this.image,
-    required this.name,
-    required this.description,
-    required this.owner,
-    required this.cate,
-    required this.IDgoods,
-  });
+  DetailRequest(
+      {required this.image,
+      required this.name,
+      required this.description,
+      required this.owner,
+      required this.cate,
+      required this.IDgoods,
+      required this.ownerName,
+      required this.ownerRate});
 
   @override
   _DetailRequestState createState() => _DetailRequestState();
@@ -201,6 +205,45 @@ class _DetailRequestState extends State<DetailRequest> {
                         ),
                         minLeadingWidth: double.minPositive,
                       ),
+                      Divider(
+                        height: 0.2,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(height: 20),
+                      ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0)),
+                        selected: true,
+                        selectedTileColor: Colors.white70,
+                        title: Text(
+                          "تقيم صاحب المنتج \n" +
+                              widget.ownerName +
+                              "   " +
+                              widget.ownerRate +
+                              '/5',
+                          textScaleFactor: 1,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        leading: RatingBarIndicator(
+                          textDirection: TextDirection.rtl,
+                          itemPadding: EdgeInsets.symmetric(horizontal: 4),
+                          rating: double.parse(widget.ownerRate),
+                          itemBuilder: (context, index) => Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          itemCount: 5,
+                          itemSize: 10,
+                          direction: Axis.horizontal,
+                        ),
+                        minLeadingWidth: double.minPositive,
+                      ),
+                      SizedBox(height: 10),
                       SizedBox(width: 20),
                       ElevatedButtonTheme(
                         data: ElevatedButtonThemeData(
@@ -347,7 +390,6 @@ class _DetailRequestState extends State<DetailRequest> {
         .collection('goods')
         .doc(ids)
         .update({'Status': status, 'receiver goods': '', 'receiverID': ''});
-
   }
   //To view the goods that swapping with
 
