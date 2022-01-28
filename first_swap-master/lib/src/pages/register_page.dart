@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_swap/fluttericon.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
@@ -395,6 +396,7 @@ class _regestpState extends State<regestp> {
     // calling our user model
     // sedning these values
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    String? token = await FirebaseMessaging.instance.getToken();
     User? user = _auth.currentUser;
     double Rate = 0;
     String Rate1 = "0";
@@ -421,6 +423,7 @@ class _regestpState extends State<regestp> {
     userModel.Rate5 = Rate5;
     userModel.NumRate = NumRate;
     userModel.Blacklist = false;
+    userModel.token= token;
 
     await firebaseFirestore
         .collection("users")

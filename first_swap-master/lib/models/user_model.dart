@@ -13,6 +13,7 @@ class UserModel {
   String? Rate5;
   String? NumRate;
   bool? Blacklist;
+  String? token;
 
   UserModel(
       {this.uid,
@@ -28,7 +29,8 @@ class UserModel {
       this.Rate4,
       this.Rate5,
       this.NumRate,
-      this.Blacklist});
+      this.Blacklist,
+      this.token});
 
   // receiving data from server
   factory UserModel.fromMap(map) {
@@ -67,6 +69,7 @@ class UserModel {
       'rate5': Rate5,
       'NumRate': Rate1,
       'Blacklist': Blacklist,
+      'token': token,
     };
   }
 }

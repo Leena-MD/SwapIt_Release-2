@@ -1,3 +1,9 @@
+// ignore_for_file: prefer_const_constructors, file_names
+
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:first_swap/fluttericon.dart';
 import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/books_category.dart';
@@ -29,6 +35,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+@override
+  void initState() {
+    // TODO: implement initState
+    saveTokenToDatabase();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -166,6 +178,22 @@ class _HomePage extends State<HomePage> {
       ),
     );
   }
+}
+
+
+
+//when user is logged in we save token in firestore for using it to send notification
+void saveTokenToDatabase() async {
+   String? token = await FirebaseMessaging.instance.getToken();
+  // Assume user is logged in for this example
+  String userId = FirebaseAuth.instance.currentUser!.uid;
+
+  await FirebaseFirestore.instance
+    .collection('users')
+    .doc(userId)
+    .update({
+      'token':token,
+    });
 }
 
 class CategoryContainer extends StatelessWidget {
