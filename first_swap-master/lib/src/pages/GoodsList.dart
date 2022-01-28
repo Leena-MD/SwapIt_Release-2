@@ -11,6 +11,7 @@ import 'package:first_swap/provider/my_provider.dart';
 import 'AdminProfile_page.dart';
 import 'MyItems.dart';
 import 'UsersList.dart';
+import 'adminDetails_page.dart';
 import 'login_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -145,20 +146,20 @@ provider.getAllGoods();
                             .map(
                               (e) => BottomContainer(
                                 onTap: () {
-                                 // Navigator.of(context).pushReplacement(
-                                   // MaterialPageRoute(
-                                    //  builder: (context) => DetailPage(
-                                     //   image: e.image,
-                                      //  name: e.title,
-                                      //  description: e.description,
-                                      //  cate: e.cate,
-                                      //  owner: e.owner,
-                                      //  IDgoods: e.IDgoods,
-                                      //  ownerRate: e.ownerRate,
-                                      //  ownerName: e.ownerName,
-                                      //),
-                                  //  ),
-                                 // );
+                                 Navigator.of(context).pushReplacement(
+                                   MaterialPageRoute(
+                                      builder: (context) => AdminDetailPage(
+                                        image: e.image,
+                                        name: e.title,
+                                      description: e.description,
+                                        cate: e.cate,
+                                        owner: e.owner,
+                                       IDgoods: e.IDgoods,
+                                       ownerRate: e.ownerRate,
+                                       ownerName: e.ownerName,
+                                      ),
+                                    ),
+                                  );
                                 },
                                 image: e.image,
                                 name: e.title,
