@@ -30,7 +30,7 @@ class AdminDetailPage extends StatefulWidget {
   final String name;
   final String cate;
   final String ownerName;
-final db = FirebaseFirestore.instance;
+  final db = FirebaseFirestore.instance;
   AdminDetailPage({
     required this.image,
     required this.name,
@@ -66,7 +66,7 @@ class _AdminDetailPageState extends State<AdminDetailPage> {
             child: Text('معلومات المنتج   ', style: TextStyle(fontSize: 23))),
         leading: IconButton(
           onPressed: () {
-             if (widget.cate == "2") {
+            if (widget.cate == "2") {
               Navigator.push(this.context,
                   MaterialPageRoute(builder: (context) => GoodsList()));
             }
@@ -91,16 +91,16 @@ class _AdminDetailPageState extends State<AdminDetailPage> {
                   MaterialPageRoute(builder: (context) => GoodsList()));
             }
             if (widget.cate == "6") {
-              Navigator.push(
-                  this.context, MaterialPageRoute(builder: (context) => GoodsList()));
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => GoodsList()));
             }
             if (widget.cate == "7") {
               Navigator.push(this.context,
                   MaterialPageRoute(builder: (context) => GoodsList()));
             }
             if (widget.cate == "8") {
-              Navigator.push(
-                  this.context, MaterialPageRoute(builder: (context) => GoodsList()));
+              Navigator.push(this.context,
+                  MaterialPageRoute(builder: (context) => GoodsList()));
             }
             if (widget.cate == "9") {
               Navigator.push(this.context,
@@ -228,12 +228,10 @@ class _AdminDetailPageState extends State<AdminDetailPage> {
                         height: 0.2,
                         color: Colors.grey,
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 20),
                       RaisedButton(
                         color: Colors.red[600],
-                        onPressed: () {
-                     
-                        },
+                        onPressed: () {},
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -242,46 +240,119 @@ class _AdminDetailPageState extends State<AdminDetailPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                           InkWell(
-                                        onTap: () {
-                                          widget.db
-                                              .collection('goods')
-                                              .doc(widget.IDgoods)
-                                              .delete();
-                                          Fluttertoast.showToast(
-                                              msg: 'تم حذف العنصر المحدد');
-                                          Navigator.push(this.context,
-                  MaterialPageRoute(builder: (context) => GoodsList()));
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.delete_outline_outlined,
-                                                color: Color(0xFFFD691F),
-                                                size: 28,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                              "حذف",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )
-                                            ],
-                                          ),
+                            InkWell(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      // return object of type Dialog
+                                      return AlertDialog(
+                                        backgroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        title: new Text(
+                                          "\nهل انت متأكد من حذف المنتج ؟",
+                                          textScaleFactor: 1,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.blueGrey,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                      ),
-                            
+                                        actions: <Widget>[
+                                          new FlatButton(
+                                            color: Colors.grey[100],
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Center(
+                                              child: new Text(
+                                                "رجوع",
+                                                textScaleFactor: 1,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.grey,
+                                                    fontWeight:
+                                                        FontWeight.normal),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          new FlatButton(
+                                            color: Colors.grey[100],
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Center(
+                                              child: new Text(
+                                                "حذف",
+                                                textScaleFactor: 1,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.redAccent,
+                                                    fontWeight:
+                                                        FontWeight.normal),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              widget.db
+                                                  .collection('goods')
+                                                  .doc(widget.IDgoods)
+                                                  .delete();
+                                              Fluttertoast.showToast(
+                                                  msg: 'تم حذف المنتج المحدد');
+                                              Navigator.push(
+                                                  this.context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          GoodsList()));
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                              /*
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        elevation: 5,
+                        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,*/
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(3, 1, 3, 1),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.delete_outline_outlined,
+                                      color: Colors.white30,
+                                      size: 28,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "حذف",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
