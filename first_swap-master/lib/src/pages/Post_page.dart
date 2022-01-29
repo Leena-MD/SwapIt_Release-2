@@ -518,7 +518,9 @@ class _PostPage extends State<PostPage> {
           'cate': cate,
           'ownerRate': ownerRate,
           'ownerName': ownerName,
-          'rate': Prate
+          'rate': Prate,
+          "caseSearch": setSearchParam(name),
+
           // add owner rating
         });
         Fluttertoast.showToast(msg: "تم الإضافة بنجاح!");
@@ -531,6 +533,16 @@ class _PostPage extends State<PostPage> {
 
     userID = firebaseUser!.uid;
   }
+
+setSearchParam(String caseNumber) {
+  List<String> caseSearchList = [];
+  String temp = "";
+  for (int i = 0; i < caseNumber.length; i++) {
+    temp = temp + caseNumber[i];
+    caseSearchList.add(temp);
+  }
+  return caseSearchList;
+}
 
   addadata(String name, String des, String url, String id, int num, String st,
       String cate, String ownerRate, String ownerName, double Prate) async {
