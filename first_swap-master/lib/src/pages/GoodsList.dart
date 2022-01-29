@@ -95,7 +95,7 @@ provider.getAllGoods();
           backgroundColor: Colors.white,
           bottomNavigationBar: CustomBottomNavigationBar(
             iconList: [
-             Icons.home,
+             
                     Icons.people,
                     Icons.reorder_rounded,
                     Icons.person,
@@ -105,7 +105,7 @@ provider.getAllGoods();
                 var _selectedItem = val;
               });
             },
-            defaultSelectedIndex: 2,
+            defaultSelectedIndex: 1,
           ),
           appBar: AppBar(
             automaticallyImplyLeading: false,
@@ -221,17 +221,17 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
         setState(() {
           _selectedIndex = index;
+          // if (_selectedIndex == )
+          //   Navigator.push(this.context,
+          //       MaterialPageRoute(builder: (context) => AdminHomePage()));
           if (_selectedIndex == 0)
             Navigator.push(this.context,
-                MaterialPageRoute(builder: (context) => AdminHomePage()));
-          if (_selectedIndex == 1)
-            Navigator.push(this.context,
                 MaterialPageRoute(builder: (context) => UsersList()));
-          if (_selectedIndex == 2)
+          if (_selectedIndex == 1)
             Navigator.push(this.context,
                 MaterialPageRoute(builder: (context) => GoodsList()));
 
-          if (_selectedIndex == 3)
+          if (_selectedIndex == 2)
             Navigator.push(this.context,
                 MaterialPageRoute(builder: (context) => AdminProfilePage()));
          
@@ -260,10 +260,10 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               icon,
               color: index == _selectedIndex ? Colors.black : Colors.grey,
             ),
-             if (index == 0) Text('الرئيسية'),
-            if (index == 1) Text('المستخدمين'),
-            if (index == 2) Text('المنتجات'),
-            if (index == 3) Text('حسابي'),
+           //  if (index == 0) Text('الرئيسية'),
+            if (index == 0) Text('المستخدمين'),
+            if (index == 1) Text('المنتجات'),
+            if (index == 2) Text('حسابي'),
           ],
         ),
       ),
