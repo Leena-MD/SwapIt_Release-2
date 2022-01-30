@@ -22,6 +22,8 @@ import 'Intrests_page.dart';
 import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
+import 'Search.dart';
+
 import 'house.dart';
 import 'kids_category.dart';
 import 'clothes.dart';
@@ -125,15 +127,23 @@ class _HomePage extends State<HomePage> {
                         alignment: Alignment.center,
                         child: Center(
                           child: TextField(
+                            onTap: () {
+
+                              Navigator.push(this.context,
+                                  MaterialPageRoute(builder: (context) => searchPage()));
+
+                            },
                             textAlign: TextAlign.right,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15.0),
                                   borderSide: BorderSide.none),
                               hintText: "البحث",
+
                               prefixIcon: Icon(
                                 Icons.search,
-                                color: Colors.blue,
+
+                                color: Colors.grey,
                               ),
                               fillColor: Colors.white,
                               filled: true,

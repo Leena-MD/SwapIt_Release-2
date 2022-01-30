@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class goodsModel {
   String? uid;
   String? name;
@@ -11,6 +13,7 @@ class goodsModel {
   double? PRate;
   String? ownerRate;
   String? ownerName;
+  String? caseSearch;
   goodsModel(
       {this.uid,
       this.name,
@@ -23,7 +26,8 @@ class goodsModel {
       this.IDgoods,
       this.PRate,
       this.ownerRate,
-      this.ownerName});
+      this.ownerName,
+      this.caseSearch});
 
   // receiving data from server
   factory goodsModel.fromMap(map) {
@@ -38,7 +42,8 @@ class goodsModel {
         cate: map['cate'],
         PRate: map['rate'],
         ownerRate: map['ownerRate'],
-        ownerName: map['ownerName']);
+        ownerName: map['ownerName'],
+        caseSearch: map['caseSearch']);
   }
 
   // sending data to our server
@@ -54,7 +59,23 @@ class goodsModel {
       'cate': cate,
       'rate': PRate,
       'ownerRate': ownerRate,
-      'ownerName': ownerName
+      'ownerName': ownerName,
+      'caseNumber':caseSearch
     };
   }
+
+  goodsModel.fromSnapshot(DocumentSnapshot snapshot) :
+        uid = snapshot['uid'],
+        name = snapshot['gName'],
+        desc = snapshot['Description'],
+        img = snapshot['image'],
+        gnum = snapshot['numGood'],
+        stat = snapshot['Status'],
+        own = snapshot['owner'],
+        cate = snapshot['cate'],
+        PRate = snapshot['rate'],
+        ownerRate = snapshot['ownerRate'],
+        ownerName = snapshot['ownerName'];
+
+
 }
