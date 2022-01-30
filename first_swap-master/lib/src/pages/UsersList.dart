@@ -1,3 +1,4 @@
+import 'package:first_swap/src/pages/profileUsers.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +8,7 @@ import 'AdminHomePage.dart';
 
 import 'AdminProfile_page.dart';
 import 'GoodsList.dart';
+import 'Home_page.dart';
 import 'MyItems.dart';
 import 'login_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,7 +30,7 @@ class _UsersListState extends State<UsersList> {
   String LName = '';
   String phoneN = '';
   String userName = '';
- 
+ String name =' ';
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   void inputData() {
@@ -54,13 +56,13 @@ class _UsersListState extends State<UsersList> {
         print(e);
       });
   }
-
-  Widget build(BuildContext context) {
-    return SafeArea(
-      //  home: Scaffold(
-
-      child: Builder(
-          builder: (context) => Scaffold(
+    Widget build(BuildContext context) {
+    
+    return MaterialApp(
+    
+   home:
+    
+          Scaffold(
                 backgroundColor: Colors.white,
                 bottomNavigationBar: CustomBottomNavigationBar(
                   iconList: [
@@ -77,11 +79,131 @@ class _UsersListState extends State<UsersList> {
                   },
                   defaultSelectedIndex: 0,
                 ),
-          )));
-  }
-
+          
+appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.cyan[800],
+            title: Center(
+                child:
+                    Text('جميع المستخدمين ', style: TextStyle(fontSize: 20))),
+          
  
+
+),
+
+
+body: StreamBuilder<QuerySnapshot>(
+
+  
+
+     stream: (name != "" && name != null )
+     ?
+      FirebaseFirestore.instance
+       .collection('users')
+       // .where('caseSearch',arrayContains: name)
+       // .where('owner',isNotEqualTo: 'czsvAfpVmOOs6pg3l0cEUSXqY9y1')
+        //'kmsfKPNhTkfljUzjk20dz0cVNe62')
+     //   .where('Status',isEqualTo: 'available')
+        .snapshots()
+        :FirebaseFirestore.instance.collection('users')
+        
+         //    .where('owner',isEqualTo:   'TM93SqbnNYUW5YDFSlgfGIG4xUD2')
+             // FirebaseAuth.instance.currentUser!.uid
+        //.orderBy("owner", descending: true)
+        //.where("uid",isNotEqualTo: "TM93SqbnNYUW5YDFSlgfGIG4xUD2")
+        .snapshots(),
+
+        
+    builder: (context, snapshot){
+
+
+       return(snapshot.connectionState == ConnectionState.waiting)
+    ?Center(child: CircularProgressIndicator())
+    :ListView.builder(
+    itemCount: snapshot.data!.docs.length,
+    itemBuilder:(context,index){
+      DocumentSnapshot data= snapshot.data!.docs[index];
+      return Container(
+    padding: EdgeInsets.only(top: 16),
+    child: Column(
+    children: [
+      ListTile(
+    title: Text(data['UserName'],
+    
+    style: TextStyle(
+    fontSize: 20,fontWeight: FontWeight.bold
+    
+    ),),
+    subtitle: Text(data['Rate'].toString()),
+    
+    leading: 
+    CircleAvatar(
+      
+    child:Icon(
+   (Icons.person),
+    color: Colors.white
+  //  fit: BoxFit.contain,
+ , size: 60,
+    ),
+    radius:40,
+    backgroundColor: Colors.grey[600],
+    
+    ),
+    
+        onTap: () {
+if(data['uid']=='TM93SqbnNYUW5YDFSlgfGIG4xUD2'){
+  Navigator.push(this.context,
+      MaterialPageRoute(builder: (context) => AdminProfilePage()));
 }
+else{
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => ProfileUser(
+  //   final String FirstName;
+  // final String UserName;
+  // final String email;
+  // final String phoneN;
+  // final String uid;
+  // final String NumRate;
+  // final String Rate;
+
+
+
+                        FirstName: data['FirstName'],
+                        LastName: data['LastName'],
+                        UserName: data['UserName'],
+                        email: data['email'],
+                        phoneN: data['phoneN'],
+                        uid: data['uid'],
+                        NumRate: data['NumRate'],
+                        Rate: data['Rate'].toString(),
+                        Blacklist: data['Blacklist'],
+                      ),
+              ),
+          );}
+
+
+        },
+   
+
+    ),
+
+    Divider(thickness: 2,)
+
+    ],
+    ),
+    );
+
+    }
+    );
+    },
+   ),
+
+    )
+    );
+
+
+        }   }
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final int defaultSelectedIndex;
