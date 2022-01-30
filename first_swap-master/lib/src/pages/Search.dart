@@ -79,7 +79,7 @@ appBar: AppBar(
       decoration: InputDecoration(
 
 
-        prefixIcon: Icon(Icons.search),hintText: 'البحث'  ),
+        prefixIcon: Icon(Icons.search),hintText: ' البحث'  ),
       onChanged: (val){
         
         setState(() {
@@ -99,12 +99,12 @@ body: StreamBuilder<QuerySnapshot>(
 
      stream: (name != "" && name != null )
      ? FirebaseFirestore.instance
-       .collection('goods')
+        .collection('goods')
         .where('caseSearch',arrayContains: name)
         .where('Status',isEqualTo: 'available')
         .snapshots()
         :FirebaseFirestore.instance.collection('goods')
-        .where('Status',isNotEqualTo: 'available')
+        .where('Status',isEqualTo: 'available')
         .snapshots(),
 
         
