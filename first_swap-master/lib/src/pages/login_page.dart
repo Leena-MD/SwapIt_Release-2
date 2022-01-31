@@ -247,14 +247,28 @@ class _LoginPageState extends State<LoginPage> {
   void LogIn(String email, String password) async {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
-
+var h="";
     if (_formkey.currentState!.validate()) {
       try {
+        bool pp=false;
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
-            .then((uid) => {
-                  if (uid.user!.emailVerified == true)
+            .then((uid) async => {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .get()
+              .then((ds) {
+            pp= ds.data()!['Blacklist'];}),
+          if(pp==true){
+            Fluttertoast.showToast(msg: " لقد تم حظر حسابك "),
+          }
+
+               else if (uid.user!.emailVerified == true)
                     {
+
+
+
                       user?.reload(),
                      Fluttertoast.showToast(msg: "تم تسجيل الدخول بنجاح"),
                       if (email == "swap.gp05@gmail.com"){
