@@ -16,7 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Post_page.dart';
 
-class ProfileUser extends StatefulWidget {
+class UsersProfile extends StatefulWidget {
     final String FirstName;
    final String LastName;
   final String UserName;
@@ -27,7 +27,7 @@ class ProfileUser extends StatefulWidget {
   final String Rate;
   final bool Blacklist;
  
-  ProfileUser({
+  UsersProfile({
     required this.FirstName,
     required this.LastName,
 
@@ -41,10 +41,10 @@ class ProfileUser extends StatefulWidget {
   });
 
   @override
-  _ProfileUserState createState() => _ProfileUserState();
+  _UsersProfileState createState() => _UsersProfileState();
 }
 
-class _ProfileUserState extends State<ProfileUser> {
+class _UsersProfileState extends State<UsersProfile> {
   @override
 
 

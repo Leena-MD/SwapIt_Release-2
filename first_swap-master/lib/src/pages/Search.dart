@@ -55,7 +55,13 @@ class _searchPage extends State<searchPage> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return MaterialApp(
+      title:'jdjc',
+    theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: Scaffold(
 appBar: AppBar(
   leading: IconButton(
     onPressed: () {
@@ -97,14 +103,16 @@ body: StreamBuilder<QuerySnapshot>(
 
 
 
-     stream: (name != "" && name != null )
+     stream: (name != "" && name != null &&uid !=null )
      ? FirebaseFirestore.instance
         .collection('goods')
         .where('caseSearch',arrayContains: name)
         .where('Status',isEqualTo: 'available')
+   //     .where('owner',isNotEqualTo: 'uid')
         .snapshots()
         :FirebaseFirestore.instance.collection('goods')
         .where('Status',isEqualTo: 'available')
+    //            .where('owner',isNotEqualTo: 'uid')
         .snapshots(),
 
         
@@ -119,9 +127,11 @@ body: StreamBuilder<QuerySnapshot>(
       DocumentSnapshot data= snapshot.data!.docs[index];
       return Container(
     padding: EdgeInsets.only(top: 16),
-    child: Column(
+    child:  Column( 
     children: [
-      ListTile(
+     if(data['owner']!=uid)   ListTile( 
+       
+
     title: Text(data['gName'],
     style: TextStyle(
     fontSize: 20,fontWeight: FontWeight.bold
@@ -139,24 +149,6 @@ body: StreamBuilder<QuerySnapshot>(
 
 
         onTap: () {
-          //     (e) => BottomContainer(
-          //     onTap: () {
-          //   Navigator.of(context).pushReplacement(
-          //     MaterialPageRoute(
-          //       builder: (context) => DetailPage(
-          //         image: e.image,
-          //         name: e.title,
-          //         description: e.description,
-          //         cate: e.cate,
-          //         owner: e.owner,
-          //         IDgoods: e.IDgoods,
-          //         ownerRate: e.ownerRate,
-          //         ownerName: e.ownerName,
-          //       ),
-          //     ),
-          //   );
-          // }, image: e.image, name: e.title
-          //     );
 if(data['owner']==uid){
   Navigator.push(this.context,
       MaterialPageRoute(builder: (context) => MyItems()));
@@ -180,11 +172,13 @@ else{
 
         },
 
-    ),
+     ),
     
-    Divider(thickness: 2,)
+   (data['owner']!=uid) ?     Divider(thickness: 2,): SizedBox.fromSize() 
+
 
     ],
+    
     ),
     );
 
@@ -193,8 +187,8 @@ else{
     },
    ),
 
-    );
-
+    )
+);
 
   }
 

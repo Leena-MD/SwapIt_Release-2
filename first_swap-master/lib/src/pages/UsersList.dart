@@ -1,4 +1,4 @@
-import 'package:first_swap/src/pages/profileUsers.dart';
+import 'package:first_swap/src/pages/UsersProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -96,23 +96,11 @@ body: StreamBuilder<QuerySnapshot>(
 
   
 
-     stream: (name != "" && name != null )
-     ?
+     stream: 
       FirebaseFirestore.instance
        .collection('users')
-       // .where('caseSearch',arrayContains: name)
-       // .where('owner',isNotEqualTo: 'czsvAfpVmOOs6pg3l0cEUSXqY9y1')
-        //'kmsfKPNhTkfljUzjk20dz0cVNe62')
-     //   .where('Status',isEqualTo: 'available')
-        .snapshots()
-        :FirebaseFirestore.instance.collection('users')
-        
-         //    .where('owner',isEqualTo:   'TM93SqbnNYUW5YDFSlgfGIG4xUD2')
-             // FirebaseAuth.instance.currentUser!.uid
-        //.orderBy("owner", descending: true)
-        //.where("uid",isNotEqualTo: "TM93SqbnNYUW5YDFSlgfGIG4xUD2")
+      .where('email',isNotEqualTo: 'swap.gp05@gmail.com')
         .snapshots(),
-
         
     builder: (context, snapshot){
 
@@ -158,17 +146,7 @@ if(data['uid']=='TM93SqbnNYUW5YDFSlgfGIG4xUD2'){
 else{
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => ProfileUser(
-  //   final String FirstName;
-  // final String UserName;
-  // final String email;
-  // final String phoneN;
-  // final String uid;
-  // final String NumRate;
-  // final String Rate;
-
-
-
+              builder: (context) => UsersProfile(
                         FirstName: data['FirstName'],
                         LastName: data['LastName'],
                         UserName: data['UserName'],
