@@ -253,9 +253,9 @@ class _swapRequest extends State<swapRequest> {
      String title="طلب تبديل";
      String body="تم استلام طلب تبديل جديد";
     if(token!= null){
-      SendMessage.sendFcmMessage(title, body, token);
+      SendMessage.sendFcmMessage(title, body, token);//send notification using FireBase Cloud Message Service FCM
       }
-      SendMessage.notifiy(title, body);
+     // SendMessage.notifiy(title, body);
       Fluttertoast.showToast(msg: "تم إرسال الطلب بنجاح!"+token);
       
 

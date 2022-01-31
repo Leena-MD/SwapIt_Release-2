@@ -347,10 +347,10 @@ class _DetailRequestState extends State<DetailRequest> {
     querySnapshot.docs.forEach((element) {
       rejecOtherGoods(element.id);
     });
+
     //get token from Firebase and send notification to OwnerGood
     var token;
     await FirebaseFirestore.instance.collection('users').doc(ownerGoods).get()
-        //.then((value) => null)
         .then((ds) {
       token = ds.data()!['token'];
       print(token);
@@ -360,7 +360,7 @@ class _DetailRequestState extends State<DetailRequest> {
     if (token != null) {
       SendMessage.sendFcmMessage(title, body, token);
     }
-    SendMessage.notifiy(title, body);
+    //SendMessage.notifiy(title, body); local Notification
     Fluttertoast.showToast(msg: "تم قبول الطلب بنجاح!");
     Navigator.push(
         this.context,
