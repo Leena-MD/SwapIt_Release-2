@@ -176,81 +176,97 @@ class _ProfileUserState extends State<ProfileUser> {
             ),
           ),
         ),
-        //const SizedBox(height: 20),
-      //  (widget.Blacklist==false)?
-      //   ElevatedButtonTheme(
-      //                   data: ElevatedButtonThemeData(
-      //                       style: ElevatedButton.styleFrom(
-      //                           minimumSize: Size(120, 60))),
-      //                   child: ButtonBar(
-      //                     mainAxisSize: MainAxisSize.max,
-      //                     children: [
-      //                       SizedBox(width: 40),
-      //                       RaisedButton(
-      //                         color: Colors.black,
-      //                         onPressed: () {
-      //                           blockUser();
-      //                         },
-      //                         shape: RoundedRectangleBorder(
-      //                           borderRadius: BorderRadius.circular(30),
-      //                         ),
-      //                         elevation: 5,
-      //                         padding: EdgeInsets.fromLTRB(54, 6, 54, 6),
-      //                         child: Row(
-      //                           mainAxisAlignment: MainAxisAlignment.center,
-      //                           children: [
-      //                             Text(
-      //                               "حظر المستخدم",
-      //                               textAlign: TextAlign.right,
-      //                               style: TextStyle(
-      //                                   fontSize: 20,
-      //                                   color: Colors.white,
-      //                                   fontWeight: FontWeight.bold),
-      //                             )
-      //                           ],
-      //                         ),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ):
-      //   const SizedBox(height: 20),
-      //     ElevatedButtonTheme(
-      //                   data: ElevatedButtonThemeData(
-      //                       style: ElevatedButton.styleFrom(
-      //                           minimumSize: Size(120, 60))),
-      //                   child: ButtonBar(
-      //                     mainAxisSize: MainAxisSize.max,
-      //                     children: [
-      //                       SizedBox(width: 40),
-      //                       RaisedButton(
-      //                         color: Colors.green,
-      //                         onPressed: () {
-      //                           unblock();
-      //                         },
-      //                         shape: RoundedRectangleBorder(
-      //                           borderRadius: BorderRadius.circular(30),
-      //                         ),
-      //                         elevation: 5,
-      //                         padding: EdgeInsets.fromLTRB(54, 6, 54, 6),
-      //                         child: Row(
-      //                           mainAxisAlignment: MainAxisAlignment.center,
-      //                           children: [
-      //                             Text(
-      //                               " إلغاء حظر المستخدم ",
-      //                               textAlign: TextAlign.right,
-      //                               style: TextStyle(
-      //                                   fontSize: 20,
-      //                                   color: Colors.white,
-      //                                   fontWeight: FontWeight.bold),
-      //                             )
-      //                           ],
-      //                         ),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-        const SizedBox(height: 20),
-        
+     //  (widget.Blacklist==false)?
+Visibility(
+              visible: widget.Blacklist==false,
+              child: Container(
+                height: 100.0,
+                
+                child: 
+        ElevatedButtonTheme(
+                        data: ElevatedButtonThemeData(
+                          
+                            style: ElevatedButton.styleFrom(
+                               alignment: Alignment.center,
+                                minimumSize: Size(120, 60))),
+                        child: ButtonBar(
+                         
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            RaisedButton(
+                              
+                              color: Colors.deepOrange,
+                              onPressed: () {
+                                blockUser();
+                              },
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              elevation: 5,
+                              padding: EdgeInsets.fromLTRB(54, 6, 54, 6),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  
+                                  Text(
+                                    "حظر المستخدم",
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+              ),
+            ),
+
+         Visibility(
+              visible: widget.Blacklist,
+              child: Container(
+                height: 100.0,
+                child:  ElevatedButtonTheme(
+                        data: ElevatedButtonThemeData(
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: Size(120, 60))),
+                        child: ButtonBar(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            RaisedButton(
+                              color: Colors.green,
+                              onPressed: () {
+                                unblock();
+                              },
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              elevation: 5,
+                              padding: EdgeInsets.fromLTRB(54, 6, 54, 6),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    " إلغاء حظر المستخدم ",
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+              ),
+            ),
+
+         
         
       ]
       );
