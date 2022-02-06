@@ -281,6 +281,26 @@ bool BL=true;
 
     Fluttertoast.showToast(msg: "تم حظر المستخدم بنجاح !");
 
+
+       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('goods')
+        .where("owner", isEqualTo: widget.uid)
+        .where(
+          "Status",
+          isEqualTo: 'available',
+        )
+        .get();
+querySnapshot.docs.forEach((element) {
+
+FirebaseFirestore.instance
+        .collection('goods').doc(element.id).update({'Status': 'blocked',});
+
+    });
+
+
+
+
+
     Navigator.of(this.context)
         .pushReplacement(MaterialPageRoute(builder: (context) => UsersList()));
   }
@@ -293,6 +313,23 @@ bool BL=true;
        });
 
     Fluttertoast.showToast(msg: "تم  إلغاء حظر المستخدم بنجاح !");
+
+       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('goods')
+        .where("owner", isEqualTo: widget.uid)
+        .where(
+          "Status",
+          isEqualTo: 'blocked',
+        )
+        .get();
+querySnapshot.docs.forEach((element) {
+
+FirebaseFirestore.instance
+        .collection('goods').doc(element.id).update({'Status': 'available',});
+
+    });
+
+
 
     Navigator.of(this.context)
         .pushReplacement(MaterialPageRoute(builder: (context) => UsersList()));
