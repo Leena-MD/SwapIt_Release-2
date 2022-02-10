@@ -350,7 +350,10 @@ class _DetailRequestState extends State<DetailRequest> {
 
     //get token from Firebase and send notification to OwnerGood
     var token;
-    await FirebaseFirestore.instance.collection('users').doc(ownerGoods).get()
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(ownerGoods)
+        .get()
         .then((ds) {
       token = ds.data()!['token'];
       print(token);
