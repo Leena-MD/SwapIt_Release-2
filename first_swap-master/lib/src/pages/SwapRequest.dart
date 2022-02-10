@@ -233,8 +233,8 @@ class _swapRequest extends State<swapRequest> {
   SendRequest(String name, String ids) async {
     {
       var status = "waiting";
-      var owner=widget.owner;
-     // String token=await FirebaseFirestore.instance.collection('users').where('uid')
+      var owner = widget.owner;
+      // String token=await FirebaseFirestore.instance.collection('users').where('uid')
 
       await FirebaseFirestore.instance.collection('goods').doc(ids).update({
         'receiver goods': "${widget.IDgoods}",
@@ -242,24 +242,26 @@ class _swapRequest extends State<swapRequest> {
         'Status': status,
       });
       //get token for send notification
-       var token;
-    String goodsId = widget.IDgoods;
-    await FirebaseFirestore.instance.collection('users').doc(owner).get()
-        //.then((value) => null)
-        .then((ds) {
-      token = ds.data()!['token'];
-      print(token);
-    });
-     String title="طلب تبديل";
-     String body="تم استلام طلب تبديل جديد";
-    if(token!= null){
-      SendMessage.sendFcmMessage(title, body, token);//send notification using FireBase Cloud Message Service FCM
+      var token;
+      String goodsId = widget.IDgoods;
+      await FirebaseFirestore.instance.collection('users').doc(owner).get()
+          //.then((value) => null)
+          .then((ds) {
+        token = ds.data()!['token'];
+        print(token);
+      });
+      String title = "طلب تبديل";
+      String body = "تم استلام طلب تبديل جديد";
+      token =
+          "elPEz3C7Svi580BfRd9M4B:APA91bEIykpSeZGfW4oZz8ejKr2H3oJJBDNcoPUTWdrkOkR5zLLALuSNt0SxHmb71uFgZsy_jIHsQkDbqCgbNrcrOaU1RVD4hSvLdvceZ9mYnc56VRumfjkU0hcyO_o7B8anZ5b0pf7y";
+      if (token != null) {
+        SendMessage.sendFcmMessage(title, body,
+            token); //send notification using FireBase Cloud Message Service FCM
       }
-     // SendMessage.notifiy(title, body);
-      Fluttertoast.showToast(msg: "تم إرسال الطلب بنجاح!"+token);
-      
+      // SendMessage.notifiy(title, body);
+      Fluttertoast.showToast(msg: "تم إرسال طلب التبديل بنجاح!");
 
-      Navigator.of(this.context)
+      Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
     }
   }
