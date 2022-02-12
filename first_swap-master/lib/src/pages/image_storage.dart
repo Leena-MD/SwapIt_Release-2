@@ -9,12 +9,11 @@ class Storage {
       firebase_storage.FirebaseStorage.instance;
 
   Future<String> uploadImage(String imagePath, String imageName) async {
-    final ref = FirebaseStorage.instance.ref().child('test/').child(imageName);
-
+    final ref = FirebaseStorage.instance.ref().child(imageName);
     File file = File(imagePath);
 
     try {
-      await storage.ref('test/$imageName').putFile(file);
+      await storage.ref('$imageName').putFile(file);
       url = await ref.getDownloadURL();
       return url;
     } on firebase_core.FirebaseException catch (e) {
