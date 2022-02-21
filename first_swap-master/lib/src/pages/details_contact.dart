@@ -435,7 +435,7 @@ class _Details extends State<DetailContact> {
       userRate4 = double.parse(ds.get('rate4'));
       userRate5 = double.parse(ds.get('rate5'));
     });
-    if (goodRate == "0") {
+    if (goodRate == "0.0") {
       isVisible = true;
     } else {
       isVisible = false;
@@ -651,6 +651,12 @@ class _Details extends State<DetailContact> {
                                 'rate5': ur5,
                                 'NumRate': urNum
                               });
+
+                            String goodsId = widget.IDgoods;
+                            await FirebaseFirestore.instance
+                            .collection('goods')
+                            .doc(goodsId)
+                            .update({'actualURate':userRate});
                           }
 
                           setState(() {
