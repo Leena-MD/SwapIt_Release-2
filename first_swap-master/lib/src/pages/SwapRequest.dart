@@ -252,8 +252,6 @@ class _swapRequest extends State<swapRequest> {
       });
       String title = "طلب تبديل";
       String body = "تم استلام طلب تبديل جديد";
-      token =
-          "elPEz3C7Svi580BfRd9M4B:APA91bEIykpSeZGfW4oZz8ejKr2H3oJJBDNcoPUTWdrkOkR5zLLALuSNt0SxHmb71uFgZsy_jIHsQkDbqCgbNrcrOaU1RVD4hSvLdvceZ9mYnc56VRumfjkU0hcyO_o7B8anZ5b0pf7y";
       if (token != null) {
         SendMessage.sendFcmMessage(title, body,
             token); //send notification using FireBase Cloud Message Service FCM
