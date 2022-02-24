@@ -27,6 +27,14 @@ Future main() async {
         )
       ]
   );
+  AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+  if (!isAllowed) {
+    // This is just a basic example. For real apps, you must show some
+    // friendly dialog box before call the request method.
+    // This is very important to not harm the user experience
+    AwesomeNotifications().requestPermissionToSendNotifications();
+  }
+});
    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(MyApp());
 }
@@ -73,8 +81,10 @@ print(message.data);
             channelKey: 'key1', //channel configuration key
             title: message.data["title"],
             body: message.data["body"],
+            displayOnForeground: true,
+            displayOnBackground: true
         )
     );
-  //call awesomenotification to how the push notification.
+  //call awesomenotification show Notify in Phone.
  AwesomeNotifications().createNotificationFromJsonData(message.data);
 }
