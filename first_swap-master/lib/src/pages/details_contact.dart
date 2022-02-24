@@ -651,12 +651,22 @@ class _Details extends State<DetailContact> {
                                 'rate5': ur5,
                                 'NumRate': urNum
                               });
-
+                              final FirebaseAuth auth = FirebaseAuth.instance;
+ final User? user = auth.currentUser;
+    final uid = user!.uid;
                             String goodsId = widget.IDgoods;
                             await FirebaseFirestore.instance
                             .collection('goods')
-                            .doc(goodsId)
-                            .update({'actualURate':userRate});
+                            .where('receiverID', isEqualTo: uid) 
+                            .where('owner', isEqualTo: ownerId)
+                                .get()
+                                .then((querySnapshot) {
+                              querySnapshot.docs.forEach((documentSnapshot) {
+                                documentSnapshot.reference
+                                    .update({'actualURate':userRate});
+                              });
+                            });
+
                           }
 
                           setState(() {
