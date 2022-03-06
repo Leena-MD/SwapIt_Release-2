@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/src/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'DonationsMap.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
 import 'login_page.dart';
@@ -227,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
         onClicked: () {
           Navigator.of(this.context).push(
             MaterialPageRoute(
-                builder: (context) => InterstsPage()), // EditProfilePage()
+                builder: (context) => DonationsMap()),//InterstsPage()),
           );
         },
       );
