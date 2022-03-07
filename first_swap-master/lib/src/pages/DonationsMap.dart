@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-//import 'package:coffee_model.dart';/
-import 'coffee_model.dart';
+//import 'package:Center_model.dart';/
+import 'Center_model.dart';
 
 class DonationsMap extends StatefulWidget {
   @override
@@ -24,7 +24,7 @@ class _DonationsMapState extends State<DonationsMap> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    coffeeShops.forEach((element) {
+    centers.forEach((element) {
       allMarkers.add(Marker(
           markerId: MarkerId(element.shopName),
           draggable: false,
@@ -43,7 +43,7 @@ class _DonationsMapState extends State<DonationsMap> {
     }
   }
 
-  _coffeeShopList(index) {
+  _centersList(index) {
     return AnimatedBuilder(
       animation: _pageController,
       builder: (BuildContext context, Widget? widget){
@@ -93,27 +93,20 @@ class _DonationsMapState extends State<DonationsMap> {
                           Container(
                               height: 90.0,
                               width: 90.0,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10.0),
-                                      topLeft: Radius.circular(10.0)),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          coffeeShops[index].thumbNail),
-                                      fit: BoxFit.cover))),
+                              ),
                           SizedBox(width: 5.0),
                           Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  coffeeShops[index].shopName,
+                                  centers[index].shopName,
                                   style: TextStyle(
                                       fontSize: 12.5,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  coffeeShops[index].address,
+                                  centers[index].address,
                                   style: TextStyle(
                                       fontSize: 12.0,
                                       fontWeight: FontWeight.w600),
@@ -121,7 +114,7 @@ class _DonationsMapState extends State<DonationsMap> {
                                 Container(
                                   width: 170.0,
                                   child: Text(
-                                    coffeeShops[index].description,
+                                    centers[index].description,
                                     style: TextStyle(
                                         fontSize: 11.0,
                                         fontWeight: FontWeight.w300),
@@ -159,9 +152,9 @@ class _DonationsMapState extends State<DonationsMap> {
                 width: MediaQuery.of(context).size.width,
                 child: PageView.builder(
                   controller: _pageController,
-                  itemCount: coffeeShops.length,
+                  itemCount: centers.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return _coffeeShopList(index);
+                    return _centersList(index);
                   },
                 ),
               ),
@@ -178,7 +171,7 @@ class _DonationsMapState extends State<DonationsMap> {
 
   moveCamera() {
     _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: coffeeShops[_pageController.page!.toInt()].locationCoords,
+        target: centers[_pageController.page!.toInt()].locationCoords,
         zoom: 14.0,
         bearing: 45.0,
         tilt: 45.0)));
