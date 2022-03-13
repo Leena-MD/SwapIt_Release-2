@@ -1,6 +1,7 @@
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'DonationsMap.dart';
 import 'EditItem.dart';
 import 'MyItemCard.dart';
 import 'MyItems.dart';
@@ -9,6 +10,8 @@ import 'Home_page.dart';
 import 'Offers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'RecyclingMap.dart';
 
 class MyItems extends StatefulWidget {
   final db = FirebaseFirestore.instance;
@@ -25,8 +28,11 @@ class MyItems extends StatefulWidget {
 class _MyItems extends State<MyItems> {
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
+
         child: Scaffold(
+
       backgroundColor: Colors.white,
       bottomNavigationBar: CustomBottomNavigationBar(
         iconList: [
@@ -42,13 +48,49 @@ class _MyItems extends State<MyItems> {
           });
         },
         defaultSelectedIndex: 1,
+
       ),
+
       appBar: AppBar(
         backgroundColor: Colors.cyan[800],
         title: Center(child: Text('منتجاتي', style: TextStyle(fontSize: 30))),
         automaticallyImplyLeading: false,
+        actions: [
+
+          PopupMenuButton(
+            // add icon, by default "3 dot" icon
+            // icon: Icon(Icons.book)
+              itemBuilder: (context){
+                return [
+                  PopupMenuItem<int>(
+                    value: 0,
+                    child: Text("الجمعيات الخيرية"),
+                  ),
+
+                  PopupMenuItem<int>(
+                    value: 1,
+                    child: Text("مراكز اعادة التدوير"),
+                  ),
+
+                ];
+              },
+              onSelected:(value){
+                if(value == 0){
+                  Navigator.push(this.context,
+                      MaterialPageRoute(builder: (context) => DonationsMap()));
+                }else if(value == 1){
+                  Navigator.push(this.context,
+                      MaterialPageRoute(builder: (context) => RecyclingMap()));
+                }
+              }
+          ),
+
+        ],
+
       ),
-      body: StreamBuilder<QuerySnapshot>(
+      body:
+      StreamBuilder<QuerySnapshot>(
+
         stream: widget.db.collection('goods').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -215,14 +257,17 @@ class _MyItems extends State<MyItems> {
                                         ),
                                       ),
                                     ])));
+
                       },
                     );
+
                   }
                 } else {
                   return Center();
                 }
               }).toList(),
             );
+
         },
       ),
     ));

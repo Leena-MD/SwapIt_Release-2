@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'DonationsMap.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
+import 'current user.dart';
 import 'login_page.dart';
 import 'edit_profile_page.dart';
 import 'Intrests_page.dart';
@@ -177,7 +178,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         const SizedBox(height: 20),
-        Center(child: MyInterest()),
+
         const SizedBox(height: 20),
         Center(child: buildUpgradeButton()),
         const SizedBox(height: 20),
@@ -223,15 +224,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget MyInterest() => ButtonWidget(
-        text: '       المفضلات       ',
-        onClicked: () {
-          Navigator.of(this.context).push(
-            MaterialPageRoute(
-                builder: (context) => DonationsMap()),//InterstsPage()),
-          );
-        },
-      );
+
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {

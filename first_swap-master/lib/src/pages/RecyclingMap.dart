@@ -3,12 +3,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'coffee_model.dart';
 import 'Center_model.dart';
 
-class DonationsMap extends StatefulWidget {
+class RecyclingMap extends StatefulWidget {
   @override
-  _DonationsMapState createState() => _DonationsMapState();
+  _RecyclingMapState createState() => _RecyclingMapState();
 }
 
-class _DonationsMapState extends State<DonationsMap> {
+class _RecyclingMapState extends State<RecyclingMap> {
 
   @override
 
@@ -29,7 +29,7 @@ class _DonationsMapState extends State<DonationsMap> {
           markerId: MarkerId(element.shopName),
           draggable: false,
           infoWindow:
-              InfoWindow(title: element.shopName, snippet: element.address),
+          InfoWindow(title: element.shopName, snippet: element.address),
           position: element.locationCoords));
     });
     _pageController = PageController(initialPage: 1, viewportFraction: 0.8)
@@ -53,7 +53,7 @@ class _DonationsMapState extends State<DonationsMap> {
           value = (1 - (value.abs() * 0.3) + 0.06).clamp(0.0, 1.0);
         }
 
-        
+
         return Center(
           child: SizedBox(
             height: Curves.easeInOut.transform(value) * 125.0,
@@ -62,7 +62,7 @@ class _DonationsMapState extends State<DonationsMap> {
           ),
         );
       },
-      
+
       child: InkWell(
           onTap: () {
             // moveCamera();
@@ -138,7 +138,7 @@ class _DonationsMapState extends State<DonationsMap> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan[800],
-          title: Text('خريطة الجمعيات الخيريه'),
+          title: Text('خريطة مراكز اعادة التدوير'),
           centerTitle: true,
         ),
         body: Stack(
@@ -185,4 +185,4 @@ class _DonationsMapState extends State<DonationsMap> {
         tilt: 45.0)));
   }
 }
- 
+
