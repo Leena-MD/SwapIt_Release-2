@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'coffee_model.dart';
@@ -67,19 +68,21 @@ class _DonationsMapState extends State<DonationsMap> {
           onTap: () {
             // moveCamera();
           },
-          child: Stack(children: [
+          child: 
+          Stack(children: [
             Center(
-                child: Container(
-                    margin: EdgeInsets.symmetric(
+                child: 
+                Container(
+                    margin: const EdgeInsets.symmetric(
                       horizontal: 10.0,
-                      vertical: 20.0,
+                      vertical: 10.0,
                     ),
-                    height: 125.0,
-                    width: 275.0,
+                    height: 160.0,
+                    width: 300.0,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         boxShadow: [
-                          BoxShadow(
+                          const BoxShadow(
                             color: Colors.black54,
                             offset: Offset(0.0, 4.0),
                             blurRadius: 10.0,
@@ -90,38 +93,54 @@ class _DonationsMapState extends State<DonationsMap> {
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.white),
                         child: Row(children: [
-                          Container(
-                              height: 90.0,
-                              width: 90.0,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10.0),
-                                      topLeft: Radius.circular(10.0)),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          coffeeShops[index].thumbNail),
-                                      fit: BoxFit.cover))),
-                          SizedBox(width: 5.0),
+                          Expanded(
+                            child: Container(
+                                width: 90.0,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10.0),
+                                        topLeft: Radius.circular(10.0)),
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            coffeeShops[index].thumbNail),
+                                        fit: BoxFit.cover))),
+                          ),
+                          const SizedBox(width: 5.0),
                           Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  coffeeShops[index].shopName,
-                                  style: TextStyle(
-                                      fontSize: 12.5,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  coffeeShops[index].address,
-                                  style: TextStyle(
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w600),
+                                Container(
+                                  width: 170.0,
+                                  child: Text(
+                                    coffeeShops[index].shopName,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                                 Container(
                                   width: 170.0,
                                   child: Text(
+                                    coffeeShops[index].address,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.right,
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        fontSize: 10.0,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                Container(
+                                  width: 170.0,
+                                  child: Text(
+
                                     coffeeShops[index].description,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
                                     style: TextStyle(
                                         fontSize: 11.0,
                                         fontWeight: FontWeight.w300),
@@ -138,7 +157,7 @@ class _DonationsMapState extends State<DonationsMap> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan[800],
-          title: Text('خريطة الجمعيات الخيريه'),
+          title: const Text('خريطة الجمعيات الخيريه'),
           centerTitle: true,
         ),
         body: Stack(

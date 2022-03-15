@@ -29,64 +29,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf522-e4ba-4112-9733-49fd7c9c167a" name="Default Changelist" comment="Abeer">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_1_21_1_37_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_1_21_1_37_AM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_1_21_1_38_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_1_21_1_38_AM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_1_21_1_38_AM__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_1_21_1_38_AM__Default_Changelist_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/fluttericon.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/fluttericon.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/models/goods.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/models/goods.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/models/goodsMod.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/models/goodsMod.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/models/product.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/models/product.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/models/request.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/models/request.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/models/requestModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/models/requestModel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/models/user_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/models/user_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/provider/my_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/provider/my_provider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/goodslist/item_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/goodslist/item_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/EditItem.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/EditItem.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Edit_password_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Edit_password_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Forgot_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Forgot_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Intrests_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Intrests_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Menugoods.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Menugoods.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItemCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItemCard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/DonationsMap.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/DonationsMap.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItems.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/MyItems.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Offers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Offers.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Post_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/Post_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/SwapRequest.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/bags.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/bags.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/books_category.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/books_category.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/clothes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/clothes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/computer_category.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/computer_category.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_contact.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_requests.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/details_requests.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/edit_profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/edit_profile_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/gym.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/gym.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/history_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/history_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/house.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/house.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/image_storage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/image_storage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/kids_category.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/kids_category.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/login_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/perfume.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/perfume.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/pet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/pet.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/pick_item_title.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/pick_item_title.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/RecyclingMap.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/RecyclingMap.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/profile_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/register_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/register_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/pages/swap_request.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/pages/swap_request.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/app_outlinebutton.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/app_outlinebutton.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/app_textfield.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/app_textfield.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/appbar_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/appbar_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/bottom_Container.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/bottom_Container.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/button_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/button_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/profile_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/src/widgets/profile_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first_swap-master/lib/themes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/first_swap-master/lib/themes.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_4_XL_API_30]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[ZF6522L9VQ]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -360,50 +318,41 @@
     <option name="LAST_COMMIT_MESSAGE" value="Abeer" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="140" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1637752743054">
+    <state width="1304" height="176" key="GridCell.Tab.0.bottom" timestamp="1647378725065">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="140" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1637752743054" />
-    <state x="466" y="120" key="FileChooserDialogImpl" timestamp="1637967867086">
+    <state width="1304" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1647378725065" />
+    <state width="1304" height="176" key="GridCell.Tab.0.center" timestamp="1647378725065">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="466" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1637967867086" />
-    <state width="651" height="176" key="GridCell.Tab.0.bottom" timestamp="1637851699727">
+    <state width="1304" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1647378725065" />
+    <state width="1304" height="176" key="GridCell.Tab.0.left" timestamp="1647378725065">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="651" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1637851699727" />
-    <state width="651" height="176" key="GridCell.Tab.0.center" timestamp="1637851699727">
+    <state width="1304" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1647378725065" />
+    <state width="1304" height="176" key="GridCell.Tab.0.right" timestamp="1647378725065">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="651" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1637851699727" />
-    <state width="651" height="176" key="GridCell.Tab.0.left" timestamp="1637851699727">
+    <state width="1304" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1647378725065" />
+    <state x="187" y="10" key="SettingsEditor" timestamp="1647285510926">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="651" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1637851699727" />
-    <state width="651" height="176" key="GridCell.Tab.0.right" timestamp="1637851699727">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="651" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1637851699727" />
-    <state x="132" y="57" key="MergeDialog" timestamp="1638301817766">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="132" y="57" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1638301817766" />
-    <state x="324" y="127" key="MultipleFileMergeDialog" timestamp="1638301819044">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="324" y="127" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1638301819044" />
-    <state x="187" y="10" key="SettingsEditor" timestamp="1637752765670">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="187" y="10" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1637752765670" />
-    <state x="278" y="98" key="Vcs.Push.Dialog.v2" timestamp="1638301755846">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="278" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1638301755846" />
-    <state x="522" y="336" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1638307002993">
-      <screen x="0" y="25" width="1440" height="812" />
-    </state>
-    <state x="495" y="279" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1638301316859" />
-    <state x="522" y="336" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1440.812@0.25.1440.812" timestamp="1638307002993" />
+    <state x="187" y="10" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1647285510926" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/first_swap-master/lib/src/pages/DonationsMap.dart</url>
+          <line>149</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/first_swap-master/lib/src/pages/DonationsMap.dart</url>
+          <line>66</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

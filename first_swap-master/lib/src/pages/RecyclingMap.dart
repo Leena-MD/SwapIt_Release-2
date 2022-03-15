@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'coffee_model.dart';
@@ -72,10 +73,10 @@ class _RecyclingMapState extends State<RecyclingMap> {
                 child: Container(
                     margin: EdgeInsets.symmetric(
                       horizontal: 10.0,
-                      vertical: 20.0,
+                      vertical: 10.0,
                     ),
-                    height: 125.0,
-                    width: 275.0,
+                    height: 160.0,
+                    width: 300.0,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         boxShadow: [
@@ -90,38 +91,54 @@ class _RecyclingMapState extends State<RecyclingMap> {
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.white),
                         child: Row(children: [
-                          Container(
-                              height: 90.0,
-                              width: 90.0,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10.0),
-                                      topLeft: Radius.circular(10.0)),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          coffeeShops[index].thumbNail),
-                                      fit: BoxFit.cover))),
+                          Expanded(
+                            child: Container(
+                                
+                                width: 90.0,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10.0),
+                                        topLeft: Radius.circular(10.0)),
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            coffeeShops[index].thumbNail),
+                                        fit: BoxFit.cover))),
+                          ),
                           SizedBox(width: 5.0),
                           Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  coffeeShops[index].shopName,
-                                  style: TextStyle(
-                                      fontSize: 12.5,
-                                      fontWeight: FontWeight.bold),
+                                Container(
+                                  width: 170.0,
+                                  child: Text(
+                                    coffeeShops[index].shopName,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                                Text(
-                                  coffeeShops[index].address,
-                                  style: TextStyle(
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w600),
+                                Container(
+                                  width: 170,
+                                  child: Text(
+                                    coffeeShops[index].address,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                        fontSize: 11.0,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                                 Container(
                                   width: 170.0,
                                   child: Text(
                                     coffeeShops[index].description,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
                                     style: TextStyle(
                                         fontSize: 11.0,
                                         fontWeight: FontWeight.w300),

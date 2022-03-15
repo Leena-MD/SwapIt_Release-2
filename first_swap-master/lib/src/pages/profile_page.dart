@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'DonationsMap.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
-import 'current user.dart';
 import 'login_page.dart';
 import 'edit_profile_page.dart';
 import 'Intrests_page.dart';
