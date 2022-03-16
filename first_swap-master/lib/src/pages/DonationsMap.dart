@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'coffee_model.dart';
 import 'Center_model.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
 class DonationsMap extends StatefulWidget {
   @override
@@ -12,19 +14,66 @@ class DonationsMap extends StatefulWidget {
 class _DonationsMapState extends State<DonationsMap> {
 
   @override
+  GoogleMapController? _controller1;
 
   late GoogleMapController _controller;
 
   List<Marker> allMarkers = [];
+   Location currentLocation = Location();
+
 
   late PageController _pageController;
 
+  late BitmapDescriptor mapMarker;
+
+
   late int prevPage;
+  void iniState(){
+    super.initState();
+    setCustMarker();
+  }
+void setCustMarker() async {
+
+mapMarker = await BitmapDescriptor.fromAssetImage(
+  ImageConfiguration(), 'assets\googlemapbluedo.png');
+}
+
+    void getLocation() async{
+    var location = await currentLocation.getLocation();
+    currentLocation.onLocationChanged.listen((LocationData loc){
+ 
+      _controller1?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
+        target: LatLng(loc.latitude ?? 0.0,loc.longitude?? 0.0),
+        zoom: 12.0,
+      )));
+      print(loc.latitude);
+      print(loc.longitude);
+      setCustMarker();
+      setState(() {
+
+        setCustMarker();
+
+
+
+        allMarkers.add(
+          Marker(markerId: MarkerId('Home'),
+       // icon: mapMarker, مايشتغل اذا حطيته فيه مشكله
+          infoWindow:
+               InfoWindow(title: "موقعك الحالي",snippet: "     "),
+
+            position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
+            //icon: mapMarker
+        ));
+      });
+       });
+  }
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+      setCustMarker();
     centers.forEach((element) {
       allMarkers.add(Marker(
           markerId: MarkerId(element.shopName),
@@ -148,7 +197,9 @@ class _DonationsMapState extends State<DonationsMap> {
                                 )
                               ])
                         ]))))
-          ])),
+          ]
+          )
+          ),
     );
   }
 
@@ -187,7 +238,18 @@ class _DonationsMapState extends State<DonationsMap> {
               ),
             )
           ],
-        ));
+        )
+                , floatingActionButton: 
+        FloatingActionButton(
+        child: Icon(Icons.location_searching,color: Colors.white,),
+
+        onPressed: (){
+          getLocation();
+        },
+      ),
+                          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
+        );
   }
 
   void mapCreated(controller) {
