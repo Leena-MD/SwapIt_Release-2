@@ -23,10 +23,13 @@ class _DonationsMapState extends State<DonationsMap> {
 
   late PageController _pageController;
 
+  @override
+
   late BitmapDescriptor mapMarker;
 
 
   late int prevPage;
+  @override
   void iniState(){
     super.initState();
     setCustMarker();
@@ -34,7 +37,7 @@ class _DonationsMapState extends State<DonationsMap> {
 void setCustMarker() async {
 
 mapMarker = await BitmapDescriptor.fromAssetImage(
-  ImageConfiguration(), 'assets\googlemapbluedo.png');
+    ImageConfiguration(), 'assets/googlemapbluedo.png');
 }
 
     void getLocation() async{
@@ -56,12 +59,12 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
 
         allMarkers.add(
           Marker(markerId: MarkerId('Home'),
-       // icon: mapMarker, مايشتغل اذا حطيته فيه مشكله
+
           infoWindow:
                InfoWindow(title: "موقعك الحالي",snippet: "     "),
 
             position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
-            //icon: mapMarker
+            icon: mapMarker
         ));
       });
        });
@@ -267,4 +270,3 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
   }
 }
  
-
