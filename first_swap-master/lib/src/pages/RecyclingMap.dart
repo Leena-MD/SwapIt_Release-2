@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
-import 'coffee_model.dart';
 import 'Center_model.dart';
+import 'package:location/location.dart';
 
 class RecyclingMap extends StatefulWidget {
   @override
@@ -20,27 +19,26 @@ class _RecyclingMapState extends State<RecyclingMap> {
   List<Marker> allMarkers = [];
 
   late PageController _pageController;
-   Location currentLocation = Location();
+  Location currentLocation = Location();
 
   late int prevPage;
-    late BitmapDescriptor mapMarker;
+  late BitmapDescriptor mapMarker;
 
-
-    @override
+  @override
   void iniState(){
     super.initState();
     setCustMarker();
   }
-void setCustMarker() async {
+  void setCustMarker() async {
 
-mapMarker = await BitmapDescriptor.fromAssetImage(
-  ImageConfiguration(), 'assets/googlemapbluedo.png');
-}
+    mapMarker = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(), 'assets/googlemapbluedo.png');
+  }
 
-    void getLocation() async{
+  void getLocation() async{
     var location = await currentLocation.getLocation();
     currentLocation.onLocationChanged.listen((LocationData loc){
- 
+
       _controller1?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
         target: LatLng(loc.latitude ?? 0.0,loc.longitude?? 0.0),
         zoom: 12.0,
@@ -55,15 +53,15 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
 
 
         allMarkers.add(
-          Marker(markerId: MarkerId('Home'),
-          infoWindow:
-               InfoWindow(title: "موقعك الحالي",snippet: "     "),
+            Marker(markerId: MarkerId('Home'),
+                infoWindow:
+                InfoWindow(title: "موقعك الحالي",snippet: "     "),
 
-            position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
-            icon: mapMarker
-        ));
+                position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
+                icon: mapMarker
+            ));
       });
-       });
+    });
   }
 
 
@@ -71,12 +69,12 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
   void initState() {
     // TODO: implement initState
     super.initState();
-    centers.forEach((element) {
+    Rcenters.forEach((element) {
       allMarkers.add(Marker(
-          markerId: MarkerId(element.shopName),
+          markerId: MarkerId(element.centerName),
           draggable: false,
           infoWindow:
-          InfoWindow(title: element.shopName, snippet: element.address),
+          InfoWindow(title: element.centerName, snippet: element.address),
           position: element.locationCoords));
     });
     _pageController = PageController(initialPage: 1, viewportFraction: 0.8)
@@ -90,7 +88,7 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
     }
   }
 
-  _coffeeShopList(index) {
+  _RcentersList(index) {
     return AnimatedBuilder(
       animation: _pageController,
       builder: (BuildContext context, Widget? widget){
@@ -139,7 +137,7 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                         child: Row(children: [
                           Expanded(
                             child: Container(
-                                
+
                                 width: 90.0,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(
@@ -147,8 +145,8 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                                         topLeft: Radius.circular(10.0)),
                                     image: DecorationImage(
                                         image: NetworkImage(
-                                            coffeeShops[index].thumbNail),
-                                        fit: BoxFit.cover))),
+                                            Rcenters[index].thumbNail),
+                                        fit: BoxFit.fill))),
                           ),
                           SizedBox(width: 5.0),
                           Column(
@@ -158,9 +156,9 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                                 Container(
                                   width: 170.0,
                                   child: Text(
-                                    coffeeShops[index].shopName,
+                                    Rcenters[index].centerName,
                                     overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
+                                    maxLines: 2,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 12.0,
@@ -170,10 +168,10 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                                 Container(
                                   width: 170,
                                   child: Text(
-                                    coffeeShops[index].address,
+                                    Rcenters[index].address,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
-                                    textAlign: TextAlign.right,
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 11.0,
                                         fontWeight: FontWeight.w500),
@@ -182,8 +180,9 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                                 Container(
                                   width: 170.0,
                                   child: Text(
-                                    coffeeShops[index].description,
+                                    Rcenters[index].description,
                                     overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
                                     maxLines: 2,
                                     style: TextStyle(
                                         fontSize: 11.0,
@@ -223,26 +222,15 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                 width: MediaQuery.of(context).size.width,
                 child: PageView.builder(
                   controller: _pageController,
-                  itemCount: coffeeShops.length,
+                  itemCount: Rcenters.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return _coffeeShopList(index);
+                    return _RcentersList(index);
                   },
                 ),
               ),
             )
           ],
-        )
-             , floatingActionButton: 
-        FloatingActionButton(
-        child: Icon(Icons.location_searching,color: Colors.white,),
-
-        onPressed: (){
-          getLocation();
-        },
-      ),
-                          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        
-        );
+        ));
   }
 
   void mapCreated(controller) {
@@ -253,7 +241,7 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
 
   moveCamera() {
     _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: coffeeShops[_pageController.page!.toInt()].locationCoords,
+        target: Rcenters[_pageController.page!.toInt()].locationCoords,
         zoom: 14.0,
         bearing: 45.0,
         tilt: 45.0)));
