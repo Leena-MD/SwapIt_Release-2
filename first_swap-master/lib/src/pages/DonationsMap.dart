@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'coffee_model.dart';
 import 'Center_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -28,8 +27,6 @@ class _DonationsMapState extends State<DonationsMap> {
 
 
   late int prevPage;
-
-    @override
   void iniState(){
     super.initState();
     setCustMarker();
@@ -37,7 +34,7 @@ class _DonationsMapState extends State<DonationsMap> {
 void setCustMarker() async {
 
 mapMarker = await BitmapDescriptor.fromAssetImage(
-  ImageConfiguration(), 'assets/googlemapbluedo.png');
+  ImageConfiguration(), 'assets\googlemapbluedo.png');
 }
 
     void getLocation() async{
@@ -59,11 +56,12 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
 
         allMarkers.add(
           Marker(markerId: MarkerId('Home'),
+       // icon: mapMarker, مايشتغل اذا حطيته فيه مشكله
           infoWindow:
                InfoWindow(title: "موقعك الحالي",snippet: "     "),
 
             position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
-            icon: mapMarker
+            //icon: mapMarker
         ));
       });
        });
@@ -75,12 +73,12 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
     // TODO: implement initState
     super.initState();
       setCustMarker();
-    centers.forEach((element) {
+    Dcenters.forEach((element) {
       allMarkers.add(Marker(
-          markerId: MarkerId(element.shopName),
+          markerId: MarkerId(element.centerName),
           draggable: false,
           infoWindow:
-              InfoWindow(title: element.shopName, snippet: element.address),
+              InfoWindow(title: element.centerName, snippet: element.address),
           position: element.locationCoords));
     });
     _pageController = PageController(initialPage: 1, viewportFraction: 0.8)
@@ -94,7 +92,7 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
     }
   }
 
-  _coffeeShopList(index) {
+  _DcentersList(index) {
     return AnimatedBuilder(
       animation: _pageController,
       builder: (BuildContext context, Widget? widget){
@@ -146,14 +144,15 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                           Expanded(
                             child: Container(
                                 width: 90.0,
+                                height: 160.0,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(10.0),
                                         topLeft: Radius.circular(10.0)),
                                     image: DecorationImage(
                                         image: NetworkImage(
-                                            coffeeShops[index].thumbNail),
-                                        fit: BoxFit.cover))),
+                                            Dcenters[index].thumbNail),
+                                        fit: BoxFit.fill))),
                           ),
                           const SizedBox(width: 5.0),
                           Column(
@@ -163,7 +162,7 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                                 Container(
                                   width: 170.0,
                                   child: Text(
-                                    coffeeShops[index].shopName,
+                                    Dcenters[index].centerName,
                                     overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
@@ -175,21 +174,21 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                                 Container(
                                   width: 170.0,
                                   child: Text(
-                                    coffeeShops[index].address,
+                                    Dcenters[index].address,
                                     overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.right,
+                                    textAlign: TextAlign.center,
                                     maxLines: 2,
                                     style: TextStyle(
-                                        fontSize: 10.0,
+                                        fontSize: 10.5,
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
                                 Container(
                                   width: 170.0,
                                   child: Text(
-
-                                    coffeeShops[index].description,
+                                    Dcenters[index].description,
                                     overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
                                     maxLines: 2,
                                     style: TextStyle(
                                         fontSize: 11.0,
@@ -231,9 +230,9 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                 width: MediaQuery.of(context).size.width,
                 child: PageView.builder(
                   controller: _pageController,
-                  itemCount: coffeeShops.length,
+                  itemCount: Dcenters.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return _coffeeShopList(index);
+                    return _DcentersList(index);
                   },
                 ),
               ),
@@ -261,10 +260,11 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
 
   moveCamera() {
     _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: coffeeShops[_pageController.page!.toInt()].locationCoords,
+        target: Dcenters[_pageController.page!.toInt()].locationCoords,
         zoom: 14.0,
         bearing: 45.0,
         tilt: 45.0)));
   }
 }
  
+
