@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csv/csv.dart';
 import 'package:first_swap/constants.dart';
 import 'package:first_swap/models/product.dart';
 import 'package:first_swap/push_notification.dart';
@@ -44,6 +48,10 @@ class DetailRequest extends StatefulWidget {
   @override
   _DetailRequestState createState() => _DetailRequestState();
 }
+
+List<String> csvList = [];
+List csvFileContentList = [];
+List CsvModuleList = [];
 
 final db = FirebaseFirestore.instance;
 
@@ -316,6 +324,7 @@ class _DetailRequestState extends State<DetailRequest> {
     String goodsId = widget.IDgoods;
     String receivergoodsId = "";
     String ownerGoods = "";
+    String Categorty = "";
 
     var status = "done";
 
@@ -328,6 +337,7 @@ class _DetailRequestState extends State<DetailRequest> {
         .then((ds) {
       receivergoodsId = ds.data()!['receiver goods'];
       ownerGoods = ds.data()!['owner'];
+      Categorty = ds.data()!['cate'];
     });
     await FirebaseFirestore.instance
         .collection('goods')
@@ -377,6 +387,26 @@ class _DetailRequestState extends State<DetailRequest> {
             IDgoods: widget.IDgoods,
           ),
         ));
+    List<List<dynamic>> csvList = [];
+
+    /// Write to a file
+
+    File file = await File(
+        "/Users/jojoalogla/Downloads/swap it-2/SwapIt_Sprint3/first_swap-master/assets/data.csv");
+    final input = file.openRead();
+    final fields = await input
+        .transform(utf8.decoder)
+        .transform(new CsvToListConverter())
+        .toList();
+    csvList = fields;
+    List data = [ownerGoods, receivergoodsId, Categorty];
+    csvList.add(data);
+
+    var csv = const ListToCsvConverter().convert(csvList);
+
+    file.writeAsString(csv);
+
+    print("csv done");
   }
 //to reject the swapping
 
@@ -463,5 +493,45 @@ class _DetailRequestState extends State<DetailRequest> {
         );
       },
     );
+  }
+}
+
+class CsvModule {
+  final String field1;
+  final String field2;
+  final String field3;
+  CsvModule({
+    this.field1 = '',
+    this.field2 = '',
+    this.field3 = '',
+  });
+
+  // List to class Module
+  CsvModule.fromList(List items)
+      : this(
+            field1: items[0].trim(),
+            field2: items[1].trim(),
+            field3: items[3].trim());
+
+  // Convert Data to JSON
+  Map toJson() {
+    return {
+      'receiverID': field1,
+      'interested goods ID': field2,
+      'cate': field3
+    };
+  }
+
+  // Convert Data to list
+  List toList() {
+    return [field1, field2, field3];
+  }
+
+  // JSON to class Module
+  factory CsvModule.fromData(Map data) {
+    return CsvModule(
+        field1: data['receiverID'],
+        field2: data['interested goods ID'],
+        field3: data['cate']);
   }
 }

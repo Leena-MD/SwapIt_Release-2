@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:first_swap/provider/my_provider.dart';
+import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
@@ -159,9 +162,27 @@ class _LoginPageState extends State<LoginPage> {
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
-          onPressed: () {
+          onPressed: () async {
             //signIn function
             LogIn(email1cont.text, pass1cont.text);
+            //  User? user = _auth.currentUser;
+            //  final uid = user!.uid;
+
+            //  const url = 'http://127.0.0.1:5000/name';
+
+            //sending a post request to the url
+            //  final response =
+            //      await http.post(Uri.parse(url), body: json.encode({'name': uid}));
+            //  final response2 = await http.get(Uri.parse(url));
+
+            //converting the fetched data from json to key value pair that can be displayed on the screen
+            // final decoded = json.decode(response2.body) as Map<String, dynamic>;
+
+            //changing the UI be reassigning the fetched data to final response
+            //setState(() {
+            //  final_response = decoded['name'];
+            // });
+            // print(final_response + "-" + final_response);
           },
           child: Text(
             "تسجيل الدخول",
@@ -247,38 +268,37 @@ class _LoginPageState extends State<LoginPage> {
   void LogIn(String email, String password) async {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
-var h="";
+    var h = "";
     if (_formkey.currentState!.validate()) {
       try {
-        bool pp=false;
+        bool pp = false;
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) async => {
-          await FirebaseFirestore.instance
-              .collection('users')
-              .doc(FirebaseAuth.instance.currentUser!.uid)
-              .get()
-              .then((ds) {
-            pp= ds.data()!['Blacklist'];}),
-          if(pp==true){
-            Fluttertoast.showToast(msg: " لقد تم حظر حسابك "),
-          }
-
-               else if (uid.user!.emailVerified == true)
+                  await FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .get()
+                      .then((ds) {
+                    pp = ds.data()!['Blacklist'];
+                  }),
+                  if (pp == true)
                     {
-
-
-
+                      Fluttertoast.showToast(msg: " لقد تم حظر حسابك "),
+                    }
+                  else if (uid.user!.emailVerified == true)
+                    {
                       user?.reload(),
-                     Fluttertoast.showToast(msg: "تم تسجيل الدخول بنجاح"),
-                      if (email == "swap.gp05@gmail.com"){
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => AdminProfilePage())),
-                      }
+                      Fluttertoast.showToast(msg: "تم تسجيل الدخول بنجاح"),
+                      if (email == "swap.gp05@gmail.com")
+                        {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => AdminProfilePage())),
+                        }
                       else
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => HomePage())),
-
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomePage())),
                     }
                   else
                     {
