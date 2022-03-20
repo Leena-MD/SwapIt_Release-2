@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'package:first_swap/src/pages/Search.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:first_swap/src/pages/Offers.dart';
 import 'package:first_swap/src/pages/Post_page.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +9,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/src/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
-import 'DonationsMap.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
 import 'login_page.dart';
@@ -22,7 +25,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
-
   //  final collRef = FirebaseFirestore.instance.collection('users');
 
   String Email = '';
@@ -33,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
   String userR = "";
 
   final FirebaseAuth auth = FirebaseAuth.instance;
-  void inputData() {
+  Future<void> inputData() async {
     final User? user = auth.currentUser;
     final uid = user!.uid;
   }
@@ -177,7 +179,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         const SizedBox(height: 20),
-
         const SizedBox(height: 20),
         Center(child: buildUpgradeButton()),
         const SizedBox(height: 20),
@@ -222,8 +223,6 @@ class _ProfilePageState extends State<ProfilePage> {
           )),
     );
   }
-
-
 }
 
 class CustomBottomNavigationBar extends StatefulWidget {
