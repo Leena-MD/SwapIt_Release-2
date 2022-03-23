@@ -230,7 +230,17 @@ class _RecyclingMapState extends State<RecyclingMap> {
               ),
             )
           ],
-        ));
+        ),
+        floatingActionButton: 
+        FloatingActionButton(
+        child: Icon(Icons.location_searching,color: Colors.white,),
+
+        onPressed: (){
+          getLocation();
+        },
+      ),
+                          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+                          );
   }
 
   void mapCreated(controller) {
