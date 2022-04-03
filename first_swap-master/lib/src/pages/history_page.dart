@@ -125,8 +125,7 @@ class _History extends State<History> {
 
                             setState(() {});
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => Offers()));
+                                MaterialPageRoute(builder: (context) => Offers()));
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
@@ -163,8 +162,7 @@ class _History extends State<History> {
 
                             setState(() {});
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => History()));
+                                MaterialPageRoute(builder: (context) => History()));
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
@@ -200,8 +198,7 @@ class _History extends State<History> {
 
                             setState(() {});
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => waiting()));
+                                MaterialPageRoute(builder: (context) => waiting()));
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
@@ -374,20 +371,21 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         setState(() {
           _selectedIndex = index;
           if (_selectedIndex == 0)
-            Navigator.push(this.context,
+            Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => HomePage()));
+
           if (_selectedIndex == 1)
-            Navigator.push(this.context,
-                MaterialPageRoute(builder: (context) => MyItems()));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) =>MyItems()));
           if (_selectedIndex == 2)
-            Navigator.push(this.context,
-                MaterialPageRoute(builder: (context) => PostPage()));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) =>PostPage()));
 
           if (_selectedIndex == 3)
-            Navigator.push(this.context,
+            Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => Offers()));
           if (_selectedIndex == 4)
-            Navigator.push(this.context,
+            Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => ProfilePage()));
         });
       },
