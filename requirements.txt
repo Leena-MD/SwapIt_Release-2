@@ -1,0 +1,14 @@
+click==8.1.2
+Flask==2.1.1
+gunicorn==20.1.0
+importlib-metadata==4.11.3
+imutils==0.5.4
+itsdangerous==2.1.2
+Jinja2==3.1.1
+MarkupSafe==2.1.1
+numpy==1.21.1
+opencv-contrib-python==3.4.11.45
+opencv-python==3.4.11.39
+TBB==0.2
+Werkzeug==2.1.1
+zipp==3.8.0

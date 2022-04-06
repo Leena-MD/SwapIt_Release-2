@@ -38,7 +38,7 @@ def nameRoute():
         response = f'Hi {name}! this is Python{respo}'
         print(response) 
         print(name)
-        CSvFilePath="/Users/jojoalogla/Downloads/Recommender/data.csv"
+        CSvFilePath="first_swap-master/assets/data.csv"
         a=Recommendation(CSvFilePath, name)
         ##Recommendation(CSvFilePath, name)
         
@@ -58,7 +58,7 @@ def nameRoute():
    
     
 #file.close()
-CSvFilePath="/Users/jojoalogla/Downloads/swap it-2/SwapIt_Sprint3/first_swap-master/assets/data.csv"
+CSvFilePath="first_swap-master/assets/data.csv"
 jsonFilePath = 'driver2.json'
 # read cv file and add to data
 data = {}
@@ -161,7 +161,7 @@ def Recommendation(fileName, userID):
     #print(recommendations)
     
     # Storing Categories recommended for each customer
-    recommendations.to_csv("/Users/jojoalogla/Downloads/swap it-2/SwapIt_Sprint3/first_swap-master/assets/Categories.csv")
+    recommendations.to_csv("first_swap-master/assets/Categories.csv")
     
     #------------------ User Based Recommendation -------------------------
     #-------------------------   Part 2 ------------------------------------
@@ -250,7 +250,7 @@ def Recommendation(fileName, userID):
     colN = list(['Similar Users'])
     simData=pd.DataFrame(S,columns=colN)
     # Storing recommended Users for cusrrent userID
-    simData.to_csv("/Users/jojoalogla/Downloads/swap it-2/SwapIt_Sprint3/first_swap-master/assets/SimilarUsers.csv")
+    simData.to_csv("first_swap-master/assets/SimilarUsers.csv")
 
     
 if __name__=="__main__":
