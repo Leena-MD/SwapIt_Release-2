@@ -57,27 +57,6 @@ def nameRoute():
     global response
    
     
-#file.close()
-CSvFilePath=https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint3/master/first_swap-master/assets/data.csv"
-jsonFilePath = 'driver2.json'
-# read cv file and add to data
-data = {}
-with open(CSvFilePath) as csvFile:
- CSvReader = csv.DictReader(csvFile)
- for rows in CSvReader:
-  id = rows ['cate']
-  data[id] = rows
-# create new json file and write data on it
-with open (jsonFilePath,'w') as jsonFile:
-# make it more readable and pretty
-    jsonFile.write(json.dumps(data, indent=4))
-    print(json.dumps(data, indent=4))
-
-
-        
-        #sending data back to your frontend app
-#""" @author: Almathami. Y """
-
 def Recommendation(fileName, userID):
     
     print("RECO IS HERE")
