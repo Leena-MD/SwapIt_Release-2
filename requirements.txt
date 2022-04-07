@@ -10,6 +10,5 @@ numpy==1.21.1
 opencv-contrib-python==4.5.5.64
 opencv-python==4.5.5.64
 opencv-python-headless==4.5.5.64
-tbb==2021.5.0
 Werkzeug==2.1.1
 zipp==3.8.0
