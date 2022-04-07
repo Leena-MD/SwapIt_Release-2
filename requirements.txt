@@ -8,6 +8,5 @@ Jinja2==3.1.1
 MarkupSafe==2.1.1
 numpy==1.21.1
 opencv-python-headless==4.5.5.64
-TBB==0.2
 Werkzeug==2.1.1
 zipp==3.8.0
