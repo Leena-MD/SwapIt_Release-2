@@ -38,7 +38,7 @@ def nameRoute():
         response = f'Hi {name}! this is Python{respo}'
         print(response) 
         print(name)
-        CSvFilePath=pd.read_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint3/master/first_swap-master/assets/data.csv",sep=",")
+        CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint3/master/first_swap-master/assets/data.csv"
         a=Recommendation(CSvFilePath, name)
         ##Recommendation(CSvFilePath, name)
         
@@ -58,7 +58,7 @@ def nameRoute():
    
     
 #file.close()
-CSvFilePath=pd.read_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint3/master/first_swap-master/assets/data.csv",sep=",")
+CSvFilePath=https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint3/master/first_swap-master/assets/data.csv"
 jsonFilePath = 'driver2.json'
 # read cv file and add to data
 data = {}
