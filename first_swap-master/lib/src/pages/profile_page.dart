@@ -17,6 +17,8 @@ import 'Intrests_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Post_page.dart';
+import 'package:flutter_restart/flutter_restart.dart';
+
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -199,8 +201,9 @@ class _ProfilePageState extends State<ProfilePage> {
     return InkWell(
       onTap: () {
         FirebaseAuth.instance.signOut();
-        Navigator.push(
-            this.context, MaterialPageRoute(builder: (context) => LoginPage()));
+         FlutterRestart.restartApp();
+        // Navigator.push(
+        //     this.context, MaterialPageRoute(builder: (context) => LoginPage()));
       },
       child: Container(
           color: Colors.cyan[800],

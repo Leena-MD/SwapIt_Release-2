@@ -192,7 +192,11 @@ class _LoginPageState extends State<LoginPage> {
           )),
     );
 
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        print("back button pressed");
+        return false;}
+      ,child: Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: SingleChildScrollView(
@@ -261,7 +265,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-    );
+     ) );
   }
 
   //login funaction that will validate and navigate to next page
