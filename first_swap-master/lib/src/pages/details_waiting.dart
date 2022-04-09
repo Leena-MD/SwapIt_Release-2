@@ -13,6 +13,7 @@ import 'package:first_swap/src/pages/pet.dart';
 import 'package:first_swap/src/pages/waiting.dart';
 import 'package:flutter/material.dart';
 import 'package:first_swap/provider/my_provider.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'Offers.dart';
@@ -45,6 +46,9 @@ class _Detailwaiting extends State<Detailwaiting> {
   int quantity = 1;
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     MyProvider provider = Provider.of<MyProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -68,20 +72,62 @@ class _Detailwaiting extends State<Detailwaiting> {
           child: Column(
             children: [
               Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(kDefaultPaddin),
-                  // For  demo we use fixed height  and width
-                  // Now we dont need them
-                  // height: 180,
-                  // width: 160,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Hero(
-                    tag: "${widget.name}",
-                    child: Image.network(widget.image),
-                  ),
-                ),
+                child: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Column(children: [
+                            Image.network(widget.image,
+                                width: 300,
+                                height: 300,
+                                fit: BoxFit.cover),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              widget.name,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.blueGrey[900],
+                              ),
+                            ),
+
+                          ]),
+                          actions: <Widget>[
+
+
+                            SizedBox(
+                              width: 50,
+                            ),
+
+                            SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: Container(
+                    child: Hero(
+                      tag: "${widget.name}",
+                      child: Image.network(widget.image),
+
+                    ),
+                    padding: EdgeInsets.all(kDefaultPaddin),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+
+                    ),
+
+
+
+
+
+                  ),),
+
               ),
               SizedBox(height: 10),
               Expanded(

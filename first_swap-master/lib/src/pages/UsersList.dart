@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/src/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'AdminHomePage.dart';
 
 import 'AdminProfile_page.dart';
@@ -57,6 +58,9 @@ class _UsersListState extends State<UsersList> {
       });
   }
     Widget build(BuildContext context) {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+      ));
     
     return MaterialApp(
     

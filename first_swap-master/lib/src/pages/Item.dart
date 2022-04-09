@@ -1,5 +1,6 @@
 import 'package:first_swap/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Item extends StatefulWidget {
   final Product product;
@@ -18,6 +19,9 @@ class _ItemState extends State<Item> {
   bool _isSelected = false;
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     return GestureDetector(
       onTap: () {
         setState(() {

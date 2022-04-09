@@ -9,6 +9,7 @@ import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:first_swap/src/pages/waiting.dart';
 import 'package:first_swap/src/widgets/bottom_Container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'Post_page.dart';
 import 'Home_page.dart';
@@ -216,8 +217,7 @@ class _Offers extends State<Offers> {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: Colors.cyan[800],
-              title: Center(
-                  child: Text("الطلبات", style: TextStyle(fontSize: 20))),
+              title: Center(child: Text("الطلبات", style: TextStyle(fontSize: 20))),
             ),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -306,6 +306,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     List<Widget> _navBarItemList = [];
 
     for (var i = 0; i < _iconList.length; i++) {

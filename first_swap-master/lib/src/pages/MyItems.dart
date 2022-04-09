@@ -2,6 +2,7 @@
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:first_swap/src/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'DonationsMap.dart';
 import 'EditItem.dart';
@@ -31,6 +32,9 @@ class _MyItems extends State<MyItems> {
    bool btn=true;
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
 
     return SafeArea(
 

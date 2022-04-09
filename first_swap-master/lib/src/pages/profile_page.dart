@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:first_swap/src/pages/Search.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_restart/flutter_restart.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:first_swap/src/pages/Offers.dart';
@@ -17,7 +19,7 @@ import 'Intrests_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Post_page.dart';
-import 'package:flutter_restart/flutter_restart.dart';
+
 
 
 class ProfilePage extends StatefulWidget {
@@ -62,6 +64,9 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     return SafeArea(
       //  home: Scaffold(
 
@@ -258,6 +263,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     List<Widget> _navBarItemList = [];
 
     for (var i = 0; i < _iconList.length; i++) {

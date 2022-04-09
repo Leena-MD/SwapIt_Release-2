@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:first_swap/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:first_swap/src/widgets/appbar_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,6 +37,9 @@ class _EditProfilePageState  extends State<EditProfilePage>  {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
 
 
 

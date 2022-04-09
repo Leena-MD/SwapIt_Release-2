@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:first_swap/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,6 +40,9 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     var errorMsg = "";
     //password field and validation القديم
     final passwordFieldPlace = TextFormField(

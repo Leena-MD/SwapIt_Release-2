@@ -37,7 +37,7 @@ import 'clothes.dart';
 import 'gym.dart';
 import 'bags.dart';
 import 'pet.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show SystemChrome, SystemUiOverlayStyle, rootBundle;
 
 import 'package:csv/csv.dart';
 
@@ -875,6 +875,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     List<Widget> _navBarItemList = [];
 
     for (var i = 0; i < _iconList.length; i++) {

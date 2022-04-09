@@ -7,6 +7,7 @@ import 'package:first_swap/fluttericon.dart';
 import 'package:first_swap/src/widgets/app_outlinebutton.dart';
 import 'package:first_swap/src/widgets/app_textfield.dart';
 import 'package:first_swap/themes.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 TextEditingController forgetmailcont = new TextEditingController();
@@ -24,6 +25,9 @@ class forgetp extends StatefulWidget {
 class _forgetpState extends State<forgetp> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     return Container();
   }
 }

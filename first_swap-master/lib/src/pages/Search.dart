@@ -19,6 +19,7 @@ import 'package:first_swap/fluttericon.dart';
 import 'package:first_swap/src/widgets/app_outlinebutton.dart';
 import 'package:first_swap/src/widgets/app_textfield.dart';
 import 'package:first_swap/themes.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'Intrests_page.dart';
 import 'Post_page.dart';
@@ -54,6 +55,9 @@ class _searchPage extends State<searchPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
 
     return MaterialApp(
       title:'jdjc',

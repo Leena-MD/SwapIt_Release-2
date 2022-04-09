@@ -11,6 +11,7 @@ import 'package:first_swap/src/pages/Offers.dart';
 import 'package:first_swap/src/pages/profile_page.dart';
 import 'package:first_swap/src/widgets/bottom_Container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'Post_page.dart';
@@ -66,6 +67,9 @@ class _swapRequest extends State<swapRequest> {
 
   // ignore: annotate_overrides
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     MyProvider provider = Provider.of<MyProvider>(context);
 
     provider.getMyGoods();

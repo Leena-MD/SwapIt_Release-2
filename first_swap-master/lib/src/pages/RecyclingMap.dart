@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'Center_model.dart';
 import 'package:location/location.dart';
@@ -197,6 +198,9 @@ class _RecyclingMapState extends State<RecyclingMap> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan[800],

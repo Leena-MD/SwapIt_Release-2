@@ -78,6 +78,9 @@ class _EditItem extends State<EditItem> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     var studentNumberController;
     var validateStudentNumber;
     var studentEmailController;

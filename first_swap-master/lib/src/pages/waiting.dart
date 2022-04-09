@@ -15,6 +15,7 @@ import 'MyItems.dart';
 import 'details_page.dart';
 import 'details_requests.dart';
 import 'history_page.dart';
+import 'package:flutter/services.dart';
 final firebaseUser =  FirebaseAuth.instance.currentUser;
 String userid= firebaseUser!.uid;
   
@@ -208,7 +209,9 @@ late int index;
 
   {
 
-
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
 
     MyProvider provider = Provider.of<MyProvider>(context);
 
@@ -248,52 +251,8 @@ late int index;
             appBar: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: Colors.cyan[800],
-              title: Center(
-                  child: Text("قائمة الانتظار",
-                      style: TextStyle(fontSize: 20))),
-              // bottom: TabBar(
-              //   controller: _controller,
-              //   tabs: [
-              //     Tab(text: category1),
-              //     Tab(text: category2),
-              //     Tab(text: category3),
-              //
-              //   ],
-              //
-              //
-              // ),
+              title: Center(child: Text("قائمة الانتظار", style: TextStyle(fontSize: 20))),
 
-              // leading: FlatButton(
-              //
-              //   onPressed: () {
-              //
-              //     Navigator.push(this.context,
-              //         MaterialPageRoute(builder: (context) => History()));
-              //
-              //   },
-              //   padding: const EdgeInsets.symmetric(horizontal: 6),
-              //   shape: RoundedRectangleBorder(
-              //     borderRadius: new BorderRadius.circular(18.0),),
-              //
-              //
-              //   child: Column(
-              //
-              //     children: <Widget>[
-              //       Icon(Icons.archive , color: Colors.white,size: 30,),
-              //
-              //       Text("الأرشيف", style: TextStyle(color: Colors.white,fontSize: 15)),
-              //
-              //
-              //
-              //
-              //     ],
-              //   ),
-              //
-              //
-              //
-              //
-              //
-              // ),
             ),
             body:
 

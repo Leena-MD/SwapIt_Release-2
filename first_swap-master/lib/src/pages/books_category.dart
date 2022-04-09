@@ -10,6 +10,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:first_swap/models/goods.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:first_swap/provider/my_provider.dart';
 import 'bags.dart';
@@ -385,6 +386,9 @@ class _BooksCat extends State<BooksCat> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     MyProvider provider = Provider.of<MyProvider>(context);
     // 1st
     provider.getBookCategory();

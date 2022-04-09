@@ -1,5 +1,7 @@
 import 'dart:async';
-
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/constants.dart';
@@ -18,6 +20,7 @@ import 'package:first_swap/provider/my_provider.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'books_category.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class DetailPage extends StatefulWidget {
   final String image;
@@ -56,6 +59,9 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
+    ));
     MyProvider provider = Provider.of<MyProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -121,19 +127,70 @@ class _DetailPageState extends State<DetailPage> {
           child: Column(
             children: [
               Expanded(
+                child: GestureDetector(
+                  onTap: () {
+        showDialog(
+        context: context,
+        builder: (BuildContext context) {
+        return AlertDialog(
+        title: Column(children: [
+        Image.network(widget.image,
+        width: 300,
+        height: 300,
+        fit: BoxFit.cover),
+        SizedBox(
+        height: 10,
+        ),
+        Text(
+          widget.name,
+        style: TextStyle(
+        fontSize: 20,
+        color: Colors.blueGrey[900],
+        ),
+        ),
+
+        ]),
+        actions: <Widget>[
+
+
+        SizedBox(
+        width: 50,
+        ),
+
+        SizedBox(
+        width: 10,
+        ),
+        ],
+        );
+        },
+        );
+        },
                 child: Container(
-                  padding: EdgeInsets.all(kDefaultPaddin),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
                   child: Hero(
                     tag: "${widget.name}",
                     child: Image.network(widget.image),
+
                   ),
-                ),
+                  padding: EdgeInsets.all(kDefaultPaddin),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+
+                  ),
+
+
+
+
+
+                ),),
+
               ),
+
+
+
               SizedBox(height: 10),
+
               Expanded(
+
                 flex: 2,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 35),
@@ -142,6 +199,7 @@ class _DetailPageState extends State<DetailPage> {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15))),
+
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
