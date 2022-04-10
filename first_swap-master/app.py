@@ -38,7 +38,7 @@ def nameRoute():
         response = f'Hi {name}! this is Python{respo}'
         print(response) 
         print(name)
-        CSvFilePath="first_swap-master/assets/data.csv"
+        CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
         a=Recommendation(CSvFilePath, name)
         ##Recommendation(CSvFilePath, name)
         
@@ -58,23 +58,11 @@ def nameRoute():
    
     
 #file.close()
-CSvFilePath="first_swap-master/assets/data.csv"
+CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
+df = pd.read_csv(CSvFilePath, error_bad_lines=False)
+print(df)
 jsonFilePath = 'driver2.json'
-# read cv file and add to data
-data = {}
-with open(CSvFilePath) as csvFile:
- CSvReader = csv.DictReader(csvFile)
- for rows in CSvReader:
-  id = rows ['cate']
-  data[id] = rows
-# create new json file and write data on it
-with open (jsonFilePath,'w') as jsonFile:
-# make it more readable and pretty
-    jsonFile.write(json.dumps(data, indent=4))
-    print(json.dumps(data, indent=4))
-
-
-        
+    
         #sending data back to your frontend app
 #""" @author: Almathami. Y """
 
@@ -161,7 +149,7 @@ def Recommendation(fileName, userID):
     #print(recommendations)
     
     # Storing Categories recommended for each customer
-    recommendations.to_csv("first_swap-master/assets/Categories.csv")
+    recommendations.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/Categories.csv")
     
     #------------------ User Based Recommendation -------------------------
     #-------------------------   Part 2 ------------------------------------
@@ -250,7 +238,7 @@ def Recommendation(fileName, userID):
     colN = list(['Similar Users'])
     simData=pd.DataFrame(S,columns=colN)
     # Storing recommended Users for cusrrent userID
-    simData.to_csv("first_swap-master/assets/SimilarUsers.csv")
+    simData.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/SimilarUsers.csv")
 
     
 if __name__=="__main__":
