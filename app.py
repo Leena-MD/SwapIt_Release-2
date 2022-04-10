@@ -1,11 +1,12 @@
 from base64 import decode
+import codecs
+from urllib.request import urlopen
 from flask import Flask, jsonify, request
 import json
 import csv
 import pandas as pd
 import numpy as np
 from psutil import users
-
 # Importing important libraries
 from scipy.sparse import coo_matrix, csr_matrix 
 from sklearn.metrics.pairwise import cosine_similarity 
@@ -38,7 +39,7 @@ def nameRoute():
         response = f'Hi {name}! this is Python{respo}'
         print(response) 
         print(name)
-        CSvFilePath="first_swap-master/assets/data.csv"
+        CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
         a=Recommendation(CSvFilePath, name)
         ##Recommendation(CSvFilePath, name)
         
@@ -58,12 +59,14 @@ def nameRoute():
    
     
 #file.close()
-CSvFilePath="first_swap-master/assets/data.csv"
+CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
+df = pd.read_csv(CSvFilePath, error_bad_lines=False)
+print(df)
 jsonFilePath = 'driver2.json'
 # read cv file and add to data
 data = {}
-with open(CSvFilePath) as csvFile:
- CSvReader = csv.DictReader(csvFile)
+with urlopen(CSvFilePath) as csvFile:
+ CSvReader = csv.DictReader(codecs.iterdecode(csvFile, 'utf-8'))
  for rows in CSvReader:
   id = rows ['cate']
   data[id] = rows
@@ -87,13 +90,10 @@ def Recommendation(fileName, userID):
     ----------
     fileName : String
     UserID : String
-
     Returns
     ------
     SimilarCustomers : List
     """
-    
-    
     
     # Use your source folder here in csv read
     Data = pd.read_csv(fileName, encoding='latin-1')
@@ -161,7 +161,7 @@ def Recommendation(fileName, userID):
     #print(recommendations)
     
     # Storing Categories recommended for each customer
-    recommendations.to_csv("first_swap-master/assets/Categories.csv")
+    recommendations.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/Categories.csv")
     
     #------------------ User Based Recommendation -------------------------
     #-------------------------   Part 2 ------------------------------------
@@ -250,9 +250,8 @@ def Recommendation(fileName, userID):
     colN = list(['Similar Users'])
     simData=pd.DataFrame(S,columns=colN)
     # Storing recommended Users for cusrrent userID
-    simData.to_csv("first_swap-master/assets/SimilarUsers.csv")
+    simData.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/SimilarUsers.csv")
 
     
 if __name__=="__main__":
     app.run(), 
-        
