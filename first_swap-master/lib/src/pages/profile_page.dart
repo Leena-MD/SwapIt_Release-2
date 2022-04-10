@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:first_swap/src/pages/Search.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_restart/flutter_restart.dart';
+// import 'package:flutter_restart/flutter_restart.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:first_swap/src/pages/Offers.dart';
@@ -206,9 +206,9 @@ class _ProfilePageState extends State<ProfilePage> {
     return InkWell(
       onTap: () {
         FirebaseAuth.instance.signOut();
-         FlutterRestart.restartApp();
-        // Navigator.push(
-        //     this.context, MaterialPageRoute(builder: (context) => LoginPage()));
+         //FlutterRestart.restartApp();
+        Navigator.push(
+            this.context, MaterialPageRoute(builder: (context) => LoginPage()));
       },
       child: Container(
           color: Colors.cyan[800],
