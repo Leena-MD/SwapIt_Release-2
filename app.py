@@ -249,6 +249,7 @@ def Recommendation(fileName, userID):
         
     colN = list(['Similar Users'])
     simData=pd.DataFrame(S,columns=colN)
+    print(simData)
     # Storing recommended Users for cusrrent userID
     simData.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/SimilarUsers.csv")
 
