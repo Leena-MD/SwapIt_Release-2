@@ -1,11 +1,12 @@
 from base64 import decode
+import codecs
+from urllib.request import urlopen
 from flask import Flask, jsonify, request
 import json
 import csv
 import pandas as pd
 import numpy as np
 from psutil import users
-
 # Importing important libraries
 from scipy.sparse import coo_matrix, csr_matrix 
 from sklearn.metrics.pairwise import cosine_similarity 
@@ -62,7 +63,21 @@ CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/fi
 df = pd.read_csv(CSvFilePath, error_bad_lines=False)
 print(df)
 jsonFilePath = 'driver2.json'
-    
+# read cv file and add to data
+data = {}
+with urlopen(CSvFilePath) as csvFile:
+ CSvReader = csv.DictReader(codecs.iterdecode(csvFile, 'utf-8'))
+ for rows in CSvReader:
+  id = rows ['cate']
+  data[id] = rows
+# create new json file and write data on it
+with open (jsonFilePath,'w') as jsonFile:
+# make it more readable and pretty
+    jsonFile.write(json.dumps(data, indent=4))
+    print(json.dumps(data, indent=4))
+
+
+        
         #sending data back to your frontend app
 #""" @author: Almathami. Y """
 
@@ -80,8 +95,6 @@ def Recommendation(fileName, userID):
     ------
     SimilarCustomers : List
     """
-    
-    
     
     # Use your source folder here in csv read
     Data = pd.read_csv(fileName, encoding='latin-1')
