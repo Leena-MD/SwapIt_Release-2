@@ -158,7 +158,7 @@ def Recommendation(fileName, userID):
         return recommendations
     
     recommendations = get_recommendations(purchase_data)
-    #print(recommendations)
+    print(recommendations)
     
     # Storing Categories recommended for each customer
     recommendations.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/Categories.csv")
