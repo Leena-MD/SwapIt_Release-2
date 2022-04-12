@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'Center_model.dart';
 import 'package:location/location.dart';
@@ -74,9 +75,15 @@ class _RecyclingMapState extends State<RecyclingMap> {
       allMarkers.add(Marker(
           markerId: MarkerId(element.centerName),
           draggable: false,
+          onTap:(){setState(() {
+            _pageController.jumpToPage(element.index);
+          });} ,
           infoWindow:
           InfoWindow(title: element.centerName, snippet: element.address),
-          position: element.locationCoords));
+          position: element.locationCoords,
+      
+          )
+          );
     });
     _pageController = PageController(initialPage: 1, viewportFraction: 0.8)
       ..addListener(_onScroll);
@@ -111,7 +118,7 @@ class _RecyclingMapState extends State<RecyclingMap> {
 
       child: InkWell(
           onTap: () {
-            // moveCamera();
+             moveCamera();
           },
           child: Stack(children: [
             Center(
@@ -217,6 +224,8 @@ class _RecyclingMapState extends State<RecyclingMap> {
                     target: LatLng(24.774265, 46.738586), zoom: 11.0),
                 markers: Set.from(allMarkers),
                 onMapCreated: mapCreated,
+               
+               
               ),
             ),
             Positioned(
