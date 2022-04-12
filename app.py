@@ -2,8 +2,15 @@ import firebase_admin
 from firebase_admin import auth
 from firebase_admin import credentials
 from firebase_admin import db
+# import urllib library
+from urllib.request import urlopen
+# import json
+import json
+url ='https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/serviceAccountKey.json'
+response = urlopen(url)
+
 # Initialize the default app
-cred = credentials.Certificate('/Users/shaikha/Desktop/Swap/SwapIt_Sprint5/first_swap-master/serviceAccountKey.json')
+cred = credentials.Certificate(json.loads(response.read()))
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://swapit-474e1-default-rtdb.firebaseio.com/'
 })
