@@ -28,7 +28,7 @@ app = Flask(__name__)
 
 def nameRoute():
     global response  
-
+    mydb=firebase.FirebaseApplication("https://swapit-474e1-default-rtdb.firebaseio.com/",None)
     #checking the request type we get from the app
     if(request.method == 'POST'):
         request_data = request.data #getting the response data
@@ -39,12 +39,13 @@ def nameRoute():
         response = f'Hi {name}! this is Python{respo}'
         print(response) 
         print(name)
+        print("im here")
+        print(mydb)
         CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
         a=Recommendation(CSvFilePath, name)
         ##Recommendation(CSvFilePath, name)
-        mydb=firebase.FirebaseApplication("https://swapit-474e1-default-rtdb.firebaseio.com/",None)
-        print("im here")
-        print(mydb)
+        
+       
     
       
         #re-assigning response with the name we got from the user
