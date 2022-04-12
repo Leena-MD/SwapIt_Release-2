@@ -28,7 +28,7 @@ app = Flask(__name__)
 
 def nameRoute():
     global response  
-    mydb=firebase.FirebaseApplication("https://swapit-474e1-default-rtdb.firebaseio.com/",None)
+   
     #checking the request type we get from the app
     if(request.method == 'POST'):
         request_data = request.data #getting the response data
@@ -39,8 +39,7 @@ def nameRoute():
         response = f'Hi {name}! this is Python{respo}'
         print(response) 
         print(name)
-        print("im here")
-        print(mydb)
+       
         CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
         a=Recommendation(CSvFilePath, name)
         ##Recommendation(CSvFilePath, name)
@@ -59,7 +58,7 @@ def nameRoute():
 
     #fetching the global response variable to manipulate inside the function
     global response
-   
+mydb=firebase.FirebaseApplication("https://swapit-474e1-default-rtdb.firebaseio.com/",None)
     
 #file.close()
 CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
@@ -78,9 +77,14 @@ with open (jsonFilePath,'w') as jsonFile:
 # make it more readable and pretty
     jsonFile.write(json.dumps(data, indent=4))
     print(json.dumps(data, indent=4))
-
-
-        
+    print("im here")
+    data={
+       "name":"joudi",
+       "age":"2222"
+   }
+    mydb.post("/swapit-474e1-default-rtdb/test",data)
+    result=mydb.get("/swapit-474e1-default-rtdb/test","")
+    print(result)
         #sending data back to your frontend app
 #""" @author: Almathami. Y """
 
