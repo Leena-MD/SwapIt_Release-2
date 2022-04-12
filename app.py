@@ -13,7 +13,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics.pairwise import cosine_similarity
 import operator
-
 #declared an empty variable for reassignment
 response = ''
 res=[]
@@ -28,7 +27,6 @@ app = Flask(__name__)
 
 def nameRoute():
     global response  
-
     #checking the request type we get from the app
     if(request.method == 'POST'):
         request_data = request.data #getting the response data
