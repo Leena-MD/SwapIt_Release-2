@@ -13,7 +13,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics.pairwise import cosine_similarity
 import operator
-from firebase import firebase
 #declared an empty variable for reassignment
 response = ''
 res=[]
@@ -57,8 +56,6 @@ def nameRoute():
 def nameRoute():
 
     #fetching the global response variable to manipulate inside the function
-    global response
-mydb=firebase.FirebaseApplication("https://swapit-474e1-default-rtdb.firebaseio.com/",None)
     
 #file.close()
 CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
@@ -78,13 +75,6 @@ with open (jsonFilePath,'w') as jsonFile:
     jsonFile.write(json.dumps(data, indent=4))
     print(json.dumps(data, indent=4))
     print("im here")
-    data={
-       "name":"joudi",
-       "age":"2222"
-   }
-    mydb.post("/swapit-474e1-default-rtdb/test",data)
-    result=mydb.get("/swapit-474e1-default-rtdb/test","")
-    print(result)
         #sending data back to your frontend app
 #""" @author: Almathami. Y """
 
