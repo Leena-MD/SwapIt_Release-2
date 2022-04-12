@@ -13,7 +13,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics.pairwise import cosine_similarity
 import operator
-
+from firebase import firebase
 #declared an empty variable for reassignment
 response = ''
 res=[]
@@ -28,7 +28,7 @@ app = Flask(__name__)
 
 def nameRoute():
     global response  
-
+   
     #checking the request type we get from the app
     if(request.method == 'POST'):
         request_data = request.data #getting the response data
@@ -39,10 +39,12 @@ def nameRoute():
         response = f'Hi {name}! this is Python{respo}'
         print(response) 
         print(name)
+       
         CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
         a=Recommendation(CSvFilePath, name)
         ##Recommendation(CSvFilePath, name)
         
+       
     
       
         #re-assigning response with the name we got from the user
@@ -56,7 +58,7 @@ def nameRoute():
 
     #fetching the global response variable to manipulate inside the function
     global response
-   
+mydb=firebase.FirebaseApplication("https://swapit-474e1-default-rtdb.firebaseio.com/",None)
     
 #file.close()
 CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
@@ -75,9 +77,14 @@ with open (jsonFilePath,'w') as jsonFile:
 # make it more readable and pretty
     jsonFile.write(json.dumps(data, indent=4))
     print(json.dumps(data, indent=4))
-
-
-        
+    print("im here")
+    data={
+       "name":"joudi",
+       "age":"2222"
+   }
+    mydb.post("/swapit-474e1-default-rtdb/test",data)
+    result=mydb.get("/swapit-474e1-default-rtdb/test","")
+    print(result)
         #sending data back to your frontend app
 #""" @author: Almathami. Y """
 
@@ -90,6 +97,7 @@ def Recommendation(fileName, userID):
     ----------
     fileName : String
     UserID : String
+
     Returns
     ------
     SimilarCustomers : List
@@ -158,7 +166,7 @@ def Recommendation(fileName, userID):
         return recommendations
     
     recommendations = get_recommendations(purchase_data)
-    print(recommendations)
+    #print(recommendations)
     
     # Storing Categories recommended for each customer
     recommendations.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/Categories.csv")
@@ -249,10 +257,10 @@ def Recommendation(fileName, userID):
         
     colN = list(['Similar Users'])
     simData=pd.DataFrame(S,columns=colN)
-    print(simData)
     # Storing recommended Users for cusrrent userID
     simData.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/SimilarUsers.csv")
 
     
 if __name__=="__main__":
     app.run(), 
+        
