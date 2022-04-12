@@ -23,6 +23,7 @@ class _DonationsMapState extends State<DonationsMap> {
 
 
   late PageController _pageController;
+  var currentPageValue = 0.0;
 
   @override
 
@@ -81,11 +82,14 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
       allMarkers.add(Marker(
           markerId: MarkerId(element.centerName),
           draggable: false,
+          onTap:(){setState(() {
+            _pageController.jumpToPage(element.index);
+          });} ,
           infoWindow:
               InfoWindow(title: element.centerName, snippet: element.address),
           position: element.locationCoords));
     });
-    _pageController = PageController(initialPage: 1, viewportFraction: 0.8)
+    _pageController = PageController(initialPage: 1, viewportFraction: 0.8,keepPage: true)
       ..addListener(_onScroll);
   }
 
@@ -118,7 +122,7 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
       
       child: InkWell(
           onTap: () {
-            // moveCamera();
+             moveCamera();
           },
           child: 
           Stack(children: [
