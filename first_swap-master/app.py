@@ -17,8 +17,7 @@ from firebase import firebase
 #declared an empty variable for reassignment
 response = ''
 res=[]
-mydb=firebase.FirebaseApplication("https://swapit-474e1-default-rtdb.firebaseio.com/",None)
-print(mydb)
+
 #creating the instance of our flask application
 app = Flask(__name__)
 
@@ -43,7 +42,9 @@ def nameRoute():
         CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
         a=Recommendation(CSvFilePath, name)
         ##Recommendation(CSvFilePath, name)
-        
+        mydb=firebase.FirebaseApplication("https://swapit-474e1-default-rtdb.firebaseio.com/",None)
+        print("im here")
+        print(mydb)
     
       
         #re-assigning response with the name we got from the user
