@@ -13,11 +13,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics.pairwise import cosine_similarity
 import operator
-
+from firebase import firebase
 #declared an empty variable for reassignment
 response = ''
 res=[]
-
+mydb=firebase.FirebaseApplication("https://swapit-474e1-default-rtdb.firebaseio.com/",None)
+print(mydb)
 #creating the instance of our flask application
 app = Flask(__name__)
 
