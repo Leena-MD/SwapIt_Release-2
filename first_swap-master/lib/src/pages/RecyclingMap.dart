@@ -188,7 +188,7 @@ class _RecyclingMapState extends State<RecyclingMap> {
                                 Container(
                                   width: 170.0,
                                   child: Text(
-                                    Rcenters[index].description,
+                                    Rcenters[index].phoneNumber,
                                     overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.center,
                                     maxLines: 2,
