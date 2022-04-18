@@ -1,5 +1,6 @@
 from base64 import decode
 import codecs
+from os import name
 from urllib.request import urlopen
 from flask import Flask, jsonify, request
 import json
@@ -79,7 +80,7 @@ app = Flask(__name__)
 
 def nameRoute():
     global response  
-
+    global name
     #checking the request type we get from the app
     if(request.method == 'POST'):
         request_data = request.data #getting the response data
@@ -92,6 +93,7 @@ def nameRoute():
         print(name)
         CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
         a=Recommendation(CSvFilePath, name)
+      
         ##Recommendation(CSvFilePath, name)
         
     
@@ -110,6 +112,7 @@ def nameRoute():
    
     
 #file.close()
+print("nnn")
 CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
 df = pd.read_csv(CSvFilePath, error_bad_lines=False)
 print(df)
@@ -126,9 +129,9 @@ with open (jsonFilePath,'w') as jsonFile:
 # make it more readable and pretty
     jsonFile.write(json.dumps(data, indent=4))
     print(json.dumps(data, indent=4))
+print("nnn")
 
 
-        
         #sending data back to your frontend app
 #""" @author: Almathami. Y """
 
@@ -209,11 +212,13 @@ def Recommendation(fileName, userID):
         return recommendations
     
     recommendations = get_recommendations(purchase_data)
+    print("this is the cates")
     print(recommendations)
     
     # Storing Categories recommended for each customer
     recommendations.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/Categories.csv")
     
+
     #------------------ User Based Recommendation -------------------------
     #-------------------------   Part 2 ------------------------------------
     
@@ -300,10 +305,18 @@ def Recommendation(fileName, userID):
         
     colN = list(['Similar Users'])
     simData=pd.DataFrame(S,columns=colN)
+    print("this is the simms")
     print(simData)
+    datajss=simData.to_json(orient='index')
+    print(datajss)
+    print(name)
+    refsims = db.reference('/SimilarUsers')
+    sim_ref = refsims.child(name)
+    
+    sim_ref.set(json.dumps(datajss, indent=2))
     # Storing recommended Users for cusrrent userID
     simData.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/SimilarUsers.csv")
-
+    
     
 if __name__=="__main__":
     app.run(), 
