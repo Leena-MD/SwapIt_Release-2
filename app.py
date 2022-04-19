@@ -1,6 +1,7 @@
 from base64 import decode
 import codecs
 from os import name
+import re
 from urllib.request import urlopen
 from flask import Flask, jsonify, request
 import json
@@ -214,9 +215,11 @@ def Recommendation(fileName, userID):
     recommendations = get_recommendations(purchase_data)
     print("this is the cates")
     print(recommendations)
-    
     # Storing Categories recommended for each customer
-    recommendations.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/Categories.csv")
+    recommendations = recommendations.to_dict()
+    refsims = db.reference('/Categories')
+    sim_ref = refsims.child(name)
+    sim_ref.set(recommendations)
     
 
     #------------------ User Based Recommendation -------------------------
@@ -307,13 +310,12 @@ def Recommendation(fileName, userID):
     simData=pd.DataFrame(S,columns=colN)
     print("this is the simms")
     print(simData)
-    datajss=simData.to_json(orient='index')
+    datajss=simData.to_dict()
     print(datajss)
     print(name)
     refsims = db.reference('/SimilarUsers')
     sim_ref = refsims.child(name)
-    
-    sim_ref.set(json.dumps(datajss, indent=2))
+    sim_ref.set(datajss)
     # Storing recommended Users for cusrrent userID
     simData.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/SimilarUsers.csv")
     
