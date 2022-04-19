@@ -1,5 +1,7 @@
 from base64 import decode
 import codecs
+from os import name
+import re
 from urllib.request import urlopen
 from flask import Flask, jsonify, request
 import json
@@ -13,7 +15,58 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics.pairwise import cosine_similarity
 import operator
-from firebase import firebase
+import firebase_admin
+from firebase_admin import auth
+from firebase_admin import credentials
+from firebase_admin import db
+# import urllib library
+from urllib.request import urlopen
+# import json
+import json
+url ='https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/serviceAccountKey.json'
+response = urlopen(url)
+
+# Initialize the default app
+cred = credentials.Certificate(json.loads(response.read()))
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://swapit-474e1-default-rtdb.firebaseio.com/'
+})
+ref = db.reference('/')
+ref.set({
+        'boxes': 
+            {
+                'box001': {
+                    'color': 'red',
+                    'width': 1,
+                    'height': 3,
+                    'length': 2
+                },
+                'box002': {
+                    'color': 'green',
+                    'width': 1,
+                    'height': 2,
+                    'length': 3
+                },
+                'box003': {
+                    'color': 'yellow',
+                    'width': 3,
+                    'height': 2,
+                    'length': 1
+                }
+            }
+        })
+ref = db.reference('boxes')
+box_ref = ref.child('box001')
+box_ref.update({
+    'color': 'red'
+})
+        
+
+
+
+
+
+
 #declared an empty variable for reassignment
 response = ''
 res=[]
@@ -28,7 +81,7 @@ app = Flask(__name__)
 
 def nameRoute():
     global response  
-   
+    global name
     #checking the request type we get from the app
     if(request.method == 'POST'):
         request_data = request.data #getting the response data
@@ -39,12 +92,11 @@ def nameRoute():
         response = f'Hi {name}! this is Python{respo}'
         print(response) 
         print(name)
-       
         CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
         a=Recommendation(CSvFilePath, name)
+      
         ##Recommendation(CSvFilePath, name)
         
-       
     
       
         #re-assigning response with the name we got from the user
@@ -58,9 +110,10 @@ def nameRoute():
 
     #fetching the global response variable to manipulate inside the function
     global response
-mydb=firebase.FirebaseApplication("https://swapit-474e1-default-rtdb.firebaseio.com/",None)
+   
     
 #file.close()
+print("nnn")
 CSvFilePath="https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/data.csv"
 df = pd.read_csv(CSvFilePath, error_bad_lines=False)
 print(df)
@@ -77,14 +130,9 @@ with open (jsonFilePath,'w') as jsonFile:
 # make it more readable and pretty
     jsonFile.write(json.dumps(data, indent=4))
     print(json.dumps(data, indent=4))
-    print("im here")
-    data={
-       "name":"joudi",
-       "age":"2222"
-   }
-    mydb.post("/swapit-474e1-default-rtdb/test",data)
-    result=mydb.get("/swapit-474e1-default-rtdb/test","")
-    print(result)
+print("nnn")
+
+
         #sending data back to your frontend app
 #""" @author: Almathami. Y """
 
@@ -97,7 +145,6 @@ def Recommendation(fileName, userID):
     ----------
     fileName : String
     UserID : String
-
     Returns
     ------
     SimilarCustomers : List
@@ -166,11 +213,15 @@ def Recommendation(fileName, userID):
         return recommendations
     
     recommendations = get_recommendations(purchase_data)
-    #print(recommendations)
-    
+    print("this is the cates")
+    print(recommendations)
     # Storing Categories recommended for each customer
-    recommendations.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/Categories.csv")
+    recommendations = recommendations.to_dict()
+    refsims = db.reference('/Categories')
+    sim_ref = refsims.child(name)
+    sim_ref.set(recommendations)
     
+
     #------------------ User Based Recommendation -------------------------
     #-------------------------   Part 2 ------------------------------------
     
@@ -257,10 +308,17 @@ def Recommendation(fileName, userID):
         
     colN = list(['Similar Users'])
     simData=pd.DataFrame(S,columns=colN)
+    print("this is the simms")
+    print(simData)
+    datajss=simData.to_dict()
+    print(datajss)
+    print(name)
+    refsims = db.reference('/SimilarUsers')
+    sim_ref = refsims.child(name)
+    sim_ref.set(datajss)
     # Storing recommended Users for cusrrent userID
     simData.to_csv("https://raw.githubusercontent.com/Leena-MD/SwapIt_Sprint5/master/first_swap-master/assets/SimilarUsers.csv")
-
+    
     
 if __name__=="__main__":
     app.run(), 
-        
