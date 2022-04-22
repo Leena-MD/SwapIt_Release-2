@@ -29,7 +29,7 @@ import 'Post_page.dart';
 import 'MyItems.dart';
 import 'Offers.dart';
 import 'Search.dart' as eos;
-
+import 'package:firebase_database/firebase_database.dart';
 import 'details_page.dart';
 import 'house.dart';
 import 'kids_category.dart';
@@ -37,7 +37,7 @@ import 'clothes.dart';
 import 'gym.dart';
 import 'bags.dart';
 import 'pet.dart';
-import 'package:flutter/services.dart' show SystemChrome, SystemUiOverlayStyle, rootBundle;
+import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:csv/csv.dart';
 
@@ -50,7 +50,7 @@ int rel = 0;
 String v0 = "";
 String v1 = "";
 String v2 = "";
-
+var dn;
 List<List> data = List<List<dynamic>>.empty(growable: true);
 List<List> data2 = List<List<dynamic>>.empty(growable: true);
 //user's response will be assigned to this variable
@@ -119,7 +119,7 @@ class _HomePage extends State<HomePage> {
       final uid2 = user2!.uid;
       String name = eos.uid;
 
-      final url = 'http://127.0.0.1:5000/name';
+      final url = 'http://swappython.azurewebsites.net/name';
 
       //sending a post request to the url
       final response =
@@ -135,79 +135,11 @@ class _HomePage extends State<HomePage> {
       });
       print(final_response + "-" + final_response);
 
-      var myData = await rootBundle.loadString("assets/Categories.csv");
-
-      List<List<dynamic>> csvTable =
-          CsvToListConverter().convert(myData, eol: '\n');
-
-      setState(() {
-        data = csvTable;
-        for (int i = 0; i < data.length; i++) {
-          if (data[i][0].toString() == uid2) {
-            print(data[i]);
-            userRecomendation = data[i];
-            print(userRecomendation);
-          }
-        }
-      });
-
-      var myData2 = await rootBundle.loadString("assets/SimilarUsers.csv");
-
-      List<List<dynamic>> csvTable2 =
-          CsvToListConverter().convert(myData2, eol: '\n');
-      setState(() {
-        data2 = csvTable2;
-
-        for (int i = 0; i < data2.length; i++) {
-          print(data2[i]);
-          String v = i.toString();
-          print(v);
-          if (data2[i][0].toString() == "0") {
-            print(data2[i]);
-            print("here");
-            v0 = data2[i][1].toString();
-            print(v0);
-            //sims.add(data2[i]);
-          }
-          if (data2[i][0].toString() == "1") {
-            print(data2[i]);
-            print("here");
-            v1 = data2[i][1].toString();
-            print(v1);
-            // sims.add(data2[i]);
-          }
-          if (data2[i][0].toString() == "2") {
-            print(data2[i]);
-            print("here");
-            v2 = data2[i][1].toString();
-            print(v2);
-            print(data2[i][1].toString());
-            // sims.add(data2[i]);
-          }
-        }
-      });
-
-      cat1 = userRecomendation[1].toString();
-      cat2 = userRecomendation[2].toString();
-      cat3 = userRecomendation[3].toString();
-      cat4 = userRecomendation[4].toString();
-      cat5 = userRecomendation[5].toString();
-      cat6 = userRecomendation[6].toString();
-      cat7 = userRecomendation[7].toString();
-      cat8 = userRecomendation[8].toString();
-      print(cat1);
-      print(cat2);
-      print(cat3);
-      print(cat4);
-      print(cat5);
-      print(cat6);
-      print(cat7);
-      print(cat8);
     } else {
       print("no swaps found");
     }
 
-    reload = 1;
+   reload = 1;
 
     if (rel == 0) {
       showDialog(
@@ -229,46 +161,34 @@ class _HomePage extends State<HomePage> {
           );
         },
       );
-
+     
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => super.widget));
 
       rel = 2;
+      print("end");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    MyProvider provider = Provider.of<MyProvider>(context);
-
+    print("widget");
     if (reload == 1) {
-      provider.cold();
+    print("if");
+     MyProvider provider = Provider.of<MyProvider>(context);
       provider.getTop1List();
       top1 = provider.Top1list;
+      provider.cold();
       print('yes');
       print(top1);
       print("yes2");
-      provider.getTop2List();
-      top2 = provider.Top2list;
-
-      provider.getTop3List();
-      top3 = provider.Top3list;
       reload = 0;
       if (top1.isEmpty) {
-        if (top2.isEmpty) {
-          if (top3.isEmpty) {
             cold = provider.coldlistt;
           } else {
             cold = [];
-          }
-        } else {
-          cold = [];
-        }
-      } else {
-        cold = [];
-      }
     }
-
+    }
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -410,10 +330,10 @@ class _HomePage extends State<HomePage> {
                                 children: <Widget>[
                                   Spacer(),
                                   Text(
-                                    "قد يعجبك ايضاً",
+                                    eId,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 19),
+                                        fontSize: 10),
                                   ),
                                 ],
                               ),
@@ -424,8 +344,8 @@ class _HomePage extends State<HomePage> {
                                 height: 300,
                                 child: ListView.builder(
                                   itemCount: 1,
-                                  scrollDirection: Axis.vertical,
-                                  reverse: false,
+                                  scrollDirection: Axis.horizontal,
+                                  reverse: true,
                                   itemBuilder: (context, id) {
                                     return Container(
                                       width: 350,
@@ -436,15 +356,17 @@ class _HomePage extends State<HomePage> {
                                           Container(
                                             margin: EdgeInsets.symmetric(
                                                 horizontal: 12),
-                                            height: 510,
+                                            height: 350,
                                             child: top1.isEmpty
                                                 ? GridView.count(
                                                     shrinkWrap: false,
                                                     primary: false,
-                                                    crossAxisCount: 2,
+                                                    crossAxisCount: 1,
+                                                    reverse: true,
                                                     childAspectRatio: 0.9,
                                                     crossAxisSpacing: 16,
-                                                    mainAxisSpacing: 10,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
                                                     children: cold
                                                         .map(
                                                           (e) =>
@@ -485,10 +407,12 @@ class _HomePage extends State<HomePage> {
                                                 : GridView.count(
                                                     shrinkWrap: false,
                                                     primary: false,
-                                                    crossAxisCount: 2,
+                                                    reverse: true,
+                                                    crossAxisCount: 1,
                                                     childAspectRatio: 0.9,
                                                     crossAxisSpacing: 16,
-                                                    mainAxisSpacing: 10,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
                                                     children: top1
                                                         .map(
                                                           (e) =>
@@ -875,9 +799,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
-    ));
     List<Widget> _navBarItemList = [];
 
     for (var i = 0; i < _iconList.length; i++) {
@@ -886,66 +807,65 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
     return Row(
       children: _navBarItemList,
-    );
-  }
+ );
+ }
 
-  Widget buildNavBarItem(IconData icon, int index) {
-    return GestureDetector(
-      onTap: () {
-        widget.onChange(index);
+ Widget buildNavBarItem(IconData icon, int index) {
+ return GestureDetector(
+ onTap: () {
+ widget.onChange(index);
 
-        setState(() {
-          _selectedIndex = index;
-          if (_selectedIndex == 0)
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomePage()));
+ setState(() {
+ _selectedIndex = index;
+ if (_selectedIndex == 0)
+ Navigator.push(this.context,
+ MaterialPageRoute(builder: (context) => HomePage()));
+ if (_selectedIndex == 1)
+ Navigator.push(this.context,
+ MaterialPageRoute(builder: (context) => MyItems()));
+ if (_selectedIndex == 2)
+ Navigator.push(this.context,
+ MaterialPageRoute(builder: (context) => PostPage()));
 
-          if (_selectedIndex == 1)
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) =>MyItems()));
-          if (_selectedIndex == 2)
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) =>PostPage()));
+ if (_selectedIndex == 3)
+ Navigator.push(this.context,
+ MaterialPageRoute(builder: (context) => Offers()));
+ if (_selectedIndex == 4)
+ Navigator.push(this.context,
+ MaterialPageRoute(builder: (context) => ProfilePage()));
+ });
+ },
+ child: Container(
+ height: 60,
+ width: MediaQuery.of(this.context).size.width / _iconList.length,
+ decoration: index == _selectedIndex
+ ? BoxDecoration(
+ border: Border(
+ bottom: BorderSide(width: 4, color: Colors.blueGrey),
+ ),
+ gradient: LinearGradient(colors: [
+ Colors.blueGrey.withOpacity(0.3),
+ Colors.blueGrey.withOpacity(0.015),
+ ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
 
-          if (_selectedIndex == 3)
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => Offers()));
-          if (_selectedIndex == 4)
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => ProfilePage()));
-        });
-      },
-      child: Container(
-        height: 60,
-        width: MediaQuery.of(this.context).size.width / _iconList.length,
-        decoration: index == _selectedIndex
-            ? BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 4, color: Colors.blueGrey),
-                ),
-                gradient: LinearGradient(colors: [
-                  Colors.blueGrey.withOpacity(0.3),
-                  Colors.blueGrey.withOpacity(0.015),
-                ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
+ //color: index == _selectedItemIndex ? Colors.green : Colors.white,
 
-                //color: index == _selectedItemIndex ? Colors.green : Colors.white,
-
-                )
-            : BoxDecoration(),
-        child: Column(
-          children: <Widget>[
-            Icon(
-              icon,
-              color: index == _selectedIndex ? Colors.black : Colors.grey,
-            ),
-            if (index == 0) Text('الرئيسية'),
-            if (index == 1) Text('منتجاتي'),
-            if (index == 2) Text('اضافة'),
-            if (index == 3) Text('الطلبات'),
-            if (index == 4) Text('حسابي'),
-          ],
-        ),
-      ),
-    );
-  }
+ )
+ : BoxDecoration(),
+ child: Column(
+ children: <Widget>[
+ Icon(
+ icon,
+ color: index == _selectedIndex ? Colors.black : Colors.grey,
+ ),
+ if (index == 0) Text('الرئيسية'),
+ if (index == 1) Text('منتجاتي'),
+ if (index == 2) Text('اضافة'),
+ if (index == 3) Text('الطلبات'),
+ if (index == 4) Text('حسابي'),
+ ],
+ ),
+ ),
+ );
+ }
 }
