@@ -258,7 +258,7 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
           getLocation();
         },
       ),
-                          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+                          //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
         );
   }

@@ -252,7 +252,7 @@ class _RecyclingMapState extends State<RecyclingMap> {
           getLocation();
         },
       ),
-                          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+                          //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
                           );
   }
 

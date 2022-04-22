@@ -31,6 +31,7 @@ class _EditProfilePageState  extends State<EditProfilePage>  {
 
   final firstNameEditingController = new TextEditingController();
   final secondNameEditingController = new TextEditingController();
+  final phoneNumberEditingController = new TextEditingController();
   String userID ="";
 
 
@@ -104,7 +105,31 @@ class _EditProfilePageState  extends State<EditProfilePage>  {
           hintText: "الاسم الأخير",
         ));
 
+    final phoneNumberField = TextFormField(
+        textAlign: TextAlign.right,
+        autofocus: false,
+        controller: phoneNumberEditingController,
+        keyboardType: TextInputType.name,
+        validator: (value) {
+          RegExp regex = new RegExp(r'(^(05)(5|0|3|6|4|9|8|7)([0-9]{7}))');
 
+          if (value!.isEmpty) {
+            return ("*الحقل مطلوب");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("يجب كتابة رقم الهاتف بطريقة صحيحة");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          phoneNumberEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.phone),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "رقم الهاتف",
+        ));
 
     //Save button
 
@@ -180,7 +205,8 @@ submitAction(context);
                     secondNameField,
  
                     SizedBox(height: 20),
-                     
+                    phoneNumberField,
+                    SizedBox(height: 20),
                      SaveButton,//save button
                     SizedBox(height: 15),
                       changePass,//change paasword button
@@ -196,7 +222,7 @@ submitAction(context);
   }
 
   
- updateUserData(String FirstName, String LastName, String uid) async {
+ updateUserData(String FirstName, String LastName,String phoneNum, String uid) async {
 
           final _auth = FirebaseAuth.instance;
 
@@ -212,9 +238,10 @@ submitAction(context);
 
     userModel.FirstName = firstNameEditingController.text;
     userModel.LastName = secondNameEditingController.text;
+    userModel.phoneN = phoneNumberEditingController.text;
 
      final firebaseUser = await FirebaseAuth.instance.currentUser;
-     if(FirstName!=null&&LastName!=null){
+     if(FirstName!=null&&LastName!=null&&phoneNum!=null){
               if (_formkey.currentState!.validate()) {
 
         if (firebaseUser != null)
@@ -222,7 +249,9 @@ submitAction(context);
           .collection('users')
           .doc(firebaseUser.uid)
           .update({
-       'FirstName': FirstName,'LastName': LastName 
+       'FirstName': FirstName,
+        'LastName': LastName,
+        'phoneN':phoneNum
        
     }
     
@@ -237,14 +266,14 @@ submitAction(context);
 
   }
 
-    updateData(String FirstName, String LastName,String userID) async {
+    updateData(String FirstName, String LastName,String phoneNum,String userID) async {
 
- await updateUserData(FirstName, LastName, userID);
+ await updateUserData(FirstName, LastName,phoneNum, userID);
 
 
   }
   submitAction(BuildContext context) {
-    updateData(firstNameEditingController.text, secondNameEditingController.text,
+    updateData(firstNameEditingController.text, secondNameEditingController.text,phoneNumberEditingController.text,
          userID);
    
   }
