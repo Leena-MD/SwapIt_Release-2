@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'Center_model.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DonationsMap extends StatefulWidget {
   @override
@@ -12,6 +11,14 @@ class DonationsMap extends StatefulWidget {
 }
 
 class _DonationsMapState extends State<DonationsMap> {
+  _makingPhoneCall(String url) async {
+    url = 'tel:' + url;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   GoogleMapController? _controller1;
@@ -19,78 +26,70 @@ class _DonationsMapState extends State<DonationsMap> {
   late GoogleMapController _controller;
 
   List<Marker> allMarkers = [];
-   Location currentLocation = Location();
-
+  Location currentLocation = Location();
 
   late PageController _pageController;
   var currentPageValue = 0.0;
 
   @override
-
   late BitmapDescriptor mapMarker;
-
 
   late int prevPage;
   @override
-  void iniState(){
+  void iniState() {
     super.initState();
     setCustMarker();
   }
-void setCustMarker() async {
 
-mapMarker = await BitmapDescriptor.fromAssetImage(
-    ImageConfiguration(), 'assets/googlemapbluedo.png');
-}
+  void setCustMarker() async {
+    mapMarker = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(), 'assets/googlemapbluedo.png');
+  }
 
-    void getLocation() async{
+  void getLocation() async {
     var location = await currentLocation.getLocation();
-    currentLocation.onLocationChanged.listen((LocationData loc){
- 
-      _controller1?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
-        target: LatLng(loc.latitude ?? 0.0,loc.longitude?? 0.0),
+    currentLocation.onLocationChanged.listen((LocationData loc) {
+      _controller1
+          ?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
+        target: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
         zoom: 12.0,
       )));
       print(loc.latitude);
       print(loc.longitude);
       setCustMarker();
       setState(() {
-
         setCustMarker();
 
-
-
-        allMarkers.add(
-          Marker(markerId: MarkerId('Home'),
-
-          infoWindow:
-               InfoWindow(title: "موقعك الحالي",snippet: "     "),
-
+        allMarkers.add(Marker(
+            markerId: MarkerId('Home'),
+            infoWindow: InfoWindow(title: "موقعك الحالي", snippet: "     "),
             position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
-            icon: mapMarker
-        ));
+            icon: mapMarker));
       });
-       });
+    });
   }
-
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-      setCustMarker();
+    setCustMarker();
     Dcenters.forEach((element) {
       allMarkers.add(Marker(
           markerId: MarkerId(element.centerName),
           draggable: false,
-          onTap:(){setState(() {
-            _pageController.jumpToPage(element.index);
-          });} ,
+          onTap: () {
+            setState(() {
+              _pageController.jumpToPage(element.index);
+            });
+          },
           infoWindow:
               InfoWindow(title: element.centerName, snippet: element.address),
           position: element.locationCoords));
     });
-    _pageController = PageController(initialPage: 1, viewportFraction: 0.8,keepPage: true)
-      ..addListener(_onScroll);
+    _pageController =
+        PageController(initialPage: 1, viewportFraction: 0.8, keepPage: true)
+          ..addListener(_onScroll);
   }
 
   void _onScroll() {
@@ -103,14 +102,13 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
   _DcentersList(index) {
     return AnimatedBuilder(
       animation: _pageController,
-      builder: (BuildContext context, Widget? widget){
+      builder: (BuildContext context, Widget? widget) {
         double value = 1;
         if (_pageController.position.haveDimensions) {
           value = (_pageController.page! - index);
           value = (1 - (value.abs() * 0.3) + 0.06).clamp(0.0, 1.0);
         }
 
-        
         return Center(
           child: SizedBox(
             height: Curves.easeInOut.transform(value) * 125.0,
@@ -119,16 +117,13 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
           ),
         );
       },
-      
       child: InkWell(
           onTap: () {
-             moveCamera();
+            moveCamera();
           },
-          child: 
-          Stack(children: [
+          child: Stack(children: [
             Center(
-                child: 
-                Container(
+                child: Container(
                     margin: const EdgeInsets.symmetric(
                       horizontal: 10.0,
                       vertical: 10.0,
@@ -205,9 +200,7 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
                                 )
                               ])
                         ]))))
-          ]
-          )
-          ),
+          ])),
     );
   }
 
@@ -217,50 +210,50 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
       statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
     ));
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.cyan[800],
-          title: const Text('خريطة الجمعيات الخيريه'),
-          centerTitle: true,
-        ),
-        body: Stack(
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height - 50.0,
+      appBar: AppBar(
+        backgroundColor: Colors.cyan[800],
+        title: const Text('خريطة الجمعيات الخيريه'),
+        centerTitle: true,
+      ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height - 50.0,
+            width: MediaQuery.of(context).size.width,
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(
+                  target: LatLng(24.774265, 46.738586), zoom: 11.0),
+              markers: Set.from(allMarkers),
+              onMapCreated: mapCreated,
+            ),
+          ),
+          Positioned(
+            bottom: 20.0,
+            child: Container(
+              height: 200.0,
               width: MediaQuery.of(context).size.width,
-              child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                    target: LatLng(24.774265, 46.738586), zoom: 11.0),
-                markers: Set.from(allMarkers),
-                onMapCreated: mapCreated,
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: Dcenters.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return _DcentersList(index);
+                },
               ),
             ),
-            Positioned(
-              bottom: 20.0,
-              child: Container(
-                height: 200.0,
-                width: MediaQuery.of(context).size.width,
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: Dcenters.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return _DcentersList(index);
-                  },
-                ),
-              ),
-            )
-          ],
-        )
-                , floatingActionButton: 
-        FloatingActionButton(
-        child: Icon(Icons.location_searching,color: Colors.white,),
-
-        onPressed: (){
+          )
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.location_searching,
+          color: Colors.white,
+        ),
+        onPressed: () {
           getLocation();
         },
       ),
-                          //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
-        );
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 
   void mapCreated(controller) {
@@ -277,4 +270,3 @@ mapMarker = await BitmapDescriptor.fromAssetImage(
         tilt: 45.0)));
   }
 }
- 

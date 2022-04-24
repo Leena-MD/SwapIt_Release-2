@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'Center_model.dart';
 import 'package:location/location.dart';
 
@@ -12,6 +11,14 @@ class RecyclingMap extends StatefulWidget {
 }
 
 class _RecyclingMapState extends State<RecyclingMap> {
+  _makingPhoneCall(String url) async {
+    url = 'tel:' + url;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   GoogleMapController? _controller1;
@@ -27,45 +34,38 @@ class _RecyclingMapState extends State<RecyclingMap> {
   late BitmapDescriptor mapMarker;
 
   @override
-  void iniState(){
+  void iniState() {
     super.initState();
     setCustMarker();
   }
-  void setCustMarker() async {
 
+  void setCustMarker() async {
     mapMarker = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(), 'assets/googlemapbluedo.png');
   }
 
-  void getLocation() async{
+  void getLocation() async {
     var location = await currentLocation.getLocation();
-    currentLocation.onLocationChanged.listen((LocationData loc){
-
-      _controller1?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
-        target: LatLng(loc.latitude ?? 0.0,loc.longitude?? 0.0),
+    currentLocation.onLocationChanged.listen((LocationData loc) {
+      _controller1
+          ?.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
+        target: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
         zoom: 12.0,
       )));
       print(loc.latitude);
       print(loc.longitude);
       setCustMarker();
       setState(() {
-
         setCustMarker();
 
-
-
-        allMarkers.add(
-            Marker(markerId: MarkerId('Home'),
-                infoWindow:
-                InfoWindow(title: "موقعك الحالي",snippet: "     "),
-
-                position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
-                icon: mapMarker
-            ));
+        allMarkers.add(Marker(
+            markerId: MarkerId('Home'),
+            infoWindow: InfoWindow(title: "موقعك الحالي", snippet: "     "),
+            position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
+            icon: mapMarker));
       });
     });
   }
-
 
   @override
   void initState() {
@@ -73,17 +73,17 @@ class _RecyclingMapState extends State<RecyclingMap> {
     super.initState();
     Rcenters.forEach((element) {
       allMarkers.add(Marker(
-          markerId: MarkerId(element.centerName),
-          draggable: false,
-          onTap:(){setState(() {
+        markerId: MarkerId(element.centerName),
+        draggable: false,
+        onTap: () {
+          setState(() {
             _pageController.jumpToPage(element.index);
-          });} ,
-          infoWindow:
-          InfoWindow(title: element.centerName, snippet: element.address),
-          position: element.locationCoords,
-      
-          )
-          );
+          });
+        },
+        infoWindow:
+            InfoWindow(title: element.centerName, snippet: element.address),
+        position: element.locationCoords,
+      ));
     });
     _pageController = PageController(initialPage: 1, viewportFraction: 0.8)
       ..addListener(_onScroll);
@@ -99,13 +99,12 @@ class _RecyclingMapState extends State<RecyclingMap> {
   _RcentersList(index) {
     return AnimatedBuilder(
       animation: _pageController,
-      builder: (BuildContext context, Widget? widget){
+      builder: (BuildContext context, Widget? widget) {
         double value = 1;
         if (_pageController.position.haveDimensions) {
           value = (_pageController.page! - index);
           value = (1 - (value.abs() * 0.3) + 0.06).clamp(0.0, 1.0);
         }
-
 
         return Center(
           child: SizedBox(
@@ -115,10 +114,9 @@ class _RecyclingMapState extends State<RecyclingMap> {
           ),
         );
       },
-
       child: InkWell(
           onTap: () {
-             moveCamera();
+            moveCamera();
           },
           child: Stack(children: [
             Center(
@@ -145,7 +143,6 @@ class _RecyclingMapState extends State<RecyclingMap> {
                         child: Row(children: [
                           Expanded(
                             child: Container(
-
                                 width: 90.0,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(
@@ -187,14 +184,71 @@ class _RecyclingMapState extends State<RecyclingMap> {
                                 ),
                                 Container(
                                   width: 170.0,
-                                  child: Text(
-                                    Rcenters[index].phoneNumber,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                        fontSize: 11.0,
-                                        fontWeight: FontWeight.w300),
+                                  child: InkWell(
+                                    child: Text(
+                                      Dcenters[index].phoneNumber,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.center,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                          fontSize: 11.0,
+                                          fontWeight: FontWeight.w300),
+                                    ),
+                                    onTap: () {
+                                      if (Dcenters[index].phoneNumber.length >
+                                          0) {
+                                        showDialog<bool>(
+                                          context: context,
+                                          builder: (c) => AlertDialog(
+                                            titleTextStyle: TextStyle(),
+                                            title: Text(
+                                              'تنبية',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            content: Text(
+                                                'هل تريد الاتصال بالرقم ' +
+                                                    Dcenters[index].phoneNumber,
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.w900)),
+                                            actions: [
+                                              FlatButton(
+                                                  child: Text('نعم',
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .blue.shade800,
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w900)),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _makingPhoneCall(
+                                                          Dcenters[index]
+                                                              .phoneNumber);
+                                                    });
+                                                    Navigator.pop(c, true);
+                                                  }),
+                                              FlatButton(
+                                                child: Text('لا',
+                                                    style: TextStyle(
+                                                        color:
+                                                            Colors.red.shade800,
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w900)),
+                                                onPressed: () =>
+                                                    Navigator.pop(c, false),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                    },
                                   ),
                                 )
                               ])
@@ -209,51 +263,50 @@ class _RecyclingMapState extends State<RecyclingMap> {
       statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
     ));
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.cyan[800],
-          title: Text('خريطة مراكز اعادة التدوير'),
-          centerTitle: true,
-        ),
-        body: Stack(
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height - 50.0,
+      appBar: AppBar(
+        backgroundColor: Colors.cyan[800],
+        title: Text('خريطة مراكز اعادة التدوير'),
+        centerTitle: true,
+      ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height - 50.0,
+            width: MediaQuery.of(context).size.width,
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(
+                  target: LatLng(24.774265, 46.738586), zoom: 11.0),
+              markers: Set.from(allMarkers),
+              onMapCreated: mapCreated,
+            ),
+          ),
+          Positioned(
+            bottom: 20.0,
+            child: Container(
+              height: 200.0,
               width: MediaQuery.of(context).size.width,
-              child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                    target: LatLng(24.774265, 46.738586), zoom: 11.0),
-                markers: Set.from(allMarkers),
-                onMapCreated: mapCreated,
-               
-               
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: Rcenters.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return _RcentersList(index);
+                },
               ),
             ),
-            Positioned(
-              bottom: 20.0,
-              child: Container(
-                height: 200.0,
-                width: MediaQuery.of(context).size.width,
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: Rcenters.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return _RcentersList(index);
-                  },
-                ),
-              ),
-            )
-          ],
+          )
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.location_searching,
+          color: Colors.white,
         ),
-        floatingActionButton: 
-        FloatingActionButton(
-        child: Icon(Icons.location_searching,color: Colors.white,),
-
-        onPressed: (){
+        onPressed: () {
           getLocation();
         },
       ),
-                          //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-                          );
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 
   void mapCreated(controller) {
@@ -270,4 +323,3 @@ class _RecyclingMapState extends State<RecyclingMap> {
         tilt: 45.0)));
   }
 }
-
