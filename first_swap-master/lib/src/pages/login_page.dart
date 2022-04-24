@@ -301,9 +301,12 @@ class _LoginPageState extends State<LoginPage> {
                                   builder: (context) => AdminProfilePage())),
                         }
                       else
+                      {
+                        rel = 1,
+                        doi = 0,
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => HomePage())),
-                    }
+                    }}
                   else
                     {
                       _auth.signOut(),

@@ -37,7 +37,8 @@ import 'clothes.dart';
 import 'gym.dart';
 import 'bags.dart';
 import 'pet.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart'
+    show SystemChrome, SystemUiOverlayStyle, rootBundle;
 
 import 'package:csv/csv.dart';
 
@@ -46,10 +47,13 @@ class HomePage extends StatefulWidget {
   _HomePage createState() => _HomePage();
 }
 
-int rel = 0;
+int rel = 1;
+int doi = 0;
+int enter = 1;
 String v0 = "";
 String v1 = "";
 String v2 = "";
+String ok = "";
 var dn;
 List<List> data = List<List<dynamic>>.empty(growable: true);
 List<List> data2 = List<List<dynamic>>.empty(growable: true);
@@ -130,66 +134,57 @@ class _HomePage extends State<HomePage> {
       final decoded = json.decode(response2.body) as Map<String, dynamic>;
 
       //changing the UI be reassigning the fetched data to final response
-      setState(() {
-        final_response = decoded['name'];
-      });
+      if (mounted)
+        setState(() {
+          final_response = decoded['name'];
+        });
       print(final_response + "-" + final_response);
-
     } else {
       print("no swaps found");
-    }
-
-   reload = 1;
-
-    if (rel == 0) {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return Center(
-            child: new Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 1.5,
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      );
-     
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => super.widget));
-
-      rel = 2;
-      print("end");
+      doi = 1;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     print("widget");
-    if (reload == 1) {
-    print("if");
-     MyProvider provider = Provider.of<MyProvider>(context);
-      provider.getTop1List();
-      top1 = provider.Top1list;
-      provider.cold();
-      print('yes');
-      print(top1);
-      print("yes2");
-      reload = 0;
-      if (top1.isEmpty) {
-            cold = provider.coldlistt;
-          } else {
-            cold = [];
-    }
+    print(top1.length);
+    if (enter == 1) {
+      if (rel == 1) {
+        //rel = 0;
+        print("if");
+        MyProvider provider = Provider.of<MyProvider>(context);
+        provider.getTop1List();
+        top1 = provider.Top1list;
+        provider.cold();
+        print('yes');
+        print(top1);
+        print("yes2");
+        reload = 0;
+        if (top1.isNotEmpty) {
+          rel = 0;
+          enter = 0;
+        }
+        print("this is doi");
+        print(doi);
+        if (top1.isEmpty && doi == 1) {
+          print("ll");
+          print(doi);
+          enter = 0;
+          cold = provider.coldlistt;
+        } else {
+          cold = [];
+        }
+        //rel = 2;
+      } else {
+        // rel = 1;
+      }
     }
     return SafeArea(
+      top: false,
+      left: false,
+      right: false,
+      bottom: false,
       child: Scaffold(
         backgroundColor: Colors.white,
         bottomNavigationBar: CustomBottomNavigationBar(
@@ -201,9 +196,10 @@ class _HomePage extends State<HomePage> {
             Icons.person,
           ],
           onChange: (val) {
-            setState(() {
-              var _selectedItem = val;
-            });
+            if (mounted)
+              setState(() {
+                var _selectedItem = val;
+              });
           },
           defaultSelectedIndex: 0,
         ),
@@ -706,6 +702,7 @@ class DealsContainer extends StatelessWidget {
     );
   }
 }
+
 
 class SingleItem extends StatelessWidget {
   @override

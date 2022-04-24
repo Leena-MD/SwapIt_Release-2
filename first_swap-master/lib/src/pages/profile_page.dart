@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:first_swap/provider/my_provider.dart';
 import 'package:first_swap/src/pages/Search.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter_restart/flutter_restart.dart';
@@ -11,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_swap/src/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'Home_page.dart';
 import 'MyItems.dart';
 import 'login_page.dart';
@@ -19,8 +21,6 @@ import 'Intrests_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Post_page.dart';
-
-
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -69,7 +69,10 @@ class _ProfilePageState extends State<ProfilePage> {
     ));
     return SafeArea(
       //  home: Scaffold(
-
+      top: false,
+      left: false,
+      right: false,
+      bottom: false,
       child: Builder(
           builder: (context) => Scaffold(
                 backgroundColor: Colors.white,
@@ -205,8 +208,23 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget signOut() {
     return InkWell(
       onTap: () {
+        MyProvider provider = Provider.of<MyProvider>(context, listen: false);
+        provider.getTop1List();
+        print(top1);
+        print(rel);
+        print(provider.Top1List);
+        provider.Top1List = List.empty();
+
+        top1 = [];
+        rel = 2;
+        doi = 0;
+        enter = 1;
+        print(doi);
+        print(provider.Top1List);
+        print(rel);
+        print(top1);
         FirebaseAuth.instance.signOut();
-         //FlutterRestart.restartApp();
+        //FlutterRestart.restartApp();
         Navigator.push(
             this.context, MaterialPageRoute(builder: (context) => LoginPage()));
       },
@@ -291,10 +309,10 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
           if (_selectedIndex == 1)
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) =>MyItems()));
+                MaterialPageRoute(builder: (context) => MyItems()));
           if (_selectedIndex == 2)
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) =>PostPage()));
+                MaterialPageRoute(builder: (context) => PostPage()));
 
           if (_selectedIndex == 3)
             Navigator.of(context).pushReplacement(
