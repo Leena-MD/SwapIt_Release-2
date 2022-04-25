@@ -3,7 +3,7 @@ Intro:
 Swap-it is a non-profit IOS application that allows people to swap unwanted goods with wanted goods, which helps people save their money and benefit from these discarded goods with essential and 
 valuable goods. The application also allows donating or recycling these goods if no one wants to swap them.
 
-Used technologies: dart programing language and flutter SDK
+Used technologies: dart programing language and flutter SDK and python
 
 Run project: 
 IOS users: Copy the project code and clone git repository by using Visual Studio Code and XCode.
