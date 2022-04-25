@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
 import 'package:first_swap/constants.dart';
-import 'package:first_swap/models/product.dart';
+
 import 'package:first_swap/push_notification.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';

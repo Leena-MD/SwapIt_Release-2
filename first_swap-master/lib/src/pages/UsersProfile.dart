@@ -1,5 +1,4 @@
 import 'package:first_swap/src/pages/Offers.dart';
-import 'package:first_swap/src/pages/Post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
