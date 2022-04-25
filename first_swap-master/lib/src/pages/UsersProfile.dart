@@ -188,7 +188,7 @@ Visibility(
               visible: widget.Blacklist==false,
               child: Container(
                 height: 100.0,
-                
+                width: 700,
                 child: 
         ElevatedButtonTheme(
                         data: ElevatedButtonThemeData(
@@ -200,6 +200,7 @@ Visibility(
                          
                           mainAxisSize: MainAxisSize.max,
                           children: [
+
                             RaisedButton(
                               
                                color: Colors.red[600],
@@ -226,6 +227,7 @@ Visibility(
                                 ],
                               ),
                             ),
+                            SizedBox(width: 70,)
                           ],
                         ),
                       )
@@ -252,7 +254,7 @@ Visibility(
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               elevation: 5,
-                              padding: EdgeInsets.fromLTRB(54, 6, 54, 6),
+                              padding: EdgeInsets.fromLTRB(54, 6, 70, 6),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -267,6 +269,7 @@ Visibility(
                                 ],
                               ),
                             ),
+                            SizedBox(width: 50,)
                           ],
                         ),
                       ),
