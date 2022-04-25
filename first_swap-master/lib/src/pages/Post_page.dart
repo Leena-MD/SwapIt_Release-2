@@ -60,6 +60,10 @@ class _PostPage extends State<PostPage> {
     var queryController;
 
     return SafeArea(
+       top: false,
+ left: false,
+ right: false,
+ bottom:false,
       child: Scaffold(
           backgroundColor: Colors.white,
           bottomNavigationBar: CustomBottomNavigationBar(
@@ -71,6 +75,7 @@ class _PostPage extends State<PostPage> {
               Icons.person,
             ],
             onChange: (val) {
+     
               setState(() {
                 var _selectedItem = val;
               });
@@ -338,6 +343,7 @@ class _PostPage extends State<PostPage> {
                                         source: ImageSource.gallery);
 
                                     if (pickedFile != null) {
+                                      if(mounted)
                                       setState(() {
                                         imagePath = pickedFile.path;
                                         imageName = GoodsNController.text;

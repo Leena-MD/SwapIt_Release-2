@@ -250,6 +250,10 @@ class _History extends State<History> {
     HistoryList = provider.throwHistoryList;
 
     return SafeArea(
+       top: false,
+ left: false,
+ right: false,
+ bottom:false,
         child: Scaffold(
             backgroundColor: Colors.white,
             bottomNavigationBar: CustomBottomNavigationBar(

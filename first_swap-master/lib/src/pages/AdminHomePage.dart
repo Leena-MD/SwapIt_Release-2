@@ -39,6 +39,10 @@ class _AdminHomePage extends State<AdminHomePage> {
       statusBarColor: Colors.cyan[800], //or set color with: Color(0xFF0000FF)
     ));
     return SafeArea(
+       top: false,
+ left: false,
+ right: false,
+ bottom:false,
       child: Scaffold(
         backgroundColor: Colors.white,
        bottomNavigationBar: CustomBottomNavigationBar(

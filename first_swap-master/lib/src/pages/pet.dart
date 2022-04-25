@@ -91,6 +91,7 @@ class _pet extends State<pet> {
                           onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category1);
+                            if(mounted)
                             setState(() {});
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
@@ -123,6 +124,7 @@ class _pet extends State<pet> {
                           onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category2);
+                            if(mounted)
                             setState(() {});
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
@@ -424,6 +426,10 @@ class _pet extends State<pet> {
     petList = provider.throwPetList;
 
     return SafeArea(
+       top: false,
+ left: false,
+ right: false,
+ bottom:false,
       child: Scaffold(
           backgroundColor: Colors.white,
           bottomNavigationBar: CustomBottomNavigationBar(

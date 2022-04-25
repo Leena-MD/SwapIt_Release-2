@@ -63,7 +63,10 @@ class _UsersProfileState extends State<UsersProfile> {
   
     return SafeArea(
       //  home: Scaffold(
-        
+         top: false,
+ left: false,
+ right: false,
+ bottom:false,
 
       child: Builder(
           builder: (context) => Scaffold(
@@ -199,7 +202,7 @@ Visibility(
                           children: [
                             RaisedButton(
                               
-                              color: Colors.deepOrange,
+                               color: Colors.red[600],
                               onPressed: () {
                                 blockUser();
                               },

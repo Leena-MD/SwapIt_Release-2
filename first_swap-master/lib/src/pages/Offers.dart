@@ -73,7 +73,7 @@ class _Offers extends State<Offers> {
                           onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category1);
-
+if(mounted)
                             setState(() {});
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(builder: (context) => Offers()));
@@ -110,7 +110,7 @@ class _Offers extends State<Offers> {
                           onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category2);
-
+if(mounted)
                             setState(() {});
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(builder: (context) => History()));
@@ -146,7 +146,7 @@ class _Offers extends State<Offers> {
                           onTap: () {
                             selectedCategory = [];
                             selectedCategory.add(category3);
-
+if(mounted)
                             setState(() {});
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(builder: (context) => waiting()));
@@ -197,6 +197,10 @@ class _Offers extends State<Offers> {
     GoodsList = provider.throwGoodsReceivingList;
 
     return SafeArea(
+       top: false,
+ left: false,
+ right: false,
+ bottom:false,
         child: Scaffold(
             backgroundColor: Colors.white,
             bottomNavigationBar: CustomBottomNavigationBar(
@@ -208,6 +212,7 @@ class _Offers extends State<Offers> {
                 Icons.person,
               ],
               onChange: (val) {
+       
                 setState(() {
                   var _selectedItem = val;
                 });

@@ -303,7 +303,7 @@ class _HomePage extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       SizedBox(height: 10),
-                      Text("الفئات ",
+                      Text("الفئات   ",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 19)),
                       SizedBox(height: 20),
@@ -326,10 +326,10 @@ class _HomePage extends State<HomePage> {
                                 children: <Widget>[
                                   Spacer(),
                                   Text(
-                                    eId,
+                                    "قد يعجبك أيضاً",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 10),
+                                        fontSize: 18),
                                   ),
                                 ],
                               ),

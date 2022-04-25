@@ -37,7 +37,10 @@ class _MyItems extends State<MyItems> {
     ));
 
     return SafeArea(
-
+ top: false,
+ left: false,
+ right: false,
+ bottom:false,
         child: Scaffold(
 
       backgroundColor: Colors.white,
@@ -50,6 +53,7 @@ class _MyItems extends State<MyItems> {
           Icons.person,
         ],
         onChange: (val) {
+         
           setState(() {
             var _selectedItem = val;
           });

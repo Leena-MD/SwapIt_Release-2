@@ -77,6 +77,10 @@ class _swapRequest extends State<swapRequest> {
     MyGoodsList = provider.throwMyGoodsList;
 
     return SafeArea(
+       top: false,
+ left: false,
+ right: false,
+ bottom:false,
         child: Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(

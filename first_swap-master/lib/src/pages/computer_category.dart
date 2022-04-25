@@ -424,6 +424,10 @@ class _ComputerCat extends State<ComputerCat> {
     petList = provider.throwPetList;
 
     return SafeArea(
+       top: false,
+ left: false,
+ right: false,
+ bottom:false,
       child: Scaffold(
           backgroundColor: Colors.white,
           bottomNavigationBar: CustomBottomNavigationBar(

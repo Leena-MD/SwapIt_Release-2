@@ -62,7 +62,10 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
     ));
     return SafeArea(
       //  home: Scaffold(
-
+ top: false,
+ left: false,
+ right: false,
+ bottom:false,
       child: Builder(
           builder: (context) => Scaffold(
                 backgroundColor: Colors.white,

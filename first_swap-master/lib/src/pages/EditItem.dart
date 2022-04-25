@@ -88,6 +88,10 @@ class _EditItem extends State<EditItem> {
     var queryController;
 
     return SafeArea(
+       top: false,
+ left: false,
+ right: false,
+ bottom:false,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
