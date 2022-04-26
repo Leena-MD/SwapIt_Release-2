@@ -1,5 +1,4 @@
 import 'package:first_swap/src/pages/Offers.dart';
-import 'package:first_swap/src/pages/Post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -188,7 +187,7 @@ Visibility(
               visible: widget.Blacklist==false,
               child: Container(
                 height: 100.0,
-                
+                width: 700,
                 child: 
         ElevatedButtonTheme(
                         data: ElevatedButtonThemeData(
@@ -200,6 +199,7 @@ Visibility(
                          
                           mainAxisSize: MainAxisSize.max,
                           children: [
+
                             RaisedButton(
                               
                                color: Colors.red[600],
@@ -226,6 +226,7 @@ Visibility(
                                 ],
                               ),
                             ),
+                            SizedBox(width: 70,)
                           ],
                         ),
                       )
@@ -252,7 +253,7 @@ Visibility(
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               elevation: 5,
-                              padding: EdgeInsets.fromLTRB(54, 6, 54, 6),
+                              padding: EdgeInsets.fromLTRB(54, 6, 70, 6),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -267,6 +268,7 @@ Visibility(
                                 ],
                               ),
                             ),
+                            SizedBox(width: 50,)
                           ],
                         ),
                       ),

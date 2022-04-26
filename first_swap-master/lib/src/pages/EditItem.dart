@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:first_swap/models/goodsMod.dart';
-import 'package:first_swap/src/pages/Home_page.dart';
+
 import 'package:first_swap/src/pages/MyItems.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +27,7 @@ class EditItem extends StatefulWidget {
   final String? statues;
   final int? numgood;
   final String? owner;
+
   const EditItem(
       {Key? key,
       this.name,
@@ -470,6 +471,7 @@ class _EditItem extends State<EditItem> {
           'Status': st,
           'owner': uiduser,
           'cate': cate,
+          'caseSearch':setSearchParam(name),
         });
 
         Fluttertoast.showToast(msg: "تم التعديل بنجاح ");
@@ -492,6 +494,7 @@ class _EditItem extends State<EditItem> {
           'Status': st,
           'owner': uiduser,
           'cate': cate,
+          'caseSearch':setSearchParam(name),
         });
 
         Fluttertoast.showToast(msg: "تم التعديل بنجاح ");
@@ -542,5 +545,16 @@ class _EditItem extends State<EditItem> {
       cate,
       Path,
     );
+  }
+
+  setSearchParam(String name) {
+    List<String> caseSearchList = [];
+    String temp = "";
+    for (int i = 0; i < name.length; i++) {
+      temp = temp + name[i];
+      caseSearchList.add(temp);
+    }
+    return caseSearchList;
+
   }
 }

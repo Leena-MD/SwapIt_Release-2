@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
 import 'package:first_swap/constants.dart';
-import 'package:first_swap/models/product.dart';
+
 import 'package:first_swap/push_notification.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';
@@ -303,7 +303,7 @@ class _DetailRequestState extends State<DetailRequest> {
                         minLeadingWidth: double.minPositive,
                       ),
                       SizedBox(height: 10),
-                      SizedBox(width: 20),
+                      SizedBox(width: 10),
                       ElevatedButtonTheme(
                         data: ElevatedButtonThemeData(
                             style: ElevatedButton.styleFrom(
@@ -312,7 +312,7 @@ class _DetailRequestState extends State<DetailRequest> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             new SizedBox(
-                              width: 100.0,
+                              width: 105.0,
                               height: 50.0,
                               child: RaisedButton(
                                 child: Text('رفض الطلب ',
@@ -329,12 +329,12 @@ class _DetailRequestState extends State<DetailRequest> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 elevation: 5,
-                                padding: EdgeInsets.fromLTRB(20, 15, 2, 5),
+                                padding: EdgeInsets.fromLTRB(20, 5, 2, 5),
                               ),
                             ),
-                            SizedBox(width: 20),
+                            SizedBox(width: 50),
                             new SizedBox(
-                              width: 100.0,
+                              width: 105.0,
                               height: 50.0,
                               child: RaisedButton(
                                 child: Text('قبول الطلب ',
@@ -351,7 +351,7 @@ class _DetailRequestState extends State<DetailRequest> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 elevation: 5,
-                                padding: EdgeInsets.fromLTRB(20, 15, 2, 5),
+                                padding: EdgeInsets.fromLTRB(20, 5, 2, 5),
                               ),
                             ),
                           ],

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_swap/constants.dart';
-import 'package:first_swap/models/product.dart';
+
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';
 import 'package:first_swap/src/pages/clothes.dart';
@@ -267,7 +267,7 @@ class _Detailwaiting extends State<Detailwaiting> {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               elevation: 5,
-                              padding: EdgeInsets.fromLTRB(54, 6, 54, 6),
+                              padding: EdgeInsets.fromLTRB(54, 6, 60, 6),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
