@@ -182,6 +182,7 @@ class _RecyclingMapState extends State<RecyclingMap> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
+<<<<<<< Updated upstream
                                 Container(
                                   width: 170.0,
                                   child: InkWell(
@@ -251,6 +252,20 @@ class _RecyclingMapState extends State<RecyclingMap> {
                                     },
                                   ),
                                 )
+=======
+                                Dcenters[index].phoneNumber.length > 0
+                                    ? TextButton.icon(
+                                        onPressed: () {
+                                          _makingPhoneCall(
+                                              Dcenters[index].phoneNumber);
+                                        },
+                                        icon: Icon(Icons.call),
+                                        label: Text(Dcenters[index].phoneNumber,
+                                            style: TextStyle(
+                                                fontSize: 11.0,
+                                                fontWeight: FontWeight.w300)))
+                                    : Row(),
+>>>>>>> Stashed changes
                               ])
                         ]))))
           ])),

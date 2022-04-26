@@ -680,7 +680,11 @@ packages:
     source: hosted
     version: "2.0.4"
   url_launcher_web:
+<<<<<<< Updated upstream
     dependency: "direct main"
+=======
+    dependency: transitive
+>>>>>>> Stashed changes
     description:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
