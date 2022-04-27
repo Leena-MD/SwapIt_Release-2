@@ -186,18 +186,18 @@ class _DonationsMapState extends State<DonationsMap> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
-                                Container(
-                                  width: 170.0,
-                                  child: Text(
-                                    Dcenters[index].phoneNumber,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                        fontSize: 11.0,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                )
+                                Dcenters[index].phoneNumber.length > 0
+                                    ? TextButton.icon(
+                                        onPressed: () {
+                                          _makingPhoneCall(
+                                              Dcenters[index].phoneNumber);
+                                        },
+                                        icon: Icon(Icons.call),
+                                        label: Text(Dcenters[index].phoneNumber,
+                                            style: TextStyle(
+                                                fontSize: 11.0,
+                                                fontWeight: FontWeight.w300)))
+                                    : Row(),
                               ])
                         ]))))
           ])),

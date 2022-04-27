@@ -439,24 +439,6 @@ class _DetailRequestState extends State<DetailRequest> {
         ));
     List<List<dynamic>> csvList = [];
 
-    /// Write to a file
-
-    File file = await File(
-        "/Users/jojoalogla/Downloads/swap it-2/SwapIt_Sprint3/first_swap-master/assets/data.csv");
-    final input = file.openRead();
-    final fields = await input
-        .transform(utf8.decoder)
-        .transform(new CsvToListConverter())
-        .toList();
-    csvList = fields;
-    List data = [ownerGoods, receivergoodsId, Categorty];
-    csvList.add(data);
-
-    var csv = const ListToCsvConverter().convert(csvList);
-
-    file.writeAsString(csv);
-
-    print("csv done");
   }
 //to reject the swapping
 

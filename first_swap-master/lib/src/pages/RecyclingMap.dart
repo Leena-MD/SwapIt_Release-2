@@ -182,75 +182,18 @@ class _RecyclingMapState extends State<RecyclingMap> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
-                                Container(
-                                  width: 170.0,
-                                  child: InkWell(
-                                    child: Text(
-                                      Dcenters[index].phoneNumber,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.center,
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                          fontSize: 11.0,
-                                          fontWeight: FontWeight.w300),
-                                    ),
-                                    onTap: () {
-                                      if (Dcenters[index].phoneNumber.length >
-                                          0) {
-                                        showDialog<bool>(
-                                          context: context,
-                                          builder: (c) => AlertDialog(
-                                            titleTextStyle: TextStyle(),
-                                            title: Text(
-                                              'تنبية',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            content: Text(
-                                                'هل تريد الاتصال بالرقم ' +
-                                                    Dcenters[index].phoneNumber,
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.w900)),
-                                            actions: [
-                                              FlatButton(
-                                                  child: Text('نعم',
-                                                      style: TextStyle(
-                                                          color: Colors
-                                                              .blue.shade800,
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w900)),
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      _makingPhoneCall(
-                                                          Dcenters[index]
-                                                              .phoneNumber);
-                                                    });
-                                                    Navigator.pop(c, true);
-                                                  }),
-                                              FlatButton(
-                                                child: Text('لا',
-                                                    style: TextStyle(
-                                                        color:
-                                                            Colors.red.shade800,
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w900)),
-                                                onPressed: () =>
-                                                    Navigator.pop(c, false),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                )
+                                Dcenters[index].phoneNumber.length > 0
+                                    ? TextButton.icon(
+                                        onPressed: () {
+                                          _makingPhoneCall(
+                                              Dcenters[index].phoneNumber);
+                                        },
+                                        icon: Icon(Icons.call),
+                                        label: Text(Dcenters[index].phoneNumber,
+                                            style: TextStyle(
+                                                fontSize: 11.0,
+                                                fontWeight: FontWeight.w300)))
+                                    : Row(),
                               ])
                         ]))))
           ])),
