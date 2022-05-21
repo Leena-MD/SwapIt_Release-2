@@ -210,7 +210,7 @@ Visibility(
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               elevation: 5,
-                              padding: EdgeInsets.fromLTRB(54, 6, 54, 6),
+                              padding: EdgeInsets.fromLTRB(54, 6, 70, 6),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -237,13 +237,18 @@ Visibility(
               visible: widget.Blacklist,
               child: Container(
                 height: 100.0,
-                child:  ElevatedButtonTheme(
-                        data: ElevatedButtonThemeData(
-                            style: ElevatedButton.styleFrom(
-                                minimumSize: Size(120, 60))),
-                        child: ButtonBar(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
+                width: 700,
+                child:
+                ElevatedButtonTheme(
+                  data: ElevatedButtonThemeData(
+
+                      style: ElevatedButton.styleFrom(
+                          alignment: Alignment.center,
+                          minimumSize: Size(120, 60))),
+                  child: ButtonBar(
+
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
                             RaisedButton(
                               color: Colors.green,
                               onPressed: () {
@@ -257,8 +262,9 @@ Visibility(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+
                                   Text(
-                                    " إلغاء حظر المستخدم ",
+                                    "الغاء  الحظر",
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
                                         fontSize: 20,
@@ -268,8 +274,8 @@ Visibility(
                                 ],
                               ),
                             ),
-                            SizedBox(width: 50,)
-                          ],
+                      SizedBox(width: 70,)
+                    ],
                         ),
                       ),
               ),

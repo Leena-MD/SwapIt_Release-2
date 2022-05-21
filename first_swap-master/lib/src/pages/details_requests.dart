@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
 import 'package:first_swap/constants.dart';
-
+import 'package:first_swap/models/product.dart';
 import 'package:first_swap/push_notification.dart';
 import 'package:first_swap/src/pages/Home_page.dart';
 import 'package:first_swap/src/pages/bags.dart';
@@ -312,13 +312,13 @@ class _DetailRequestState extends State<DetailRequest> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             new SizedBox(
-                              width: 105.0,
+                              width: 280.0,
                               height: 50.0,
                               child: RaisedButton(
                                 child: Text('رفض الطلب ',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 20,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold)),
                                 color: Colors.redAccent,
@@ -332,15 +332,16 @@ class _DetailRequestState extends State<DetailRequest> {
                                 padding: EdgeInsets.fromLTRB(20, 5, 2, 5),
                               ),
                             ),
+                            SizedBox(height: 10),
                             SizedBox(width: 50),
                             new SizedBox(
-                              width: 105.0,
+                              width: 280.0,
                               height: 50.0,
                               child: RaisedButton(
                                 child: Text('قبول الطلب ',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 20,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold)),
                                 color: Colors.lightGreen,
