@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 <key>NSPhotoLibraryUsageDescription</key>
-<string>Allow this app to access your photos</string>
+<string>Allow this app to access your photos to upload photos from your library</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -43,6 +43,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Swap it app needs your location to search for nearby charities</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Swap it app needs your location to search for nearby charities</string>
+	<key>NSLocationWhenInUsageDescription</key>
+	<string>Swap it app needs your location to search for nearby charities</string>
 	<key>NSAppTransportSecurity</key>
 <dict>
    <key>NSAllowsArbitraryLoads</key><true/>
